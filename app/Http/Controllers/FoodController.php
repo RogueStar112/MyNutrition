@@ -15,10 +15,18 @@ class FoodController extends Controller
         return view('nutrition_food_form');
     }
 
-    public function food_form_store()
+    public function food_form_store(Request $request) 
     {
-    
+         $array_index = $request->input('food_pages');
+         
+         $array_index = explode(",", $array_index);
+
+         for ($x=0; $x < count($array_index); $x++) {
+           echo $array_index[$x];
+         }
     }
+
+    // PAGE RENDER METHODS
 
     public function create_new_food_page(Request $request) {
         $index = $request->input('index');

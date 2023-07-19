@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\MealController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/nutrition/food/create_item', [FoodController::class, 'create_new_food_item'])->name('food.item_create');
     // Route::put('/nutrition/food', [FoodController::class, 'food_edit'])->name('food.edit');
     // Route::delete('/nutrition/food', [FoodController::class, 'food_delete'])->name('food.delete');
+
+    Route::get('/nutrition/meal', [MealController::class, 'meal_form'])->name('meal.create');
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])

@@ -4,7 +4,7 @@
     <p class="text-gray-500 italic mt-2">The basic information.</p>
     </div>
 
-    <div class="mb-3 grid grid-cols-2 gap-1">
+    <div class="mb-3 grid grid-cols-3 gap-1">
         <label class="block p-6">
             <span class="text-white">Food Name</span>
             <input type="text" id="food_name_{{$index}}" name="food_name_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="Ricotta Cheese" />
@@ -14,11 +14,17 @@
             <span class="text-white">Food Source</span>
             <input type="text" id="food_source_{{$index}}" name="food_source_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="Aldi" />
         </label>
+
+        <label class="block p-6">
+            <span class="text-white">Serving Size (g)</span>
+            <input type="text" id="food_servingsize_{{$index}}" name="food_servingsize_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="100" />
+        </label>
+        
     </div> 
 
     <div class="p-6">
     <h1 class="text-white text-2xl">2. Nutritional Info</h1>
-    <p class="text-gray-500 italic mt-2">Per 100g. All fields optional.</p>
+    <p class="text-gray-500 italic mt-2">According to serving size. All fields optional.</p>
     </div>
 
     <div class="mb-3 grid grid-cols-4 gap-1">

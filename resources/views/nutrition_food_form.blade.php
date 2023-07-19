@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="flex justify-center">
-                            <input type="hidden" id="pages" name="food-pages" value="1"/>
+                            <input type="hidden" id="pages" name="food_pages" value="1"/>
                             <button type="button" class="bg-red-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-trash"></i>  DELETE</button>
                             <button type="button" class="bg-blue-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-eye"></i>  VIEW</button>
                             <button type="submit" class="bg-lime-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-check"></i>  SUBMIT</button>
@@ -113,7 +113,11 @@
 
                     noOfPages += 1;
                     index += 1;
+
                     page_numbers.push(noOfPages);
+
+                    $('#pages').val(page_numbers);
+                    // pageNumber = noOfPages;
                     updatePageNumber();
 
                     $.ajax({
