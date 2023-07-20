@@ -5,6 +5,31 @@
         </h2>
     </x-slot>
 
+    @if ($errors->any())
+    <div class="alert alert-danger max-w-7xl rounded-lg mx-auto text-center bg-red-800 text-white">
+        <h1 class="text-2xl font-extrabold">Input Error</h1>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    @isset($validated_data)
+        
+        <div class="alert alert-danger max-w-7xl rounded-lg mx-auto text-center bg-green-800 text-white p-6">
+            <h1 class="text-2xl font-extrabold">Data Insertion Success!</h1>
+
+            <ul>
+                @foreach($validated_data as $data)
+                    <li>{{$loop->iteration}}. {{$data['food_name']}}</li>
+                @endforeach
+            </ul>
+        </div>
+
+    @endisset
+
     <div class="flex py-4 justify-center">
         <div class="flex max-w-7xl">
             <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
@@ -27,7 +52,7 @@
                         </div>
 
                         <div class="flex justify-center">
-                            <input type="hidden" id="pages" name="food-pages" value="1"/>
+                            <input type="hidden" id="pages" name="food_pages" value="1"/>
                             <button type="button" class="bg-red-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-trash"></i>  DELETE</button>
                             <button type="button" class="bg-blue-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-eye"></i>  VIEW</button>
                             <button type="submit" class="bg-lime-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-check"></i>  SUBMIT</button>
@@ -40,6 +65,7 @@
             </div>
 
             <div id="FOOD-ITEMS-CONTAINER" class="max-w-sm mx-auto max-h-screen /sm:px-6 /lg:px-8 [&>div]:mb-3">
+                
                 
                 {{-- <x-food-item 
                  index="1"
@@ -113,7 +139,11 @@
 
                     noOfPages += 1;
                     index += 1;
+
                     page_numbers.push(noOfPages);
+
+                    $('#pages').val(page_numbers);
+                    // pageNumber = noOfPages;
                     updatePageNumber();
 
                     $.ajax({
