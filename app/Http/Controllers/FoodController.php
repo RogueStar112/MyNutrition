@@ -180,6 +180,7 @@ class FoodController extends Controller
 
 
         $food_search = Food::where('user_id', $user_id)
+                            ->orderBy('id', 'desc')
                             ->get();
 
         $food_array = [];

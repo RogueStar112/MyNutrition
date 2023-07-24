@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight">
-            {{ __('Nutrition - Create New Food') }}
+        <h2 class="font-semibold italic text-center uppercase dark:text-white text-3xl text-gray-800 leading-tight">
+            {{ __('Create New Food') }}
         </h2>
     </x-slot>
 
@@ -32,10 +32,10 @@
 
     <div class="flex py-4 justify-center">
         <div class="flex max-w-7xl">
-            <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto px-6 sm:px-6 lg:px-8">
                 <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="POST" action="{{ route('food.store')}}">
                     @csrf
-                    <div id="FOOD_FORM_INPUTS" class="relative max-h-[682px] overflow-hidden">
+                    <div id="FOOD_FORM_INPUTS" class="relative md:max-h-[682px] overflow-hidden">
                        <x-food-input-item index="1"/>
 
                     </div>
@@ -64,7 +64,7 @@
                 </form>
             </div>
 
-            <div id="FOOD-ITEMS-CONTAINER" class="max-w-sm mx-auto max-h-screen /sm:px-6 /lg:px-8 [&>div]:mb-3">
+            <div id="FOOD-ITEMS-CONTAINER" class="max-w-sm mx-auto max-h-screen hidden md:block /sm:px-6 /lg:px-8 [&>div]:mb-3">
                 
                 
                 {{-- <x-food-item 

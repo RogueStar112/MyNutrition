@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight">
-            {{ __('Nutrition - Edit New Food') }}
+        <h2 class="font-semibold italic uppercase text-center dark:text-white text-3xl text-gray-800 leading-tight">
+            {{ __('Edit Existing Food') }}
         </h2>
     </x-slot>
 
