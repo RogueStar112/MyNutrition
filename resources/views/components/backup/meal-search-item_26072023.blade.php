@@ -81,7 +81,7 @@
                 @endphp
 
                 {{-- alternating css pattern --}}
-                <tr class="@if(!$isEven)dark:bg-gray-900 @endif border-gray-700">
+                <tr class="@if($isEven) dark:bg-gray-900  @endif border-gray-700">
 
                     {{-- text-gray-900 whitespace-nowrap dark:text-white --}}
                     <td class="px-6 py-3 hidden md:table-cell">{{$loop->iteration}}</td>

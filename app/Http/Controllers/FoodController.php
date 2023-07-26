@@ -45,7 +45,7 @@ class FoodController extends Controller
 
             $validated = $request->validate([
 
-                "food_name_$array_index_x" => 'required|string|max:20',
+                "food_name_$array_index_x" => 'required|string|max:25',
                 "food_source_$array_index_x" => 'required|string|max:20',
                 "food_servingsize_$array_index_x" => 'required|numeric|max:1000',
                 "food_calories_$array_index_x" => 'nullable|numeric|max:15000',

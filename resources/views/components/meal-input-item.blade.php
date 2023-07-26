@@ -84,6 +84,7 @@
         $(document).ready(function() {
                 $('#meal_name_1, #meal_name_servingsize_1, #meal_name_quantity_1').on("keypress", function(e) {
                     
+                    // if key press = enter key.
                     if(e.which == 13) {
                         e.preventDefault();
 
@@ -91,6 +92,14 @@
                         var query = $('#meal_name_1').val();
                         var servingSize = $('#meal_name_servingsize_1').val();
                         var quantity = $('#meal_name_quantity_1').val();
+
+                        if (servingSize == "") {
+                            servingSize = 100;
+                        }
+
+                        if (quantity == "") {
+                            quantity = 1;
+                        }
 
                         var ignoreServingSize = $("#disable_servingsize_1").is(':checked');
 
