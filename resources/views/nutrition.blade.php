@@ -24,7 +24,7 @@
                     {{ __('Log your exercises. (WIP)') }}
                 </x-dashboard-link>
 
-                <x-dashboard-link colspan="1.5" heading="Body Stats" icon="fas fa-weight fa-3x text-grey-300">
+                <x-dashboard-link colspan="1" heading="Body Stats" icon="fas fa-weight fa-3x text-grey-300">
                     {{ __('Log your BMI, Weight & Height. (WIP)') }}
                 </x-dashboard-link>
 

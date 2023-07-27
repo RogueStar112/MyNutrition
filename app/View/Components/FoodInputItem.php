@@ -15,10 +15,30 @@ class FoodInputItem extends Component
     public $index;
     public $active;
 
-    public function __construct($index = '', $active = '')
+    public $name;
+    public $source;
+    public $servingSize;
+    public $calories;
+    public $fat;
+    public $carbs;
+    public $protein;
+
+
+    public function __construct($index = '', $active = '', $name = '', $source = '', $servingSize = '', $calories = '', $fat = '', $carbs = '', $protein = '')
     {
         $this->index = $index;
         $this->active = $active;
+        
+        $this->name = $name;
+        $this->source = $source;
+        $this->servingSize = $servingSize;
+        
+        $this->calories = $calories;
+        $this->fat = $fat;
+        $this->carbs = $carbs;
+        $this->protein = $protein;
+
+        
     }
 
     /**

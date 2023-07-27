@@ -22,7 +22,7 @@
 			  crossorigin="anonymous"></script>
               
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased bg-slate-700">
         <div class="min-h-screen dark:bg-slate-700">
             @include('layouts.navigation')
 

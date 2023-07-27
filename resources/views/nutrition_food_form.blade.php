@@ -1,16 +1,41 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight">
-            {{ __('Nutrition - Create New Food') }}
+        <h2 class="font-semibold italic text-center uppercase dark:text-white text-3xl text-gray-800 leading-tight">
+            {{ __('Create New Food') }}
         </h2>
     </x-slot>
 
+    @if ($errors->any())
+    <div class="alert alert-danger max-w-7xl rounded-lg mx-auto text-center bg-red-800 text-white">
+        <h1 class="text-2xl font-extrabold">Input Error</h1>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    @isset($validated_data)
+        
+        <div class="alert alert-danger max-w-7xl rounded-lg mx-auto text-center bg-green-800 text-white p-6">
+            <h1 class="text-2xl font-extrabold">Data Insertion Success!</h1>
+
+            <ul>
+                @foreach($validated_data as $data)
+                    <li>{{$loop->iteration}}. {{$data['food_name']}}</li>
+                @endforeach
+            </ul>
+        </div>
+
+    @endisset
+
     <div class="flex py-4 justify-center">
         <div class="flex max-w-7xl">
-            <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto px-6 sm:px-6 lg:px-8">
                 <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="POST" action="{{ route('food.store')}}">
                     @csrf
-                    <div id="FOOD_FORM_INPUTS" class="relative max-h-[682px] overflow-hidden">
+                    <div id="FOOD_FORM_INPUTS" class="relative md:max-h-[682px] overflow-hidden">
                        <x-food-input-item index="1"/>
 
                     </div>
@@ -39,7 +64,8 @@
                 </form>
             </div>
 
-            <div id="FOOD-ITEMS-CONTAINER" class="max-w-sm mx-auto max-h-screen /sm:px-6 /lg:px-8 [&>div]:mb-3">
+            <div id="FOOD-ITEMS-CONTAINER" class="max-w-sm mx-auto max-h-screen hidden md:block /sm:px-6 /lg:px-8 [&>div]:mb-3">
+                
                 
                 {{-- <x-food-item 
                  index="1"
