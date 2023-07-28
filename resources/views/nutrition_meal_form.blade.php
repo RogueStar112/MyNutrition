@@ -13,7 +13,7 @@
     <div class="flex py-4 justify-center">
         <div class="flex max-w-7xl">
             <div class="max-w-7xl /w-[768px] mx-auto sm:px-6 lg:px-8">
-                <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="POST" action="{{ route('food.store')}}">
+                <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="POST" action="{{ route('meal.store')}}">
                     @csrf
                     <div id="FOOD_FORM_INPUTS" class="relative md:max-h-[682px] overflow-hidden">
                        <x-meal-input-item index="1"/>
@@ -48,7 +48,7 @@
                 </form>
             </div>
 
-            <div id="FOOD-ITEMS-CONTAINER" class="max-w-sm mx-auto max-h-screen /sm:px-6 /lg:px-8 [&>div]:mb-3">
+            <div id="FOOD-ITEMS-CONTAINER" class="max-w-sm mx-auto max-h-screen /sm:px-6 /lg:px-8 [&>div]:mb-2">
                 
                 
                 {{-- <x-food-item 
@@ -73,6 +73,7 @@
         {{-- Hidden form to keep no_of_foods, doesn't do anything outside of this --}}
         <form>
             <input type="hidden" id="no_of_foods" value="0" autocomplete="off">
+    
         </form>
     </div>
 

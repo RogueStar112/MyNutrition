@@ -43,7 +43,8 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/nutrition/meal', [MealController::class, 'meal_form'])->name('meal.create');
-    
+    Route::post('/nutrition/meal', [MealController::class, 'meal_form_store'])->name('meal.store');
+
     Route::post('/nutrition/meal/create_meal/{food_id}', [MealController::class, 'add_food_to_meal'])->name('meal.add_food');
 
     Route::post('/nutrition/meal/search_food/{query}', [MealController::class, 'search_food'])->name('meal.search_food');

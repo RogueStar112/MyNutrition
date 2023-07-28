@@ -153,7 +153,7 @@
     </table>
 
     <script>
-
+        
         // noOfFoods is referred in nutrition_meal_form!
 
         $(document).ready(function() {
@@ -161,7 +161,6 @@
 
                     e.preventDefault();
                     var no_of_foods = parseInt($("#no_of_foods").val()) + 1;
-                    
                     var csrfToken = $('meta[name="csrf-token"]').attr('content');
                     var query = $(this).attr('value');
                     var servingSize = $('#meal_name_servingsize_1').val();
@@ -186,12 +185,38 @@
                             //ignoreServingSize: ignoreServingSize
                         },
                         success: function(response) {
-                            $('#FOOD-ITEMS-CONTAINER').append(response);
+                            $('#FOOD-ITEMS-CONTAINER').append(response['html']);
+
+            
+                            var food_form_inputElements = $('#FOOD_FORM :input');
+
+                            const food_form_inputElementStrings = food_form_inputElements.map(function() {
+                            return $(this).prop('outerHTML');
+                            }).get();
+
+                            
+
+                            if(food_form_inputElementStrings.includes(String(response['html_input_data'])))
+                            {
+                                console.log('This already exists!')
+                            } else {
+                                $('#FOOD_FORM').append(response['html_input_data']);
+                            }
+                            
+                         
+
+                            console.log('STRIES ' + String(food_form_inputElementStrings));
+                            console.log('STRINPUTDATA ' + String(response['html_input_data']));
+                            
+                            
+
                         },
                         error: function(xhr) {
                             console.log(xhr.responseText);
                         }
                     });
+
+                    
 
 
             });

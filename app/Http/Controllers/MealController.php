@@ -13,11 +13,20 @@ use App\Models\FoodSource;
 use App\Models\Food;
 use App\Models\Macronutrients;
 
+use App\Models\Meal;
+use App\Models\MealItems;
+
 class MealController extends Controller
 {
     public function meal_form()
     {   
         return view('nutrition_meal_form');
+    }
+
+    public function meal_form_store(Request $request) {
+        
+        
+
     }
 
     public function search_food(Request $request) {
@@ -94,6 +103,8 @@ class MealController extends Controller
 
         $food_array = [];
 
+        $data_input_to_render = "";
+
         foreach($food_search as $index=>$food) {
             $food_array[] = $food;
 
@@ -106,6 +117,8 @@ class MealController extends Controller
                                                 ->first();
 
             $food_array[$index]['source_name'] = $food_source_search->name;
+
+            $food_id = $food->id;
             
             if ($ignoreServingSize == true) {
                 $servingSize = $food_array[$index]['serving_size'] = $macronutrients_search->serving_size;
@@ -113,19 +126,30 @@ class MealController extends Controller
                 // ignore
             }
 
+            $food_array[$index]['serving_size_input'] = $servingSize;
+            $food_array[$index]['quantity'] = $quantity;
             $food_array[$index]['serving_size'] = $macronutrients_search->serving_size;
             $food_array[$index]['calories'] = $macronutrients_search->calories;
             $food_array[$index]['fat'] = $macronutrients_search->fat;
             $food_array[$index]['carbohydrates'] = $macronutrients_search->carbohydrates;
             $food_array[$index]['protein'] = $macronutrients_search->protein;
 
-            
+            $data_input_to_render .= "<input id='meal_calories_$food_id' type='hidden' name='meal_calories_$food_id' value='$macronutrients_search->calories' index='$noOfFoods' readonly />";
+            $data_input_to_render .= "<input id='meal_fat_$food_id' type='hidden' name='meal_fat_$food_id' value='$macronutrients_search->fat' index='$noOfFoods' readonly />";
+            $data_input_to_render .= "<input id='meal_carbs_$food_id' type='hidden' name='meal_carbs_$food_id' value='$macronutrients_search->carbohydrates' index='$noOfFoods' readonly />";
+            $data_input_to_render .= "<input id='meal_protein_$food_id' type='hidden' name='meal_protein_$food_id' value='$macronutrients_search->protein' index='$noOfFoods' readonly />";
+            $data_input_to_render .= "<input id='meal_servingsize_$food_id' type='hidden' name='meal_servingsize_$food_id' value='$servingSize' index='$noOfFoods' readonly />";
+            $data_input_to_render .= "<input id='meal_quantity_$food_id' type='hidden' name='meal_quantity_$food_id' value='$quantity' index='$noOfFoods' readonly />";
 
         }       
 
         $component = new MealFoodItem($noOfFoods, $food_array, $servingSize, $quantity);
 
-        return $component->render()->with($component->data());
+        // $data_input_to_render .= "<input id='meal_servingsize_$noOfFoods' type='hidden' name='meal_servingsize_$noOfFoods'>";
+
+        
+        return response()->json(['html' => (string)$component->render()->with($component->data()), 'html_input_data' => $data_input_to_render]);  
+        // return $component->render()->with($component->data());
 
 
     }
