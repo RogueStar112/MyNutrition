@@ -117,9 +117,12 @@ class MealController extends Controller
 
             $food_array = [];
 
+            $index_no = $meal['index'];
             $query_no = $meal['query'];
             $servingSize = $meal['servingSize'];
             $quantity = $meal['quantity'];
+
+            $food_array[$index]['index'] = $index_no;
 
             $food_search = Food::where('id', "$query_no")
                             ->where('user_id', $user_id)
@@ -160,7 +163,7 @@ class MealController extends Controller
 
             // $food_array_html[$index] = new MealFoodItem($query_no, $food_array, $servingSize, $quantity);
             
-            $food_array_component = new MealFoodItem($query_no, $food_array, $servingSize, $quantity);
+            $food_array_component = new MealFoodItem($index_no, $food_array, $servingSize, $quantity);
     
             $food_array_html[$index]['render_html'] = (string)$food_array_component->render()->with($food_array_component->data());
 

@@ -167,12 +167,25 @@
     <script>
         
         // noOfFoods is referred in nutrition_meal_form!
+        
 
         $(document).ready(function() {
                 $('.add_food_icon').on("click", function(e) {
 
+                    no_of_foods = 0;
+
+                    // $("#no_of_foods").val(no_of_foods)
+
                     e.preventDefault();
-                    var no_of_foods = parseInt($("#no_of_foods").val()) + 1;
+
+                    if (meal_json[query]) {
+                        console.log('MEAL JSON QUERY ALREADY EXISTS. VAL RETAINED.');
+                        var no_of_foods = parseInt($("#no_of_foods").val());
+                    } else {
+                        console.log('NO OF FOODS INCREASED BY 1.')
+                        var no_of_foods = parseInt($("#no_of_foods").val()) + 1;
+                    }
+
                     var csrfToken = $('meta[name="csrf-token"]').attr('content');
                     var query = $(this).attr('value');
                     var servingSize = $('#meal_servingsize_1').val();
@@ -197,10 +210,66 @@
  
                     // }
                     
-                    meal_json[`${no_of_foods}`] = {'query': query,'servingSize': servingSize,'quantity': quantity};
+                    console.log('QUERY ', query);
+                    
+                    console.log('MEAL JSON BLEURGH', meal_json);
+                    // if (meal_json[query]) {
+                    //     food_array
+                    // } else {
+                    //     food_array.push(meal_json[query]);
+                    // }
+
+                    meal_json[query] = {'index': no_of_foods, 'query': query, 'servingSize': servingSize,'quantity': quantity};
+                    
+                    // meal_json_array = [meal_json];
                     
 
-                    $("#no_of_foods").val(no_of_foods)
+                    var food_already_exists = false;
+
+                    for (let i = 0; i < Object.keys(meal_json).length; i++) {
+                        
+                        try {
+
+                            if (food_array[i]['query'] == query) {
+
+                                meal_json[query]['index'] = i+1;
+
+                                food_array[i] = meal_json[query];
+
+                                var no_of_foods = parseInt($("#no_of_foods").val());
+
+
+                            } else {
+                                // food_array.push(meal_json[query])
+                            }
+
+                        } catch (e) {
+                            console.log('ERROR FOOD ARRAY', e)
+
+                            food_array.push(meal_json[query])
+                            // food_array.push(meal_json[query])
+                        }
+
+                        // if (food_array[i]['query'] == query) {
+
+                        // } else {
+                        //     food_array.push(meal_json[query]);
+                        // }
+                        
+                    }
+                    
+                    console.log('FOOD ARRAY', food_array)
+
+                    // Object.keys(meal_json).foreach()
+
+                    // meal_json = Object.values(meal_json_array).sort(function(obj1, obj2) {
+                    //     return obj1.index.localeCompare(obj2.index);
+
+                    // })
+
+                    // meal_json = Object.assign({}, meal_json)
+
+                    console.log('SORTED MEAL JSON', meal_json);
 
                     // let i=1;
 
@@ -237,14 +306,44 @@
                             // console.log('successful response to render: ' response['html'])
                             // $('#FOOD-ITEMS-CONTAINER').append(response['html']['render_html']);
                             
+                            $('#FOOD-ITEMS-CONTAINER').empty();
+                            
+                            console.log('RESPONSE HTML', Object.entries(response['html']));
+                            
+                            for (let i = 0; i < food_array.length; i++) {
 
-                            for (let i = 1; i <= Object.keys(response['html']).length; i++) {
-                                console.log('successful response to render: ', response['html'][i]['render_html'])
+                                if (response['html'][food_array[i]['index']] == i) {
+                                    console.log('Food already exists. Array length retained.')
+                                    $("#no_of_foods").val(no_of_foods-1); 
+                                } else {
+                                    console.log('RESPONSE HTML FOOD ARRAY I INDEX', response['html'][food_array[i]['index']])
+                                    console.log('I:', i)
+                                    console.log('Food array length increased.')
+                                    $('#FOOD-ITEMS-CONTAINER').append(response['html'][food_array[i]['query']]['render_html']);
+                                    $("#no_of_foods").val(no_of_foods); 
+                                }
+                            }
 
-                                $('#FOOD-ITEMS-CONTAINER').empty();
+                            // for (const [key, value] of Object.entries(response['html'])) {
+                                
+                            //     $('#FOOD-ITEMS-CONTAINER').append(response['html'][key]['render_html']);
+                            //     $("#no_of_foods").val(no_of_foods);
 
-                                $('#FOOD-ITEMS-CONTAINER').append(response['html'][i]['render_html']);
-                            } 
+                            // }
+                            // for (let i = 1; i <= Object.keys(response['html']).length; i++) {
+                            //     console.log('successful response to render: ', response['html'][i]['render_html'])
+
+                                
+
+                            //     $('#FOOD-ITEMS-CONTAINER').append(response['html'][i]['render_html']);
+                            // } 
+
+                            // console.log('FULL RESPONSE HTML ', response['html'])
+                            
+                            // test
+                            // $("#no_of_foods").val(0)
+
+                            console.log('NO OF FOODS: SUCCESS', no_of_foods);
                             
                         },
                         error: function(xhr) {

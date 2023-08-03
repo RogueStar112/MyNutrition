@@ -11,31 +11,16 @@
     </div>
 
     <div class="flex py-4 justify-center">
-        <div class="flex max-w-8xl">
-            {{-- <div id="MEAL_OVERVIEW" class="max-w-3xl bg-gray-900 rounded-lg text-white p-6 /md:max-h-[682px] md:max-h-[886px]">
-
-                <div class="text-center">
-
-                    MEAL OVERVIEW
-                <p class="text-4xl">486kcal</p>
-
-                <p class="text-2xl text-red-500">21.7g fat</p>
-                
-                <p class="text-2xl text-orange-500">70g carbs</p>
-                
-                <p class="text-2xl text-green-500">46.4g protein</p>
-                </div>
-            </div> --}}
-
+        <div class="flex max-w-7xl">
             <div class="max-w-7xl /w-[768px] mx-auto sm:px-6 lg:px-8">
-                <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="POST" action="{{ route('meal.store')}}">
+                <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="POST" action="{{ route('food.store')}}">
                     @csrf
                     <div id="FOOD_FORM_INPUTS" class="relative md:max-h-[682px] overflow-hidden">
                        <x-meal-input-item index="1"/>
 
                     </div>
 
-                    <div id="FOOD-SEARCH-CONTAINER" class="">
+                    <div id="FOOD-SEARCH-CONTAINER">
 
                     </div>
 
@@ -51,7 +36,7 @@
                         </div> --}}
 
                         <div class="flex justify-center">
-                            <input type="hidden" id="pages" name="food_pages" value=""/>
+                            <input type="hidden" id="pages" name="food_pages" value="1"/>
                             <button type="button" class="bg-red-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-trash"></i>  DELETE</button>
                             <button type="button" class="bg-blue-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-eye"></i>  VIEW</button>
                             <button type="submit" class="bg-lime-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-check"></i>  SUBMIT</button>
@@ -63,11 +48,9 @@
                 </form>
             </div>
 
-            <div id="" class="max-w-sm mx-auto max-h-screen /sm:px-6 /lg:px-8 [&>div]:mb-2 bg-gray-900 rounded-lg text-white p-6 w-[304px]">
-                 
-              
-
-                <p class="my-6 w-full text-center"> FOOD ITEMS </p>
+            <div id="FOOD-ITEMS-CONTAINER" class="max-w-sm mx-auto max-h-screen /sm:px-6 /lg:px-8 [&>div]:mb-3">
+                
+                
                 {{-- <x-food-item 
                  index="1"
                  name="Ricotta Cheese" 
@@ -84,33 +67,20 @@
                 carbs="27.1" 
                 protein="8.4" /> --}}
 
-                <div id="FOOD-ITEMS-CONTAINER">
-
-                </div>
-
-                
-                <div id="nutrition-info-total" class="w-full">
-                    <p class="border-4 border-transparent border-b-white">Total</p>
-
-
-
-                </div>
-                
             </div>
         </div>
 
         {{-- Hidden form to keep no_of_foods, doesn't do anything outside of this --}}
         <form>
             <input type="hidden" id="no_of_foods" value="0" autocomplete="off">
-            
         </form>
     </div>
 
     <script>
 
+        console.log('meal json and food_array reset');
         var meal_json = {};
-
-        var replacement_balancer = 1;
+        var food_array = [];
 
         $(document).ready(function() {
             
@@ -128,6 +98,8 @@
 
             var no_of_foods = parseInt($("#no_of_foods").val())
             
+            
+
             var targetElement = $('#FOOD-ITEMS-CONTAINER')[0];
 
             // thank you to ChatGPT for the mutationobserver tip!
@@ -143,7 +115,7 @@
                     $(`.food_revealbtn`).click(function() {
                     // get index of button
                         var index_selector = $(this).attr('index');
-                
+            
                         // open/close nutritional info
                         $(`#nutritional_wrapper_${index_selector}`).toggleClass('slide-down');
                         // $(`#nutritional_wrapper_${index_selector}`).toggleClass('collapse');
