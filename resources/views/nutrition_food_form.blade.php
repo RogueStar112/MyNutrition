@@ -21,11 +21,58 @@
         <div class="alert alert-danger max-w-7xl rounded-lg mx-auto text-center bg-green-800 text-white p-6">
             <h1 class="text-2xl font-extrabold">Data Insertion Success!</h1>
 
-            <ul>
-                @foreach($validated_data as $data)
-                    <li>{{$loop->iteration}}. {{$data['food_name']}}</li>
-                @endforeach
-            </ul>
+            <div class="w-full flex justify-center mt-6">
+            <table class="w-2/3">
+                <thead class="rounded-lg">
+                    <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <th class="p-6 hidden md:table-cell">#</th>
+                        <th class="p-6 w-1/3 md:w-auto">Name</th>
+                        <th class="p-6 w-1/3 md:w-auto">Source</th>
+                        <th class="p-6 hidden md:table-cell">Serving Size</th>
+                        <th class="p-6 hidden md:table-cell">Calories</th>
+                        <th class="p-6 hidden md:table-cell">Fat</th>
+                        <th class="p-6 hidden md:table-cell">Carbohydrates</th>
+                        <th class="p-6 hidden md:table-cell">Protein</th>
+                    </tr>
+                </thead>
+
+                @php
+                
+                $isEven = false;
+
+                @endphp
+
+                <tbody>
+                    @foreach($validated_data as $index=>$data)
+                    
+                    @php
+                        if($index % 2 == 0) {
+                            $isEven = true;
+                        } else {
+                            $isEven = false;
+                        }
+                    @endphp
+
+                    <tr class="@if(!$isEven)dark:bg-gray-900 @else dark:bg-gray-500 @endif ">
+                        <td class="px-6 py-3 hidden md:table-cell">{{$loop->iteration}}</td> 
+                        <td>{{$data['food_name']}}</td>
+                        <td>{{$data['food_source']}}</td>
+
+                        @if($data['food_servingunit'] == 'slice' || $data['food_servingunit'] == 'pc')
+                            <td>{{$data['food_servingsize']}} {{$data['food_servingunit']}}s</td>
+                        @else
+                            <td>{{$data['food_servingsize']}}{{$data['food_servingunit']}}</td>
+                        @endif
+
+                        <td>{{$data['food_calories']}}</td>
+                        <td>{{$data['food_fat']}}</td>
+                        <td>{{$data['food_carbs']}}</td>
+                        <td>{{$data['food_protein']}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            </div>
         </div>
 
     @endisset
@@ -35,8 +82,10 @@
             <div class="max-w-3xl mx-auto px-6 sm:px-6 lg:px-8">
                 <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="POST" action="{{ route('food.store')}}">
                     @csrf
-                    <div id="FOOD_FORM_INPUTS" class="relative md:max-h-[682px] overflow-hidden">
-                       <x-food-input-item index="1"/>
+                    <div id="FOOD_FORM_INPUTS" class="relative /md:max-h-[682px] md:max-h-[602px] overflow-hidden">
+
+
+                       <x-food-input-item index="1" :servingUnitOptions="$food_form_options"/>
 
                     </div>
 
@@ -109,6 +158,8 @@
                     var index = noOfPages;
                     var name = $(`#food_name_${noOfPages}`).val();
                     var source = $(`#food_source_${noOfPages}`).val();
+                    var servingSize = $(`#food_servingsize_${noOfPages}`).val();
+                    var servingUnit = $(`#food_servingunit_${noOfPages}`).val();
                     var calories = $(`#food_calories_${noOfPages}`).val();
                     var fat = $(`#food_fat_${noOfPages}`).val();
                     var carbs = $(`#food_carbs_${noOfPages}`).val();
@@ -123,6 +174,8 @@
                         data: {
                             index: index,
                             name: name,
+                            serving_size: servingSize,
+                            serving_unit: servingUnit,
                             source: source,
                             calories: calories,
                             fat: fat,
@@ -276,6 +329,19 @@
                 var name_val = $(`#food_name_${lastPageSelected}`).val();
                 var source_val = $(`#food_source_${lastPageSelected}`).val();
                 var calories_val = $(`#food_calories_${lastPageSelected}`).val();
+                var servingsize_val = $(`#food_servingsize_${lastPageSelected}`).val();
+                var servingunit_val = $(`:selected`, `#food_servingunit_${lastPageSelected}`).attr('shortname');
+                
+                // $(function() { 
+                //     $(`#food_servingunit_${lastPageSelected}`).change(function(){ 
+                //         var element = $(this).find('option:selected'); 
+                //         var myTag = element.attr("shortname"); 
+
+                //         $(`#food_text_servingunit_${lastPageSelected}`).text(servingunit_val);
+                //     }); 
+                // }); 
+
+               
                 var fat_val = $(`#food_fat_${lastPageSelected}`).val();
                 var carbs_val = $(`#food_carbs_${lastPageSelected}`).val();
                 var protein_val = $(`#food_protein_${lastPageSelected}`).val();
@@ -283,6 +349,8 @@
                 $(`#food_text_name_${lastPageSelected}`).text(name_val)
                 $(`#food_text_source_${lastPageSelected}`).text(source_val)
                 $(`#food_text_calories_${lastPageSelected}`).text(calories_val + `kcal`)
+                $(`#food_text_servingsize_${lastPageSelected}`).text(servingsize_val);
+                $(`#food_text_servingunit_${lastPageSelected}`).text(servingunit_val);
                 $(`#food_text_fat_${lastPageSelected}`).text(fat_val + `g`)
                 $(`#food_text_carbs_${lastPageSelected}`).text(carbs_val + `g`)
                 $(`#food_text_protein_${lastPageSelected}`).text(protein_val + `g`)

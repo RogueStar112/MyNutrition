@@ -13,16 +13,20 @@ class FoodItem extends Component
      */
     public $index;
     public $name;
+    public $servingSize;
+    public $servingUnit;
     public $source;
     public $calories;
     public $fat;
     public $carbs;
     public $protein;
 
-    public function __construct($index = '', $name = '', $source = '', $calories = '', $fat = '', $carbs = '', $protein = '')
+    public function __construct($index = '', $name = '', $servingSize = '', $servingUnit = '', $source = '', $calories = '', $fat = '', $carbs = '', $protein = '')
     {
         $this->index = $index;
         $this->name = $name;
+        $this->servingSize = $servingSize;
+        $this->servingUnit = $servingUnit;
         $this->source = $source;
         $this->calories = $calories;
         $this->fat = $fat;

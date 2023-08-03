@@ -11,13 +11,15 @@ class MealFoodItem extends Component
     public $foodIndex;
     public $foods;
     public $servingSize;
+    public $servingUnit;
     public $quantity;
 
-    public function __construct($foodIndex = '', $foods = '', $servingSize = 100, $quantity = 1)
+    public function __construct($foodIndex = '', $foods = '', $servingSize = 100, $servingUnit = '', $quantity = 1)
     {
         $this->foodIndex = $foodIndex;
         $this->foods = $foods;
         $this->servingSize = $servingSize;
+        $this->servingUnit = $servingUnit;
         $this->quantity = $quantity;
 
     }

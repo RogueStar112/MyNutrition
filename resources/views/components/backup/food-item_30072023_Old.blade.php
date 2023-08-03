@@ -1,14 +1,12 @@
-<div id="food_item_{{ $index }}" class="cursor-pointer min-h-[100px] active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg p-6 text-white overflow-hidden" onclick="goToPage({{$index}})">
+<div id="food_item_{{ $index }}" class="min-h-[100px] active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg p-6 text-white cursor-pointer" onclick="goToPage({{$index}})">
     <ul class="relative">
         <button id="item_revealbtn_{{ $index }}" index="{{ $index }}" class="food_revealbtn absolute right-0 bg-lime-800 text-white p-3 rounded-lg">
             <i id="item_icon_{{ $index }}" class="fas fa-chevron-down"> </i>
         </button>
 
         <div class="" id="food_wrapper_{{ $index }}">
-            {{-- <li class="font-bold text-left">#{{ $index }}</li> --}}
-            <p aria-label="index_number" class="absolute left-[50%] text-8xl font-black opacity-10 select-none">{{ $index }}</p>
+            <li class="font-bold text-left">Number {{ $index }}</li>
             <li id="food_text_name_{{$index}}">{{ $name }}</li>
-            <p class="text-gray-500"><span id="food_text_servingsize_{{$index}}">{{ $servingSize }}</span><span id="food_text_servingunit_{{$index}}">{{ $servingUnit }}</span></p>
             <span id="food_text_source_{{$index}}"class="text-right text-gray-500">{{ $source }}</span>
             {{-- <p class="absolute right-0 bottom-0 text-gray-500">100g</p> --}}
 

@@ -15,10 +15,10 @@
         </label>
 
         <label class="block p-6">
-            <span class="text-white w-full text-center block">Enter Serving Size (g)</span>
+            <span class="text-white w-full text-center block">Enter Serving Size</span>
             <div class="flex place-items-center">
                 <i class="fas fa-balance-scale mx-3 text-white"></i>
-                <input type="text" id="meal_name_servingsize_{{$index}}" name="meal_name_servingsize_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="100g" value="" required/>
+                <input type="text" id="meal_servingsize_{{$index}}" name="meal_name_servingsize_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="100g" value="" required/>
             </div>
         </label>
 
@@ -26,7 +26,7 @@
             <span class="text-white w-full text-center block">Enter Quantity</span>
             <div class="flex place-items-center">
                 <i class="fas fa-times mx-3 text-white"></i>
-                <input type="text" id="meal_name_quantity_{{$index}}" name="meal_name_quantity_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="1" value="" required/>
+                <input type="text" id="meal_quantity_{{$index}}" name="meal_name_quantity_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="1" value="" required/>
             </div>
         </label>
 
@@ -82,7 +82,7 @@
     
     <script>
         $(document).ready(function() {
-                $('#meal_name_1, #meal_name_servingsize_1, #meal_name_quantity_1').on("keypress", function(e) {
+                $('#meal_name_1, #meal_servingsize_1, #meal_quantity_1').on("keypress", function(e) {
                     
                     // if key press = enter key.
                     if(e.which == 13) {
@@ -90,8 +90,8 @@
 
                         var csrfToken = $('meta[name="csrf-token"]').attr('content');
                         var query = $('#meal_name_1').val();
-                        var servingSize = $('#meal_name_servingsize_1').val();
-                        var quantity = $('#meal_name_quantity_1').val();
+                        var servingSize = $('#meal_servingsize_1').val();
+                        var quantity = $('#meal_quantity_1').val();
 
                         if (servingSize == "") {
                             servingSize = 100;

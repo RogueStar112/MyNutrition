@@ -180,37 +180,6 @@
 
                     var ignoreServingSize = $("#disable_servingsize_1").is(':checked');
 
-                    // let x=1;
-
-                    // for (x; x<=no_of_foods; x++) {
-                        
-                    //     if (meal_json[x]['query'] == query) {
- 
-                    //          console.log('CONFLICT FOUND', meal_json);
-
-
-                             
-
-                    //     } else {
-                    //         meal_json[`${no_of_foods}`] = {'query': query,'servingSize': servingSize,'quantity': quantity};
-                    //     }
- 
-                    // }
-                    
-                    meal_json[`${no_of_foods}`] = {'query': query,'servingSize': servingSize,'quantity': quantity};
-                    
-
-                    $("#no_of_foods").val(no_of_foods)
-
-                    // let i=1;
-
-                    
-                    
-
-                               
-
-                    
-
                     $.ajax({
                         url: `/nutrition/meal/create_meal/${query}`,
                         method: 'POST',
@@ -218,34 +187,87 @@
                             'X-CSRF-TOKEN': csrfToken
                         },
                         data: {
-                            meals: meal_json
-                            // no_of_foods: no_of_foods,
-                            // balancer: replacement_balancer,
-                            // query: query,
-                            // servingSize: servingSize,
-                            // quantity: quantity
-                            // ignoreServingSize: ignoreServingSize
+                            no_of_foods: no_of_foods,
+                            balancer: replacement_balancer,
+                            query: query,
+                            servingSize: servingSize,
+                            quantity: quantity
+                            //ignoreServingSize: ignoreServingSize
                         },
                         success: function(response) {
 
-                            // forEach(response['html']) {
+                            var i=0;                        
 
-                            // }
+                            if(meal_json[`${query}`]) {
+
+                                        
+
+                                for (i; i<no_of_foods; i++) {
+
+                                    console.log('MEAL JSONs ', meal_json[`${query}`])
+                                    
+
+                                    var array_food_name = meal_json[`${query}`][0]['food_name'];
+                                    
+                                    if($(`#food_text_name_${i+1}`).html() == array_food_name) {
+                                        
+                                   
+                                        $(`#meal_item_${i+1}`).replaceWith(response['html_replace']);
+
+                       
+                                        console.log('REPLACEMENT BALANCER ', replacement_balancer)
+                                        console.log('NOF ', no_of_foods);
+
+                                        console.log('item successfully updated');
+                                    }
+                                }
+                                // $(`#meal_item_${no_of_foods}`).replaceWith(response['html']);
+                                // console.log('detected potato')
+                            } else {
+                                $('#FOOD-ITEMS-CONTAINER').append(response['html']);
+                         
+                                $("#no_of_foods").val(no_of_foods)
+                                console.log('NOOFFOODS ', no_of_foods);
+                            }
+
+                            replacement_balancer = $('.meal_item').length;
+                                
+                            meal_json[`${query}`] = response['food_array'];
+
+                            // console.log('MEAL JSON ' + JSON.stringify(meal_json));
+
+                            // console.log('RESPONSE HTML ', response['html']);
+
                             
-                            // console.log('successful response: ', Object.keys(response['html']).length);
-                            
-                            // console.log('successful response to render: ' response['html'])
-                            // $('#FOOD-ITEMS-CONTAINER').append(response['html']['render_html']);
+            
+                            var food_form_inputElements = $('#FOOD_FORM :input');
+
+                            const food_form_inputElementStrings = food_form_inputElements.map(function() {
+                            return $(this).prop('outerHTML');
+                            }).get();
+
                             
 
-                            for (let i = 1; i <= Object.keys(response['html']).length; i++) {
-                                console.log('successful response to render: ', response['html'][i]['render_html'])
+                            if(food_form_inputElementStrings.includes(String(response['html_input_data'])))
+                            {
+                                console.log('This already exists!')
+                            } else {
+                                $('#FOOD_FORM').append(response['html_input_data']);
+                                
+                                // meal_json[`${query}`] = response['food_array'];
+                                // meal_json['test'] = 'test';
+                                
 
-                                $('#FOOD-ITEMS-CONTAINER').empty();
 
-                                $('#FOOD-ITEMS-CONTAINER').append(response['html'][i]['render_html']);
-                            } 
+                            }
                             
+                         
+
+                            // console.log('STRIES ' + String(food_form_inputElementStrings));
+                            // console.log('STRINPUTDATA ' + String(response['html_input_data']));
+                            
+                            
+
                         },
                         error: function(xhr) {
                             console.log(xhr.responseText);
@@ -256,7 +278,6 @@
 
 
             });
-
         });
     </script>
 </div>
