@@ -10,4 +10,7 @@ class MealItems extends Model
     use HasFactory;
 
     protected $table = 'meal_items';
+
+    public $timestamps = true;
+
 }

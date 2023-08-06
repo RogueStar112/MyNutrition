@@ -165,9 +165,59 @@ class MealController extends Controller
 
 
     public function meal_form_store(Request $request) {
-        
-        //
+        $user_id = Auth::user()->id;
 
+        $array_index = $request->input('foods_pages');
+         
+        $array_index = explode(",", $array_index);
+
+        // will be used later to visualize what items go through!
+        $added_items = [];
+
+        $newMeal = new Meal();
+
+        $newMeal->user_id = $user_id;
+
+        $newMeal->name = $request->input('MEAL_NAME');
+
+        $date_time = strtotime($request->input('MEAL_TIME'));
+
+        $newMeal->time_planned = date('Y-m-d h:i:s', $date_time);
+
+        // if the new meal's planned time is in the past...
+        if (date('Y-m-d h:i:s', $date_time) < date('Y-m-d h:i:s')) {
+            $newMeal->is_eaten = 1;
+        } else {
+            $newMeal->is_eaten = 0;
+        }
+
+        $newMeal->save();
+
+
+        $newMeal_search = Meal::where('user_id', $user_id)
+                            ->latest('id')
+                            ->first();
+
+        for ($x=0; $x < count($array_index); $x++) {
+            
+            $array_index_x = $array_index[$x];
+
+            $newFoodItem = new MealItems();
+
+            $newFoodItem->name = $request->input("meal_foodname_$array_index_x");
+            $newFoodItem->meal_id = $newMeal_search->id;
+            $newFoodItem->food_id = $request->input("meal_foodid_$array_index_x");
+            $newFoodItem->food_unit_id = $request->input("meal_foodunitid_$array_index_x");
+            $newFoodItem->serving_size = $request->input("meal_servingsize_$array_index_x");
+            $newFoodItem->quantity = $request->input("meal_quantity_$array_index_x");
+            
+            $newFoodItem->save();
+
+
+        }
+
+        return view('nutrition_meal_form');
+        
     }
 
     public function search_food(Request $request) {
