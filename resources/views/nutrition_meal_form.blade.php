@@ -13,7 +13,7 @@
     <div class="flex py-4 justify-center">
         <div class="flex max-w-7xl">
             <div class="max-w-7xl /w-[768px] mx-auto sm:px-6 lg:px-8">
-                <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="POST" action="{{ route('food.store')}}">
+                <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="GET" action="{{ route('meal.create_p2')}}">
                     @csrf
                     <div id="FOOD_FORM_INPUTS" class="relative md:max-h-[682px] overflow-hidden">
                        <x-meal-input-item index="1"/>
@@ -44,6 +44,10 @@
                     </div>
                     
 
+                    <input type="hidden" id="no_of_foods" value="0" autocomplete="off">
+                    <input type="hidden" id="foods_pages" name="foods_pages" value="" autocomplete="off">
+                    <div id="form-meal-foods"></div>
+            
 
                 </form>
             </div>
@@ -70,10 +74,14 @@
             </div>
         </div>
 
-        {{-- Hidden form to keep no_of_foods, doesn't do anything outside of this --}}
-        <form>
-            <input type="hidden" id="no_of_foods" value="0" autocomplete="off">
-        </form>
+        {{-- Hidden form to keep no_of_foods, doesn't do anything outside of this.
+        
+        Foods_pages preserves the order of which food items are added.
+
+        last updated 05/08/23
+
+        --}}
+        
     </div>
 
     <script>
@@ -81,6 +89,7 @@
         console.log('meal json and food_array reset');
         var meal_json = {};
         var food_array = [];
+        var foods_pages = [];
 
         $(document).ready(function() {
             

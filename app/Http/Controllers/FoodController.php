@@ -196,6 +196,7 @@ class FoodController extends Controller
 
         $food_search = Food::where('user_id', $user_id)
                             ->orderBy('id', 'desc')
+                            ->groupBy('name')
                             ->get();
 
         $food_array = [];
