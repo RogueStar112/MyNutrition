@@ -182,7 +182,7 @@ class MealController extends Controller
 
         $date_time = strtotime($request->input('MEAL_TIME'));
 
-        $newMeal->time_planned = date('Y-m-d H:i:s', $date_time);
+        $newMeal->time_planned = date('Y-m-d h:i:s', $date_time);
 
         // if the new meal's planned time is in the past...
         if (date('Y-m-d h:i:s', $date_time) < date('Y-m-d h:i:s')) {
@@ -462,17 +462,16 @@ class MealController extends Controller
 
             
             $meal_date = date('Y-m-d', strtotime($meal->time_planned));
-            // $meal_items_array = '';
+            // $meal_items_array[$meal_date] = '';
 
-            $meal_items_array[$i]['meal_date'] = $meal_date;
-            $meal_items_array[$i]['time_planned'] = date('H:i', strtotime($meal->time_planned));
-            $meal_items_array[$i]['meal_name'] = $meal->name;
-            $meal_items_array[$i]['calories'] = 0;
-            $meal_items_array[$i]['fat'] = 0;
-            $meal_items_array[$i]['carbs'] = 0;
-            $meal_items_array[$i]['protein'] = 0;
+            $meal_items_array[$meal_date][$meal->id]['time_planned'] = date('H:i', strtotime($meal->time_planned));
+            $meal_items_array[$meal_date][$meal->id]['name'] = $meal->name;
+            $meal_items_array[$meal_date][$meal->id]['calories'] = 0;
+            $meal_items_array[$meal_date][$meal->id]['fat'] = 0;
+            $meal_items_array[$meal_date][$meal->id]['carbs'] = 0;
+            $meal_items_array[$meal_date][$meal->id]['protein'] = 0;
                                     
-            foreach($meal_items_select as $food_index=>$meal_item) {
+            foreach($meal_items_select as $index=>$meal_item) {
 
 
                 
@@ -483,45 +482,43 @@ class MealController extends Controller
                 $foods = Macronutrients::where('food_id', $meal_item->food_id)
                                             ->get();
                 
-                // $meal_items_array['name'] = $food_index;                         
+                // $meal_items_array[$meal->id]['name'] = $meal_item->name;                         
                 
 
                 foreach($foods as $food) {
-                    // $meal_items_array[$food_index]['calories'] = $food->calories;
+                    // $meal_items_array[$meal->id][$meal_item->name]['calories'] = $food->calories;
 
-                    // $meal_items_array[$food_index]['serving_size_food'] = $food->serving_size;
+                    // $meal_items_array[$meal->id][$meal_item->name]['serving_size_food'] = $food->serving_size;
 
-                    // $meal_items_array[$food_index]['serving_size_meal'] = $meal_item->serving_size;
+                    // $meal_items_array[$meal->id][$meal_item->name]['serving_size_meal'] = $meal_item->serving_size;
 
-                    // $meal_items_array[$food_index]['time_planned'] = $meal->time_planned;
+                    // $meal_items_array[$meal_date][$meal->id][$meal_item->name]['time_planned'] = $meal->time_planned;
 
-                    $meal_items_array[$i][$food_index]['food_name'] = $meal_item->name; 
+                    $meal_items_array[$meal_date][$meal->id][$meal_item->name]['calories'] = (int)(($food->calories /(int) $food->serving_size) * (int)$meal_item->serving_size);
 
-                    $meal_items_array[$i][$food_index]['calories'] = (int)(($food->calories /(int) $food->serving_size) * (int)$meal_item->serving_size);
+                    $meal_items_array[$meal_date][$meal->id]['calories'] += round(($food->calories*($food->serving_size / $meal_item->serving_size)), 0);
 
-                    $meal_items_array[$i]['calories'] += round(($food->calories*($food->serving_size / $meal_item->serving_size)), 0);
-
-                    $meal_items_array[$i][$food_index]['fat'] = round(($food->fat*($food->serving_size / $meal_item->serving_size)), 1);
+                    $meal_items_array[$meal_date][$meal->id][$meal_item->name]['fat'] = round(($food->fat*($food->serving_size / $meal_item->serving_size)), 1);
                     
-                    $meal_items_array[$i]['fat'] += round(($food->fat*($food->serving_size / $meal_item->serving_size)), 1);
+                    $meal_items_array[$meal_date][$meal->id]['fat'] += round(($food->fat*($food->serving_size / $meal_item->serving_size)), 1);
                     
-                    $meal_items_array[$i][$food_index]['carbs'] = round(($food->carbohydrates*($food->serving_size / $meal_item->serving_size)), 1);
+                    $meal_items_array[$meal_date][$meal->id][$meal_item->name]['carbs'] = round(($food->carbohydrates*($food->serving_size / $meal_item->serving_size)), 1);
 
-                    $meal_items_array[$i]['carbs'] += round(($food->carbohydrates*($food->serving_size / $meal_item->serving_size)), 1);
+                    $meal_items_array[$meal_date][$meal->id]['carbs'] += round(($food->carbohydrates*($food->serving_size / $meal_item->serving_size)), 1);
                     
 
-                    $meal_items_array[$i][$food_index]['protein'] = round(($food->protein*($food->serving_size / $meal_item->serving_size)), 1);
+                    $meal_items_array[$meal_date][$meal->id][$meal_item->name]['protein'] = round(($food->protein*($food->serving_size / $meal_item->serving_size)), 1);
 
-                    $meal_items_array[$i]['protein'] += round(($food->protein*($food->serving_size / $meal_item->serving_size)), 1);
+                    $meal_items_array[$meal_date][$meal->id]['protein'] += round(($food->protein*($food->serving_size / $meal_item->serving_size)), 1);
                     
                 }  
 
                 // Rounding the numbers to prevent trailing decimals.
 
-                $meal_items_array[$i]['calories'] = round($meal_items_array[$i]['calories'], 0);
-                $meal_items_array[$i]['fat'] = round($meal_items_array[$i]['fat'], 1);
-                $meal_items_array[$i]['carbs'] = round($meal_items_array[$i]['carbs'], 1);
-                $meal_items_array[$i]['protein'] = round($meal_items_array[$i]['protein'], 1);
+                $meal_items_array[$meal_date][$meal->id]['calories'] = round($meal_items_array[$meal_date][$meal->id]['calories'], 0);
+                $meal_items_array[$meal_date][$meal->id]['fat'] = round($meal_items_array[$meal_date][$meal->id]['fat'], 1);
+                $meal_items_array[$meal_date][$meal->id]['carbs'] = round($meal_items_array[$meal_date][$meal->id]['carbs'], 1);
+                $meal_items_array[$meal_date][$meal->id]['protein'] = round($meal_items_array[$meal_date][$meal->id]['protein'], 1);
 
                 
             }

@@ -21,6 +21,7 @@ class FoodController extends Controller
     public function food_form()
     {   
 
+        // Food unit options are stored in the database.
         $food_form_options = FoodUnit::all();
 
         return view('nutrition_food_form', ['food_form_options' => $food_form_options]);

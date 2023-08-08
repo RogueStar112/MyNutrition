@@ -50,7 +50,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/nutrition/meal/search_food/{query}', [MealController::class, 'search_food'])->name('meal.search_food');
 
     Route::get('/nutrition/meal/summary', [MealController::class, 'meal_form_submission'])->name('meal.create_p2');
-
+    
+    Route::get('/nutrition/meal/view', [MealController::class, 'meal_view'])->name('meal.view');
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])
