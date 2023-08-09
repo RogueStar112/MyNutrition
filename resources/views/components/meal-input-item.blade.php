@@ -94,7 +94,7 @@
                         var quantity = $('#meal_quantity_1').val();
 
                         if (servingSize == "") {
-                            servingSize = 100;
+                            servingSize = 1;
                         }
 
                         if (quantity == "") {

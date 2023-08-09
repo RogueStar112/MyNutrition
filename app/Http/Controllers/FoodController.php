@@ -371,8 +371,16 @@ class FoodController extends Controller
 
         $index = $request->input('index');
         $name = $request->input('name');
+
         $servingSize = $request->input('serving_size');
 
+        if ($servingSize == 0) {
+
+            $food_search = Food::find($index);
+
+            $servingSize = $food_search->serving_size;
+
+        }
 
         $servingUnit = $request->input('serving_unit');
         $food_unit_to_get = FoodUnit::where('id', $servingUnit)->first();

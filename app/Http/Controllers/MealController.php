@@ -185,7 +185,7 @@ class MealController extends Controller
         $newMeal->time_planned = date('Y-m-d H:i:s', $date_time);
 
         // if the new meal's planned time is in the past...
-        if (date('Y-m-d h:i:s', $date_time) < date('Y-m-d h:i:s')) {
+        if (date('Y-m-d H:i:s', $date_time) < date('Y-m-d H:i:s')) {
             $newMeal->is_eaten = 1;
         } else {
             $newMeal->is_eaten = 0;
@@ -225,6 +225,19 @@ class MealController extends Controller
 
         $foods = $request->input('query');
         $servingSize = $request->input('servingSize');
+
+        // if ($servingSize = 0) {
+
+
+
+        // }
+
+        $servingSize = $request->input('servingSize');
+
+        if ($servingSize == 0) {
+            $servingSize = 0;
+        }
+
         $quantity = $request->input('quantity');
 
         $ignoreServingSize = $request->input('ignoreServingSize');
@@ -280,7 +293,17 @@ class MealController extends Controller
 
         }                   
 
-        $component = new MealSearchItem($food_array, $servingSize, $quantity);
+        if ($servingSize == "") {
+
+            $component = new MealSearchItem($food_array, $macronutrients_search->serving_size, $quantity);        
+
+        
+        } else {
+
+            $component = new MealSearchItem($food_array, $servingSize, $quantity);
+
+
+        }
 
         return $component->render()->with($component->data());
 
@@ -497,22 +520,22 @@ class MealController extends Controller
 
                     $meal_items_array[$i][$food_index]['food_name'] = $meal_item->name; 
 
-                    $meal_items_array[$i][$food_index]['calories'] = (int)(($food->calories /(int) $food->serving_size) * (int)$meal_item->serving_size);
+                    $meal_items_array[$i][$food_index]['calories'] = (int)(($food->calories /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity;
 
-                    $meal_items_array[$i]['calories'] += round(($food->calories*($food->serving_size / $meal_item->serving_size)), 0);
+                    $meal_items_array[$i]['calories'] += round((($food->calories /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 0);
 
-                    $meal_items_array[$i][$food_index]['fat'] = round(($food->fat*($food->serving_size / $meal_item->serving_size)), 1);
+                    $meal_items_array[$i][$food_index]['fat'] = round((($food->fat /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
                     
-                    $meal_items_array[$i]['fat'] += round(($food->fat*($food->serving_size / $meal_item->serving_size)), 1);
+                    $meal_items_array[$i]['fat'] += round((($food->fat /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
                     
-                    $meal_items_array[$i][$food_index]['carbs'] = round(($food->carbohydrates*($food->serving_size / $meal_item->serving_size)), 1);
+                    $meal_items_array[$i][$food_index]['carbs'] = round((($food->carbohydrates /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
 
-                    $meal_items_array[$i]['carbs'] += round(($food->carbohydrates*($food->serving_size / $meal_item->serving_size)), 1);
+                    $meal_items_array[$i]['carbs'] += round((($food->carbohydrates /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
                     
 
-                    $meal_items_array[$i][$food_index]['protein'] = round(($food->protein*($food->serving_size / $meal_item->serving_size)), 1);
+                    $meal_items_array[$i][$food_index]['protein'] = round((($food->protein /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
 
-                    $meal_items_array[$i]['protein'] += round(($food->protein*($food->serving_size / $meal_item->serving_size)), 1);
+                    $meal_items_array[$i]['protein'] += round((($food->protein /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
                     
                 }  
 

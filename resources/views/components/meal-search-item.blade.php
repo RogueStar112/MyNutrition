@@ -39,6 +39,10 @@
                 //     $food['serving_size'] = 100;
                 // }
 
+                if($servingSize == 0 or $servingSize == "") {
+                    $servingSize = 1;
+                }
+
                 $food['calories'] = round(($food['calories']/($food['serving_size']/$servingSize))*$quantity, 0);
                 $food['fat'] = round(($food['fat']/($food['serving_size']/$servingSize))*$quantity, 1);
                 $food['carbohydrates'] = round(($food['carbohydrates']/($food['serving_size']/$servingSize))*$quantity, 1);

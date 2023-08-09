@@ -5,10 +5,10 @@
         </h2>
     </x-slot>
 
-    <div class="flex py-4 justify-center">
+    {{-- <div class="flex py-4 justify-center">
         
 
-    </div>
+    </div> --}}
 
     <div class="flex py-4 justify-center">
         <div class="flex max-w-7xl">
@@ -18,7 +18,7 @@
                         
 
                         @foreach($meals as $meal)
-                        <div class="flex relative bg-gray-800 rounded-lg mt-3 justify-evenly place-items-center text-white">
+                        <div class="flex relative bg-gray-800 rounded-t-lg mt-3 justify-evenly place-items-center text-white">
                             
                             <div class="flex flex-col">
                             <p class="inline-block text-white pl-6 pt-6 pr-6 font-black text-2xl">{{$meal['meal_name']}}</p>
@@ -47,20 +47,23 @@
                         </div>
 
                         
-                        <table class="w-full bg-gray-900">
+                        <table class="w-full bg-gray-900 justify-evenly place-items-center">
                             
                             
                             <tbody>
                             @foreach(array_keys($meal) as $food) 
                                 
+                            
+
                                 @if(gettype($food) == 'integer') 
                                     
-                                <tr class="text-white p-6 w-full">
-                                    <td class="p-6">{{$meal[$food]['food_name']}}</td>
-                                    <td>{{$meal[$food]['calories']}}kcal</td>
-                                    <td>{{$meal[$food]['fat']}}g</td>
-                                    <td>{{$meal[$food]['carbs']}}g</td>
-                                    <td>{{$meal[$food]['protein']}}g</td>
+                                
+                                <tr class="flex justify-around place-items-center text-white p-6 w-full @if($loop->last) border-4 border-transparent border-b-red-400 rounded-b-lg @endif">
+                                    <td class="inline-block w-[198px]">{{$meal[$food]['food_name']}}</td>
+                                    <td class="w-fit">{{$meal[$food]['calories']}}kcal</td>
+                                    <td class="w-fit">{{$meal[$food]['fat']}}g</td>
+                                    <td class="w-fit">{{$meal[$food]['carbs']}}g</td>
+                                    <td class="w-fit">{{$meal[$food]['protein']}}g</td>
                                 </tr>
 
 
