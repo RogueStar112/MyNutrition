@@ -249,8 +249,6 @@ class FoodController extends Controller
                             ->groupBy('name')
                             ->get();
 
-        $food_array = [];
-        
         foreach($food_search as $index=>$food) {
             $food_array[] = $food;
 
@@ -275,9 +273,9 @@ class FoodController extends Controller
         
         // return $food_array;
 
-        return view('nutrition_food_view_item', ['foods' => $food_array]);
+        return view('nutrition_food_view', ['foods' => $food_array, 'food_form_options' => $food_form_options]);
 
-        
+        }
     }
 
     public function food_form_edit($id) {

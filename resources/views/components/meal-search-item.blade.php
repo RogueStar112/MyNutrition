@@ -138,10 +138,11 @@
                     @endif
 
                     <td class="px-6 py-3 hidden md:table-cell">{{$food['protein']}}g<br><p class="invisible">_</p></td>
-                    <td class="px-6 py-3">
-                        <a class="p-2 rounded-lg" href="{{ route('food.edit', $food['id'])}}"><i class="fas fa-pencil-alt text-yellow-500"></i></a>
+                    <td class="flex px-6 py-3 place-items-center justify-center gap-3">
+                        <a class="rounded-lg" href="{{ route('food.edit', $food['id'])}}"><i class="fas fa-pencil-alt text-yellow-500"></i></a>
+                        <a href=""><i class="fas fa-eye text-blue-500 cursor-pointer" value="{{$food['id']}}"></i></a>
                         <i class="fas fa-plus text-green-500 cursor-pointer add_food_icon" value="{{$food['id']}}"></i>
-                        <br><p class="invisible">_</p>
+                        {{-- <br><p class="invisible">_</p> --}}
                         <button class="p-2 rounded-lg visible md:hidden"><i id="food_icon_{{$food['id']}}" class="fas fa-eye text-white"></i></button>
                     </td>
 

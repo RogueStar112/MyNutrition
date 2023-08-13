@@ -38,24 +38,8 @@
                         <div class="max-w-7xl bg-gray-800 p-6 text-white rounded-lg my-4">
                             <table class="border-separate border-spacing-y-1.5 bg-gray-900 p-6 m-2 w-[600px] place-items-center text-center">
 
-                                @php
-                                    $dayOfWeekNumber = date("w", strtotime($index));
-
-                                    switch($dayOfWeekNumber)
-                                        {
-                                    case 0 : $dayOfWeek = "Sunday";
-                                    case 1 : $dayOfWeek = "Monday";
-                                    case 2 : $dayOfWeek = "Tuesday";
-                                    case 3 : $dayOfWeek = "Wednesday";
-                                    case 4 : $dayOfWeek = "Thursday";
-                                    case 5 : $dayOfWeek = "Friday";
-                                    case 6 : $dayOfWeek = "Saturday";
-                                        }
-
-                                @endphp
-
                                 <div class="w-full text-center">
-                                <h1 class="text-md font-black">{{ "$dayOfWeek " .  date('jS F Y', strtotime($index)) }}</h1>
+                                <h1 class="text-md font-black">{{ date('jS F Y', strtotime($index)) }}</h1>
                                 </div>
 
                                 <thead>
@@ -74,7 +58,7 @@
                                 @foreach($meal['times_planned'] as $meal_time)
                                 
                                 <tr class="m-4">
-                                    <td class="bg-orange-800 text-xl w-[170px]" colspan="1">{{ date('H:i', strtotime($meal_time)) }}</td>
+                                    <td class="bg-orange-800 text-xl" colspan="1">{{ date('H:i', strtotime($meal_time)) }}</td>
                                     <td class="bg-orange-900" colspan="4">{{ $meal[$meal_time]['meal_name'] }}</td>
                                 </tr>
 
@@ -87,13 +71,7 @@
                          
                                     @if(gettype($food_item) == 'integer') 
                                     <tr class="text-gray-500">
-                                        @php
-                                            
-                                            $meal_foodname = str_replace(" ", "_", $meal[$meal_time][$food_item]['food_name']);
-                                            $meal_foodname_display = $meal[$meal_time][$food_item]['food_name'];
-
-                                        @endphp
-                                        <td><a class="text-orange-500" href="{{ route('food.view_item', ['user_id'=>$user_id, 'name'=>$meal_foodname])}}">{{$meal_foodname_display}}</a></td>
+                                        <td>{{$meal[$meal_time][$food_item]['food_name']}}</td>
                                         <td>{{$meal[$meal_time][$food_item]['calories']}}kcal</td>
                                         <td>{{$meal[$meal_time][$food_item]['fat']}}g</td>
                                         <td>{{$meal[$meal_time][$food_item]['carbs']}}g</td>

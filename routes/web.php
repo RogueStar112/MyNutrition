@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/nutrition/food', [FoodController::class, 'food_delete'])->name('food.delete');
 
     Route::get('/nutrition/food/view', [FoodController::class, 'food_view'])->name('food.view');
+    Route::get('/nutrition/food/view/{user_id}/{name}', [FoodController::class, 'food_view_item'])->name('food.view_item');
     Route::get('/nutrition/food/edit/{id}', [FoodController::class, 'food_form_edit'])->name('food.form_edit');
     Route::put('/nutrition/food/edit/{id}', [FoodController::class, 'food_edit'])->name('food.edit');
 
@@ -52,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/nutrition/meal/summary', [MealController::class, 'meal_form_submission'])->name('meal.create_p2');
     
     Route::get('/nutrition/meal/view', [MealController::class, 'meal_view'])->name('meal.view');
+    Route::get('/nutrition/meal/view/statistics/{start_date}/{end_date}', [MealController::class, 'meal_view_stats'])->name('meal.view_stats');
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])

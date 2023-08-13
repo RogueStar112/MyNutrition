@@ -40,5 +40,11 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <script src="node_modules\chart.js\dist\chart.umd.js"></script>
+        <script>
+            const myChart = new Chart(ctx, {...});
+        </script>
+
     </body>
 </html>
