@@ -71,11 +71,11 @@ class MealController extends Controller
                 
                 
                 // "meal_source_$food_pages_x" => 'required|string|max:20',
-                "meal_servingsize_$food_pages_x" => 'required|numeric|max:1000',
+                "meal_servingsize_$food_pages_x" => 'required|numeric|max:5000',
                 "meal_calories_$food_pages_x" => 'nullable|numeric|max:15000',
-                "meal_fat_$food_pages_x" => 'nullable|numeric|max:1000',
-                "meal_carbs_$food_pages_x" => 'nullable|numeric|max:1000',
-                "meal_protein_$food_pages_x" => 'nullable|numeric|max:1000',
+                "meal_fat_$food_pages_x" => 'nullable|numeric|max:5000',
+                "meal_carbs_$food_pages_x" => 'nullable|numeric|max:5000',
+                "meal_protein_$food_pages_x" => 'nullable|numeric|max:5000',
 
                 
             ]);
@@ -758,6 +758,16 @@ class MealController extends Controller
 
     public function meal_view_stats($start_date, $end_date) {
 
+        $user_id = Auth::user()->id;
+        
+        $meal_select = Meal::where('user_id', $user_id)
+                            ->whereBetween('time_planned', [$start_date . ' 00:00:00', $end_date . ' 23:59:59'])
+                            ->orderByRaw('time_planned ASC')
+                            ->get();
+        
+        return view('nutrition_meal_view_statistics');
+
+        
     }
 
 }

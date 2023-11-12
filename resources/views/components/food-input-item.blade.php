@@ -32,6 +32,14 @@
               @endforeach
             </select>
         </label>
+
+        <label class="block p-6 col-span-2" for="food_image_{{$index}}">
+
+            <span class="text-white">Upload Image (optional)</span>
+
+            <input type="file" name="food_image_{{$index}}" id="food_image_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md p-3"/>
+
+        </label>
         
     </div> 
 

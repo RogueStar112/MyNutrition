@@ -43,19 +43,19 @@
 
                                     switch($dayOfWeekNumber)
                                         {
-                                    case 0 : $dayOfWeek = "Sunday";
-                                    case 1 : $dayOfWeek = "Monday";
-                                    case 2 : $dayOfWeek = "Tuesday";
-                                    case 3 : $dayOfWeek = "Wednesday";
-                                    case 4 : $dayOfWeek = "Thursday";
-                                    case 5 : $dayOfWeek = "Friday";
-                                    case 6 : $dayOfWeek = "Saturday";
+                                    case 0 : $dayOfWeek = "Sunday"; break;
+                                    case 1 : $dayOfWeek = "Monday"; break;
+                                    case 2 : $dayOfWeek = "Tuesday"; break;
+                                    case 3 : $dayOfWeek = "Wednesday"; break;
+                                    case 4 : $dayOfWeek = "Thursday"; break;
+                                    case 5 : $dayOfWeek = "Friday"; break;
+                                    case 6 : $dayOfWeek = "Saturday"; break;
                                         }
 
                                 @endphp
 
                                 <div class="w-full text-center">
-                                <h1 class="text-md font-black">{{ "$dayOfWeek " .  date('jS F Y', strtotime($index)) }}</h1>
+                                <h1 class="text-md font-black text-orange-500">{{ "$dayOfWeek " .  date('jS F Y', strtotime($index)) }}</h1>
                                 </div>
 
                                 <thead>
@@ -106,8 +106,18 @@
                                 
 
                                 <tr class="text-xl">
-                                    <td class="uppercase text-gray-500 text-sm"></td>
-                                    
+                                    <td></td>
+                                    {{-- <td> Meal #{{$loop->iteration}} Total </td> --}}
+                                    {{-- <td class="uppercase text-gray-500 text-sm bg-gray-700 p-2 m-2 rounded-full"><a class="bg-gray-800 p-2 m-2 rounded-full">
+                                        <i class="fas fa-pencil-alt text-yellow-500"></i>
+                                        </a>
+
+                                        <a class="bg-gray-800 p-2 m-2 rounded-full">
+                                            <i class="fas fa-trash-alt text-red-500"></i>
+                                        </a>
+                                        <br><p class="invisible">_</p> 
+                                    </td> --}}
+                   
                                     <td>{{ $meal[$meal_time]['calories'] }}kcal</td>
                                     <td>{{ $meal[$meal_time]['fat'] }}g</td>
                                     <td>{{ $meal[$meal_time]['carbs'] }}g</td>

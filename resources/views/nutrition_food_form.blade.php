@@ -80,9 +80,9 @@
     <div class="flex py-4 justify-center">
         <div class="flex max-w-7xl">
             <div class="max-w-3xl mx-auto px-6 sm:px-6 lg:px-8">
-                <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="POST" action="{{ route('food.store')}}">
+                <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="POST" enctype="multipart/form-data" action="{{ route('food.store')}}">
                     @csrf
-                    <div id="FOOD_FORM_INPUTS" class="relative /md:max-h-[682px] md:max-h-[602px] overflow-hidden">
+                    <div id="FOOD_FORM_INPUTS" class="relative /md:max-h-[682px] md:max-h-[750px] overflow-hidden">
 
 
                        <x-food-input-item index="1" :servingUnitOptions="$food_form_options"/>

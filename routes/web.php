@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\MealController;
+use App\Http\Controllers\BodyStatsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,9 +52,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/nutrition/meal/search_food/{query}', [MealController::class, 'search_food'])->name('meal.search_food');
 
     Route::get('/nutrition/meal/summary', [MealController::class, 'meal_form_submission'])->name('meal.create_p2');
-    
+
     Route::get('/nutrition/meal/view', [MealController::class, 'meal_view'])->name('meal.view');
     Route::get('/nutrition/meal/view/statistics/{start_date}/{end_date}', [MealController::class, 'meal_view_stats'])->name('meal.view_stats');
+
+    Route::get('/nutrition/body_stats', [BodyStatsController::class, 'body_stats_form'])->name('body_stats.form');
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])

@@ -16,6 +16,12 @@ use App\Models\Food;
 use App\Models\FoodUnit;
 use App\Models\Macronutrients;
 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\File;
+use Illuminate\Validation\Rule;
+
+use Illuminate\Support\Facades\Storage;
+
 class FoodController extends Controller
 {
     public function food_form()
@@ -59,8 +65,27 @@ class FoodController extends Controller
                 "food_fat_$array_index_x" => 'nullable|numeric|max:1000',
                 "food_carbs_$array_index_x" => 'nullable|numeric|max:1000',
                 "food_protein_$array_index_x" => 'nullable|numeric|max:1000',
-
+                "food_image_$array_index_x" => 'image'
             ]);
+
+
+            $food_image_path = $request->file("food_image_$array_index_x")->store('images/food');
+
+            $food_image = Storage::url($food_image_path);
+
+            // echo $food_image;
+            // https://laravel.com/docs/10.x/validation#validating-files
+
+            // Validator::validate($food_image, [
+
+            //     'photo' => [
+            //         'nullable',
+
+            //         File::image()
+            //             ->dimensions(Rule::dimensions()->maxWidth('1024')->maxHeight('1024')),
+            //     ],
+
+            // ]);
 
             $food_name = $request->input("food_name_$array_index_x");
             $food_calories = $request->input("food_calories_$array_index_x");
@@ -70,7 +95,7 @@ class FoodController extends Controller
             $food_fat = $request->input("food_fat_$array_index_x");
             $food_carbs = $request->input("food_carbs_$array_index_x");
             $food_protein = $request->input("food_protein_$array_index_x");
-
+            
 
             $existingFoodSource = FoodSource::where('name', $food_source)->first();
 
@@ -104,6 +129,8 @@ class FoodController extends Controller
                 $newFood->user_id = $user_id;
 
                 $newFood->source_id = $food_source_id;
+
+                $newFood->img_url = $food_image;
 
                 $newFood->save();
 
@@ -238,17 +265,27 @@ class FoodController extends Controller
 
     }
 
-    public function food_view_item($id) {
+    public function food_view_item($id, $name) {
+
         $user_id = Auth::user()->id;
 
+        // $authenticated = false;
+
+        // if ($id == $user_id) {
+        //     $authenticated = true;
+
+        // }
+       
         // $food_form_options = FoodUnit::all();
+        $name = str_replace("_", " ", $name);
+
 
         $food_search = Food::where('user_id', $user_id)
-                            ->where('food_id', $id)
+                            ->where('name', $name)
                             ->orderBy('id', 'desc')
-                            ->groupBy('name')
                             ->get();
 
+                            
         $food_array = [];
         
         foreach($food_search as $index=>$food) {
@@ -262,14 +299,19 @@ class FoodController extends Controller
             $macronutrients_search = Macronutrients::where('food_id', $food->id)
                                                 ->first();
 
+            $food_array[$index]['created_by'] = Auth::user()->name;
             $food_array[$index]['source_name'] = $food_source_search->name;
             $food_array[$index]['serving_size'] = $macronutrients_search->serving_size;
             $food_array[$index]['calories'] = $macronutrients_search->calories;
             $food_array[$index]['fat'] = $macronutrients_search->fat;
             $food_array[$index]['carbohydrates'] = $macronutrients_search->carbohydrates;
             $food_array[$index]['protein'] = $macronutrients_search->protein;
-
-            
+             
+            if ($food->img_url != NULL) {
+                $food_array[$index]['img_url'] = $food->img_url;
+            } else {
+                $food_array[$index]['img_url'] = 'N/A';
+            }
 
         }                   
         
@@ -328,6 +370,9 @@ class FoodController extends Controller
         $food_fat = $request->input("food_fat_1");
         $food_carbs = $request->input("food_carbs_1");
         $food_protein = $request->input("food_protein_1");
+        $food_image_path = $request->file("food_image_1")->store('public/images/food');
+
+        $food_image = Storage::url($food_image_path);
 
         $food_search = Food::where('id', $id)
                                         ->where('user_id', $user_id)
@@ -371,6 +416,7 @@ class FoodController extends Controller
 
                 $food_to_update->name = $food_name;
                 $food_to_update->source_id = $food_search->source_id;
+                $food_to_update->img_url = $food_image; 
                 
                 $food_to_update->save();
                 $food_to_update->touch();
