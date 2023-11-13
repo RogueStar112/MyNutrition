@@ -69,7 +69,7 @@ class FoodController extends Controller
             ]);
 
 
-            $food_image_path = $request->file("food_image_$array_index_x")->store('images/food');
+            $food_image_path = $request->file("food_image_$array_index_x")->store('public/images/food');
 
             $food_image = Storage::url($food_image_path);
 
