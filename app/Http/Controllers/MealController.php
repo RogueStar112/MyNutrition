@@ -103,6 +103,13 @@ class MealController extends Controller
             $food_array[$x]['carbohydrates'] =  $food_carbs;
             $food_array[$x]['protein'] = $food_protein;
 
+            
+            if ($food_servingsize == NULL) {
+                $food_array[$x]['serving_size_input'] = $macronutrients_search->serving_size;
+                $food_servingsize = $macronutrients_search->serving_size;
+            }
+
+
             $total_nutrients['calories'] += round(($food_calories/$macronutrients_search->serving_size)*$food_servingsize*$food_quantity, 0);
             $total_nutrients['fat'] += round(($food_fat/$macronutrients_search->serving_size)*$food_servingsize*$food_quantity, 1);
             $total_nutrients['carbohydrates'] += round(($food_carbs/$macronutrients_search->serving_size)*$food_servingsize*$food_quantity, 1);
@@ -765,7 +772,7 @@ class MealController extends Controller
                             ->orderByRaw('time_planned ASC')
                             ->get();
         
-        return view('nutrition_meal_view_statistics');
+        return view('nutrition_meal_view_statistics', ['meals' => $meal_select]);
 
         
     }

@@ -7,10 +7,10 @@
 
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="grid grid-flow-row-dense grid-cols-3 grid-rows-3 gap-3">
-                <x-dashboard-link colspan="3" heading="Overview" textalign="center">
+            <div class="grid grid-flow-row-dense mx-4 grid-cols-1 md:grid-cols-3 md:grid-rows-3 gap-3">
+                {{-- <x-dashboard-link colspan="3" heading="Overview" textalign="center">
                     {{ __(Auth::user()->name . "'s nutrition") }}
-                </x-dashboard-link>
+                </x-dashboard-link> --}}
 
                 <x-dashboard-link colspan="1" :href="route('food.create')" heading="Food" icon="fas fa-hotdog fa-3x text-orange-300">
                     {{ __('Create new food item.') }}

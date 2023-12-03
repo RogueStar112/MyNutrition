@@ -10,15 +10,8 @@
 
     </div> --}}
 
-    <div class="flex py-4 justify-center items-center">
-        <div class="flex flex-col max-w-sm md:flex-row md:max-w-7xl justify-center">
-            <div class="flex flex-col mx-auto [&>div]:mb-6">
-                {{-- <div class="text-center text-white">Start Date</div> --}}
-                {!! $calendar !!}
-                {{-- <div class="text-center text-white">End Date</div>
-                {!! $calendar !!} --}}
-            </div>
-
+    <div class="flex py-4 justify-center">
+        <div class="flex max-w-7xl">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 @isset($meals)
 
@@ -35,6 +28,7 @@
                     @endforeach
 
 
+                        {!! $calendar !!}
                             
                     {{-- @foreach($dates_to_search as $date) --}}
 
@@ -42,8 +36,8 @@
 
                    
                         @foreach($meals[0] as $index=>$meal)
-                        <div class="max-w-7xl bg-gray-800 p-6 text-white rounded-lg mb-4">
-                            <table class="border-separate border-spacing-y-1.5 bg-gray-900 p-6 m-2 w-full md:w-[600px] place-items-center text-center">
+                        <div class="max-w-7xl bg-gray-800 p-6 text-white rounded-lg my-4">
+                            <table class="border-separate border-spacing-y-1.5 bg-gray-900 p-6 m-2 w-[600px] place-items-center text-center">
 
                                 @php
                                     $dayOfWeekNumber = date("w", strtotime($index));
@@ -69,9 +63,9 @@
                                     <tr class="uppercase text-gray-500">
                                         <th>Time</th>
                                         <th>Calories</th>
-                                        <th class="hidden md:table-cell">Fat</th>
-                                        <th class="hidden md:table-cell">Carbs</th>
-                                        <th class="hidden md:table-cell">Protein</th>
+                                        <th>Fat</th>
+                                        <th>Carbs</th>
+                                        <th>Protein</th>
                                     </tr>
                                 </thead>
 
@@ -102,9 +96,9 @@
                                         @endphp
                                         <td><a class="text-orange-500" href="{{ route('food.view_item', ['user_id'=>$user_id, 'name'=>$meal_foodname])}}">{{$meal_foodname_display}}</a></td>
                                         <td>{{$meal[$meal_time][$food_item]['calories']}}kcal</td>
-                                        <td class="hidden md:table-cell">{{$meal[$meal_time][$food_item]['fat']}}g</td>
-                                        <td class="hidden md:table-cell">{{$meal[$meal_time][$food_item]['carbs']}}g</td>
-                                        <td class="hidden md:table-cell">{{$meal[$meal_time][$food_item]['protein']}}g</td>
+                                        <td>{{$meal[$meal_time][$food_item]['fat']}}g</td>
+                                        <td>{{$meal[$meal_time][$food_item]['carbs']}}g</td>
+                                        <td>{{$meal[$meal_time][$food_item]['protein']}}g</td>
                                     </tr>
                                     @endif
               
@@ -126,9 +120,9 @@
                                     </td> --}}
                    
                                     <td>{{ $meal[$meal_time]['calories'] }}kcal</td>
-                                    <td class="hidden md:table-cell">{{ $meal[$meal_time]['fat'] }}g</td>
-                                    <td class="hidden md:table-cell">{{ $meal[$meal_time]['carbs'] }}g</td>
-                                    <td class="hidden md:table-cell">{{ $meal[$meal_time]['protein'] }}g</td>
+                                    <td>{{ $meal[$meal_time]['fat'] }}g</td>
+                                    <td>{{ $meal[$meal_time]['carbs'] }}g</td>
+                                    <td class=>{{ $meal[$meal_time]['protein'] }}g</td>
                                 </tr>
 
                                 <tr>
@@ -176,17 +170,17 @@
                             </tr>
 
                             <tr class="m-3 place-items-center border-t-white border-transparent border-4 text-xl">
-                                <td class="hidden md:table-cell border-t-white border-t-2 p-2 mt-2 text-2xl">TOTAL</td>
+                                <td class="border-t-white border-t-2 p-2 mt-2 text-2xl">TOTAL</td>
 
-                                <td class="hidden md:table-cell border-t-white border-t-2 flex-auto p-2 m-2 bg-gray-800 text-center">{{$meal['calories']}}kcal</td>
+                                <td class="border-t-white border-t-2 flex-auto p-2 m-2 bg-gray-800 text-center">{{$meal['calories']}}kcal</td>
                                                                 {{-- <br><p class="text-sm text-gray-400">CALORIES</p></td> --}}
-                                <td class="hidden md:table-cell border-t-white border-t-2 flex-auto p-2 m-2 bg-gray-800 text-center">{{$meal['fat']}}g
+                                <td class="border-t-white border-t-2 flex-auto p-2 m-2 bg-gray-800 text-center">{{$meal['fat']}}g
                                     {{-- <br><p class="text-sm text-gray-400">FAT</p> --}}
                                 </td>
-                                <td class="hidden md:table-cell border-t-white border-t-2 flex-auto p-2 m-2 bg-gray-800 text-center">{{$meal['carbs']}}g
+                                <td class="border-t-white border-t-2 flex-auto p-2 m-2 bg-gray-800 text-center">{{$meal['carbs']}}g
                                     {{-- <br><p class="text-sm text-gray-400">CARBS</p> --}}
                                 </td>
-                                <td class="hidden md:table-cell border-t-white border-t-2 flex-auto p-2 m-2 bg-gray-800 text-center">{{$meal['protein']}}g
+                                <td class="border-t-white border-t-2 flex-auto p-2 m-2 bg-gray-800 text-center">{{$meal['protein']}}g
                                     {{-- <br><p class="text-sm text-gray-400">PROTEIN</p> --}}
                                 </td>
                             </tr>
@@ -206,7 +200,7 @@
 
                 @endisset
             </div>
-        </div>
+       
         
     </div>
 

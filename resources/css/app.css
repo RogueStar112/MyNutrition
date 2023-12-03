@@ -37,9 +37,10 @@
     display: flex;
     position: relative;
     padding: 16px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
+    
     max-width: 320px;
-    background: #5b6676;
+    background: #1F2937;
     border-radius: 4px;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
@@ -51,7 +52,7 @@
     font-size: 2rem;
     line-height: 1;
     font-weight: 300;
-    color: white8;
+    color: white;
     transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
@@ -60,7 +61,7 @@
 
 .year {
     margin-left: 4px;
-    color: #CBD5E1;
+    color: #9A3412;
 }
 
 .days {
@@ -96,7 +97,7 @@
 }
 
 .day.today {
-    color: #0EA5E9;
+    color: rgb(232, 163, 13);
     font-weight: 600;
 }
 
@@ -107,7 +108,7 @@
 }
 
 .day:hover {
-    background: black;
+    background: #111827;
 }
 
 .day .content {

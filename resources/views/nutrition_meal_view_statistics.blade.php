@@ -12,9 +12,18 @@
 
     <div class="flex py-4 justify-center">
         <div class="flex max-w-7xl">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 text-white">
                 
+                @foreach($meals as $meal)
+
+                        {{$meal}}<br>
+
+                @endforeach
+
             </div>
+        
+        </div>
+
     </div>
 
     <script>

@@ -15,6 +15,7 @@ use App\Models\FoodSource;
 use App\Models\Food;
 use App\Models\FoodUnit;
 use App\Models\Macronutrients;
+use App\Models\MealItems;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\File;
@@ -299,6 +300,12 @@ class FoodController extends Controller
             $macronutrients_search = Macronutrients::where('food_id', $food->id)
                                                 ->first();
 
+            $foodunit_search = MealItems::where('food_id', $food->id)
+                                            ->first();
+
+            $foodunit_search_ii = FoodUnit::where('id', $foodunit_search->food_unit_id)
+                                            ->first();           
+
             $food_array[$index]['created_by'] = Auth::user()->name;
             $food_array[$index]['source_name'] = $food_source_search->name;
             $food_array[$index]['serving_size'] = $macronutrients_search->serving_size;
@@ -306,6 +313,7 @@ class FoodController extends Controller
             $food_array[$index]['fat'] = $macronutrients_search->fat;
             $food_array[$index]['carbohydrates'] = $macronutrients_search->carbohydrates;
             $food_array[$index]['protein'] = $macronutrients_search->protein;
+            $food_array[$index]['serving_unit'] = $foodunit_search_ii->short_name;
              
             if ($food->img_url != NULL) {
                 $food_array[$index]['img_url'] = $food->img_url;

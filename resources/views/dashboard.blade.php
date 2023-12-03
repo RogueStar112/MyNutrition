@@ -7,10 +7,10 @@
 
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="grid grid-cols-3 grid-rows-3 gap-3">
-                <x-dashboard-item colspan="3" heading="Overview" textalign="center">
+            <div class="grid grid-flow-row-dense mx-4 grid-cols-1 md:grid-cols-3 md:grid-rows-3 gap-3">
+                {{-- <x-dashboard-item colspan="3" heading="Overview" textalign="center">
                     {{ __(Auth::user()->name . "'s statistics") }}
-                </x-dashboard-item>
+                </x-dashboard-item> --}}
 
                 <x-dashboard-item colspan="1" heading="Calories Burnt" icon="fas fa-fire fa-3x text-orange-300">
                     {{ __('1,265kcal') }}
