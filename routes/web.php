@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\BodyStatsController;
+use App\Http\Controllers\ExerciseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,6 +58,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/nutrition/meal/view/statistics/{start_date}/{end_date}', [MealController::class, 'meal_view_stats'])->name('meal.view_stats');
 
     Route::get('/nutrition/body_stats', [BodyStatsController::class, 'body_stats_form'])->name('body_stats.form');
+
+    Route::get('/exercise/create', [ExerciseController::class, 'exercise_form'])->name('exercise.form');
+
+    
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])

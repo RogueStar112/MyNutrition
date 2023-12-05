@@ -252,7 +252,7 @@ class MealController extends Controller
         
 
         $food_search = Food::where('name', 'LIKE', "%{$foods}%")
-                           ->where('user_id', $user_id)
+                        //    ->where('user_id', $user_id)
                            ->orderBy('id', 'desc')
                            ->groupBy('name')
                            ->get();
@@ -347,7 +347,7 @@ class MealController extends Controller
             $food_array[$meal_datendex]['index'] = $meal_datendex_no;
 
             $food_search = Food::where('id', "$query_no")
-                            ->where('user_id', $user_id)
+                            // ->where('user_id', $user_id)
                             ->groupBy('name', 'source_id')
                             ->first();
 
@@ -491,7 +491,7 @@ class MealController extends Controller
 
         $html .= '<div class="days">';
 
-        $dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        $dayLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
         foreach ($dayLabels as $dayLabel)
         {
             $html .= "<span class='day-label'>" . $dayLabel . '</span>';
@@ -504,7 +504,7 @@ class MealController extends Controller
 
             $day = $startOfCalendar->format('j');
 
-            $html .= '<span class="day '.$extraClass.'"><span class="content">' . $day . '</span></span>';
+            $html .= '<span class="day '.$extraClass.'"><span id="content-day-' . $day .'" class="content">' . $day . '</span></span>';
             $startOfCalendar->addDay();
         }
         $html .= '</div></div>';

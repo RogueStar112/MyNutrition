@@ -269,6 +269,7 @@ class FoodController extends Controller
     public function food_view_item($id, $name) {
 
         $user_id = Auth::user()->id;
+        $user_name = Auth::user()->name;
 
         // $authenticated = false;
 
@@ -325,7 +326,7 @@ class FoodController extends Controller
         
         // return $food_array;
 
-        return view('nutrition_food_view_item', ['foods' => $food_array]);
+        return view('nutrition_food_view_item', ['foods' => $food_array, 'user_id' => $user_id, 'user_name' => $user_name]);
 
         
     }

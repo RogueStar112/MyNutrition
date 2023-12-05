@@ -20,7 +20,7 @@
                     {{ __('Create meals with existing foods.') }}
                 </x-dashboard-link>
 
-                <x-dashboard-link colspan="1" heading="Exercise" icon="fas fa-shoe-prints fa-3x -rotate-90 text-yellow-300">
+                <x-dashboard-link colspan="1" :href="route('exercise.form')" heading="Exercise" icon="fas fa-shoe-prints fa-3x -rotate-90 text-yellow-300">
                     {{ __('Log your exercises. (WIP)') }}
                 </x-dashboard-link>
 
