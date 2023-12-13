@@ -69,11 +69,13 @@ class FoodController extends Controller
                 "food_image_$array_index_x" => 'image'
             ]);
 
+            if ($request->file("food_image_$array_index_x") != NULL) {
+                $food_image_path = $request->file("food_image_$array_index_x")->store('public/images/food');
 
-            $food_image_path = $request->file("food_image_$array_index_x")->store('public/images/food');
-
-            $food_image = Storage::url($food_image_path);
-
+                $food_image = Storage::url($food_image_path);
+            } else {
+                $food_image = NULL;
+            }
             // echo $food_image;
             // https://laravel.com/docs/10.x/validation#validating-files
 
@@ -220,6 +222,7 @@ class FoodController extends Controller
     public function food_view() {
 
         $user_id = Auth::user()->id;
+        $user_name = Auth::user()->name;
 
         $food_form_options = FoodUnit::all();
 
@@ -241,8 +244,11 @@ class FoodController extends Controller
             $macronutrients_search = Macronutrients::where('food_id', $food->id)
                                                 ->first();
 
+            $food_unit_chosen = FoodUnit::find($macronutrients_search->food_unit_id)->short_name;
+
             $food_array[$index]['source_name'] = $food_source_search->name;
             $food_array[$index]['serving_size'] = $macronutrients_search->serving_size;
+            $food_array[$index]['serving_unit'] = $food_unit_chosen;
             $food_array[$index]['calories'] = $macronutrients_search->calories;
             $food_array[$index]['fat'] = $macronutrients_search->fat;
             $food_array[$index]['carbohydrates'] = $macronutrients_search->carbohydrates;
@@ -254,7 +260,7 @@ class FoodController extends Controller
         
         // return $food_array;
 
-        return view('nutrition_food_view', ['foods' => $food_array, 'food_form_options' => $food_form_options]);
+        return view('nutrition_food_view', ['foods' => $food_array, 'food_form_options' => $food_form_options, 'user_name' => $user_name]);
 
         // $food_source_search = FoodSource::where('id', $food_search->source_id)
         //                                 ->get();
@@ -379,9 +385,15 @@ class FoodController extends Controller
         $food_fat = $request->input("food_fat_1");
         $food_carbs = $request->input("food_carbs_1");
         $food_protein = $request->input("food_protein_1");
-        $food_image_path = $request->file("food_image_1")->store('public/images/food');
 
-        $food_image = Storage::url($food_image_path);
+        if ($request->file("food_image_1") != NULL) {
+            $food_image_path = $request->file("food_image_1")->store('public/images/food');
+
+            $food_image = Storage::url($food_image_path);
+        } else {
+            $food_image = NULL;
+        }
+
 
         $food_search = Food::where('id', $id)
                                         ->where('user_id', $user_id)

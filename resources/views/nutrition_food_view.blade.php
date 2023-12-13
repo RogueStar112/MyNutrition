@@ -10,6 +10,78 @@
         @isset($foods)
 
         <div class="max-w-7xl overflow-x-auto ">
+            
+            @foreach($foods as $index=>$food)
+
+                <div class="grid grid-cols-[50px_1fr_1fr] grid-rows-4 bg-[#1E293B] rounded-lg w-1/2 mx-auto my-6 p-6">
+
+                    <p class="text-2xl text-[#334155]">{{$loop->iteration}}</p>
+                    
+                    <div class="col-start-2 col-end-3 row-start-1 row-end-2">
+                        <p class="text-2xl text-white font-extrabold">{{$food['name']}}</p>
+                        
+                    </div>
+                    
+                    <div class="col-start-2 col-end-3 row-start-2 row-end-3 flex justify-between text-gray-500">
+                        <td class="px-6 py-3 hidden md:table-cell">Per {{$food['serving_size'] . $food['serving_unit']}}</td>
+
+                            
+                            {{-- <div class="flex flex-row-reverse">
+                                <p class="mx-3">{{$user_name}}</p>
+                                <img src="{{url('/img/blankpfp.png')}}" width="40" height="24">
+                            </div> --}}
+        
+                    </div>
+
+                    <div class="col-start-2 col-end-3 row-start-3 row-end-4 flex justify-between text-gray-500">
+                        <p class="italic">{{$food['source_name']}}</p>
+                    </div>
+
+                    <div class="row-span-4">
+                        <div id="nutritional_wrapper_{{ $loop->iteration }}" class="visible text-gray-500 opacity-100 slide-down">
+                            <div class="relative">
+                                <li id="food_text_calories_{{$loop->iteration}}" class="italic">{{ $food['calories'] }}kcal</li>
+                
+                                <p class="absolute right-0 top-0 text-gray-500">Calories</p>
+                
+                
+                                <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                    <div id="food_progressbar_calories_{{$loop->iteration}}" class="bg-blue-600 h-2.5 rounded-full" style="width: {{ ((float)$food['calories'] / 1500) * 100 }}%"></div>
+                                </div>
+                            </div>
+                
+                            <div class="relative mt-3">
+                                <li id="food_text_fat_{{$loop->iteration}}" class="italic">{{$food['fat']}}g</li>
+                                <p class="absolute right-0 top-0 text-gray-500">Fat</p>
+                
+                                <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                    <div id="food_progressbar_fat_{{$loop->iteration}}" class="bg-orange-600 h-2.5 rounded-full" style="width: {{ ((float)$food['fat'] / 97) * 100 }}%"></div>
+                                </div>
+                            </div>
+                
+                            <div class="relative mt-3">
+                                <li id="food_text_carbs_{{$loop->iteration}}" class="italic">{{ $food['carbohydrates'] }}g</li>
+                                <p class="absolute right-0 top-0 text-gray-500">Carbs</p>
+                
+                                <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                    <div id="food_progressbar_carbs_{{$loop->iteration}}" class="bg-yellow-600 h-2.5 rounded-full" style="width: {{ ((float)$food['carbohydrates'] / 97) * 100 }}%"></div>
+                                </div>
+                            </div>
+                
+                            <div class="relative mt-3">
+                                <li id="food_text_protein_{{$loop->iteration}}" class="italic">{{ $food['protein'] }}g</li>
+                                <p class="absolute right-0 top-0 text-gray-500">Protein</p>
+                
+                                <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                    <div id="food_progressbar_protein_{{$loop->iteration}}" class="bg-green-600 h-2.5 rounded-full" style="width: {{ ((float)$food['protein'] / 80) * 100 }}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            @endforeach
+
             <table class="px-2 md:w-full table-fixed text-white text-center rounded-lg overflow-x-auto">
 
             {{-- credit to: https://flowbite.com/docs/components/tables/ for table css --}}

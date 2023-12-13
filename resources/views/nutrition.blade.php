@@ -40,6 +40,14 @@
                     {{ __('Log water intake. (WIP)') }}
                 </x-dashboard-link>
 
+                <x-dashboard-link colspan="1.5" heading="Preferences" icon="fas fa-tint fa-3x text-blue-300">
+                    {{ __('Any particular cuisines you fancy?') }}
+                </x-dashboard-link>
+
+                <x-dashboard-link colspan="1.5" heading="Meal Suggester (WIP)" icon="fas fa-tint fa-3x text-red-300">
+                    {{ __("Can't decide what to eat? Use this.") }}
+                </x-dashboard-link>
+
 
 
 

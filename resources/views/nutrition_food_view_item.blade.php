@@ -75,6 +75,12 @@
 
                 </div>
 
+                <div class="flex flex-row-reverse justify-between mx-6">
+                    <div class="flex py-3 place-items-center justify-center gap-3">
+                        <a class="rounded-l text-yellow-500" href="{{ route('food.edit', $food['id'])}}"><i class="fas fa-pencil-alt text-yellow-500"></i> EDIT</a>
+                    </div>
+                </div>
+
 
                 <div id="nutritional_wrapper_" class="slide-down text-white mx-6 list-none">
 
