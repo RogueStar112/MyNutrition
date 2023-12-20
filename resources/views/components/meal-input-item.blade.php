@@ -1,14 +1,18 @@
-<div id="meal_number_{{$index}}" class="inline-block">
+<div id="meal_number_{{$index}}" class="/inline-block">
     <div class="p-6">
     <h1 class="text-white text-2xl">1. Select Foods To Add</h1>
     <p class="text-gray-500 italic mt-2">Type in all three inputs, then press enter.</p>
     </div>
 
-    <div class="mb-3 md:grid md:grid-cols-3 gap-1 w-[50rem]">
+    <div class="mb-3 md:grid md:grid-cols-2 gap-1 w-[50rem]">
+        
+    </div>
 
+    <div class="mb-3 md:grid md:grid-cols-3 gap-1 /w-[50rem]">
+        
         <label class="block p-6">
             <span class="text-white w-full text-center block">Search Existing Foods</span>
-            <div class="flex place-items-center">
+            <div class="flex place-items-center w-full">
                 <i class="fas fa-magnifying-glass mx-3 text-white"></i>
                 <input type="text" id="meal_name_{{$index}}" name="meal_name_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="Ricotta Cheese" value="" required/>
             </div>

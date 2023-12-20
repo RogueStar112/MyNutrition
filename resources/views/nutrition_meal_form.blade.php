@@ -13,9 +13,9 @@
     <div class="flex py-4 justify-center">
         <div class="flex max-w-7xl">
             <div class="max-w-7xl /w-[768px] mx-auto sm:px-6 lg:px-8">
-                <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="GET" action="{{ route('meal.create_p2')}}">
+                <form id="FOOD_FORM" class="bg-gray-800 max-w-[65rem] /h-32 rounded-lg" method="GET" action="{{ route('meal.create_p2')}}">
                     @csrf
-                    <div id="FOOD_FORM_INPUTS" class="relative md:max-h-[682px] overflow-hidden">
+                    <div id="FOOD_FORM_INPUTS" class="relative w-full max-w-[400px] md:max-w-full md:max-h-[682px] overflow-hidden">
                        <x-meal-input-item index="1"/>
 
                     </div>

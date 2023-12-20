@@ -229,6 +229,7 @@ class MealController extends Controller
 
     public function search_food(Request $request) {
         $user_id = Auth::user()->id;
+        $user_name = Auth::user()->name;
 
         $foods = $request->input('query');
         $servingSize = $request->input('servingSize');
@@ -288,7 +289,8 @@ class MealController extends Controller
                 $food_array[$meal_datendex]['serving_size'] = 1;
             }
 
-
+            $food_array[$meal_datendex]['user_name'] = $user_name;
+            $food_array[$meal_datendex]['img_url'] = $food->img_url;
             $food_array[$meal_datendex]['calories'] = $macronutrients_search->calories;
             $food_array[$meal_datendex]['fat'] = $macronutrients_search->fat;
             $food_array[$meal_datendex]['food_unit_id'] = $food_unit->id; 

@@ -20,10 +20,32 @@
                         {{ __('Nutrition') }}
                     </x-nav-link>
                 </div>
+
+                <!-- Links Before User -->
+
+                
             </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <div class="flex relative justify-end fill-white">
+        
+                      
+                    <svg class="invert" width="16px" height="16px" viewBox="0 0 32 32" id="Lager_95" data-name="Lager 95" xmlns="http://www.w3.org/2000/svg">
+                        <g id="Rectangle_1" data-name="Rectangle 1" transform="translate(4)" fill="none" stroke="#040505" stroke-miterlimit="10" stroke-width="4">
+                          <path d="M12,0h0A12,12,0,0,1,24,12V24a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V12A12,12,0,0,1,12,0Z" stroke="none"/>
+                          <path d="M12,2h0A10,10,0,0,1,22,12v8a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V12A10,10,0,0,1,12,2Z" fill="none"/>
+                        </g>
+                        <rect id="Rectangle_2" data-name="Rectangle 2" width="32" height="4" rx="2" transform="translate(0 20)" fill="#040505"/>
+                        <path id="Path_9" data-name="Path 9" d="M16,32h0a4,4,0,0,1-4-4V26h8v2A4,4,0,0,1,16,32Z" fill="#040505"/>
+                      </svg>
+
+                      <span class="hidden relative /flex mr-3 h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                      </span>
+                </div>
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:fill-white dark:text-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">

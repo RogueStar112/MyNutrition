@@ -8,7 +8,7 @@ $food['carbohydrates'] = round(($food['carbohydrates']/($food['serving_size']))*
 $food['protein'] = round(($food['protein']/($food['serving_size']))*$servingSize*$quantity, 1);
 
 @endphp
-<div id="meal_item_{{ $foodIndex }}" class="meal_item min-h-[100px] mt-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg p-6 text-white overflow-hidden" index="{{$foodIndex}}">
+<div id="meal_item_{{ $foodIndex }}" class="meal_item min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg p-6 text-white overflow-hidden" index="{{$foodIndex}}">
     <ul class="relative">
         <button id="item_revealbtn_{{ $foodIndex }}" index="{{ $foodIndex }}" class="food_revealbtn absolute right-0 bg-lime-800 text-white p-3 rounded-lg @if($showMoreButton == true)hidden @endif">
             <i id="item_icon_{{ $foodIndex }}" class="fas fa-chevron-down"> </i>
