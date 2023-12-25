@@ -28,6 +28,10 @@
                     {{ __('Log your BMI, Weight & Height. (WIP)') }}
                 </x-dashboard-link>
 
+                <x-dashboard-link colspan="1" heading="Goals" icon="fas fa-solid fa-bullseye fa-3x text-grey-300">
+                    {{ __('Set nutrition goals. (WIP)') }}
+                </x-dashboard-link>
+
                 {{-- <x-dashboard-link colspan="1" heading="Exercise Duration" icon="far fa-clock fa-3x text-grey-300">
                     {{ __('140 minutes') }}
                 </x-dashboard-link> --}}
@@ -40,7 +44,7 @@
                     {{ __('Log water intake. (WIP)') }}
                 </x-dashboard-link>
 
-                <x-dashboard-link colspan="1.5" heading="Preferences" icon="fas fa-tint fa-3x text-blue-300">
+                <x-dashboard-link colspan="1.5" heading="Preferences (WIP)" icon="fas fa-tint fa-3x text-blue-300">
                     {{ __('Any particular cuisines you fancy?') }}
                 </x-dashboard-link>
 
