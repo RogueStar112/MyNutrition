@@ -71,7 +71,7 @@
 
         @endphp
 
-        <div class="grid grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6">
+        <div class="grid grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6" id="food-item-{{$food['food_id']}}">
 
             <div class="bg-transparent">
                 <img class="/p-6 object-cover rounded-full min-h-full w-[128px] max-w-[128px] max-h-[128px]"  src="{{  url(''.$food['img_url']) }}" alt="" />
@@ -122,9 +122,9 @@
                 {{-- <div class="h-full"></div> --}}
             </div>
 
-            <div class="absolute flex items-center h-full rounded-r-lg right-0 bg-green-500 add_food_icon cursor-pointer" value="{{$food['id']}}">
-         
-                    <i class="fas fa-plus fa-2x text-white self-center cursor-pointer py-auto px-2"></i>
+            <div id="food-add-{{$food['food_id']}}" class="absolute flex items-center h-full rounded-r-lg right-0 bg-green-500 add_food_icon cursor-pointer" value="{{$food['id']}}">
+
+                    <i id="food-add-icon-{{$food['food_id']}}" class="fas fa-plus fa-2x text-white self-center cursor-pointer py-auto px-2"></i>
 
             </div>
         </div>
@@ -379,9 +379,9 @@
  
                     // }
                     
-                    console.log('QUERY ', query);
+                    // console.log('QUERY ', query);
                     
-                    console.log('MEAL JSON BLEURGH', meal_json);
+                    // console.log('MEAL JSON BLEURGH', meal_json);
                     // if (meal_json[query]) {
                     //     food_array
                     // } else {
@@ -511,6 +511,13 @@
                                     $("#form-meal-foods").append(response['html'][food_array[i]['query']]['form_data']);
                                     
                                     $("#no_of_foods").val(no_of_foods); 
+
+                                    $(`#food-add-${query}`).addClass(`bg-yellow-500 [&>*]:text-black`);
+                                    
+                                    $(`#food-add-icon-${query}`).addClass(`fa-pencil`);
+
+                                    $(`#food-add-icon-${query}`).removeClass(`fa-plus`);
+
                                 }
                             }
 

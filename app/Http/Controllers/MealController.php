@@ -289,6 +289,7 @@ class MealController extends Controller
                 $food_array[$meal_datendex]['serving_size'] = 1;
             }
 
+            $food_array[$meal_datendex]['food_id'] = $food->id;
             $food_array[$meal_datendex]['user_name'] = $user_name;
             $food_array[$meal_datendex]['img_url'] = $food->img_url;
             $food_array[$meal_datendex]['calories'] = $macronutrients_search->calories;
