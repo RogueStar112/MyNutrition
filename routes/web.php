@@ -5,6 +5,7 @@ use App\Http\Controllers\FoodController;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\BodyStatsController;
 use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +33,12 @@ Route::get('/nutrition', function () {
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard/{start_date}/{end_date}', [DashboardController::class, 'dashboard_stats'])->name('dashboard.stats');
+
     Route::get('/nutrition/food', [FoodController::class, 'food_form'])->name('food.create');
+
+    
+
     Route::post('/nutrition/food', [FoodController::class, 'food_form_store'])->name('food.store');
     Route::post('/nutrition/food/create_page', [FoodController::class, 'create_new_food_page'])->name('food.page_create');
     Route::post('/nutrition/food/create_item', [FoodController::class, 'create_new_food_item'])->name('food.item_create');
