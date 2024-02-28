@@ -70,7 +70,7 @@ class FoodController extends Controller
             ]);
 
             if ($request->file("food_image_$array_index_x") != NULL) {
-                $food_image_path = $request->file("food_image_$array_index_x")->store('public/images/food');
+                $food_image_path = $request->file("food_image_$array_index_x")->store('images/food', 'public');
 
                 $food_image = Storage::url($food_image_path);
             } else {
@@ -387,7 +387,7 @@ class FoodController extends Controller
         $food_protein = $request->input("food_protein_1");
 
         if ($request->file("food_image_1") != NULL) {
-            $food_image_path = $request->file("food_image_1")->store('public/images/food');
+            $food_image_path = $request->file("food_image_1")->store('images/food', 'public');
 
             $food_image = Storage::url($food_image_path);
         } else {

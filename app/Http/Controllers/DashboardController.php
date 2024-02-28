@@ -136,8 +136,9 @@ class DashboardController extends Controller
 
         }
 
-        return $meal_macro_calculations;
-
+        // return $meal_macro_calculations;
+        
+        return view('dashboard_2024', ['meal_items' => $meal_items_array, 'meal_macros' => $meal_macro_calculations, 'meal_names' => $meal_items_names]);
         // return $meal_items_array;
 
     }
