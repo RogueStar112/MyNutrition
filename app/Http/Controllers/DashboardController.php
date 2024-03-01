@@ -29,18 +29,41 @@ class DashboardController extends Controller
 
     public function dashboard_stats($start_date, $end_date) {
         
-        $user_id = Auth::user()->id;
-
+        function meal_select($start_date, $end_date, $user_id) {
         $meal_select = Meal::where('user_id', $user_id)
                             ->whereBetween('time_planned', [$start_date . ' 00:00:00', $end_date . ' 23:59:59'])
                             ->orderByRaw('time_planned ASC')
                             ->get();
+
+        return $meal_select;
+        }
+    
+
+        $user_id = Auth::user()->id;
+
+    
+
+
+        $meal_select = meal_select($start_date, $end_date, $user_id);
+
+        // $meal_names = [];
+
+        $meal_times = [];
 
         $meal_items_array = [];
 
         $meal_items_names = [];
 
         $meal_macro_calculations = [];
+
+    
+
+        foreach ($meal_select as $index => $meal) {
+
+            $meal_names[$index] = ['meal_name' => $meal->name, 'meal_id' => $meal->id];
+
+
+        }
 
         for ($meal=0; $meal < count($meal_select); $meal++) {
 
@@ -103,21 +126,22 @@ class DashboardController extends Controller
                                         ->get();
 
 
-
+                    $macros['name'] = Food::find($macro_select[0]->food_id)->name;
                     $macros['serving_size'] = $macro_select[0]->serving_size ? $macro_select[0]->serving_size : 1 ;
                     $macros['quantity'] = $quantity;
-
-                    $macros['fat'] = round((float)($macro_select[0]->fat / $macros['serving_size']) * $serving_size * $quantity, 1);
+                    
                     $macros['calories'] = round((float)($macro_select[0]->calories / $macros['serving_size']) * $serving_size * $quantity, 1);
+                    
+                    $macros['fat'] = round((float)($macro_select[0]->fat / $macros['serving_size']) * $serving_size * $quantity, 1);
                     $macros['carbohydrates'] = round((float)($macro_select[0]->carbohydrates / $macros['serving_size']) * $serving_size * $quantity, 1);
                     $macros['protein'] = round((float)($macro_select[0]->protein / $macros['serving_size']) * $serving_size * $quantity, 1);
 
-                    $macro_totals['fat'] += $macros['fat'];
                     $macro_totals['calories'] += $macros['calories'];
+                    $macro_totals['fat'] += $macros['fat'];
                     $macro_totals['carbohydrates'] += $macros['carbohydrates'];
                     $macro_totals['protein'] += $macros['protein'];
                     
-
+                    $meal_macros_no_total[$meal_items_array_keys[$x]][$y] = $macros;
  
                     $meal_macro_calculations[$meal_items_array_keys[$x]][$y] = $macros;
                     $meal_macro_calculations[$meal_items_array_keys[$x]]['total'] = $macro_totals;
@@ -137,8 +161,18 @@ class DashboardController extends Controller
         }
 
         // return $meal_macro_calculations;
-        
-        return view('dashboard_2024', ['meal_items' => $meal_items_array, 'meal_macros' => $meal_macro_calculations, 'meal_names' => $meal_items_names]);
+
+        $meal_times = array_keys($meal_items_array);
+
+        // return $meal_items_array;
+
+        // return ([
+        //     $meal_items_array,
+        //     $meal_items_names,
+        //     $meal_macro_calculations
+        // ]);    
+
+        return view('dashboard_2024', ['meal_times' => $meal_times, 'meal_items' => $meal_items_array, 'meal_macros_no_total' => $meal_macros_no_total, 'meal_macros' => $meal_macro_calculations, 'meal_names' => $meal_items_names]);
         // return $meal_items_array;
 
     }
