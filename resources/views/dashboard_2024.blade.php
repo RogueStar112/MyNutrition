@@ -6,12 +6,37 @@
     </x-slot>
 
     <div class="py-4">
-        <div class="max-w-7xl [&>*]:max-w-3xl mx-auto sm:px-6 lg:px-8">
+        <div class="flex max-w-7xl [&>*]:max-w-3xl mx-auto sm:px-6 lg:px-8 gap-3">
+
+            
+            <div class="max-w-[250px] max-h-[250px]">   {!! $calendar !!} </div>
+
+   
             <div class="max-w-3xl ">
 
                 <p class="text-white my-4">{{"Found " . count($meal_times) . " meals"}}</p>
 
-        
+                <div class="bg-stone-800 grid grid-cols-6 text-white mb-2 [&>*]:m-2 max-w-md">
+                    <div class="col-span-6 text-center">LEGEND</div>
+                    <div class="flex col-span-3 items-center gap-3">
+                        <div class="most-calories h-[10px] w-[10px] rounded-full bg-blue-500 col-span-3">
+                        </div>
+                        <p>Most calories</p>
+                    </div>
+                    <div class="flex col-span-3 items-center gap-3">
+                        <div class="most-fat h-[10px] w-[10px] rounded-full bg-red-500 col-span-3"></div>
+                        <p>Most fat</p>
+                    </div>
+                    <div class="flex col-span-3 items-center gap-3">
+                        <div class="most-carbs h-[10px] w-[10px] rounded-full bg-orange-500 col-span-3"></div>
+                         <p>Most carbs</p>
+                    </div>
+                    <div class="flex col-span-3 items-center gap-3">
+                        <div class="most-protein h-[10px] w-[10px] rounded-full bg-green-500 col-span-3"></div>
+                        <p>Most protein</p>
+                    </div>
+
+                </div>
 
                 @foreach(array_reverse($meal_times) as $_ => $meal_time)
 
@@ -153,6 +178,7 @@
 
                                     @if($key == 'name')
                                         <div class="flex text-stone-400 grow gap-1"><p>{{$macro}}</p>
+                                            <div class="flex gap-1">
                                             @if($_key == $highest_calories_index)
                                                 <div class="most-calories h-[10px] w-[10px] rounded-full bg-blue-500"></div>
                                             @endif
@@ -168,6 +194,7 @@
                                             @if($_key == $highest_protein_index)
                                                 <div class="most-protein h-[10px] w-[10px] rounded-full bg-green-500"></div>
                                             @endif
+                                            </div>
                                         </div>
                                     
                                     @elseif($key == 'total')
@@ -250,6 +277,8 @@
 
             </div>
         </div>
+
+        
     </div>
 
     <script>

@@ -70,13 +70,17 @@ class FoodController extends Controller
             ]);
 
             if ($request->file("food_image_$array_index_x") != NULL) {
+                
+                // dd($request->file("food_image_$array_index_x"));
+
+
                 $filename = time() . '.' . $request->file("food_image_$array_index_x")->extension();  // Generate unique filename
 
                 $food_image_path = $request->file("food_image_$array_index_x")->storeAs('storage/images/food', $filename, 'public');
 
                 // $food_image = Storage::url($food_image_path);
 
-                $food_image = $filename;
+                $food_image = $food_image_path;
             } else {
                 $food_image = NULL;
             }

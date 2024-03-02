@@ -22,10 +22,19 @@ use App\Models\Macronutrients;
 use App\Models\Meal;
 use App\Models\MealItems;
 
+use App\Http\Traits\CalendarGenerator;
+
+
+
 
 class DashboardController extends Controller
 {   
     
+    use CalendarGenerator;
+
+    public function showMealCalendar() {
+        $calendarData = $this->calendar();
+    }
 
     public function dashboard_stats($start_date, $end_date) {
         
@@ -172,7 +181,7 @@ class DashboardController extends Controller
         //     $meal_macro_calculations
         // ]);    
 
-        return view('dashboard_2024', ['meal_times' => $meal_times, 'meal_items' => $meal_items_array, 'meal_macros_no_total' => $meal_macros_no_total, 'meal_macros' => $meal_macro_calculations, 'meal_names' => $meal_items_names]);
+        return view('dashboard_2024', ['meal_times' => $meal_times, 'meal_items' => $meal_items_array, 'meal_macros_no_total' => $meal_macros_no_total, 'meal_macros' => $meal_macro_calculations, 'meal_names' => $meal_items_names, 'calendar' => $this->calendar()]);
         // return $meal_items_array;
 
     }
