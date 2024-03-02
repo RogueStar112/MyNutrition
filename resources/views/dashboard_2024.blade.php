@@ -152,7 +152,7 @@
                                     @endphp
 
                                     @if($key == 'name')
-                                        <div class="flex text-stone-400 grow gap-2">{{$macro}}
+                                        <div class="flex text-stone-400 grow gap-1"><p>{{$macro}}</p>
                                             @if($_key == $highest_calories_index)
                                                 <div class="most-calories h-[10px] w-[10px] rounded-full bg-blue-500"></div>
                                             @endif

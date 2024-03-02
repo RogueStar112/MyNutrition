@@ -70,9 +70,13 @@ class FoodController extends Controller
             ]);
 
             if ($request->file("food_image_$array_index_x") != NULL) {
-                $food_image_path = $request->file("food_image_$array_index_x")->store('images/food', 'public');
+                $filename = time() . '.' . $request->file("food_image_$array_index_x")->extension();  // Generate unique filename
 
-                $food_image = Storage::url($food_image_path);
+                $food_image_path = $request->file("food_image_$array_index_x")->storeAs('storage/images/food', $filename, 'public');
+
+                // $food_image = Storage::url($food_image_path);
+
+                $food_image = $filename;
             } else {
                 $food_image = NULL;
             }
@@ -387,9 +391,13 @@ class FoodController extends Controller
         $food_protein = $request->input("food_protein_1");
 
         if ($request->file("food_image_1") != NULL) {
-            $food_image_path = $request->file("food_image_1")->store('images/food', 'public');
+            $filename = time() . '.' . $request->file("food_image_1")->extension();  // Generate unique filename
 
-            $food_image = Storage::url($food_image_path);
+            $food_image_path = $request->file("food_image_1")->storeAs('storage/images/food', $filename, 'public');
+
+            // $food_image = Storage::url($food_image_path);
+
+            $food_image = $food_image_path;
         } else {
             $food_image = NULL;
         }
