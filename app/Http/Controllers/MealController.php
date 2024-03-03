@@ -610,36 +610,36 @@ class MealController extends Controller
 
                         $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['food_name'] = $meal_item->name; 
 
-                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['calories'] = (int)(($food->calories /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity;
+                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['calories'] = (int)(($food->calories /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity;
 
                         
-                        $meal_dates_ymd[0][$meal_date]['calories'] += round((($food->calories /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 0);
+                        $meal_dates_ymd[0][$meal_date]['calories'] += round((($food->calories /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 0);
 
-                        $meal_dates_ymd[0][$meal_date][$meal_time]['calories'] += round((($food->calories /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 0);
+                        $meal_dates_ymd[0][$meal_date][$meal_time]['calories'] += round((($food->calories /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 0);
 
                         
-                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['fat'] = round((($food->fat /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['fat'] = round((($food->fat /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
                         
-                        $meal_dates_ymd[0][$meal_date][$meal_time]['fat'] += round((($food->fat /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+                        $meal_dates_ymd[0][$meal_date][$meal_time]['fat'] += round((($food->fat /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
 
 
-                        $meal_dates_ymd[0][$meal_date]['fat'] += round((($food->fat /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+                        $meal_dates_ymd[0][$meal_date]['fat'] += round((($food->fat /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
 
-                        // $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['fat'] += round((($food->fat /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+                        // $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['fat'] += round((($food->fat /(float) $food->serving_size) * ()$meal_item->serving_size)*$meal_item->quantity, 1);
                         
-                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['carbs'] = round((($food->carbohydrates /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['carbs'] = round((($food->carbohydrates /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
 
-                        $meal_dates_ymd[0][$meal_date]['carbs'] += round((($food->carbohydrates /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+                        $meal_dates_ymd[0][$meal_date]['carbs'] += round((($food->carbohydrates /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
 
 
-                        $meal_dates_ymd[0][$meal_date][$meal_time]['carbs'] += round((($food->carbohydrates /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+                        $meal_dates_ymd[0][$meal_date][$meal_time]['carbs'] += round((($food->carbohydrates /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
                         
                         
-                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['protein'] = round((($food->protein /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['protein'] = round((($food->protein /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
 
-                        $meal_dates_ymd[0][$meal_date]['protein'] += round((($food->protein /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+                        $meal_dates_ymd[0][$meal_date]['protein'] += round((($food->protein /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
                         
-                        $meal_dates_ymd[0][$meal_date][$meal_time]['protein'] += round((($food->protein /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+                        $meal_dates_ymd[0][$meal_date][$meal_time]['protein'] += round((($food->protein /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
 
 
                     }  
@@ -726,22 +726,22 @@ class MealController extends Controller
 
         //             $meal_dates_ymd[$meal_date][$food_index]['food_name'] = $meal_item->name; 
 
-        //             $meal_dates_ymd[$meal_date][$food_index]['calories'] = (int)(($food->calories /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity;
+        //             $meal_dates_ymd[$meal_date][$food_index]['calories'] = (int)(($food->calories /(float) $food->serving_size) * ()$meal_item->serving_size)*$meal_item->quantity;
 
-        //             $meal_dates_ymd[$meal_date]['calories'] += round((($food->calories /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 0);
+        //             $meal_dates_ymd[$meal_date]['calories'] += round((($food->calories /(float) $food->serving_size) * ()$meal_item->serving_size)*$meal_item->quantity, 0);
 
-        //             $meal_dates_ymd[$meal_date][$food_index]['fat'] = round((($food->fat /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+        //             $meal_dates_ymd[$meal_date][$food_index]['fat'] = round((($food->fat /(float) $food->serving_size) * ()$meal_item->serving_size)*$meal_item->quantity, 1);
                     
-        //             $meal_dates_ymd[$meal_date]['fat'] += round((($food->fat /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+        //             $meal_dates_ymd[$meal_date]['fat'] += round((($food->fat /(float) $food->serving_size) * ()$meal_item->serving_size)*$meal_item->quantity, 1);
                     
-        //             $meal_dates_ymd[$meal_date][$food_index]['carbs'] = round((($food->carbohydrates /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+        //             $meal_dates_ymd[$meal_date][$food_index]['carbs'] = round((($food->carbohydrates /(float) $food->serving_size) * ()$meal_item->serving_size)*$meal_item->quantity, 1);
 
-        //             $meal_dates_ymd[$meal_date]['carbs'] += round((($food->carbohydrates /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+        //             $meal_dates_ymd[$meal_date]['carbs'] += round((($food->carbohydrates /(float) $food->serving_size) * ()$meal_item->serving_size)*$meal_item->quantity, 1);
                     
 
-        //             $meal_dates_ymd[$meal_date][$food_index]['protein'] = round((($food->protein /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+        //             $meal_dates_ymd[$meal_date][$food_index]['protein'] = round((($food->protein /(float) $food->serving_size) * ()$meal_item->serving_size)*$meal_item->quantity, 1);
 
-        //             $meal_dates_ymd[$meal_date]['protein'] += round((($food->protein /(int) $food->serving_size) * (int)$meal_item->serving_size)*$meal_item->quantity, 1);
+        //             $meal_dates_ymd[$meal_date]['protein'] += round((($food->protein /(float) $food->serving_size) * ()$meal_item->serving_size)*$meal_item->quantity, 1);
                     
         //         }  
 
