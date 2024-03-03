@@ -1,41 +1,51 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Dashboard') }}<br>
+            
         </h2>
+        <p class="text-white">{{$start_date}} to {{$end_date}}</p>
     </x-slot>
+
+    <div class="py-4 max-w-7xl text-center mx-auto text-white px-6">
+                    {!! $calendar !!}        
+    </div>
 
     <div class="py-4">
         <div class="flex max-w-7xl [&>*]:max-w-3xl mx-auto sm:px-6 lg:px-8 gap-3">
 
-            
-            <div class="max-w-[250px] max-h-[250px]">   {!! $calendar !!} </div>
+
+            {{-- <div class="max-w-[250px] max-h-[250px]">   {!! $calendar !!} </div> --}}
 
    
             <div class="max-w-3xl ">
 
                 <p class="text-white my-4">{{"Found " . count($meal_times) . " meals"}}</p>
 
-                <div class="bg-stone-800 grid grid-cols-6 text-white mb-2 [&>*]:m-2 max-w-md">
-                    <div class="col-span-6 text-center">LEGEND</div>
-                    <div class="flex col-span-3 items-center gap-3">
-                        <div class="most-calories h-[10px] w-[10px] rounded-full bg-blue-500 col-span-3">
+                <div class="flex gap-4">
+                    <div class="bg-stone-800 grid grid-cols-6 text-white mb-2 [&>*]:m-2 max-w-md">
+                        <div class="col-span-6 text-center">LEGEND</div>
+                        <div class="flex col-span-3 items-center gap-3">
+                            <div class="most-calories h-[10px] w-[10px] rounded-full bg-blue-500 col-span-3">
+                            </div>
+                            <p>Most calories</p>
                         </div>
-                        <p>Most calories</p>
-                    </div>
-                    <div class="flex col-span-3 items-center gap-3">
-                        <div class="most-fat h-[10px] w-[10px] rounded-full bg-red-500 col-span-3"></div>
-                        <p>Most fat</p>
-                    </div>
-                    <div class="flex col-span-3 items-center gap-3">
-                        <div class="most-carbs h-[10px] w-[10px] rounded-full bg-orange-500 col-span-3"></div>
-                         <p>Most carbs</p>
-                    </div>
-                    <div class="flex col-span-3 items-center gap-3">
-                        <div class="most-protein h-[10px] w-[10px] rounded-full bg-green-500 col-span-3"></div>
-                        <p>Most protein</p>
+                        <div class="flex col-span-3 items-center gap-3">
+                            <div class="most-fat h-[10px] w-[10px] rounded-full bg-red-500 col-span-3"></div>
+                            <p>Most fat</p>
+                        </div>
+                        <div class="flex col-span-3 items-center gap-3">
+                            <div class="most-carbs h-[10px] w-[10px] rounded-full bg-orange-500 col-span-3"></div>
+                            <p>Most carbs</p>
+                        </div>
+                        <div class="flex col-span-3 items-center gap-3">
+                            <div class="most-protein h-[10px] w-[10px] rounded-full bg-green-500 col-span-3"></div>
+                            <p>Most protein</p>
+                        </div>
+
                     </div>
 
+        
                 </div>
 
                 @foreach(array_reverse($meal_times) as $_ => $meal_time)
@@ -87,7 +97,7 @@
   
                         @endforeach --}}
 
-                        <div id="meal-items-{{$_}}" class="grid [&>*>*]:p-2 /[&>*>*]:m-2 [&>*>*]:bg-stone-800">
+                        <div id="meal-items-{{$_}}" class="grid [&>*>*]:p-2 /[&>*>*]:m-2 [&>*>*]:bg-stone-800 hidden">
 
 {{-- 
                             @foreach($meal_macros[$meal_time] as $key => $macro)
@@ -288,6 +298,14 @@
             $( `div[id^='meal-items-${this.value}']`).toggleClass('hidden');
 
         });
+
+        $('.content-day').click(function() {
+
+            let dayClg = $(this).data('calendarDay');
+
+            console.log(dayClg);
+
+        })
 
     </script>
 </x-app-layout>

@@ -780,4 +780,17 @@ class MealController extends Controller
         
     }
 
+    public function get_meals_from_dates($start_date, $end_date) {
+
+        $user_id = Auth::user()->id;
+
+        $meal_select = Meal::where('user_id', $user_id)
+                            ->whereBetween('time_planned', [$start_date . ' 00:00:00', $end_date . ' 23:59:59'])
+                            ->orderByRaw('time_planned ASC')
+                            ->get();
+
+        return $meal_select;
+
+    }
+
 }

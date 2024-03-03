@@ -181,7 +181,7 @@ class DashboardController extends Controller
         //     $meal_macro_calculations
         // ]);    
 
-        return view('dashboard_2024', ['meal_times' => $meal_times, 'meal_items' => $meal_items_array, 'meal_macros_no_total' => $meal_macros_no_total, 'meal_macros' => $meal_macro_calculations, 'meal_names' => $meal_items_names, 'calendar' => $this->calendar()]);
+        return view('dashboard_2024', ['start_date' => $start_date, 'end_date' => $end_date, 'meal_times' => $meal_times, 'meal_items' => $meal_items_array, 'meal_macros_no_total' => $meal_macros_no_total, 'meal_macros' => $meal_macro_calculations, 'meal_names' => $meal_items_names, 'calendar' => $this->calendar(null, $start_date, $end_date)]);
         // return $meal_items_array;
 
     }
