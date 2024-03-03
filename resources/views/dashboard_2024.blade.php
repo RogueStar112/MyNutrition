@@ -7,7 +7,7 @@
         <p class="text-white">{{$start_date}} to {{$end_date}}</p>
     </x-slot>
 
-    <div class="py-4 max-w-7xl text-center mx-auto text-white px-6">
+    <div class="flex max-w-7xl text-center mx-auto text-white px-6">
                     {!! $calendar !!}        
     </div>
 
@@ -295,7 +295,7 @@
         
         $( "button[id^='show-more-']" ).on("click", function() {
 
-            $( `div[id^='meal-items-${this.value}']`).toggleClass('hidden');
+            $( `#meal-items-${this.value}`).toggleClass('hidden');
 
         });
 

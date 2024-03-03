@@ -34,11 +34,11 @@ trait CalendarGenerator {
         // credit to: https://jonathanbriehl.com/posts/build-a-simple-calendar-with-carbon-and-laravel#disqus_thread
 
         $monthsBetween = $this->getMonthsBetween($startDate, $endDate);
-        $html = '<div class="grid grid-cols-3 gap-3">';
+        $html = '<div class="grid gap-3 max-h-[650px] overflow-hidden">';
 
         for ($i=0; $i<count($monthsBetween)-1; $i++) {
           
-          $date = empty($date) ? Carbon::now() : Carbon::createFromDate($date)->addMonth();
+          $date = empty($date) ? Carbon::now() : Carbon::createFromDate($date)->subMonth();
       
           $startOfCalendar = $date->copy()->firstOfMonth()->startOfWeek(Carbon::MONDAY);
           $endOfCalendar = $date->copy()->lastOfMonth()->endOfWeek(Carbon::SUNDAY);
@@ -46,7 +46,7 @@ trait CalendarGenerator {
           if ($i < 1) {
             $html .= '<div class="calendar">';
           } else {
-            $html .= '<div class="calendar hidden">';
+            $html .= '<div class="calendar">';
           }
 
           $html .= '<div class="month-year">';
