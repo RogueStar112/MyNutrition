@@ -67,7 +67,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/exercise/create', [ExerciseController::class, 'exercise_form'])->name('exercise.form');
 
-    
+    Route::get('/get/meals/{start_date}/{end_date}', [MealController::class, 'get_meals_from_dates']);
+
+    Route::get('/nutrition/meal/edit/{id}', [MealController::class, 'meal_edit_form'])->name('meal.edit_form');
+
+    Route::put('/nutrition/meal/edit/{id}', [MealController::class, 'meal_edit'])->name('meal.edit');
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])

@@ -793,4 +793,34 @@ class MealController extends Controller
 
     }
 
+    public function meal_edit_form($id) {
+
+        $user_id = Auth::user()->id;
+
+        $meals_array = [];
+
+        $meal_select = Meal::where('user_id', $user_id)
+                            ->where('id', $id)
+                            ->get();
+
+        foreach($meal_select as $meal_date=>$meal) {
+                
+                $meal_items_select = MealItems::where('meal_id', $meal->id)
+                                        ->get();
+
+        }
+
+        // return $meal_items_select;
+
+        foreach($meal_items_select as $key => $value) {
+            $meals_array[$key]['name'] = $value->name;
+            $meals_array[$key]['food_id'] = $value->food_id;
+            $meals_array[$key]['servingSize'] = $value->serving_size;
+            $meals_array[$key]['quantity'] = $value->quantity;
+            
+        }
+
+        return view('nutrition_meal_edit_form', ['meals' => $meal_select, 'meals_array' => $meals_array]);
+    }
+
 }

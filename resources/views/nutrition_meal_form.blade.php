@@ -21,7 +21,7 @@
                     </div>
 
                     <div id="FOOD-SEARCH-CONTAINER">
-
+                        <!-- x-meal-search-items -->
                     </div>
 
                     <div id="food-media-controls">

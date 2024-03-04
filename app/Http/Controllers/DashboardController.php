@@ -84,6 +84,7 @@ class DashboardController extends Controller
 
             $meal_items_names[$meal_select[$meal]->time_planned]["meal_name"] = $meal_select[$meal]->name;
             // $meal_items_array[$meal_select[$meal]->time_planned][$meal] = $meal_items_select;
+             $meal_items_names[$meal_select[$meal]->time_planned]["meal_id"] = $meal_select[$meal]->id;
 
             $meal_items_names[$meal_select[$meal]->time_planned]["is_eaten"] = $meal_select[$meal]->is_eaten;
             

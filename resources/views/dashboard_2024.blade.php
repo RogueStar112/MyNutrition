@@ -59,6 +59,10 @@
                    
                     {{-- <br><p class="text-green-500">T: {{$meal_time}}</p> --}}
 
+                    @php
+                        $meal_id = $meal_names[$meal_time]['meal_id'];
+                    @endphp
+
                     @foreach($meal_names[$meal_time] as $key => $meal_name)
 
                         @if($key == 'meal_name')
@@ -68,6 +72,7 @@
                                  <div class="flex justify-between">
                                     <p class="text-2xl text-orange-400">{{DateTime::createFromFormat('Y-m-d H:i:s', $meal_time)->format('d M Y - H:i')}}</p>
                                     <button id="show-more-{{$key}}" class="bg-green-600 text-white text-center px-4 ml-4 rounded-lg text-2xl" value="{{$_}}">+</button>
+                                    <a id="edit-{{$key}}" href="{{ route('meal.edit_form', $meal_id) }}" class="bg-yellow-600 text-black text-center px-4 ml-4 rounded-lg text-2xl" value="{{$_}}">✎</a>
                                  </div>
                             </div>
                         @endif
