@@ -151,8 +151,10 @@
         var meals_array = <?php echo json_encode($meals_array); ?>
 
         $(document).ready(function(){
-
+            var no_of_foods = parseInt($("#no_of_foods").val())
+            
              for (let i=0; i<meals_array.length; i++) {
+
               meal_json[meals_array[i]['food_id']] = {'index': i, 'query': meals_array[i]['food_id'], 'servingSize': meals_array[i]['servingSize'],'quantity': meals_array[i]['quantity']};
               console.log(meal_json);
 
@@ -241,8 +243,12 @@
 
                                     $("#form-meal-foods").append(response['html'][food_array[i]['query']]['form_data']);
                                     
+                                    // no_of_foods += 1;
+                                    
+
                                     $("#no_of_foods").val(no_of_foods); 
 
+                                    
                                     $(`#food-add-${query}`).addClass(`bg-yellow-500 [&>*]:text-black`);
                                     
                                     $(`#food-add-icon-${query}`).addClass(`fa-pencil`);

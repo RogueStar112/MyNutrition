@@ -511,6 +511,8 @@
                                     $("#form-meal-foods").append(response['html'][food_array[i]['query']]['form_data']);
                                     
                                     $("#no_of_foods").val(no_of_foods); 
+                                    
+                                    console.log('FOOD_ARRAY JACKSON', food_array);
 
                                     $(`#food-add-${query}`).addClass(`bg-yellow-500 [&>*]:text-black`);
                                     
