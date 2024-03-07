@@ -1,18 +1,18 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight">
+        <h2 class="font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight text-center">
             {{ __('Dashboard') }}<br>
             
         </h2>
-        <p class="text-white">{{$start_date}} to {{$end_date}}</p>
+        <p class="text-white text-center">{{$start_date}} to {{$end_date}}</p>
     </x-slot>
 
     <div class="flex max-w-7xl text-center mx-auto text-white px-6">
                     {!! $calendar !!}        
     </div>
 
-    <div class="py-4">
-        <div class="flex max-w-7xl [&>*]:max-w-3xl mx-auto sm:px-6 lg:px-8 gap-3">
+    <div class="py-4 hidden">
+        <div class="flex  max-w-7xl [&>*]:max-w-3xl mx-auto sm:px-6 lg:px-8 gap-3">
 
 
             {{-- <div class="max-w-[250px] max-h-[250px]">   {!! $calendar !!} </div> --}}
@@ -297,18 +297,35 @@
     </div>
 
     <script>
-        
+        var calories_data = <?php echo json_encode($load_date_calories); ?>
+
+
         $( "button[id^='show-more-']" ).on("click", function() {
 
             $( `#meal-items-${this.value}`).toggleClass('hidden');
 
         });
 
-        $('.content-day').click(function() {
+        $('.day').click(function() {
 
             let dayClg = $(this).data('calendarDay');
 
             console.log(dayClg);
+
+        })
+
+        $('#viewmode-default').click(function() {
+            
+
+
+        })
+
+        
+        $('#viewmode-calories').click(function() {
+
+            $('#day-container').html(calories_data);
+
+
 
         })
 
