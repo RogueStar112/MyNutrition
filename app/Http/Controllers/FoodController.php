@@ -74,7 +74,7 @@ class FoodController extends Controller
                 // dd($request->file("food_image_$array_index_x"));
 
 
-                $filename = time() . '.' . $request->file("food_image_$array_index_x")->extension();  // Generate unique filename
+                $filename = time() . "_$array_index_x" . '.' . $request->file("food_image_$array_index_x")->extension();  // Generate unique filename
 
                 $food_image_path = $request->file("food_image_$array_index_x")->storeAs('storage/images/food', $filename, 'public');
 
