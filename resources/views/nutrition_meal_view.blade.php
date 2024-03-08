@@ -14,7 +14,7 @@
         <div class="flex flex-col max-w-sm md:flex-row md:max-w-7xl justify-center">
             <div class="flex flex-col mx-auto [&>div]:mb-6">
                 {{-- <div class="text-center text-white">Start Date</div> --}}
-                {!! $calendar !!}
+                {{-- {!! $calendar !!} --}}
                 {{-- <div class="text-center text-white">End Date</div>
                 {!! $calendar !!} --}}
             </div>

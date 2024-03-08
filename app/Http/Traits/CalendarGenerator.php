@@ -89,16 +89,18 @@ trait CalendarGenerator {
 
               $foods = Macronutrients::find((int)$meal_item->food_id);
               
-              $calories_calculated += ($foods->calories/$foods->serving_size)*$meal_item_servingsize*$meal_item_quantity;
-                                                  
+              $calories_calculated += (int)(($foods->calories/$foods->serving_size)*$meal_item_servingsize*$meal_item_quantity);
+                                                   
             }
+
+        
 
           }
             
 
 
           $html .= '<span class="day" data-calendar-day=' . $year . '-' . $month . '-' . $day . 
-                    ' class="day flex '.$extraClass.'"><span class="content-day" id="content-day-' . $year . '-' . $month . '-' . $day .'" class="content">' . $calories_calculated . '</span></span>';
+                    ' class="day flex '.$extraClass.'"><span class="content-day" id="content-day-' . $year . '-' . $month . '-' . $day .'" class="content">' . $day . '<br>' . '<span class="text-blue-500">' . $calories_calculated . '</span></span></span>';
           $startOfCalendar->addDay();
       }
       
