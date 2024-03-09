@@ -98,11 +98,11 @@
                         var quantity = $('#meal_quantity_1').val();
                         var foods_pages = $('#foods_pages').val().split(",");
 
-                        console.log("FOODS PAGES SWPF", foods_pages)
+                        // console.log("FOODS PAGES SWPF", foods_pages)
 
                         var existsAsItem = jQuery.inArray(query, foods_pages) !== -1 ? true : false;
 
-                        console.log("EXISTS AS ITEM", existsAsItem);
+                        // console.log("EXISTS AS ITEM", existsAsItem);
 
                         if (servingSize == "") {
                             servingSize = 1;

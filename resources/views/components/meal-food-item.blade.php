@@ -8,16 +8,33 @@ $food['carbohydrates'] = round(($food['carbohydrates']/($food['serving_size']))*
 $food['protein'] = round(($food['protein']/($food['serving_size']))*$servingSize*$quantity, 1);
 
 @endphp
-<div id="meal_item_{{ $foodIndex }}" class="meal_item min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg p-6 text-white overflow-hidden" index="{{$foodIndex}}">
-    <ul class="relative">
+<div id="meal_item_{{ $foodIndex }}" class="meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg p-6 text-white shadow-md shadow-black overflow-hidden" index="{{$foodIndex}}">
+    <ul class="@isset($food['img_url']) @else relative @endisset">
         <button id="item_revealbtn_{{ $foodIndex }}" index="{{ $foodIndex }}" class="food_revealbtn absolute right-0 bg-lime-800 text-white p-3 rounded-lg @if($showMoreButton == true)hidden @endif">
             <i id="item_icon_{{ $foodIndex }}" class="fas fa-chevron-down"> </i>
         </button>
 
-        <div class="select-none" id="food_wrapper_{{ $foodIndex }}">
+        <div class="select-none max-h-[72px]" id="food_wrapper_{{ $foodIndex }}">
             {{-- <li class="font-bold text-left">#{{ $foodIndex }}</li> --}}
-            <p aria-label="index_number" class="absolute @if($showMoreButton==true)left-[75%] top-[0%]@else left-[50%] @endif text-8xl font-black opacity-10 select-none">{{ $foodIndex }}</p>
-            <li id="food_text_name_{{$foodIndex}}">{{ $food['name'] }}</li>
+
+            
+
+            @isset($food['img_url'])
+                   @if($food['img_url'] == '') 
+                    <p aria-label="index_number" class="absolute @if($showMoreButton==true)left-[75%] top-[0%]@else left-[50%] @endif text-8xl font-black opacity-10 select-none">{{ $foodIndex }}</p>
+                    @else
+            {{-- <p aria-label="index_number" class="z-50 absolute @if($showMoreButton==true)left-[75%] top-[5%]@else left-[50%] @endif text-8xl font-black opacity-60 select-none">{{ $foodIndex }}</p>
+             --}}
+            <img src="{{ asset($food['img_url']) }}" aria-label="index_number" class="rounded-full w-[96px] h-[96px] m-2 right-0 top-0 /-right-12 /-top-12  shadow-xl shadow-black absolute @if($showMoreButton==true)/left-[75%] /top-[0%]@else /left-[50%] @endif text-8xl font-black /opacity-10 select-none" />
+            
+            @endif
+            @else
+                <p aria-label="index_number" class="absolute @if($showMoreButton==true)left-[80%] top-[0%]@else left-[50%] @endif text-8xl font-black opacity-10 select-none">{{ $foodIndex }}</p>
+            
+            @endisset
+         
+
+            <li class="text-balance max-w-[144px]" id="food_text_name_{{$foodIndex}}">{{ $food['name'] }}</li>
 
             
             <p class="text-gray-500">{{ $food['serving_size_input'] }} {{$food['food_unit_short']}}@if($food['serving_size_input'] > 1 && ($food['food_unit_short'] == 'slice' || $food['food_unit_short'] == 'piece'))s @endif x {{ $food['quantity'] }}</p>

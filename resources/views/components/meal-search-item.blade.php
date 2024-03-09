@@ -122,10 +122,16 @@
                 {{-- <div class="h-full"></div> --}}
             </div>
 
-            <div id="food-add-{{$food['food_id']}}" class="absolute flex items-center h-full rounded-r-lg right-0 bg-green-500 add_food_icon cursor-pointer" value="{{$food['id']}}">
+            <div id="food-add-{{$food['food_id']}}" class="absolute flex flex-col justify-center items-center h-full rounded-r-lg right-0 bg-green-500 add_food_icon cursor-pointer max-w-[44px]" value="{{$food['id']}}">
+                    
+                    <div class="grow flex justify-center items-center">
+                    <i id="food-add-icon-{{$food['food_id']}}" class="flex fas fa-plus fa-2x text-white self-center cursor-pointer py-auto px-2"></i>
+                    </div>
 
-                    <i id="food-add-icon-{{$food['food_id']}}" class="fas fa-plus fa-2x text-white self-center cursor-pointer py-auto px-2"></i>
-
+                    <div class="grow bg-red-800 rounded-br-lg flex justify-center items-center" >
+                    <i id="food-del-icon-{{$food['food_id']}}" class="flex fas fa-trash fa-2x text-white self-center cursor-pointer py-auto px-2"></i>
+                    </div>
+                    
             </div>
         </div>
 

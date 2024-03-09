@@ -51,6 +51,8 @@ class MealController extends Controller
             // finds the specific food in the loop
             $food_search = Food::find((int)$food_pages_x);
 
+            $food_imgurl = $food_search->img_url;
+
             $food_source_search = FoodSource::where('id', $food_search->source_id)
                                         ->first();
 
@@ -76,7 +78,6 @@ class MealController extends Controller
                 "meal_fat_$food_pages_x" => 'nullable|numeric|max:5000',
                 "meal_carbs_$food_pages_x" => 'nullable|numeric|max:5000',
                 "meal_protein_$food_pages_x" => 'nullable|numeric|max:5000',
-
                 
             ]);
 
@@ -102,6 +103,7 @@ class MealController extends Controller
             $food_array[$x]['fat'] = $food_fat;
             $food_array[$x]['carbohydrates'] =  $food_carbs;
             $food_array[$x]['protein'] = $food_protein;
+            $food_array[$x]['img_url'] = $food_imgurl;
 
             
             if ($food_servingsize == NULL) {
@@ -131,9 +133,12 @@ class MealController extends Controller
             
             // (string)$food_array_component->render()->with($food_array_component->data());
             $mealfooditem_component = '';
+
+
             
-            $mealfooditem_component = new MealFoodItem($x+1, $food_array, $food_servingsize, $food_servingunit, $food_quantity, true, true);
+            $mealfooditem_component = new MealFoodItem($x+1, $food_array, $food_servingsize, $food_servingunit, $food_quantity, true, true, $food_imgurl);
             
+
             $food_array_components[$x] = $mealfooditem_component->render()->with($mealfooditem_component->data());
 
             
