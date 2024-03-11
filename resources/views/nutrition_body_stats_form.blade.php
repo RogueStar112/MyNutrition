@@ -7,7 +7,7 @@
 
     <div class="max-w-3xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
 
-        <form id="BODY_STATS_FORM" method="POST" class="bg-gray-800 text-white" enctype="multipart/form-data">
+        <form id="BODY_STATS_FORM" method="POST" class="bg-gray-800 text-white" enctype="multipart/form-data" action="{{ route('body_stats.store')}}">
             @csrf
 
             <div class="max-w-3xl border-4 border-orange-500 relative p-4" aria-label="step-one-weight">
@@ -20,11 +20,18 @@
                     <div class="mt-4 flex gap-3 items-center">
 
                         <div class="relative ">
-                            <input class='rounded-full p-3 bg-slate-700 text-gray-200' placeholder="84" name='current-weight' id='current-weight' />
+                            <input class='rounded-full p-3 bg-slate-700 text-gray-200' placeholder="84" name='current-weight' id='current-weight' required/>
                             <select class="absolute right-0 p-3 rounded-r-full border-l-2 border-slate-500 bg-slate-700 text-gray-200 border-r-0 border-t-0 border-b-0 w-[113px]" name="weight-unit" id="weight-unit">
-                                <option value="kg" id="unit-kg">kilograms</option>
-                                <option value="lbs" id="unit-lbs">pounds</option>
-                                <option value="st" id="unit-st">stone</option>
+                                <option value="kg" id="unit-kg" selected>kg</option>
+                                <option value="lbs" id="unit-lbs">lbs</option>
+                                <option value="st" id="unit-st">st</option>
+                            </select>
+                        </div>
+
+                        <div class="relative " id="stlbs">
+                            <input class='rounded-full p-3 bg-slate-700 text-gray-200' placeholder="13" name='current-weight-stlbs' id='current-weight-stlbs' />
+                            <select class="absolute right-0 p-3 rounded-r-full border-l-2 border-slate-500 bg-slate-700 text-gray-200 border-r-0 border-t-0 border-b-0 w-[113px]" name="weight-unit-stlbs" disabled id="weight-unit-stlbs">
+                                <option value="stlbs" id="unit-stlbs">lbs</option>
                             </select>
                         </div>
                 
@@ -46,7 +53,7 @@
                     </div>
                 </div>
 
-                <div class="mt-4">
+                {{-- <div class="mt-4">
                     <label class="mt-4" for="current-age">
                         How old are you?
 
@@ -57,7 +64,7 @@
 
                         </div>
                     </label>
-                </div>
+                </div> --}}
 
                 <div class="mt-4">
                     <label class="mt-4" for="current-height">
@@ -67,16 +74,21 @@
                         <div class="mt-4 flex gap-3 items-center">
 
                             <div class="relative ">
-                                <input class='rounded-full p-3 bg-slate-700 text-gray-200' placeholder="175" name='current-height' id='current-height' />
-                                <select class="absolute right-0 p-3 rounded-r-full border-l-2 border-slate-500 bg-slate-700 text-gray-200 border-r-0 border-t-0 border-b-0" name="height-unit" id="height-unit">
-                                    <option value="cm">centimetres</option>
-                                    <option value="ft">ft</option>
+                                <input class='rounded-full p-3 bg-slate-700 text-gray-200' placeholder="180" name='current-height' id='current-height' required/>
+                                <select class="absolute right-0 p-3 rounded-r-full border-l-2 border-slate-500 bg-slate-700 text-gray-200 border-r-0 border-t-0 border-b-0 pr-6 w-[113px]" name="height-unit" id="height-unit">
+                                    <option id="unit-cm" value="cm">cm</option>
+                                    <option id="unit-ft" value="ft">ft</option>
                                 </select>
                             </div>
 
 
-                            <input class='rounded-full p-3 bg-slate-700 text-gray-200' placeholder="11" name='current-height-in' id='current-height-in' />
+                            <div class="relative hidden" id="height-inches">
+                                <input class='rounded-full p-3 bg-slate-700 text-gray-200' placeholder="11" name='current-height-in' id='current-height-in' />
+                                <select class="absolute right-0 p-3 rounded-r-full border-l-2 border-slate-500 bg-slate-700 text-gray-200 border-r-0 border-t-0 border-b-0 pr-6 w-[113px]" name="height-in" id="height-in" disabled>
+                                    <option id="unit-in" value="cm">in</option>
+                                </select>
                             
+                            </div>
                             {{-- <label for="weight-unit-kgs">
                                 <input type="radio"  id="weight-unit-kgs" name='weight-unit' value="kg" checked>
                             kg
@@ -96,20 +108,20 @@
                     </label>
                 </div>
 
-                <div class="mt-4">
+                {{-- <div class="mt-4">
                     <label class="mt-4" for="gender">
-                        Sex (optional)
+                        Sex
 
 
                         <div class="mt-4 flex gap-3 w">
 
                                 <label for="gender-male">
-                                <input type="radio"  id="gender-male" name='gender' value="1">
+                                <input type="radio"  id="gender-male" name='gender' value="m">
                                 Male
                                 </label>
 
                                 <label for="gender-female">
-                                <input type="radio" id="gender-female" name='gender' value="0">
+                                <input type="radio" id="gender-female" name='gender' value="f">
                                 Female
                                 </label>
 
@@ -119,7 +131,7 @@
                                 </label>
                             </div>
                     </label>
-                </div>
+                </div> --}}
 
                 
              <button type="submit" class="bg-green-500 mt-4 p-4">Submit</button>
@@ -199,112 +211,190 @@
 
     <script>
 
-        let weightInput = $('#current-weight');
+        function checkWeight() {
 
+            if($('#weight-unit').val() == 'st') {
 
-        let weightVal = $('#current-weight').val();
-        let weightUnit = $('#weight-unit').val();
+            $('#stlbs').removeClass('hidden')
+            $('#current-weight-stlbs').prop('required', true)
+            $('#current-weight').attr('placeholder', '14')
 
+                 } else {
 
-
-        console.log(parseInt(weightVal));
-
-        function convertWeight(unit_from, unit_to) {
-
-            console.log(unit_from, unit_to);
-
-            if(unit_from == 'kg' && unit_to == 'lbs') {
-                // console.log(weightUnit);
-
-
-                $('#current-weight').val(weightVal*2.2);
-
-                
-                // let weightUnit = $('#weight-unit').val();
+            $('#stlbs').addClass('hidden')
+            $('#current-weight-stlbs').removeAttr('required');
+            $('#current-weight').attr('placeholder', '140')
 
             }
-
-            if(unit_from == 'kg' && unit_to == 'st') {
-
-                 $('#current-weight').val(weightVal/6.35);
-
-            }
-
-            if(unit_from == 'lbs' && unit_to == 'kg') {
-
-                // console.log(weightUnit);
-
-                $('#current-weight').val(weightVal/2.205);
-
-                
-                // let weightUnit = $('#weight-unit').val();
-
-            }
-
-            if(unit_from == 'lbs' && unit_to == 'st') {
-
-                $('#current-weight').val(weightVal/14);
-
-            }
-
-            if(unit_from == 'st' && unit_to == 'kg') {
-
-
-                $('#current-weight').val(weightVal*6.35);
-
-            }
-
-            if(unit_from == 'st' && unit_to == 'lbs') {
-
-                $('#current-weight').val(weightVal*14);
-
-            }
-
 
         }
 
-    
+        function checkHeight() {
+
+            if($('#height-unit').val() == 'ft') {
+
+                $('#height-inches').removeClass('hidden')
+                $('#current-height').attr('placeholder', '5')
+                $('#current-height-in').prop('required', true)
+
+
+                } else {
+
+                $('#height-inches').addClass('hidden')
+                $('#current-height-in').removeAttr('required');
+                $('#current-height').attr('placeholder', '180')
+
+
+
+            }
+
+        }
 
         $(document).ready(function() {
 
-            let weightVal = $('#current-weight').val();
-            let weightUnit = $('#weight-unit').val();
-
-            $('#current-weight').on('input', function() {
-                weightVal = $('#current-weight').val();
-                console.log('w v changed', weightVal);
-            })
             
-            $('#current-weight').on('change', function() {
-                weightVal = $('#current-weight').val();
-                console.log('w unit changed through conversion', weightVal);
-            })
+                checkHeight();
+                checkWeight();
 
-            $('#weight-unit').on('click', function() {
-                weightUnit = $('#weight-unit').val();
-                console.log('w unit changed', weightUnit);
-            })
+            $('#height-unit').on('change', function() {
 
+                checkHeight();
+            }) 
 
-            $('#unit-lbs').click(function() {
+            $('#weight-unit').on('change', function() {
 
-                convertWeight(weightUnit, 'lbs');
+                checkWeight();
 
-            }); 
-
-            $('#unit-kg').click(function() {
-
-                convertWeight(weightUnit, 'kg');
-
-            }); 
-
-            $('#unit-st').click(function() {
-
-                convertWeight(weightUnit, 'st');
-
-            }); 
+            }) 
 
 
         })
+        // let weightInput = $('#current-weight');
+
+
+        // let weightVal = $('#current-weight').val();
+        // let weightUnit = $('#weight-unit').val();
+
+
+
+        // console.log(parseInt(weightVal));
+
+        // function convertWeight(unit_from, unit_to) {
+
+        //     console.log("UF", unit_from, "UT", unit_to);
+
+        //     if(unit_from == 'kg' && unit_to == 'lbs') {
+        //         // console.log(weightUnit);
+
+        //         console.log('kg -> lbs');
+
+
+        //         return weightVal*2.2;
+
+        //         $('#current-weight').val(weightVal*2.2);
+
+                
+        //         // let weightUnit = $('#weight-unit').val();
+
+        //     }
+
+        //     if(unit_from == 'kg' && unit_to == 'st') {
+
+        //         console.log('kg -> st')
+        //         return weightVal/6.35;
+
+        //          $('#current-weight').val(weightVal/6.35);
+
+        //     }
+
+        //     if(unit_from == 'lbs' && unit_to == 'kg') {
+
+        //         // console.log(weightUnit);
+
+        //         console.log('lbs -> kg')
+        //         return weightVal/2.21;
+
+        //         $('#current-weight').val(weightVal/2.205);
+
+                
+        //         // let weightUnit = $('#weight-unit').val();
+
+        //     }
+
+        //     if(unit_from == 'lbs' && unit_to == 'st') {
+
+        //         console.log('lbs -> st')
+        //         return weightVal/14;
+
+        //         $('#current-weight').val(weightVal/14);
+
+        //     }
+
+        //     if(unit_from == 'st' && unit_to == 'kg') {
+
+        //         console.log('st -> kg')
+        //         return weightVal*6.35;
+
+        //         $('#current-weight').val(weightVal*6.35);
+
+        //     }
+
+        //     if(unit_from == 'st' && unit_to == 'lbs') {
+
+        //         console.log('st -> lbs')
+        //         return weightVal*14;
+
+        //         $('#current-weight').val(weightVal*14);
+
+        //     }
+
+
+        // }
+
+    
+
+        // $(document).ready(function() {
+
+        //     let weightVal = $('#current-weight').val();
+        //     let weightUnit = $('#weight-unit').val();
+
+        //     $('#current-weight').on('input', function() {
+        //         weightVal = $('#current-weight').val();
+        //         console.log('w v changed', weightVal);
+        //     })
+            
+        //     $('#current-weight').on('change', function() {
+        //         weightVal = $('#current-weight').val();
+        //         console.log('w unit changed through conversion', weightVal);
+        //     })
+
+        //     $('#weight-unit').on('click', function() {
+        //         weightUnit = $('#weight-unit').val();
+        //         console.log('w unit changed', weightUnit);
+        //     })
+
+
+        //     $('#unit-lbs').click(function() {
+
+        //         $('#current-weight').val(convertWeight(weightUnit, 'lbs'));
+
+        //     }); 
+
+        //     $('#unit-kg').click(function() {
+
+        //         $('#current-weight').val(convertWeight(weightUnit, 'kg'));
+
+        //     }); 
+
+        //     $('#unit-st').click(function() {
+
+        //         $('#current-weight').val(convertWeight(weightUnit, 'st'));
+
+        //     }); 
+
+
+        // })
+
+        
     </script>
 </x-app-layout>
