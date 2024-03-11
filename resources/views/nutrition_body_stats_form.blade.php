@@ -224,16 +224,42 @@
 
             }
 
+            if(unit_from == 'kg' && unit_to == 'st') {
+
+                 $('#current-weight').val(weightVal/6.35);
+
+            }
+
             if(unit_from == 'lbs' && unit_to == 'kg') {
 
                 // console.log(weightUnit);
 
-                $('#current-weight').val(weightVal/2.2);
+                $('#current-weight').val(weightVal/2.205);
 
                 
                 // let weightUnit = $('#weight-unit').val();
 
             }
+
+            if(unit_from == 'lbs' && unit_to == 'st') {
+
+                $('#current-weight').val(weightVal/14);
+
+            }
+
+            if(unit_from == 'st' && unit_to == 'kg') {
+
+
+                $('#current-weight').val(weightVal*6.35);
+
+            }
+
+            if(unit_from == 'st' && unit_to == 'lbs') {
+
+                $('#current-weight').val(weightVal*14);
+
+            }
+
 
         }
 
@@ -241,15 +267,24 @@
 
         $(document).ready(function() {
 
+            let weightVal = $('#current-weight').val();
+            let weightUnit = $('#weight-unit').val();
+
             $('#current-weight').on('input', function() {
                 weightVal = $('#current-weight').val();
                 console.log('w v changed', weightVal);
+            })
+            
+            $('#current-weight').on('change', function() {
+                weightVal = $('#current-weight').val();
+                console.log('w unit changed through conversion', weightVal);
             })
 
             $('#weight-unit').on('click', function() {
                 weightUnit = $('#weight-unit').val();
                 console.log('w unit changed', weightUnit);
             })
+
 
             $('#unit-lbs').click(function() {
 
@@ -260,6 +295,12 @@
             $('#unit-kg').click(function() {
 
                 convertWeight(weightUnit, 'kg');
+
+            }); 
+
+            $('#unit-st').click(function() {
+
+                convertWeight(weightUnit, 'st');
 
             }); 
 
