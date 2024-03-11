@@ -97,7 +97,16 @@ class BodyStatsController extends Controller
 
         $bmi = round(($weight_val/($height_val/100)**2), 1);
         
-        $body_fat = NULL;
+        if($request->input('body-fat') != NULL) {
+
+            $body_fat = (float)$request->input('body-fat');
+        
+        } else {
+
+            $body_fat = NULL;
+
+        }
+
 
         $last_updated = date("Y-m-d H:i:s");
 
@@ -106,21 +115,26 @@ class BodyStatsController extends Controller
         // dd($user_id, $weight_val, $height_val, $bmi, $last_updated, $body_fat);
 
 
-        $newUserHealthDetails = new UserHealthDetails();
+        $newUserHealthDetails = UserHealthDetails::updateOrCreate(
+            ['user_id' => $user_id],
+            ['weight' => $weight_val, 'height' => $height_val, 'bmi' => $bmi, 'bodyfat' => $body_fat, 'last_updated' => $last_updated]
+        );
 
-        $newUserHealthDetails->user_id = $user_id;
+        // $newUserHealthDetails = new UserHealthDetails();
 
-        $newUserHealthDetails->weight = $weight_val;
+        // $newUserHealthDetails->user_id = $user_id;
 
-        $newUserHealthDetails->height = $height_val;
+        // $newUserHealthDetails->weight = $weight_val;
 
-        $newUserHealthDetails->bmi = $bmi;
+        // $newUserHealthDetails->height = $height_val;
 
-        $newUserHealthDetails->bodyfat = $body_fat;
+        // $newUserHealthDetails->bmi = $bmi;
 
-        $newUserHealthDetails->last_updated = $last_updated;
+        // $newUserHealthDetails->bodyfat = $body_fat;
 
-        $newUserHealthDetails->save();
+        // $newUserHealthDetails->last_updated = $last_updated;
+
+        // $newUserHealthDetails->save();
 
 
         $newUserHealthLogs = new UserHealthLogs();
@@ -139,6 +153,6 @@ class BodyStatsController extends Controller
 
         $newUserHealthLogs->save();
 
-
+        return view('dashboard');
     }
 }

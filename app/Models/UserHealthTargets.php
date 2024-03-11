@@ -11,5 +11,6 @@ class UserHealthTargets extends Model
 
     protected $table = 'user_health_targets';
 
+
     public $timestamps = false;
 }

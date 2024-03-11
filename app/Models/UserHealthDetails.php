@@ -11,5 +11,14 @@ class UserHealthDetails extends Model
 
     protected $table = 'user_health_details';
 
+    
+    protected $fillable = [
+        'weight',
+        'height',
+        'bmi',
+        'bodyfat',
+        'last_updated'
+    ];
+
     public $timestamps = false;
 }

@@ -53,6 +53,8 @@
                     </div>
                 </div>
 
+                
+
                 {{-- <div class="mt-4">
                     <label class="mt-4" for="current-age">
                         How old are you?
@@ -74,7 +76,7 @@
                         <div class="mt-4 flex gap-3 items-center">
 
                             <div class="relative ">
-                                <input class='rounded-full p-3 bg-slate-700 text-gray-200' placeholder="180" name='current-height' id='current-height' required/>
+                                <input class='rounded-full p-3 bg-slate-700 text-gray-200' placeholder="172" name='current-height' id='current-height' required/>
                                 <select class="absolute right-0 p-3 rounded-r-full border-l-2 border-slate-500 bg-slate-700 text-gray-200 border-r-0 border-t-0 border-b-0 pr-6 w-[113px]" name="height-unit" id="height-unit">
                                     <option id="unit-cm" value="cm">cm</option>
                                     <option id="unit-ft" value="ft">ft</option>
@@ -103,6 +105,22 @@
                                 <input type="radio" id="weight-unit-st" name='weight-unit' value="st">
                             st
                             </label> --}}
+
+                        </div>
+                    </label>
+                </div>
+                
+
+                <div class="mt-4">
+                    <label class="mt-4" for="body-fat">
+                        Body fat (optional)
+
+
+                        <div class="mt-4 flex gap-3 w-fit relative">
+
+                            <input class='rounded-full p-3 bg-slate-700 text-gray-200 relative' placeholder="29" name='body-fat' id='body-fat' />
+
+                            <p class="absolute right-4 top-1/4 select-none">%</p>
 
                         </div>
                     </label>
@@ -223,7 +241,7 @@
 
             $('#stlbs').addClass('hidden')
             $('#current-weight-stlbs').removeAttr('required');
-            $('#current-weight').attr('placeholder', '140')
+            $('#current-weight').attr('placeholder', '95')
 
             }
 
