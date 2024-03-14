@@ -55,6 +55,8 @@ class ExerciseController extends Controller
         $avg_heart_rate = (float)$request->input('avg-heart-rate')!=NULL ? (float)$request->input('avg-heart-rate') : 0;
 
         $exercise_time = $request->input('exercise-time');
+        $exercise_time_ymdhis = date('Y-m-d H:i:s', strtotime($exercise_time));
+
 
         $exercise_type = $request->input('exercise-type');
 
@@ -63,7 +65,8 @@ class ExerciseController extends Controller
 
         $exercise_type_id = $exercise_type_id[0]->id;
 
-        // dd($user_id, $distance_val, $duration_val, $exercise_distance_unit, $active_calories, $total_calories, $avg_heart_rate, $exercise_time, $exercise_type, $exercise_type_id);
+
+        // dd($user_id, $distance_val, $duration_val, $exercise_distance_unit, $active_calories, $total_calories, $avg_heart_rate, $exercise_time, $exercise_type, $exercise_type_id, $exercise_time_ymdhis);
 
         $newExercise = new Exercise();
 
@@ -71,7 +74,7 @@ class ExerciseController extends Controller
         $newExercise->exercise_type_id = $exercise_type_id;
         $newExercise->distance = $distance_val;
         $newExercise->duration = $duration_val;
-        $newExercise->exercise_start = $exercise_time;
+        $newExercise->exercise_start = $exercise_time_ymdhis;
         $newExercise->calories_active = $active_calories;
         $newExercise->calories_total = $total_calories;
         $newExercise->average_bpm = $avg_heart_rate;
