@@ -10,8 +10,9 @@
         
 
         
-
+        <form method="POST" enctype="multipart/form-data" action="{{ route('exercise.store')}}">
         <div class="max-w-3xl px-24 border-4 text-white border-yellow-400 bg-gray-800 [&>*]:my-4 mx-auto">
+            @csrf
 
             <div class="w-full text-center">
                 <h2 class="text-3xl">Log your exercise</h2>
@@ -21,7 +22,7 @@
             <div class="w-full flex justify-between items-center">
                 <label for="exercise-time" class="text-white">Exercise start time</label>
 
-                <input type="datetime-local" name="exercise-time" class="block bg-slate-700 text-gray-200 w-[240px] mt-1  rounded-full" placeholder="Big Breakfast, Spaghetti Carbonara, BLT Sandwich" value="" required/>
+                <input type="datetime-local" name="exercise-time" class="block bg-slate-700 text-gray-200 w-[240px] mt-1  rounded-full"  value="" required/>
         
             </div>
 
@@ -44,6 +45,7 @@
 
             </div>
         </div>
+        </form>
 
 
         <div class="flex justify-between relative">

@@ -75,7 +75,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/nutrition/body_stats', [BodyStatsController::class, 'body_stats_store'])->name('body_stats.store');
 
+    Route::post('/exercise/create', [ExerciseController::class, 'exercise_store'])->name('exercise.store');
+
     Route::get('/nutrition/visualizer', [DashboardController::class, 'visualizer_show'])->name('visualizer.show');
+
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])
