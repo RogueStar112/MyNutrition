@@ -186,4 +186,10 @@ class DashboardController extends Controller
         // return $meal_items_array;
 
     }
+
+
+    public function visualizer_show() {
+
+        return view('visualizer');
+    }
 }

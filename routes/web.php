@@ -74,6 +74,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/nutrition/meal/edit/{id}', [MealController::class, 'meal_edit'])->name('meal.edit');
 
     Route::post('/nutrition/body_stats', [BodyStatsController::class, 'body_stats_store'])->name('body_stats.store');
+
+    Route::get('/nutrition/visualizer', [DashboardController::class, 'visualizer_show'])->name('visualizer.show');
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])

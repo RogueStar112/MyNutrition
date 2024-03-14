@@ -11,7 +11,7 @@
 
         
 
-        <div class="max-w-3xl px-24 border-4 text-white border-yellow-400 bg-gray-800 [&>*]:my-4">
+        <div class="max-w-3xl px-24 border-4 text-white border-yellow-400 bg-gray-800 [&>*]:my-4 mx-auto">
 
             <div class="w-full text-center">
                 <h2 class="text-3xl">Log your exercise</h2>
@@ -19,7 +19,7 @@
             </div>
             
             <div class="w-full flex justify-between items-center">
-                <label for="exercise-time" class="text-white">Exercise time</label>
+                <label for="exercise-time" class="text-white">Exercise start time</label>
 
                 <input type="datetime-local" name="exercise-time" class="block bg-slate-700 text-gray-200 w-[240px] mt-1  rounded-full" placeholder="Big Breakfast, Spaghetti Carbonara, BLT Sandwich" value="" required/>
         
@@ -77,7 +77,7 @@
 
         
         <div class="w-full text-center">
-            <p class="text-slate-500">Step 2: If you know your workout stats, put them here!</p>
+            <p class="text-slate-500">Step 2: If you know your workout stats, put them here!<br>(Using watch stats)</p>
 
 
             <div class="grid grid-cols-3 gap-4 [&>*]:rounded-full [&>*]:bg-slate-700 [&>*]:text-gray-200 [&>*]:p-2 [&>*]:mt-2">
@@ -88,7 +88,7 @@
 
               <input name="avg-heart-rate" placeholder="Average heart rate">
 
-              <input name="active-calories" placeholder="Active calories">
+              {{-- <input name="active-calories" placeholder="Active calories"> --}}
 
             </div>
 
@@ -103,7 +103,7 @@
 
 
         <div class="flex justify-end">
-            <button type="submit" class="bg-green-500 text-white p-4">SUBMIT</button>
+            <button type="submit" class="bg-green-500 text-white p-4 w-[135px]">SUBMIT</button>
         </div>
 
         

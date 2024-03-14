@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight">
-            {{ __('Nutrition Main Menu') }}
-        </h2>
+        <h1 class="font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight">
+            {{ __('Visualizer - Beta') }}
+        </h1>
     </x-slot>
 
     <div class="py-4">
@@ -52,7 +52,7 @@
                     {{ __("Can't decide what to eat? Use this.") }}
                 </x-dashboard-link>
 
-                <x-dashboard-link colspan="1.5" heading="Visualizer" :href="route('visualizer.show')" icon="fas fa-calendar fa-3x text-red-300">
+                <x-dashboard-link colspan="1.5" heading="Visualizer" icon="fas fa-calendar fa-3x text-red-300">
                     {{ __("BETA - Experimental Test.") }}
                 </x-dashboard-link>
 
