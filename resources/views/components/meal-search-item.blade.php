@@ -74,7 +74,7 @@
         <div class="grid grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6" id="food-item-{{$food['food_id']}}">
 
             <div class="bg-transparent">
-                <img class="/p-6 object-cover rounded-full min-h-full w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="" />
+                <img class="/p-6 object-cover rounded-full /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="" />
             </div>
 
             <div class="desc-box m-6">
