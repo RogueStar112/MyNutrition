@@ -10,12 +10,12 @@
         $hrs = 25;
     @endphp
 
-    <div class="py-4 relative mx-auto max-w-7xl">
-        <div id="TASK-VISUALIZER" class="overflow-x-scroll max-w-7xl mx-auto /sm:px-6 /lg:px-8 even:bg-slate-800 flex [&>*]:grow h-[50vh] max-h-[300px] relative">
+    <div class="py-4 relative mx-auto max-w-7xl overflow-hidden">
+        <div id="TASK-VISUALIZER" class="/overflow-x-scroll overflow-hidden max-w-7xl mx-auto /sm:px-6 /lg:px-8 even:bg-slate-800 flex [&>*]:grow h-[50vh] max-h-[300px] border-4 relative">
 
-            <div id="TASKS" class=" w-full h-full absolute left-0 flex justify-center items-center /w-1/3 /h-1/5 border-4 border-orange-500 rounded-lg z-50 overflow-hidden">
+            <div id="TASKS" class=" w-full h-full absolute left-0 flex justify-center items-center /w-1/3 /h-1/5 /border-4 /border-orange-500 rounded-lg z-50">
                 
-                <p class="text-center text-white">Tasks Container</p>
+                <p class="text-center text-gray-400 text-2xl select-none">{{date('d/m/Y')}}</p>
 
             </div>
             
@@ -39,11 +39,12 @@
 
         </div>
 
+
         <div class="flex justify-between items-center">
         <div class="w-fit rounded-lg my-4 bg-slate-900 text-white p-4 flex items-center gap-6">Legend
 
             <div class="bg-orange-500 h-[12px] w-[12px] rounded-full"></div>Meal
-            <div class="bg-yellow-500 h-[12px] w-[12px] rounded-full"></div>Exercise
+            <div class="bg-green-500 h-[12px] w-[12px] rounded-full"></div>Exercise
             <div class="bg-blue-500 h-[12px] w-[12px] rounded-full"></div>Sleep
 
         </div>
@@ -61,6 +62,8 @@
         const tv_height = tv.height();
 
         const tasks = $('#TASKS');
+
+        let noOfTasks = 1;
 
         console.log(tv_width, tv_height);
 
@@ -87,22 +90,32 @@
            let x_time_start = time_start*tv_cell_width;
            let x_time_end = time_end*tv_cell_width;
 
-            tasks.append(`<div class="bg-green-500 rounded-lg text-white absolute flex justify-center items-center h-8" style="background-color: #${color}; left: ${x_time_start}px; width:${(x_time_end-x_time_start)/tv_width*100}%; top:${y_index}px;">${caption}</div>`);
+           // For ID
+   
 
+            tasks.append(`<div id='task-${noOfTasks}' class="new-task bg-green-500 rounded-lg text-white absolute flex justify-center items-center h-8" style="background-color: #${color}; left: ${(x_time_start/tv_width)*100}%; width:${(x_time_end-x_time_start)/tv_width*100}%; top:${y_index}px;"><p class='select-none'>${caption}</p></div>`);
+
+            noOfTasks += 1;
         }
 
-        createNewTask_Time('Sleep', '0000FF', 0, 5.90, 0)
+        createNewTask_Time('Sleep', '2196f3', 0, 5.90, 0)
         createNewTask_Time('Breakfast (600kcal)', 'FF0000', 6, 10.25, 10);
-        createNewTask_Time('Lunch (850kcal)', 'FF0000', 12, 17.75, 50)
+        createNewTask_Time('Lunch (850kcal)', 'FF0000', 12, 18, 50)
         createNewTask_Time('Snack', 'FF0000', 18, 19, 90)
         createNewTask_Time('Dinner (1000kcal)', 'FF0000', 19, 25, 130);
-        createNewTask_Time('Sleep', '0000FF', 22, 25, 170)
-    
-        createNewTask_Time('Walk', 'BBBB33', 10.35, 11.90, 30)
+        createNewTask_Time('Sleep', '2196f3', 22, 27, 170)
+        createNewTask_Time('Walk', '4caf50', 10.30, 11.90, 30)
         // createNewTask('Walk (30 min)', '33BB33', 210, 430, 10);
         // createNewTask('Breakfast (650kcal)', 'FF0000', 320, 640, 50);
         // createNewTask('Sleep', '2222FF', 800, 1400, 90);
 
-        
+        $('#TASKS').draggable({ axis: 'x' });
+
+        $('.new-task').each(function(i, obj) {
+
+
+
+        })
+
     </script>
 </x-app-layout>
