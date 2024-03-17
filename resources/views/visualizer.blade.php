@@ -48,7 +48,7 @@
             <div class="bg-blue-500 h-[12px] w-[12px] rounded-full"></div>Sleep
 
         </div>
-        <div class="w-full text-right text-white sm:px-6 lg:px-8 mt-4">Calorie Target: 2500kcal</div>
+        <div class="w-fit bg-slate-900 p-4 rounded-lg text-right text-white sm:px-6 lg:px-8">Calorie Target: 2500kcal</div>
         </div>
     </div>
 
