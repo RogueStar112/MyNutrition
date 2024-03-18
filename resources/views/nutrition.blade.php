@@ -7,10 +7,94 @@
 
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="grid grid-flow-row-dense mx-4 grid-cols-1 md:grid-cols-3 md:grid-rows-3 gap-3">
+            <div class="grid grid-flow-row-dense grid-cols-1 md:grid-cols-6 md:grid-rows-1 gap-3">
+
+                <!--
+                Menu One: Logging
+                1. Create new Foods
+                2. Create new Meals
+                3. Create new Exercise
+                4. Body Stats
+                -->
+
+
+                <h2 class="text-6xl italic font-extrabold text-white col-span-6 m-4 pb-6 border-b-4 border-white">LOG</h2>
+
+                <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2" href="{{route('food.create')}}">
+
+                    <div class="flex justify-between text-red-500 border-b-4 border-b-red-500 p-4 items-center">
+                        <h2 class="text-5xl uppercase font-black">Food</h2>
+                         <i class="fas fa-hotdog fa-3x"></i>
+                    </div>
+                    <p class="text-white p-4">Create new Food Items.</p>
+                </a>
+
+                <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2" href="{{route('meal.create')}}">
+                    <div class="flex justify-between text-orange-500 border-b-4 border-b-orange-500 items-center">
+                        <h2 class="text-5xl uppercase p-4 font-black">Meal</h2>
+                         <i class="fas fa-utensils fa-3x p-4"></i>
+                    </div>
+                    <p class="text-white p-4">Create new Meals with existing Food.</p>
+                </a>
+
+                <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2" href="{{route('exercise.form')}}">
+
+                    <div class="flex justify-between text-yellow-500 border-b-4 border-b-yellow-500 items-center">
+                        <h2 class="text-5xl uppercase p-4 font-black">Exercise</h2>
+                         <i class="fas fa-shoe-prints -rotate-90 fa-3x p-4"></i>
+                    </div>
+
+                    <p class="text-white p-4">Log your Exercises.</p>
+                </a>   
+
+                <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-3" href="{{route('body_stats.form')}}">
+
+                    <div class="flex justify-between text-teal-500 border-b-4 border-b-teal-500 items-center">
+                        <h2 class="text-5xl uppercase p-4 font-black">Body</h2>
+                         <i class="fas fa-weight fa-3x p-4"></i>
+                    </div>
+
+                    <p class="text-white p-4">Log Weight, Height & Body Fat.</p>
+                </a>
+
+                <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-3" href="{{route('exercise.form')}}">
+
+                    <div class="flex justify-between text-blue-500 border-b-4 border-b-blue-500 items-center">
+                        <h2 class="text-5xl uppercase p-4 font-black">Water</h2>
+                         <i class="fas fa-tint fa-3x p-4"></i>
+                    </div>
+
+                    <p class="text-white p-4">Log your Exercises.</p>
+                </a>
+
+                <h2 class="text-6xl italic font-extrabold text-white m-4 pb-6 border-b-4 border-white w-full col-span-6">ACHIEVE</h2>
+
+                <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-3" href="{{route('exercise.form')}}">
+
+                    <div class="flex justify-between text-blue-500 border-b-4 border-b-blue-500 items-center">
+                        <h2 class="text-5xl uppercase p-4 font-black">Goals</h2>
+                         <i class="fas fa-tint fa-3x p-4"></i>
+                    </div>
+
+                    <p class="text-white p-4">Set Nutrition Goals! (WIP)</p>
+                </a>
+
+                <a href="col-span-3 slot-for-later"></a>
+
+                <h2 class="text-6xl italic font-extrabold text-white m-4 pb-6 border-b-4 border-white w-full col-span-6">STATISTICS</h2>
+
+                <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-3" href="{{route('visualizer.show')}}">
+
+                    <div class="flex justify-between text-orange-300 border-b-4 border-b-orange-300 items-center">
+                        <h2 class="text-5xl uppercase p-4 font-black">Visualizer</h2>
+                         <i class="fas fa-calendar fa-3x p-4"></i>
+                    </div>
+
+                    <p class="text-white p-4">See how each day goes! (Beta)</p>
+                </a>
                 {{-- <x-dashboard-link colspan="3" heading="Overview" textalign="center">
                     {{ __(Auth::user()->name . "'s nutrition") }}
-                </x-dashboard-link> --}}
+                </x-dashboard-link>
 
                 <x-dashboard-link colspan="1" :href="route('food.create')" heading="Food" icon="fas fa-hotdog fa-3x text-orange-300">
                     {{ __('Create new food item.') }}
@@ -32,13 +116,13 @@
                     {{ __('Set nutrition goals. (WIP)') }}
                 </x-dashboard-link>
 
-                {{-- <x-dashboard-link colspan="1" heading="Exercise Duration" icon="far fa-clock fa-3x text-grey-300">
+                <x-dashboard-link colspan="1" heading="Exercise Duration" icon="far fa-clock fa-3x text-grey-300">
                     {{ __('140 minutes') }}
-                </x-dashboard-link> --}}
+                </x-dashboard-link>
 
-                {{-- <x-dashboard-link colspan="1" heading="Today's Meals" icon="fas fa-hotdog fa-3x text-grey-300">
+                <x-dashboard-link colspan="1" heading="Today's Meals" icon="fas fa-hotdog fa-3x text-grey-300">
                     {{ __('Meal Deal, Chicken & Rice') }}
-                </x-dashboard-link> --}}
+                </x-dashboard-link>
 
                 <x-dashboard-link colspan="1.5" heading="Water" icon="fas fa-tint fa-3x text-blue-300">
                     {{ __('Log water intake. (WIP)') }}
@@ -54,7 +138,7 @@
 
                 <x-dashboard-link colspan="1.5" heading="Visualizer" :href="route('visualizer.show')" icon="fas fa-calendar fa-3x text-red-300">
                     {{ __("BETA - Experimental Test.") }}
-                </x-dashboard-link>
+                </x-dashboard-link> --}}
 
 
 
