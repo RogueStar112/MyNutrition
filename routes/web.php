@@ -6,6 +6,7 @@ use App\Http\Controllers\MealController;
 use App\Http\Controllers\BodyStatsController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GoalsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,6 +79,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/exercise/create', [ExerciseController::class, 'exercise_store'])->name('exercise.store');
 
     Route::get('/nutrition/visualizer', [DashboardController::class, 'visualizer_show'])->name('visualizer.show');
+
+    Route::get('/goals/create', [GoalsController::class, 'goals_form'])->name('goals.form');
 
 });
 

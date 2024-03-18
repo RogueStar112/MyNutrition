@@ -47,14 +47,14 @@
                         <p class="text-white p-4">Log your Exercises.</p>
                     </a>   
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2" href="{{route('body_stats.form')}}">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2 duration-300 hover:bg-cyan-800 [&>*]:hover:text-black [&>*]:hover:border-b-black" href="{{route('body_stats.form')}}">
 
                         <div class="flex justify-between text-teal-500 border-b-4 border-b-teal-500 items-center">
                             <h2 class="text-5xl uppercase p-4 font-black">Body</h2>
                             <i class="fas fa-weight fa-3x p-4"></i>
                         </div>
 
-                        <p class="text-white p-4">Log Weight, Height & Body Fat.</p>
+                        <p class="text-white p-4">Weight, Height & Body Fat.</p>
                     </a>
 
                     <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2" href="{{route('exercise.form')}}">
@@ -79,21 +79,21 @@
 {{-- 
                 <h2 class="text-6xl italic font-extrabold text-white m-4 pb-6 border-b-4 border-gray-500 w-full col-span-6">ACHIEVE</h2> --}}
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-3" href="{{route('exercise.form')}}">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-3" href="{{route('goals.form')}}">
 
-                        <div class="flex justify-between text-blue-500 border-b-4 border-b-blue-500 items-center">
+                        <div class="flex justify-between text-blue-300 border-b-4 border-b-blue-300 items-center">
                             <h2 class="text-5xl uppercase p-4 font-black">Goals</h2>
                             <i class="fas fa-bullseye fa-3x p-4"></i>
                         </div>
 
-                        <p class="text-white p-4">Set Macro and Sleep Goals. (WIP)</p>
+                        <p class="text-white p-4">Set Macro and Sleep Goals.</p>
                     </a>
 
                     {{-- <a href="col-span-3 slot-for-later"></a> --}}
 
                     <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-3 relative">
 
-                        <p class="-rotate-12 text-5xl absolute left-1/2 top-1/4 text-white opacity-100 font-black -translate-x-1/2 translate-y-1/2">WIP</p>
+                        <p class="-rotate-12 text-5xl absolute left-1/2 top-1/4 text-white opacity-100 font-black -translate-x-1/2 translate-y-1/2 w-full text-center z-50">Coming Eventually</p>
 
                         <div class="flex justify-between text-yellow-500 border-b-4 border-b-yellow-500 opacity-80 blur-sm select-none items-center">
                             <h2 class="text-5xl uppercase p-4 font-black">Trophies</h2>
@@ -125,9 +125,9 @@
                         <p class="text-white p-4">See how each day goes! (Beta)</p>
                     </a>
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-6 relative">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-6 relative overflow-hidden">
 
-                        <p class="-rotate-12 text-5xl absolute left-1/2 top-1/4 text-white opacity-100 font-black -translate-x-1/2 translate-y-1/2">WIP</p>
+                        <p class="-rotate-12 text-5xl absolute left-1/2 top-1/4 text-white opacity-100 font-black -translate-x-1/2 translate-y-1/2  text-center w-full">Coming Soon</p>
 
                         <div class="flex justify-between text-gray-300 border-b-4 border-b-gray-300 opacity-80 blur-sm select-none items-center">
                             <h2 class="text-5xl uppercase p-4 font-black">Settings</h2>
