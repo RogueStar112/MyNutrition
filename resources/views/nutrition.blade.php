@@ -57,14 +57,14 @@
                         <p class="text-white p-4">Weight, Height & Body Fat.</p>
                     </a>
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2" href="{{route('exercise.form')}}">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2" href="{{route('water.form')}}">
 
                         <div class="flex justify-between text-blue-500 border-b-4 border-b-blue-500 items-center">
                             <h2 class="text-5xl uppercase p-4 font-black">Water</h2>
                             <i class="fas fa-tint fa-3x p-4"></i>
                         </div>
 
-                        <p class="text-white p-4">Log your Exercises.</p>
+                        <p class="text-white p-4">Log your Water Intake.</p>
                     </a>
 
                     <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2" href="{{route('exercise.form')}}">

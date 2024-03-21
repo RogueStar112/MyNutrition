@@ -7,6 +7,8 @@ use App\Http\Controllers\BodyStatsController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoalsController;
+use App\Http\Controllers\WaterController;
+use App\Http\Controllers\SleepController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -82,6 +84,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/goals/create', [GoalsController::class, 'goals_form'])->name('goals.form');
 
+    Route::get('/water/create', [WaterController::class, 'water_form'])->name('water.form');
+
+    Route::get('/sleep/create', [SleepController::class, 'sleep_form'])->name('sleep.form');
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])
