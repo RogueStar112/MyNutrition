@@ -147,3 +147,10 @@
 
     border: 4px solid lime;
 }
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    margin: 0; 
+  }
