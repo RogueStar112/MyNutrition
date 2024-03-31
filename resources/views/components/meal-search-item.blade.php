@@ -95,7 +95,7 @@
 
                 
             <div class="text-white h-full text-center mr-2" aria-label="food-macros">
-
+            
                 <p class="w-full">Per {{($servingSize != $food['serving_size']) ? $servingSize : $food['serving_size']}}{{$food['food_unit_short']}}. (normally {{$food['serving_size'] . $food['food_unit_short']}}) </p>
 
                 {{-- <div class="h-full"></div> --}}
