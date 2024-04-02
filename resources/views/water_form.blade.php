@@ -4,8 +4,14 @@
 
             <div class="relative w-full h-full overflow-hidden">
 
-                <h1 class="font-semibold text-4xl md:text-6xl uppercase dark:text-white text-3xl text-gray-800 leading-tight p-4 absolute top-1/2 z-50 bg-teal-500 -skew-y-6">
-                    {{ __('Log Water Intake') }}
+                <h1 class="font-semibold text-6xl md:text-6xl uppercase dark:text-white text-3xl text-gray-800 leading-tight p-4 absolute top-1/2 z-50 primary-water-form -skew-y-6" style="width: 597px;">
+                    {{-- {{ __('Log Water Intake') }} --}}
+                    Log <select id="drink-type" class="no-select-arrow appearance-none dark:text-white text-5xl text-gray-800 leading-tight p-4 top-1/2 z-50 primary-water-form border-none uppercase px-2 w-[180px]" style="-moz-appearance: none;">
+                           <option selected value="0" text-value="water">Water</option>
+                           <option value="1" text-value="coke">Coke</option>
+                           <option value="2" text-value="milk">Milk</option>
+                           <option value="3" text-value="fruit">Fruit</option>
+                        </select> Intake
                 </h1>
 
 
@@ -14,11 +20,11 @@
             </svg>
 
 
-            <div class="absolute bg-teal-700 w-[128px] h-[128px] top-[12rem] right-[40.41rem] -skew-x-[24deg] z-20">
+            <div class="absolute tertiary-water-form w-[128px] h-[128px] top-[12rem] right-[40.41rem] -skew-x-[24deg] z-20">
                 
             </div>
 
-            <div class="absolute bg-teal-500 w-[384px] /h-[64px] h-[128px] top-[14rem] right-[24.41rem] -skew-x-[24deg] -skew-y-[10deg] z-0">
+            <div class="absolute primary-water-form w-[384px] /h-[64px] h-[128px] top-[14rem] right-[24.41rem] -skew-x-[24deg] -skew-y-[10deg] z-0">
                 
             </div>
 
@@ -37,14 +43,14 @@
         </div>
     </x-slot>
 
-    <div class="shadow-2xl max-w-[1216px] mx-auto relative">
+    <form class="shadow-2xl max-w-[1216px] mx-auto relative">
 
         <i class="collapse md:visible fas fa-clock fa-3x p-4 text-blue-200 scale-[1.7] absolute right-[80px] bottom-16 translate-x-1/2 -translate-y-1/2"></i>
             
 
         <div class="w-full max-w-[1216px] mx-auto bg-[#0465A5] text-center pt-4 text-white text-3xl">
-            <p class="w-fit bg-teal-500 mx-auto p-4 -skew-x-12">Step one: Number of drinks</p>
-            <p class="w-fit bg-teal-600 mx-auto p-4 -skew-x-12 text-lg">Assume each glass is 200ml.</p>
+            <p class="w-fit primary-water-form mx-auto p-4 -skew-x-12">Step one: Number of drinks</p>
+            <p class="w-fit secondary-water-form mx-auto p-4 -skew-x-12 text-lg">Assume each glass is 200ml.</p>
         </div>
 
         <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24" style="background-color: #0465A5;">
@@ -64,20 +70,27 @@
                     <i class="fa-solid fa-circle-plus fa-3x  text-white" id="increase-glass"></i>
 
         </div>
-            
-
+        
                         <p class="text-white text-center bg-[#0465A5] max-w-[1216px] mx-auto">You have drunk <span id='litres-drank'>1</span>L.</p>
+                        <p class="text-white text-center bg-[#0465A5] max-w-[1216px] mx-auto">That's <span id='glasses-drank'>5</span> glasses of <span class='drink-type'>water</span>.</p>
 
         <div class="w-full max-w-[1216px] mx-auto bg-[#0465A5] text-center pt-4 text-white text-3xl">
-            <p class="w-fit bg-teal-500 mx-auto p-4 -skew-x-12">Step two: Time drunk</p>
-            <p class="w-fit bg-teal-600 mx-auto p-4 -skew-x-12 text-lg">When did you drink this amount of water?</p>
+            <p class="w-fit primary-water-form mx-auto p-4 -skew-x-12">Step two: Time drunk</p>
+            <p class="w-fit secondary-water-form mx-auto p-4 -skew-x-12 text-lg">When did you drink this amount of <span class='drink-type'>water</span>?</p>
         </div>
 
 
         <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24" style="background-color: #0465A5;">
 
+                    <input type="hidden" name="water-amount" id="water-amount" value="5"></input>
+                    <input id="water-when" name="water-when" class="mx-auto p-4 rounded-full text-[#0465A5]" type="datetime-local" value="2024-03-31T06:00"/>
 
-                    <input class="mx-auto p-4 rounded-full text-[#0465A5]" type="datetime-local" value="2024-03-31T06:00"/>
+        </div>
+
+
+        <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24 bg-[#0465A5]">
+
+            <button class="bg-green-500 text-white mx-auto p-4">ADD ENTRY</button>
 
         </div>
     </div>
@@ -133,30 +146,78 @@
 {{-- 
         <i class="fas fa-tint fa-3x p-4 text-blue-400 opacity-60 scale-[3] -rotate-[30deg] absolute right-20 bottom-0 translate-x-1/2 -translate-y-1/2"></i>
          --}}
-    </div> --}}
+</form> --}}
 
     <script>
+
+        
+        const currentDate = new Date();
+        let day = currentDate.getDate();
+        let month = currentDate.getMonth() + 1;
+        let year = currentDate.getFullYear();
+
+
+        // make day or month have a leading zero if value is less than 10 e.g. 9 becomes 09.
+        if (day < 10) {
+
+            day = `0${day}`;
+        }
+
+        if (month < 10) {
+
+            month  = `0${month}`;
+
+        }
+
+        let hours = currentDate.getHours();
+        let minutes = currentDate.getMinutes();
+
+        // apply same leading zero logic to hours and minutes
+        if (hours < 10) {
+
+            hours = `0${hours}`;
+        }
+
+        if (minutes < 10) {
+
+            minutes = `0${minutes}`;
+
+        }
+
+        $('#water-when').val(`${year}-${month}-${day}T${hours}:${minutes}`);
+
+        $('#water-when').attr('value', `${year}-${month}-${day}T${hours}:${minutes}`);
 
         let no_of_glasses = 5;
 
         $('#increase-glass, #decrease-glass').on('click', function() {
 
             if(this.id == 'increase-glass') {
-              no_of_glasses += 1;
+                no_of_glasses += 1;
+                } else {
+                no_of_glasses -= 1;
+            }
+
+            if(no_of_glasses > 0) {
+
+
             } else {
-              no_of_glasses -= 1;
+                
+                no_of_glasses = 0;
+
             }
 
 
-                let output_str = '';
-                for(let i = 0; i<no_of_glasses; i++) {
-                    output_str += '<i class="fa-solid fa-glass-water"></i> ';
-                }
+            let output_str = '';
+            for(let i = 0; i<no_of_glasses; i++) {
+                output_str += '<i class="fa-solid fa-glass-water"></i> ';
+            }
 
-                $('#no-of-glasses').html(output_str);
-                $('#litres-drank').html(Number.parseFloat(0.2*no_of_glasses).toFixed(2));
-                $('#no-of-glasses').attr('value', no_of_glasses);
-
+            $('#no-of-glasses').html(output_str);
+            $('#litres-drank').html(Number.parseFloat(0.2*no_of_glasses).toFixed(2));
+            $('#glasses-drank').html(no_of_glasses)
+            $('#no-of-glasses').attr('value', no_of_glasses);
+            $('#water-amount').val(no_of_glasses)
         })
 
         // $('#log-water-btn').on('click', function() {
@@ -170,6 +231,30 @@
 
 
         // });
+
+        $('#drink-type').on('change', function() {
+
+            console.log(this)
+            console.log(this.value);
+
+            if(this.value == 0) {
+
+                $(".primary-water-form").css("background-color", "#14b8a6");
+                $(".secondary-water-form").css("background-color", "#0d9488");
+                $(".tertiary-water-form").css("background-color", "#0f766e");
+                
+            }
+
+            if(this.value == 1) {
+
+                $(".primary-water-form").css("background-color", "rgb(154, 81, 26)");
+                $(".secondary-water-form").css("background-color", "rgb(115, 60, 19)");
+                $(".tertiary-water-form").css("background-color", "rgb(95, 60, 19)");
+
+            }
+
+            $('.drink-type').text($(this).attr('text-value'))
+        });
 
     </script>
 
