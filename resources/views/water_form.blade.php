@@ -296,8 +296,8 @@
             // IF MILK
             if(this.value == 2) {
 
-                $(".primary-water-form").css("background-color", "rgb(185, 185, 185)");
-                $(".primary-water-form").css("color", "rgb(255, 255, 255)");
+                $(".primary-water-form").css("background-color", "rgb(254,250,235)");
+                $(".primary-water-form").css("color", "rgb(0, 0, 0)");
                 $(".secondary-water-form").css("background-color", "rgb(135, 135, 135)");
                 $(".tertiary-water-form").css("background-color", "rgb(125, 125, 125)");
 
