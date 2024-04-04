@@ -20,7 +20,7 @@
             </svg>
 
 
-            <div class="absolute tertiary-water-form w-[128px] h-[128px] top-[12rem] right-[40.41rem] -skew-x-[24deg] z-20">
+            <div class="absolute tertiary-water-form w-[128px] h-[128px] right-[53.5%] top-[83%] -skew-x-[24deg] z-20">
                 
             </div>
 
@@ -49,8 +49,8 @@
             
 
         <div class="w-full max-w-[1216px] mx-auto bg-[#0465A5] text-center pt-4 text-white text-3xl">
-            <p class="w-fit primary-water-form mx-auto p-4 -skew-x-12">Step one: Number of drinks</p>
-            <p class="w-fit secondary-water-form mx-auto p-4 -skew-x-12 text-lg">Assume each glass is 200ml.</p>
+            <p class="w-fit primary-water-form mx-auto p-4 -skew-x-12">Step one: Number of things</p>
+            <p id="assume-text" class="w-fit secondary-water-form mx-auto p-4 -skew-x-12 text-lg">Assume each glass is 200ml.</p>
         </div>
 
         <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24" style="background-color: #0465A5;">
@@ -71,18 +71,19 @@
 
         </div>
         
-                        <p class="text-white text-center bg-[#0465A5] max-w-[1216px] mx-auto">You have drunk <span id='litres-drank'>1</span>L.</p>
-                        <p class="text-white text-center bg-[#0465A5] max-w-[1216px] mx-auto">That's <span id='glasses-drank'>5</span> glasses of <span class='drink-type'>water</span>.</p>
+                        <p id="total-drank" class="text-white text-center bg-[#0465A5] max-w-[1216px] mx-auto">You have drunk <span id='litres-drank'>1</span>L.</p>
+                        <p class="text-white text-center bg-[#0465A5] max-w-[1216px] mx-auto">That's <span id='glasses-drank'>5</span> <span id='glasses-type'>glasses</span> of <span class='drink-type'>water</span>.</p>
 
         <div class="w-full max-w-[1216px] mx-auto bg-[#0465A5] text-center pt-4 text-white text-3xl">
             <p class="w-fit primary-water-form mx-auto p-4 -skew-x-12">Step two: Time drunk</p>
-            <p class="w-fit secondary-water-form mx-auto p-4 -skew-x-12 text-lg">When did you drink this amount of <span class='drink-type'>water</span>?</p>
+            <p class="w-fit secondary-water-form mx-auto p-4 -skew-x-12 text-lg">When did you take this amount of <span class='drink-type'>water</span>?</p>
         </div>
 
 
         <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24" style="background-color: #0465A5;">
 
                     <input type="hidden" name="water-amount" id="water-amount" value="5"></input>
+                    <input type="hidden" name="fluid-type" id="fluid-type" value=""></input>
                     <input id="water-when" name="water-when" class="mx-auto p-4 rounded-full text-[#0465A5]" type="datetime-local" value="2024-03-31T06:00"/>
 
         </div>
@@ -90,7 +91,7 @@
 
         <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24 bg-[#0465A5]">
 
-            <button class="bg-green-500 text-white mx-auto p-4">ADD ENTRY</button>
+            <button id="add-fluid-entry" class="bg-green-500 text-white mx-auto p-4">ADD ENTRY</button>
 
         </div>
     </div>
@@ -150,7 +151,14 @@
 
     <script>
 
-        
+        let nounToUse = 'water'
+
+        let drinkVal = $('#drink-type').val();
+        let verbToUse = drinkVal == 3 ? 'pieces' : 'glasses'
+
+        console.log('VTU', verbToUse)
+
+
         const currentDate = new Date();
         let day = currentDate.getDate();
         let month = currentDate.getMonth() + 1;
@@ -210,8 +218,14 @@
 
             let output_str = '';
             for(let i = 0; i<no_of_glasses; i++) {
-                output_str += '<i class="fa-solid fa-glass-water"></i> ';
+                if($('#drink-type').find(":selected").val() == 3) {
+                    output_str += '<i class="fas fa-apple-alt"></i> ';
+                } else {
+                    output_str += '<i class="fa-solid fa-glass-water"></i> ';
+                }
+
             }
+
 
             $('#no-of-glasses').html(output_str);
             $('#litres-drank').html(Number.parseFloat(0.2*no_of_glasses).toFixed(2));
@@ -234,27 +248,103 @@
 
         $('#drink-type').on('change', function() {
 
-            console.log(this)
-            console.log(this.value);
-
+            // console.log(this)
+            // console.log(this.value);
+            
+            //IF WATER
             if(this.value == 0) {
 
                 $(".primary-water-form").css("background-color", "#14b8a6");
+                  $(".primary-water-form").css("color", "rgb(255, 255, 255)");
+
                 $(".secondary-water-form").css("background-color", "#0d9488");
                 $(".tertiary-water-form").css("background-color", "#0f766e");
-                
-            }
 
+                $("#no-of-glasses>*").addClass('fa-solid fa-glass-water');
+                $("#no-of-glasses>*").removeClass('fas fa-apple-alt');
+                
+                $('#glasses-type').text('glasses')
+
+                $('#assume-text').text('Assume each glass is 200ml.')
+
+                $('#total-drank').removeClass('hidden');
+
+                $('#fluid-type').val(this.value);
+            }
+            
+            // IF COKE
             if(this.value == 1) {
 
                 $(".primary-water-form").css("background-color", "rgb(154, 81, 26)");
+                $(".primary-water-form").css("color", "rgb(255, 255, 255)");
                 $(".secondary-water-form").css("background-color", "rgb(115, 60, 19)");
                 $(".tertiary-water-form").css("background-color", "rgb(95, 60, 19)");
 
+               $("#no-of-glasses>*").addClass('fa-solid fa-glass-water');
+               $("#no-of-glasses>*").removeClass('fas fa-apple-alt');
+
+                $('#glasses-type').text('glasses')
+
+                $('#assume-text').text('Assume each glass is 200ml.')
+
+                $('#total-drank').removeClass('hidden');
+
+                $('#fluid-type').val(this.value);
             }
 
-            $('.drink-type').text($(this).attr('text-value'))
+
+            // IF MILK
+            if(this.value == 2) {
+
+                $(".primary-water-form").css("background-color", "rgb(185, 185, 185)");
+                $(".primary-water-form").css("color", "rgb(255, 255, 255)");
+                $(".secondary-water-form").css("background-color", "rgb(135, 135, 135)");
+                $(".tertiary-water-form").css("background-color", "rgb(125, 125, 125)");
+
+                $("#no-of-glasses>*").addClass('fa-solid fa-glass-water');
+                $("#no-of-glasses>*").removeClass('fas fa-apple-alt');
+                
+                $('#glasses-type').text('glasses')
+
+                $('#assume-text').text('Assume each glass is 200ml.')
+
+                $('#total-drank').removeClass('hidden');
+
+                $('#fluid-type').val(this.value);
+            }
+
+            // IF FRUIT
+            if(this.value == 3) {
+
+            
+                $(".primary-water-form").css("background-color", "rgb(0, 80, 0)");
+                $(".primary-water-form").css("color", "rgb(0, 230, 0)");
+                $("#no-of-glasses>*").removeClass('fa-solid fa-glass-water');
+                $("#no-of-glasses>*").addClass('fas fa-apple-alt');
+
+
+
+                $(".secondary-water-form").css("background-color", "rgb(0, 155, 0)");
+                $(".tertiary-water-form").css("background-color", "rgb(0, 135, 0)");
+                
+                $('#glasses-type').text('pieces');
+
+                $('#assume-text').text('Assume each fruit is part of your 5 a day.')
+
+                $('#total-drank').addClass('hidden');
+
+                $('#fluid-type').val(this.value);
+
+            }
+
+            $('.drink-type').text($(this).find(":selected").attr('text-value'))
+
+
+
         });
+
+
+        
 
     </script>
 

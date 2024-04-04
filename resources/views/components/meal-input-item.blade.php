@@ -129,7 +129,7 @@
                             },
                             success: function(response) {
                                 $('#FOOD-SEARCH-CONTAINER').empty().append(response);
-                                console.log('success');
+                                // console.log('success');
                             },
                             error: function(xhr) {
                                 console.log(xhr.responseText);

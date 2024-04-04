@@ -86,7 +86,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/water/create', [WaterController::class, 'water_form'])->name('water.form');
 
+    Route::post('/water/add_to_form', [WaterController::class, 'add_form'])->name('water.add_form');
+
     Route::get('/sleep/create', [SleepController::class, 'sleep_form'])->name('sleep.form');
+
+    
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])
