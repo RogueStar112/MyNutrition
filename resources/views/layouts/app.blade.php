@@ -9,6 +9,7 @@
         <title>{{ config('app.name', 'MyNutrition') }}</title>
         
         <!-- Fonts -->
+        <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -27,7 +28,7 @@
 
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-              
+
     </head>
     <body class="font-sans antialiased bg-slate-700">
         <div class="min-h-screen dark:bg-slate-700">
@@ -52,6 +53,9 @@
         <script>
             const myChart = new Chart(ctx, {...});
         </script>
+
+        <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 
     </body>
 </html>

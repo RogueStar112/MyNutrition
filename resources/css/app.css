@@ -72,12 +72,12 @@
     color: #9A3412;
 }
 
-.days {
+/* .days {
     display: flex;
     flex-wrap: wrap;
     flex-grow: 1;
     margin-right: 46px;
-}
+} */
 
 .day-label {
     position: relative;
@@ -181,4 +181,49 @@ input[type=number]::-webkit-inner-spin-button {
 
      /* default: bg-teal-700 */
     background-color: #0f766e;
+}
+
+/* Base radio button styles */
+.radio-button {
+    @apply appearance-none w-4 h-4 border rounded-full border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200; /* Existing styles */
+    
+  }
+  
+  /* Focused radio button style */
+  .radio-button:focus {
+    @apply ring-2 ring-green-500; 
+  }
+
+  input[type=radio] {
+    display:none;
+ }
+ 
+ input[type=radio] + label {
+    display: inline-block;
+    border: 1px solid #eee;
+    padding: 10px;
+    margin-right: 10px;
+    color: #eee;
+    cursor: pointer;
+ }
+
+ input[type=radio]:checked + label {
+    background: #eee;
+    color: #000;
+ }
+
+/* #TASKS .next-day-active {
+ right: 
+} */
+
+/* #TASKS {
+    transition-duration: 0.5s;
+} */
+
+label {
+    transition-duration: 0.3s;
+}
+
+.days-of-week {
+ grid-auto-flow: column;
 }
