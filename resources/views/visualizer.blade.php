@@ -80,36 +80,40 @@
 
   
 
-            <div class="m-4 flex flex-col md:flex-row justify-between">
-                <h2 class="font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight">
+            <div class="my-4 flex flex-col md:flex-row justify-between place-items-center">
+                <h2 class="text-center mb-4 md:mb-0 md:text-left font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight">
                     {{ __('Daily View') }}
                 </h2>
+                
+                <div id="daterange-controls" class="flex justify-between p-4 bg-slate-800 rounded-lg">
+                    <div id="date-range-picker" date-rangepicker class="flex justify-end items-center">
+                        <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none [&>div]:flex-col">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                            </svg>
+                        </div>
+                        <input id="datepicker-range-start" name="dailypicker-start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+                        </div>
+                        <span class="mx-4 text-gray-500">to</span>
+                        <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                            </svg>
+                        </div>
+                        <input id="datepicker-range-end" name="dailypicker-end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+                    </div>
+                    </div>
 
-                <div id="date-range-picker" date-rangepicker class="flex justify-end items-center">
-                    <div class="relative">
-                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none [&>div]:flex-col">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                        </svg>
-                    </div>
-                    <input id="datepicker-range-start" name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
-                    </div>
-                    <span class="mx-4 text-gray-500">to</span>
-                    <div class="relative">
-                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                        </svg>
-                    </div>
-                    <input id="datepicker-range-end" name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
-                </div>
+                    <button type="button" id="update-dailyview-btn" class="btn bg-green-500 p-2 rounded-lg ml-2 text-white hover:bg-green-600">Update</button>
                 </div>
             </div>
             
             <div></div>
 
 
-                <div id="TASK-VISUALIZER" class="/overflow-x-scroll overflow-hidden max-w-7xl mx-auto /sm:px-6 /lg:px-8 even:bg-slate-800 flex [&>*]:grow h-[50vh] max-h-[300px] border-4 relative [&>button]:opacity-0 [&>button]:duration-200 [&>button]:hover:opacity-50 rounded-lg">
+                <div id="TASK-VISUALIZER" class="overflow-x-scroll md:overflow-hidden max-w-7xl mx-auto /sm:px-6 /lg:px-8 even:bg-slate-800 flex [&>*]:grow h-[50vh] max-h-[400px] border-4 relative [&>button]:opacity-0 [&>button]:duration-200 [&>button]:hover:opacity-50 rounded-lg">
                     
                     <button id="PREV-DAY" class="absolute top-1/4 left-0 text-9xl text-white opacity-50 z-50 cursor-pointer"> < </button>
 
@@ -127,7 +131,7 @@
                         <div id="hr-{{$i}}" class="even:bg-slate-800 odd:shadow-2xl odd:bg-transparent relative">
 
                             @if($i == 0)
-                            <p class="absolute top-0 left-1 text-white opacity-60 font-extrabold">TIME</p>
+                            <p class="absolute top-0 left-1 text-white opacity-60 font-extrabold pt-4 ">TIME</p>
                             @endif
 
                             @if($i < 10)
@@ -229,7 +233,8 @@
         
         const taskData = [
             [
-                { task: "Sleep", description: "...", time_start: 0, time_end: 7.5, bg_color: "2196f3" },
+                { task: "Sleep", description: [{type: "duration", value: 7.5, unit: "hrs"},
+                {type: "estimated_calories_burnt", value: 550, unit: "kcal", description: "based on your (BMR / 24) * time slept."}], time_start: 0, time_end: 7.5, bg_color: "2196f3" },
                 { task: "Breakfast", description: "...", time_start: 8, time_end: 11.5, bg_color: "FF0000" },
                 { task: "Walk", description: "...", time_start: 12, time_end: 13.5, bg_color: "4caf50" },
                 { task: "Lunch", description: "...", time_start: 13.5, time_end: 18, bg_color: "FF0000" },
@@ -300,6 +305,7 @@
                 taskTable.empty(); // Clear the table content
 
                 const tableWidth = taskTable.width();
+                const tableHeight = taskTable.height();
 
                 taskData[dayIndex].forEach((task, taskIndex) => {
                     const row = $('<tr>');
@@ -315,7 +321,7 @@
                                 background-color: #${task.bg_color}; 
                                 left: ${leftPercent}%; 
                                 width: ${widthPercent}%; 
-                                top: ${(taskIndex + 1) * 36}px;
+                                top: ${(taskIndex + 1) * (tableHeight / 40)}%;
                                 transition: opacity 0.3s ease; /* Add transition property */
                             "
                         >
