@@ -65,9 +65,10 @@
                        <img class='mx-auto max-h-[256px]' src="{{  url(''.$food['img_url']) }}" />
                 </div>
                 
-                <div class="flex flex-row-reverse justify-between mx-6">
-                    <p class="text-gray-500 text-[16px]">Per {{$food['serving_size']}}{{$food['serving_unit']}}</p>
-                    
+                <div class="flex flex-row-reverse justify-between mx-6 text-gray-500">
+
+                    <td class="px-6 py-3 hidden md:table-cell text-gray-500">Per {{$serving_size . $food['serving_unit']}}</td>
+                  
                     <div class="flex flex-row-reverse">
                         <p class="mx-3 text-gray-500">{{$user_name}}</p>
                         <img src="{{url('/img/blankpfp.png')}}" width="24" height="24">

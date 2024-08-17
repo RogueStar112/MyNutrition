@@ -15,6 +15,7 @@ class MealFoodItem extends Component
     public $quantity;
     public $showNutrients;
     public $showMoreButton;
+    public $imgUrl;
     
     public function __construct($foodIndex = '', $foods = '', $servingSize = 100, $servingUnit = '', $quantity = 1, $showNutrients = false, $showMoreButton = false, $imgUrl = '')
     {

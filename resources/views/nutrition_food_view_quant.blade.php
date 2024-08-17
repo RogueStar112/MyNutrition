@@ -23,14 +23,15 @@
                     </div>
                     
                     <div class="col-start-2 col-end-3 row-start-2 row-end-3 flex justify-between text-gray-500">
+                        @isset($quantity)
                         
-                        @isset($serving_size)
-                            <td class="px-6 py-3 hidden md:table-cell">Per {{$serving_size . $food['serving_unit']}}</td>
+                        <td class="px-6 py-3 hidden md:table-cell">Per {{$quantity . $food['serving_unit']}}</td>
+
                         @else
-                            <td class="px-6 py-3 hidden md:table-cell">Per {{$food['serving_size'] . $food['serving_unit']}}</td>
+
+                        <td class="px-6 py-3 hidden md:table-cell">Per {{$food['serving_size'] . $food['serving_unit']}}</td>
+
                         @endisset
-
-
                             
                             {{-- <div class="flex flex-row-reverse">
                                 <p class="mx-3">{{$user_name}}</p>

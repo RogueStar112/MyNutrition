@@ -19,6 +19,8 @@ use App\Models\Macronutrients;
 use App\Models\Meal;
 use App\Models\MealItems;
 
+use Illuminate\Support\Facades\DB;
+
 class MealController extends Controller
 {
     public function meal_form()
@@ -260,7 +262,7 @@ class MealController extends Controller
         $food_search = Food::where('name', 'LIKE', "%{$foods}%")
                         //    ->where('user_id', $user_id)
                            ->orderBy('id', 'desc')
-                           ->groupBy('name')
+                           ->groupBy('name', 'source_id')
                            ->get();
 
         $food_array = [];
@@ -377,6 +379,9 @@ class MealController extends Controller
             $food_id = $food_search->id;
 
             $food_unit_id = $food_unit->id; 
+
+            // $food_search = Food::find((int)$food_pages_x);
+            $food_imgurl = $food_search->img_url;
             
             // if ($meal_dategnoreServingSize == true) {
             //     $servingSize = $food_array[$meal_datendex]['serving_size'] = $macronutrients_search->serving_size;
@@ -393,11 +398,11 @@ class MealController extends Controller
             $food_array[$meal_datendex]['fat'] = $macronutrients_search->fat;
             $food_array[$meal_datendex]['carbohydrates'] = $macronutrients_search->carbohydrates;
             $food_array[$meal_datendex]['protein'] = $macronutrients_search->protein;
-
+            $food_array[$meal_datendex]['img_url'] = $food_imgurl;
 
             // $food_array_html[$meal_datendex] = new MealFoodItem($query_no, $food_array, $servingSize, $quantity);
             
-            $food_array_component = new MealFoodItem($meal_datendex_no, $food_array, $servingSize, $food_unit->short_name, $quantity, false, false);
+            $food_array_component = new MealFoodItem($meal_datendex_no, $food_array, $servingSize, $food_unit->short_name, $quantity, false, false, $food_imgurl);
             
             $food_array_html[$meal_datendex]['index'] = (int)$meal_datendex_no;
             $food_array_html[$meal_datendex]['query'] = (int)$query_no;
@@ -560,6 +565,8 @@ class MealController extends Controller
                             ->whereBetween('time_planned', [$meal_date . ' 00:00:00', $meal_date . ' 23:59:59'])
                             ->orderByRaw('time_planned ASC')
                             ->get();
+
+
             
             foreach($meal_select as $meal_date=>$meal) {
                 
@@ -601,6 +608,15 @@ class MealController extends Controller
                     
                     // $meal_dates_ymd['name'] = $food_index;                         
                     
+                    $food_img = DB::table('food')
+                                    ->select('img_url')
+                                    ->where("id", "=", $meal_item->food_id)
+                                    ->get();
+
+                    // $meal_portion = (float)$meal_item->serving_size*$meal_item->quantity;
+
+                    // $meal_dates_ymd[0][$meal_date][$meal_time]['serving_size'] 
+                     
 
                     foreach($foods as $food) {
                         // $meal_dates_ymd[$food_index]['calories'] = $food->calories;
@@ -611,13 +627,22 @@ class MealController extends Controller
 
                         // $meal_dates_ymd[$food_index]['time_planned'] = $meal->time_planned;
 
+                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['img_url'] = $food_img[0];
 
+                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['food_id'] = $meal_item->food_id; 
 
                         $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['food_name'] = $meal_item->name; 
 
                         $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['calories'] = (int)(($food->calories /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity;
 
+                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['serving_size'] = $meal_item->serving_size;
+
+                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['quantity'] = $meal_item->quantity;
+
+                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['serving_x_quantity'] = round($meal_item->serving_size*$meal_item->quantity, 0);
+
                         
+
                         $meal_dates_ymd[0][$meal_date]['calories'] += round((($food->calories /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 0);
 
                         $meal_dates_ymd[0][$meal_date][$meal_time]['calories'] += round((($food->calories /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 0);
@@ -646,7 +671,7 @@ class MealController extends Controller
                         
                         $meal_dates_ymd[0][$meal_date][$meal_time]['protein'] += round((($food->protein /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
 
-
+                        
                     }  
 
                     // Rounding the numbers to prevent trailing decimals.
@@ -666,6 +691,7 @@ class MealController extends Controller
                     $meal_dates_ymd[0][$meal_date][$meal_time]['carbs'] = round($meal_dates_ymd[0][$meal_date][$meal_time]['carbs'], 1);
                     $meal_dates_ymd[0][$meal_date][$meal_time]['protein'] = round($meal_dates_ymd[0][$meal_date][$meal_time]['protein'], 1);
                     
+                   
                 }       
 
 

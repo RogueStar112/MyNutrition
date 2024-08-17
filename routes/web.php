@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoalsController;
 use App\Http\Controllers\WaterController;
 use App\Http\Controllers\SleepController;
+use App\Http\Controllers\VisualizerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,7 +50,11 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/nutrition/food', [FoodController::class, 'food_delete'])->name('food.delete');
 
     Route::get('/nutrition/food/view', [FoodController::class, 'food_view'])->name('food.view');
-    Route::get('/nutrition/food/view/{user_id}/{name}', [FoodController::class, 'food_view_item'])->name('food.view_item');
+    
+    Route::get('/nutrition/food/view/{user_id}/{food_id}', [FoodController::class, 'food_view_item'])->name('food.view_item');
+
+    // Route::get('/nutrition/food/view/{user_id}/{name}/{quantity}', [FoodController::class, 'food_view_item_quant'])->name('food.view_item_quant');
+
     Route::get('/nutrition/food/edit/{id}', [FoodController::class, 'food_form_edit'])->name('food.form_edit');
     Route::put('/nutrition/food/edit/{id}', [FoodController::class, 'food_edit'])->name('food.edit');
 
@@ -90,7 +95,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/sleep/create', [SleepController::class, 'sleep_form'])->name('sleep.form');
 
-    
+    Route::get('/nutrition/visualizer/load/{start_date}/{end_date}', [VisualizerController::class, 'visualizer_load'])->name('visualizer.load_dates');
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])

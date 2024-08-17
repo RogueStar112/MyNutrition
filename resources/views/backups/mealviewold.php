@@ -1,48 +1,4 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold italic text-center uppercase dark:text-white text-3xl text-gray-800 leading-tight">
-            {{ __('Nutrition - View Meals') }}
-        </h2>
-    </x-slot>
-
-    {{-- <div class="flex py-4 justify-center">
-        
-
-    </div> --}}
-
-    <div class="flex py-4 justify-center items-center">
-        <div class="flex flex-col max-w-sm md:flex-row md:max-w-7xl justify-center">
-            <div class="flex flex-col mx-auto [&>div]:mb-6">
-                {{-- <div class="text-center text-white">Start Date</div> --}}
-                {{-- {!! $calendar !!} --}}
-                {{-- <div class="text-center text-white">End Date</div>
-                {!! $calendar !!} --}}
-            </div>
-
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                @isset($meals)
-
-                @php
-                $dates_to_search = [];
-                @endphp
-
-                    @foreach(array_keys($meals[0]) as $meal_date)
-
-                        @php
-                            array_push($dates_to_search, $meal_date);
-                        @endphp
-
-                    @endforeach
-
-
-                            
-                    {{-- @foreach($dates_to_search as $date) --}}
-
-                        {{-- {{ $date }} --}}
-
-                   
-                        @foreach($meals[0] as $index=>$meal)
-                        <div class="max-w-7xl bg-gray-800 p-6 text-white rounded-lg mb-4">
+<div class="max-w-7xl bg-gray-800 p-6 text-white rounded-lg mb-4">
                             <table class="border-separate border-spacing-y-1.5 bg-gray-900 p-6 m-2 w-full md:w-[600px] place-items-center text-center">
 
                                 @php
@@ -62,7 +18,7 @@
                                 @endphp
 
                                 <div class="w-full text-center">
-                                <h1 class="text-md font-black text-orange-500">{{ "$dayOfWeek " .  date('jS F Y', strtotime($index)) }}</h1>
+                                <h2 class="text-md font-black text-orange-500">{{ "$dayOfWeek " .  date('jS F Y', strtotime($index)) }}</h2>
                                 </div>
 
                                 <thead>
@@ -95,21 +51,12 @@
                                     @if(gettype($food_item) == 'integer') 
                                     <tr class="text-gray-500">
                                         @php
-                                            $meal_foodid = $meal[$meal_time][$food_item]['food_id'];
-                                            // $meal_foodname = str_replace(" ", "_", $meal[$meal_time][$food_item]['food_name']);
-
-                                            // $meal_foodname = str_replace("%2F", "", "$meal_foodname");
-
+                                            
+                                            $meal_foodname = str_replace(" ", "_", $meal[$meal_time][$food_item]['food_name']);
                                             $meal_foodname_display = $meal[$meal_time][$food_item]['food_name'];
 
-                                            $meal_servingsize =  $meal[$meal_time][$food_item]['serving_size'];
-
-                                            $meal_serving_x_quantity =  $meal[$meal_time][$food_item]['serving_x_quantity'];
-
-
-
                                         @endphp
-                                        <td><a class="text-orange-500" href="{{ route('food.view_item', ['user_id'=>$user_id, 'food_id'=>$meal_foodid, 'serving_size'=>$meal_servingsize])}}">{{$meal_foodname_display}}</a></td>
+                                        <td><a class="text-orange-500" href="{{ route('food.view_item', ['user_id'=>$user_id, 'name'=>$meal_foodname])}}">{{$meal_foodname_display}}</a></td>
                                         <td>{{$meal[$meal_time][$food_item]['calories']}}kcal</td>
                                         <td class="hidden md:table-cell">{{$meal[$meal_time][$food_item]['fat']}}g</td>
                                         <td class="hidden md:table-cell">{{$meal[$meal_time][$food_item]['carbs']}}g</td>
@@ -208,19 +155,3 @@
                         </tbody>
                          </table>
                         </div>
-                        @endforeach
-                   
-                    {{-- @endforeach  --}}
-
-
-                @endisset
-            </div>
-        </div>
-        
-    </div>
-
-    <script>
-
-        
-    </script>
-</x-app-layout>

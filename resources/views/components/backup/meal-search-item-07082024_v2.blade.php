@@ -69,49 +69,15 @@
         }
 
 
-        // Breakdown:
-        // (FoodIntake / FoodAllowance) * 100
-
-        $caloriePerc = ((float)$food['calories'] / 1250) * 100;
-        $fatPerc = ((float)$food['fat'] / 90) * 100;
-        $carbsPerc = ((float)$food['carbohydrates'] / 120) * 100;
-        $proteinPerc = ((float)$food['protein'] / 96) * 100;
-
-        $calorieExceedGlow = false;
-        $fatExceedGlow = false;
-        $carbsExceedGlow = false;
-        $proteinExceedGlow = false;
-
-        if($caloriePerc > 100) {
-            $caloriePerc = 100;       
-            $calorieExceedGlow = true;
-        }
-
-        if($fatPerc > 100) {
-            $fatPerc = 100;
-            $fatExceedGlow = true;
-        }
-
-        if($carbsPerc > 100) {
-            $carbsPerc = 100;
-            $carbsExceedGlow = true;
-        }
-
-        if($proteinPerc > 100) {
-            $proteinPerc = 100;
-            $proteinExceedGlow = true;
-        } 
-        
-
         @endphp
 
         <div class="grid grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6" id="food-item-{{$food['food_id']}}">
 
-            <div class="bg-transparent self-center">
+            <div class="bg-transparent">
                 <img class="/p-6 object-cover rounded-full /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="" />
             </div>
 
-            <div class="desc-box m-6 self-center">
+            <div class="desc-box m-6">
 
                 <div class="h-full">
                     <div class="h-1/2">
@@ -128,69 +94,31 @@
             </div>
 
                 
-            <div class="text-white h-full text-center mr-2 self-center" aria-label="food-macros">
+            <div class="text-white h-full text-center mr-2" aria-label="food-macros">
             
                 <p class="w-full">Per {{($servingSize != $food['serving_size']) ? $servingSize : $food['serving_size']}}{{$food['food_unit_short']}}. (normally {{$food['serving_size'] . $food['food_unit_short']}}) </p>
 
                 {{-- <div class="h-full"></div> --}}
-
-                {{-- Food Nutrients. --}}
-                
-                <div class="h-full flex p-6 gap-3 [&>*]:text-clip [&>*]:flex-1 [&>*]:text-lg [&>*]:text-center [&>*]:flex [&>*]:flex-col [&>*>p]:text-clip">
+                <div class="p-6 h-full flex [&>*]:flex-1 [&>*]:text-lg">
                 
 
-                    <section>
-                        <p>{{ ($food['calories'] > 1000) ? round($food['calories']/1000) . 'k ' : $food['calories'] . 'kcal' }}</p>
-                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-blue-900">
-                            <div id="food_progressbar_calories_{{$index}}" class="bg-blue-600 h-2.5 rounded-full {{$calorieExceedGlow ? "drop-shadow-glow animate-pulse" : ""}}" style="width: {{ $caloriePerc }}%"></div>
-                        </div>
-                        <p class="mt-1 text-blue-600">Calories</p>
-                    {{-- <br>
-                        {{$food['calories']}}cal --}}
-                    </section>
 
-                    <section>
-                        <p>{{($food['fat'] > 1000) ? round($food['fat']/1000) . 'kg ' : $food['fat'] . 'g'}}</p>
-                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-orange-900">
-                            <div id="food_progressbar_fat_{{$index}}" class="bg-orange-600 h-2.5 rounded-full {{$fatExceedGlow ? "drop-shadow-glow animate-pulse" : ""}}" style="width: {{ $fatPerc }}%"></div>
-                        </div>
-                        <p class="mt-1 text-orange-600">Fat</p>
-                    {{-- <br>
-                        {{$food['fat'] ? $food['fat'] : "0" }}g --}}
-                    </section>
+                    <p>Calories<br>
+                        {{$food['calories']}}cal
+                    </p>
 
-
-                    <section>
-                        <p>{{($food['carbohydrates'] > 1000) ? round($food['carbohydrates']/1000) . 'kg ' : $food['carbohydrates'] . 'g'}}
-                        </p>
-
-                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-yellow-900">
-                            <div id="food_progressbar_carbs_{{$index}}" class="bg-yellow-500 h-2.5 rounded-full {{$carbsExceedGlow ? "drop-shadow-glow animate-pulse" : ""}}" style="width: {{ $carbsPerc }}%"></div>
-                        </div>
-
-                        <p class="mt-1 text-yellow-500">Carbs</p>
-                    </section>
-{{-- 
-                    <br>
-                        {{$food['carbohydrates'] ? $food['carbohydrates'] : "0" }}g --}}
-
-                    <section>
-                        <p>{{($food['protein'] > 1000) ? round($food['protein']/1000) . 'kg ' : $food['protein'] . 'g'}}
-                        </p>
-
-                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-green-900">
-                            <div id="food_progressbar_protein_{{$index}}" class="bg-green-600 h-2.5 rounded-full {{$proteinExceedGlow ? "drop-shadow-glow animate-pulse w-[110%] max-w-full overflow-hidden" : ""}}" style="width: {{ $proteinPerc }}%"></div>
-                        </div>
-
-                        <p class="mt-1 text-green-600">Protein</p>
-                    </section>
-
-                    {{-- <br>{{$food['protein'] ? $food['protein'] : "0" }}g --}}
+                    <p>Fat<br>
+                        {{$food['fat'] ? $food['fat'] : "0" }}g
+                    </p>
+                    <p>Carbs<br>
+                        {{$food['carbohydrates'] ? $food['carbohydrates'] : "0" }}g
+                    </p>
+                    <p>Protein<br>{{$food['protein'] ? $food['protein'] : "0" }}g
+                    </p>
 
                    
 
                 </div>
-
                 {{-- <div class="h-full"></div> --}}
             </div>
 

@@ -280,7 +280,97 @@ class FoodController extends Controller
 
     }
 
-    public function food_view_item($id, $name) {
+    public function food_view_item(Request $request, $id, $food_id) {
+
+        $user_id = Auth::user()->id;
+        $user_name = Auth::user()->name;
+
+        // $authenticated = false;
+
+        // if ($id == $user_id) {
+        //     $authenticated = true;
+
+        // }
+       
+        // $food_form_options = FoodUnit::all();
+        // $name = str_replace("_", " ", $name);
+
+
+        $food_search = Food::where('user_id', $user_id)
+                            ->where('id', $food_id)
+                            ->orderBy('id', 'desc')
+                            ->get();
+
+                            
+        $food_array = [];
+        
+        foreach($food_search as $index=>$food) {
+            $food_array[] = $food;
+
+            $food_source_search = FoodSource::where('id', $food->source_id)
+                                              ->first();
+            
+
+
+            $macronutrients_search = Macronutrients::where('food_id', $food->id)
+                                                ->first();
+
+            $foodunit_search = MealItems::where('food_id', $food->id)
+                                            ->first();
+
+            $foodunit_search_ii = FoodUnit::where('id', $foodunit_search->food_unit_id)
+                                            ->first();           
+
+            $food_array[$index]['created_by'] = Auth::user()->name;
+            $food_array[$index]['source_name'] = $food_source_search->name;
+
+
+            if ($request->has('serving_size')) {
+                $food_array[$index]['serving_size'] = $macronutrients_search->serving_size;
+                $food_array[$index]['serving_size_specified'] = $request->serving_size;
+                $request_servingsize = $request->serving_size;
+            } else {
+                $food_array[$index]['serving_size'] = $macronutrients_search->serving_size;
+                $request_servingsize = $macronutrients_search->serving_size;
+
+            }
+            
+            // if ($request->has('serving_size')) {
+            //     $food_array[$index]['specified_serving_size'] = $request->serving_size;
+            // }
+
+            if ($request->has('serving_size')) {
+                $food_array[$index]['calories'] = round(($macronutrients_search->calories / $food_array[$index]['serving_size'] * $food_array[$index]['serving_size_specified']), 0);
+                $food_array[$index]['fat'] = round(($macronutrients_search->fat / $food_array[$index]['serving_size'] * $food_array[$index]['serving_size_specified']), 0);
+                $food_array[$index]['carbohydrates'] = round(($macronutrients_search->carbohydrates / $food_array[$index]['serving_size'] * $food_array[$index]['serving_size_specified']), 0);
+                $food_array[$index]['protein'] = round(($macronutrients_search->protein / $food_array[$index]['serving_size'] * $food_array[$index]['serving_size_specified']), 0);
+            } else {
+                $food_array[$index]['calories'] = $macronutrients_search->calories;
+                $food_array[$index]['fat'] = $macronutrients_search->fat;
+                $food_array[$index]['carbohydrates'] = $macronutrients_search->carbohydrates;
+                $food_array[$index]['protein'] = $macronutrients_search->protein;
+            }
+
+            $food_array[$index]['serving_unit'] = $foodunit_search_ii->short_name;  
+            
+            if ($food->img_url != NULL) {
+                $food_array[$index]['img_url'] = $food->img_url;
+            } else {
+                $food_array[$index]['img_url'] = 'N/A';
+            }
+
+        }                   
+
+        // return $food_array;
+        
+        // return $food_array;
+
+        return view('nutrition_food_view_item', ['foods' => $food_array, 'user_id' => $user_id, 'user_name' => $user_name, 'serving_size' => $request_servingsize]);
+
+        
+    }
+
+    public function food_view_item_quant($id, $name, $quantity) {
 
         $user_id = Auth::user()->id;
         $user_name = Auth::user()->name;
@@ -324,10 +414,18 @@ class FoodController extends Controller
             $food_array[$index]['created_by'] = Auth::user()->name;
             $food_array[$index]['source_name'] = $food_source_search->name;
             $food_array[$index]['serving_size'] = $macronutrients_search->serving_size;
-            $food_array[$index]['calories'] = $macronutrients_search->calories;
-            $food_array[$index]['fat'] = $macronutrients_search->fat;
-            $food_array[$index]['carbohydrates'] = $macronutrients_search->carbohydrates;
-            $food_array[$index]['protein'] = $macronutrients_search->protein;
+            $food_array[$index]['specified_serving_size'] = $quantity;
+
+            
+            $food_array[$index]['calories'] = round((($macronutrients_search->calories / $food_array[$index]['serving_size']) * $food_array[$index]['specified_serving_size']), 0);
+
+
+            $food_array[$index]['fat'] = round((($macronutrients_search->fat / $food_array[$index]['serving_size']) * $food_array[$index]['specified_serving_size']), 0);
+            $food_array[$index]['carbohydrates'] = round((($macronutrients_search->carbohydrates / $food_array[$index]['serving_size']) * $food_array[$index]['specified_serving_size']), 0);
+            $food_array[$index]['protein'] = round((($macronutrients_search->protein / $food_array[$index]['serving_size']) * $food_array[$index]['specified_serving_size']), 0);
+
+
+
             $food_array[$index]['serving_unit'] = $foodunit_search_ii->short_name;
              
             if ($food->img_url != NULL) {
@@ -340,7 +438,7 @@ class FoodController extends Controller
         
         // return $food_array;
 
-        return view('nutrition_food_view_item', ['foods' => $food_array, 'user_id' => $user_id, 'user_name' => $user_name]);
+        return view('nutrition_food_view_item', ['foods' => $food_array, 'user_id' => $user_id, 'user_name' => $user_name, 'quantity' => $quantity]);
 
         
     }

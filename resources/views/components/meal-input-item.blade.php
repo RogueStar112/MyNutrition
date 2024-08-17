@@ -22,7 +22,7 @@
             <span class="text-white w-full text-center block">Enter Serving Size</span>
             <div class="flex place-items-center">
                 <i class="fas fa-balance-scale mx-3 text-white"></i>
-                <input type="text" id="meal_servingsize_{{$index}}" name="meal_name_servingsize_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="100g" value="" required/>
+                <input type="text" id="meal_servingsize_{{$index}}" name="meal_name_servingsize_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="100" value="" required/>
             </div>
         </label>
 
@@ -85,12 +85,52 @@
     </div> --}}
     
     <script>
+
+
+        function validateString(string) {
+            let myString = parseStr(string.split(""));
+            
+            if (string[0] ==  '0') {
+                myString = myString.slice(1, string.length);
+                
+                
+            } 
+
+            if (string[string.length-1] == '.') {
+                myString = myString.join().replace(".", "")
+
+                myString = myString.replace(",", "");
+
+            }
+
+            return myString;
+        }
+
+
+
+        $('#meal_servingsize_1, #meal_quantity_1').on('input', function() {
+
+            
+            const allowedChars = /[^0-9.\s]/g;
+            this.value = this.value.replace(allowedChars, '');
+        });
+
         $(document).ready(function() {
                 $('#meal_name_1, #meal_servingsize_1, #meal_quantity_1').on("keypress", function(e) {
                     
                     // if key press = enter key.
                     if(e.which == 13) {
                         e.preventDefault();
+
+                        /* new block of code - refactor later.
+                            const pattern = `/^\d+(\.\d+)?$/`;
+
+                            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                            var query = $('#meal_name_1').val();
+                            var servingSize = pattern.test($('#meal_quantity_1').val()), $('#meal_servingsize_1').val()) ?  $('#meal_servingsize_1').val() : "1";
+                            var quantity = pattern.test($('#meal_quantity_1').val()) ? $('#meal_quantity_1').val() : "1";
+                            var foods_pages = $('#foods_pages').val().split(",");
+                        */
 
                         var csrfToken = $('meta[name="csrf-token"]').attr('content');
                         var query = $('#meal_name_1').val();

@@ -95,21 +95,12 @@
                                     @if(gettype($food_item) == 'integer') 
                                     <tr class="text-gray-500">
                                         @php
-                                            $meal_foodid = $meal[$meal_time][$food_item]['food_id'];
-                                            // $meal_foodname = str_replace(" ", "_", $meal[$meal_time][$food_item]['food_name']);
-
-                                            // $meal_foodname = str_replace("%2F", "", "$meal_foodname");
-
+                                            
+                                            $meal_foodname = str_replace(" ", "_", $meal[$meal_time][$food_item]['food_name']);
                                             $meal_foodname_display = $meal[$meal_time][$food_item]['food_name'];
 
-                                            $meal_servingsize =  $meal[$meal_time][$food_item]['serving_size'];
-
-                                            $meal_serving_x_quantity =  $meal[$meal_time][$food_item]['serving_x_quantity'];
-
-
-
                                         @endphp
-                                        <td><a class="text-orange-500" href="{{ route('food.view_item', ['user_id'=>$user_id, 'food_id'=>$meal_foodid, 'serving_size'=>$meal_servingsize])}}">{{$meal_foodname_display}}</a></td>
+                                        <td><a class="text-orange-500" href="{{ route('food.view_item', ['user_id'=>$user_id, 'name'=>$meal_foodname])}}">{{$meal_foodname_display}}</a></td>
                                         <td>{{$meal[$meal_time][$food_item]['calories']}}kcal</td>
                                         <td class="hidden md:table-cell">{{$meal[$meal_time][$food_item]['fat']}}g</td>
                                         <td class="hidden md:table-cell">{{$meal[$meal_time][$food_item]['carbs']}}g</td>
