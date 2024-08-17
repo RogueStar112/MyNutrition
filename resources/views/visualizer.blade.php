@@ -447,39 +447,42 @@
             }
 
             function loadTaskDates(_dayIndex) {
-                const todaysDate = new Date();
 
-                taskDates.empty(); // Clear the table content
-                const dateKeys = Object.keys(taskData);
+                // commented out until further notice, does not work as intended. 170824
                 
-                dateKeys.forEach((dateKey, dayIndex) => {
-                    const tasksForDay = taskData[dateKey]; 
-                    taskDates.empty()
+                // const todaysDate = new Date();
 
-                    tasksForDay.forEach((task, taskIndex) => {
-                        const row = $('<tr>');
+                // taskDates.empty(); // Clear the table content
+                // const dateKeys = Object.keys(taskData);
+                
+                // dateKeys.forEach((dateKey, dayIndex) => {
+                //     const tasksForDay = taskData[dateKey]; 
+                //     taskDates.empty()
 
-                        const taskElement = task.date_short ? $(`
-                            <div 
-                                id='taskDate-${dayIndex}-${taskIndex}' 
-                                class="new-taskdate w-min rounded-lg text-white flex justify-between  h-[53px] items-center bg-slate-800 h-4 z-0 opacity-0 cursor-pointer" 
-                                style="
-                                    background-color: #${task.bg_color}; 
-                                    transition: opacity 0.3s ease; /* Add transition property */
-                                "
-                            >
-                                <p class=''>${task.date_short ? task.date_short : ""}</p>
-                            </div>
-                        `) : $(`<div></div>`);
+                //     tasksForDay.forEach((task, taskIndex) => {
+                //         const row = $('<tr>');
 
-                        row.append(taskElement);
-                        taskDates.append(row);
+                //         const taskElement = task.date_short ? $(`
+                //             <div 
+                //                 id='taskDate-${dayIndex}-${taskIndex}' 
+                //                 class="new-taskdate w-min rounded-lg text-white flex justify-between  h-[53px] items-center bg-slate-800 h-4 z-0 opacity-0 cursor-pointer" 
+                //                 style="
+                //                     background-color: #${task.bg_color}; 
+                //                     transition: opacity 0.3s ease; /* Add transition property */
+                //                 "
+                //             >
+                //                 <p class=''>${task.date_short ? task.date_short : ""}</p>
+                //             </div>
+                //         `) : $(`<div></div>`);
 
-                        setTimeout(() => {
-                            taskElement.addClass('opacity-100'); 
-                        }, 50); 
-                    });
-                });
+                //         row.append(taskElement);
+                //         taskDates.append(row);
+
+                //         setTimeout(() => {
+                //             taskElement.addClass('opacity-100'); 
+                //         }, 50); 
+                //     });
+                // });
 
             }
                 

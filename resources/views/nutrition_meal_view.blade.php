@@ -96,6 +96,9 @@
                                     <tr class="text-gray-500">
                                         @php
                                             $meal_foodid = $meal[$meal_time][$food_item]['food_id'];
+                                            
+                                            // MEALFOODNAME IS DEPRECATED AS OF 170824
+                                            
                                             // $meal_foodname = str_replace(" ", "_", $meal[$meal_time][$food_item]['food_name']);
 
                                             // $meal_foodname = str_replace("%2F", "", "$meal_foodname");
