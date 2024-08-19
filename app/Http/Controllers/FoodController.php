@@ -545,6 +545,10 @@ class FoodController extends Controller
                 $macronutrients_to_update = Macronutrients::where('food_id', $id)
                                                 ->first();
 
+                $meal_items_to_update = MealItems::where('food_id', $id)
+                                          ->get();
+
+
                 $food_to_update->name = $food_name;
                 $food_to_update->source_id = $food_search->source_id;
                 $food_to_update->img_url = $food_image; 
@@ -560,6 +564,16 @@ class FoodController extends Controller
                 $macronutrients_to_update->protein = $food_protein;
 
                 $macronutrients_to_update->save();
+
+
+                // Update for meal items to have the same food unit item to use. 19/08/2024
+                foreach($meal_items_to_update as $meal_item_to_update) {
+
+                    $meal_item_to_update->food_unit_id = $food_unit_to_get->id;
+                    $meal_item_to_update->save();
+                    $meal_item_to_update->touch();
+
+                }
 
                 return view('nutrition_food_form', ['food_form_options' => $food_form_options]);
 

@@ -352,15 +352,62 @@
                     // taskTable.empty()
                     
                     const tasksForDay = taskData[dateKeys[_dayIndex]]; 
-
+                    
                     console.log("TFD", tasksForDay)
+
+                    // if (_dayIndex > 0) {
+                    //     taskTable.empty();
+                    //         const prevDayTasks = taskData[dateKeys[_dayIndex - 1]];
+
+                    //         if prevDayTasks.keys()[0] = dateKeys[_dayIndex]
+                    //         prevDayTasks.forEach(task => {
+                    //             if (task.time_end > 24) {
+                    //                 // Calculate Segment 2 for the overflow event
+                    //                 const overflowTask = {
+                    //                     ...task, // Copy other task properties
+                    //                     time_start: 0, 
+                    //                     time_end: task.time_end - 24 
+                    //                 };
+                    //                 tasksForDay.push(overflowTask); // Add to current day's tasks
+                    //             }
+                    //         });
+                    //     }
 
                     tasksForDay.forEach((task, taskIndex) => {
                         
                         const row = $('<tr>');
 
-                        const leftPercent = (task.time_start / 25) * 100;
-                        const widthPercent = ((task.time_end - task.time_start) / 25) * 100;
+                        if (task.time_end < task.time_start) {
+                            task.time_end += 25; // Add 24 hours to represent the next day
+                        }
+
+                        let leftPercent = (task.time_start / 25) * 100;
+                        let widthPercent = ((task.time_end - task.time_start) / 25) * 100;    
+
+                        if (leftPercent > 150) {
+                            leftPercent = 50;
+                        }
+
+                        if (widthPercent > 150) {
+                            widthPercent = 50;
+                        }
+
+
+                        // const leftPercent = (task.time_start / 25) * 100;
+
+                        // // if(task.time_start < 12) {
+                        // //     task.time_start += 12
+                        // // }
+
+                        // // if(task.time_end < 12) {
+                        // //     task.time_end += 12
+                        // // }
+
+                        
+                        
+                        // const widthPercent = ((task.time_end - task.time_start) / 25) * 100;
+
+                        
 
                         const taskElement = $(`
                             <div 
