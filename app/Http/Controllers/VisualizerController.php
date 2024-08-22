@@ -85,6 +85,7 @@ class VisualizerController extends Controller
             }
             
             $taskData_setup = array(
+                "id" => $task->id,
                 "date" => Carbon::parse($task->time_planned)->format('d/m/Y h:i'),
                 "date_short" => Carbon::parse($task->time_planned)->format('d/m/Y'),
                 "task" => $task->name,

@@ -209,6 +209,8 @@
 
 
     @endforeach
+
+    {{-- {{ $foods->links() }} --}}
     
 
 

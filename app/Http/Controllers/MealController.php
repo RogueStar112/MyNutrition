@@ -263,7 +263,7 @@ class MealController extends Controller
                         //    ->where('user_id', $user_id)
                            ->orderBy('id', 'desc')
                            ->groupBy('name', 'source_id')
-                           ->get();
+                           ->paginate(15);
 
         $food_array = [];
 
@@ -321,6 +321,7 @@ class MealController extends Controller
 
 
         }
+
 
         return $component->render()->with($component->data());
 

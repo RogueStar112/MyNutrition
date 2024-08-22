@@ -7,11 +7,11 @@
         <p class="text-white text-center">{{$start_date}} to {{$end_date}}</p>
     </x-slot>
 
-    <div class="flex max-w-7xl text-center mx-auto text-white px-6">
+    {{-- <div class="flex max-w-7xl text-center mx-auto text-white px-6">
                     {!! $calendar !!}        
-    </div>
+    </div> --}}
 
-    <div class="py-4 hidden">
+    <div class="py-4">
         <div class="flex  max-w-7xl [&>*]:max-w-3xl mx-auto sm:px-6 lg:px-8 gap-3">
 
 

@@ -219,6 +219,20 @@
         }
 
         // window.onresize = calibrateScreen;
+
+        // 22/08/2024
+        function nutritionReveal(id) {
+            console.log(`Your meal id is: ${id}`)
+
+            /* 
+                later: 
+                make a API link to get the meal_items for this meal id
+
+                sum the calories, fat, carbs, protein
+
+                and other useful stats :)
+            */
+        }
  
         function createNewTask(caption, color, x_start, x_end, y_index) {
 
@@ -349,7 +363,7 @@
 
                 dateKeys.forEach((dateKey, dayIndex) => {
 
-                    // taskTable.empty()
+                    taskTable.empty()
                     
                     const tasksForDay = taskData[dateKeys[_dayIndex]]; 
                     
@@ -420,6 +434,7 @@
                                     top: ${(taskIndex + 1) * (tableHeight / 40)}%;
                                     transition: opacity 0.3s ease; /* Add transition property */
                                 "
+                                onclick="nutritionReveal(${task.id})"
                             >
                                 <p class='select-none'>${task.task}</p>
                             </div>
@@ -497,39 +512,41 @@
 
                 // commented out until further notice, does not work as intended. 170824
                 
-                // const todaysDate = new Date();
+                const todaysDate = new Date();
 
-                // taskDates.empty(); // Clear the table content
-                // const dateKeys = Object.keys(taskData);
+                taskDates.empty(); // Clear the table content
+                const dateKeys = Object.keys(taskData);
                 
-                // dateKeys.forEach((dateKey, dayIndex) => {
-                //     const tasksForDay = taskData[dateKey]; 
-                //     taskDates.empty()
+                dateKeys.forEach((dateKey, dayIndex) => {
+                    const tasksForDay = taskData[dateKeys[_dayIndex]]; 
+                    taskDates.empty()
 
-                //     tasksForDay.forEach((task, taskIndex) => {
-                //         const row = $('<tr>');
+                    // 22 08 2024
 
-                //         const taskElement = task.date_short ? $(`
-                //             <div 
-                //                 id='taskDate-${dayIndex}-${taskIndex}' 
-                //                 class="new-taskdate w-min rounded-lg text-white flex justify-between  h-[53px] items-center bg-slate-800 h-4 z-0 opacity-0 cursor-pointer" 
-                //                 style="
-                //                     background-color: #${task.bg_color}; 
-                //                     transition: opacity 0.3s ease; /* Add transition property */
-                //                 "
-                //             >
-                //                 <p class=''>${task.date_short ? task.date_short : ""}</p>
-                //             </div>
-                //         `) : $(`<div></div>`);
+                    tasksForDay.forEach((task, taskIndex) => {
+                        const row = $('<tr>');
 
-                //         row.append(taskElement);
-                //         taskDates.append(row);
+                        const taskElement = task.date_short ? $(`
+                            <div 
+                                id='taskDate-${dayIndex}-${taskIndex}' 
+                                class="new-taskdate w-min rounded-lg text-white flex justify-between  h-[53px] items-center bg-slate-800 h-4 z-0 opacity-0 cursor-pointer" 
+                                style="
+                                    background-color: #${task.bg_color}; 
+                                    transition: opacity 0.3s ease; /* Add transition property */
+                                "
+                            >
+                                <p class=''>${task.date ? task.date : ""}</p>
+                            </div>
+                        `) : $(`<div></div>`);
 
-                //         setTimeout(() => {
-                //             taskElement.addClass('opacity-100'); 
-                //         }, 50); 
-                //     });
-                // });
+                        row.append(taskElement);
+                        taskDates.append(row);
+
+                        setTimeout(() => {
+                            taskElement.addClass('opacity-100'); 
+                        }, 50); 
+                    });
+                });
 
             }
                 
