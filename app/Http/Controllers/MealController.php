@@ -267,8 +267,15 @@ class MealController extends Controller
 
         $food_array = [];
 
+        $current_page = $food_search->currentPage();
+
         foreach($food_search as $meal_datendex=>$food) {
+
+
+
             $food_array[] = $food;
+
+
 
             $food_source_search = FoodSource::where('id', $food->source_id)
                                                 ->first();
@@ -322,8 +329,11 @@ class MealController extends Controller
 
         }
 
+        
 
-        return $component->render()->with($component->data());
+
+        // return $food_array;
+        return $food_search->links() . $component->render()->with($component->data());
 
 
     }

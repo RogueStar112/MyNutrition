@@ -107,6 +107,7 @@
         }
 
 
+        // Only numeric and . characters allowed.
 
         $('#meal_servingsize_1, #meal_quantity_1').on('input', function() {
 
@@ -156,7 +157,7 @@
 
                         $.ajax({
                             url: `/nutrition/meal/search_food/${query}`,
-                            method: 'POST',
+                            method: 'GET',
                             headers: {
                                 'X-CSRF-TOKEN': csrfToken
                             },
@@ -170,6 +171,7 @@
                             success: function(response) {
                                 $('#FOOD-SEARCH-CONTAINER').empty().append(response);
                                 // console.log('success');
+                                console.log(response);
                             },
                             error: function(xhr) {
                                 console.log(xhr.responseText);
