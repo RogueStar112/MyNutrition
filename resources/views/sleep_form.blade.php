@@ -20,7 +20,7 @@
                 <image width="1280" height="320" href="{{asset('storage/images/sleep/pexels-olly-3807760.jpg')}}" clip-path="url(#clip)" />
             </svg> --}}
             
-            <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1024 320">
+            {{-- <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1024 320">
                 <!-- Define the clipping path -->
                 <clipPath id="clip">
                     <path d="M0,288L30,256C60,224,120,160,180,160C240,160,300,224,360,261.3C420,299,480,309,540,282.7C600,256,660,192,720,154.7C780,117,840,107,900,90.7C960,75,1020,53,1080,80C1140,107,1200,181,1260,192C1320,203,1380,149,1410,122.7L1440,96L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path>
@@ -28,7 +28,7 @@
             
                 <!-- Apply the clipping path to the image and adjust the aspect ratio -->
                 <image x="240" width="1024" height="320" href="{{asset('storage/images/sleep/pexels-olly-3807760.jpg')}}" clip-path="url(#clip)" preserveAspectRatio="xMidYMid slice" />
-            </svg>
+            </svg> --}}
             
 
         </div>

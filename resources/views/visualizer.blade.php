@@ -166,11 +166,11 @@
                     <div class="w-fit bg-slate-900 p-4 rounded-lg text-right text-white sm:px-6 lg:px-8">Calorie Target: 2500kcal</div>
                 </div>
 
-                <div id="WIDGET-MANAGER" class="grid grid-cols-2 grid-rows-3 [&>*]:overflow-hidden [&>*]:bg-slate-900 [&>*]:w-full [&>*]:h-full [&>*]:rounded-lg h-[640px] gap-3">
+                <div id="WIDGET-MANAGER" class="grid grid-cols-2 grid-rows-3  [&>*]:bg-slate-900 [&>*]:w-full [&>*]:h-full [&>*]:rounded-lg h-[640px] gap-3">
                     
                     <!-- Please note these are placeholders for the time being -->
                     
-                    <div id="TOTAL-NUTRIENTS" class="grid grid-cols-2 grid-rows-2  w-full h-full relative">
+                    <div id="TOTAL-NUTRIENTS" class="grid grid-cols-2 grid-rows-2  w-full h-full relative overflow-hidden">
                         <div id="TN-MAIN-SECTION" class="row-span-2 text-center text-2xl text-white my-auto [&>div]:flex p-4">
                             {{-- <span class="font-extrabold">982</span><br>Calories --}}
                             <div class="text-white font-extrabold text-center justify-center">Chicken Meal</div>
@@ -183,12 +183,12 @@
 
                         </div>
 
-                        <div id="TN-TOP-SECTION" class="row-span-2 text-center text-white text-3xl absolute -right-1/2 [&>div]:absolute overflow-hidden rounded-full">
-                            <div class="top-img /right-1/2 h-full object-cover">
+                        <div id="TN-TOP-SECTION" class="row-span-2 text-center text-white text-3xl grid grid-cols-3 grid-rows-3 gap-2 p-2 [&>div>img]:opacity-60 [&>div>img]:w-16 [&>div>img]:h-16 [&>div>img]:rounded-full [&>div>img]:w-[64px]  /absolute /-right-1/2 /[&>div]:absolute /overflow-hidden /rounded-full">
+                            <div class="/top-img /right-1/2 h-full object-cover opacity-60">
                                 <img class="h-full object-cover" src="{{asset('storage/images/food/1724519175.jpg')}}">
                             </div>
 
-                            <div class="bottom-img /left-1/2 h-full object-cover">
+                            <div class="/bottom-img /left-1/2 h-full object-cover">
                                 <img class="h-full object-cover" src="{{asset('storage/images/food/1724519093.png')}}">
                             </div>
                         </div>
@@ -196,11 +196,11 @@
 
                     </div>
 
-                    <div id="ITEM-LIST" class="text-white flex flex-col justify-center items-center">
+                    <div id="ITEM-LIST" class="text-white flex flex-col justify-center items-center overflow-y-scroll">
                         <div class="text-center text-2xl font-extrabold">Meal Breakdown</div>
 
                         {{-- flex flex-col [&>*]:flex [&>*]:justify-between [&>*]:text-white [&>*>img]:h-[48px] [&>*>img]:w-[48px] [&>*>img]:rounded-full [&>*]:items-center [&*]:mx-4 gap-4 --}}
-                        <table class="text-center mx-auto w-full">
+                        <table class="text-center mx-auto w-full overflow-y-scroll">
                             <thead>
                                 <tr class="uppercase text-gray-500 [&>th]:p-1">
                                     <th>Name</th>
@@ -210,7 +210,7 @@
                                     <th class="hidden md:table-cell">Protein</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="MEAL-BREAKDOWN-TBODY">
                                 {{-- <img src="{{asset('storage/images/food/1724519175.jpg')}}"> --}}
                                 <tr class="[&>td]:p-1">
                                     <td>Chicken Burger</td>
@@ -279,7 +279,7 @@
     <script>
 
         // IIFE: Prevents the functions from this page from being called through the console.
-        // Thanks AI for this tip!
+        // Thanks AL for this tip! 27082024
 
         (function() {
         // a few consts first...
@@ -311,7 +311,106 @@
             if (id == undefined) {
                 // do nothing
             } else {
-                console.log(`Your meal id is: ${id}`)
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                $.ajax({
+                        url: `/nutrition/visualizer/meal_widget_load/${id}`,
+                        method: 'GET',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        data: {
+                            // date_start: startDate,
+                            // date_end: endDate
+                            // no_of_foods: no_of_foods,
+                            // balancer: replacement_balancer,
+                            // query: query,
+                            // servingSize: servingSize,
+                            // quantity: quantity
+                            // ignoreServingSize: ignoreServingSize
+                        },
+                        success: function(response) {
+                            console.log(response);
+
+
+                            let responseBreakdown = response.breakdown;
+
+                            let responseTotal = response.total;
+
+                            let responseHTML_Table = ''
+
+                            let responseHTML_TNTopSection = ``
+
+
+                            Object.keys(responseBreakdown).forEach(function(item) {
+
+                                responseHTML_Table += `<tr class='[&>td]:p-1'>
+                                        <td>${item}</td>
+                                        <td>${responseBreakdown[item]['calories']}</td>
+                                        <td>${responseBreakdown[item]['fat']}</td>
+                                        <td>${responseBreakdown[item]['carbs']}</td>
+                                        <td>${responseBreakdown[item]['protein']}</td>
+                                    </tr>
+                                    `
+                                responseHTML_TNTopSection += `<div class="relative h-full object-cover opacity-60 hover:opacity-100 duration-100 [&>p]:hover:opacity-100 [&>p]:opacity-0">
+                                    <p class="absolute left-0 top-0 text-sm h-full">${item}</p>
+                                    <img class="h-full object-cover text-sm" src="${responseBreakdown[item]['img_url']}" alt="${item}">
+
+                                </div>
+                                `
+                            });
+                            
+                            // if((Object.keys(responseBreakdown).length) > 1) {
+                            //     responseHTML_Table += `<tr class='[&>td]:p-1'>
+                            //             <td>TOTAL</td>
+                            //             <td>${responseTotal['calories']}</td>
+                            //             <td>${responseTotal['fat']}</td>
+                            //             <td>${responseTotal['carbs']}</td>
+                            //             <td>${responseTotal['protein']}</td>
+                            //         </tr>
+                            //         `
+                            // } else {
+
+                            // }
+      
+
+                            console.log(responseHTML_Table)
+
+                            let responseHTML_TNMainSection = `
+                            
+                            <div class="text-white font-extrabold text-center justify-center">${response.name}</div>
+                            <div class="text-blue-500 flex justify-between"><span class="font-extrabold">${responseTotal['calories']}</span> kcal</div>
+                            
+                            <div class="text-orange-500 flex justify-between">${responseTotal['fat']}g <span>Fat</span></div>
+                            <div class="text-yellow-500 flex justify-between">${responseTotal['carbs']}g <span>Carbs</span></div>
+                            <div class="text-green-500 flex justify-between">${responseTotal['protein']}g <span>Protein</span></div>
+
+
+                            `;
+
+
+
+                            
+                            $('#MEAL-BREAKDOWN-TBODY').html(responseHTML_Table)
+
+                            $(`#TN-MAIN-SECTION`).html(responseHTML_TNMainSection)
+
+                            $(`#TN-TOP-SECTION`).html(responseHTML_TNTopSection)
+
+                            
+                            //$('#ITEM-LIST')
+                            // taskData = response;
+                            // totalDays = Object.keys(taskData).length; 
+
+                            // console.log('TD UPDATE', Object.keys(taskData));
+
+                            // loadTasksForDay(currentDay);
+                            // loadTasksForDay_list(currentDay);
+                            // loadTaskDates(currentDay);
+
+                            // $('#DAILY-DATE-SELECTED').text(`${Object.keys(taskData)[currentDay]}`)
+                        }
+                })
             }
             /* 
                 later: 
@@ -518,7 +617,7 @@
                         const taskElement = $(`
                             <div 
                                 id='task-${dayIndex}-${taskIndex}' 
-                                class="new-task bg-green-500 rounded-lg text-white absolute flex justify-center items-center h-8 z-0 opacity-0 cursor-pointer" 
+                                class="new-task bg-green-500 rounded-lg text-white absolute flex justify-center items-center h-8 z-0 opacity-0 cursor-pointer hover:bg-green-500 duration-100" 
                                 style="
                                     background-color: #${task.bg_color}; 
                                     left: ${leftPercent}%; 
@@ -594,6 +693,9 @@
                         `);
 
                         row.append(taskElement);
+                        taskElement.on('click', function() {
+                            nutritionReveal(`${task.id}`)
+                        })
                         taskTable_dailyList.append(row);
 
                         setTimeout(() => {
@@ -625,7 +727,7 @@
                         const taskElement = task.date_short ? $(`
                             <div 
                                 id='taskDate-${dayIndex}-${taskIndex}' 
-                                class="new-taskdate w-min rounded-lg text-white flex justify-between  h-[53px] items-center bg-slate-800 h-4 z-0 opacity-0 cursor-pointer" 
+                                class="new-taskdate w-min rounded-lg text-white flex justify-between  h-[53px] items-center bg-slate-800 h-4 z-0 opacity-0 cursor-pointer focus:bg-green-500" 
                                 style="
                                     background-color: #${task.bg_color}; 
                                     transition: opacity 0.3s ease; /* Add transition property */
