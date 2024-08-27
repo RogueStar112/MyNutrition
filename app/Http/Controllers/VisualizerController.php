@@ -105,4 +105,8 @@ class VisualizerController extends Controller
         
 
     }
+
+    public function visualizer_mealwidget_load($id) {
+
+    }
 }

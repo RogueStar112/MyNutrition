@@ -96,6 +96,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/sleep/create', [SleepController::class, 'sleep_form'])->name('sleep.form');
 
     Route::get('/nutrition/visualizer/load/{start_date}/{end_date}', [VisualizerController::class, 'visualizer_load'])->name('visualizer.load_dates');
+
+    Route::get('/nutrition/visualizer/meal_widget_load/{id}', [VisualizerController::class, 'visualizer_mealwidget_load'])->name('visualizer.load_mealwidget');
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])

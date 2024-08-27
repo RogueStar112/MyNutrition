@@ -76,7 +76,7 @@
                 </div>
             </div> --}}
         
-        <div id="DAILY-VIEW" class="p-4 grid grid-cols-[2fr_1fr] grid-rows-[90px_minmax(200px, 1fr)] gap-2">
+        <div id="DAILY-VIEW" class="px-4 grid grid-cols-[2fr_1fr] grid-rows-[90px_minmax(200px, 1fr)] gap-2">
 
             <div id="DAILY-VISUALIZER-VIEW">
 
@@ -156,14 +156,95 @@
 
 
                 <div id="MEAL-LEGEND" class="flex justify-between items-center /max-w-[66.7%]">
-                <div class="w-fit rounded-lg my-4 bg-slate-900 text-white p-4 flex items-center gap-6">Legend
+                    <div class="w-fit rounded-lg my-4 bg-slate-900 text-white p-4 flex items-center gap-6">Legend
 
-                    <div class="bg-orange-500 h-[12px] w-[12px] rounded-full"></div>Meal
-                    <div class="bg-green-500 h-[12px] w-[12px] rounded-full"></div>Exercise
-                    <div class="bg-blue-500 h-[12px] w-[12px] rounded-full"></div>Sleep
+                        <div class="bg-orange-500 h-[12px] w-[12px] rounded-full"></div>Meal
+                        <div class="bg-green-500 h-[12px] w-[12px] rounded-full"></div>Exercise
+                        <div class="bg-blue-500 h-[12px] w-[12px] rounded-full"></div>Sleep
 
+                    </div>
+                    <div class="w-fit bg-slate-900 p-4 rounded-lg text-right text-white sm:px-6 lg:px-8">Calorie Target: 2500kcal</div>
                 </div>
-                <div class="w-fit bg-slate-900 p-4 rounded-lg text-right text-white sm:px-6 lg:px-8">Calorie Target: 2500kcal</div>
+
+                <div id="WIDGET-MANAGER" class="grid grid-cols-2 grid-rows-3 [&>*]:overflow-hidden [&>*]:bg-slate-900 [&>*]:w-full [&>*]:h-full [&>*]:rounded-lg h-[640px] gap-3">
+                    
+                    <!-- Please note these are placeholders for the time being -->
+                    
+                    <div id="TOTAL-NUTRIENTS" class="grid grid-cols-2 grid-rows-2  w-full h-full relative">
+                        <div id="TN-MAIN-SECTION" class="row-span-2 text-center text-2xl text-white my-auto [&>div]:flex p-4">
+                            {{-- <span class="font-extrabold">982</span><br>Calories --}}
+                            <div class="text-white font-extrabold text-center justify-center">Chicken Meal</div>
+                            <div class="text-blue-500 flex justify-between"><span class="font-extrabold">982</span> kcal</div>
+                            
+                            <div class="text-orange-500 flex justify-between">11.2g <span>Fat</span></div>
+                            <div class="text-yellow-500 flex justify-between">124.3g <span>Carbs</span></div>
+                            <div class="text-green-500 flex justify-between">42.5g <span>Protein</span></div>
+
+
+                        </div>
+
+                        <div id="TN-TOP-SECTION" class="row-span-2 text-center text-white text-3xl absolute -right-1/2 [&>div]:absolute overflow-hidden rounded-full">
+                            <div class="top-img /right-1/2 h-full object-cover">
+                                <img class="h-full object-cover" src="{{asset('storage/images/food/1724519175.jpg')}}">
+                            </div>
+
+                            <div class="bottom-img /left-1/2 h-full object-cover">
+                                <img class="h-full object-cover" src="{{asset('storage/images/food/1724519093.png')}}">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div id="ITEM-LIST" class="text-white flex flex-col justify-center items-center">
+                        <div class="text-center text-2xl font-extrabold">Meal Breakdown</div>
+
+                        {{-- flex flex-col [&>*]:flex [&>*]:justify-between [&>*]:text-white [&>*>img]:h-[48px] [&>*>img]:w-[48px] [&>*>img]:rounded-full [&>*]:items-center [&*]:mx-4 gap-4 --}}
+                        <table class="text-center mx-auto w-full">
+                            <thead>
+                                <tr class="uppercase text-gray-500 [&>th]:p-1">
+                                    <th>Name</th>
+                                    <th>Calories</th>
+                                    <th class="hidden md:table-cell">Fat</th>
+                                    <th class="hidden md:table-cell">Carbs</th>
+                                    <th class="hidden md:table-cell">Protein</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{-- <img src="{{asset('storage/images/food/1724519175.jpg')}}"> --}}
+                                <tr class="[&>td]:p-1">
+                                    <td>Chicken Burger</td>
+                                    <td>306kcal</td>
+                                    <td>14g</td>
+                                    <td>30.4g</td>
+                                    <td>16.2g</td>
+                                </tr>
+
+                                {{-- <img src="{{asset('storage/images/food/1724519093.png')}}"> --}}
+                                <tr class="[&>td]:p-1"> 
+                                    <td>Loaded Fries</td>
+                                    <td>506kcal</td>
+                                    <td>21.3g</td>
+                                    <td>54.3g</td>
+                                    <td>16.2g</td>
+                                </tr>
+
+                                <tr>
+                                {{-- <img src="{{asset('storage/images/food/1721912251_1.jpg')}}"> --}}
+                                    <td>Coke Classic</td>
+                                    <td>160kcal</td>
+                                    <td>0g</td>
+                                    <td>40g</td>
+                                    <td>0g</td>
+                                </tr>
+                            </div>
+                        </table>
+                    </div>
+
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
             </div>
 
@@ -197,6 +278,10 @@
 
     <script>
 
+        // IIFE: Prevents the functions from this page from being called through the console.
+        // Thanks AI for this tip!
+
+        (function() {
         // a few consts first...
         // we'll call the task visualizer like it's a television.
         const tv = $('#TASK-VISUALIZER');
@@ -222,8 +307,12 @@
 
         // 22/08/2024
         function nutritionReveal(id) {
-            console.log(`Your meal id is: ${id}`)
 
+            if (id == undefined) {
+                // do nothing
+            } else {
+                console.log(`Your meal id is: ${id}`)
+            }
             /* 
                 later: 
                 make a API link to get the meal_items for this meal id
@@ -232,6 +321,9 @@
 
                 and other useful stats :)
             */
+
+            // develop the UI first
+
         }
  
         function createNewTask(caption, color, x_start, x_end, y_index) {
@@ -434,13 +526,17 @@
                                     top: ${(taskIndex + 1) * (tableHeight / 40)}%;
                                     transition: opacity 0.3s ease; /* Add transition property */
                                 "
-                                onclick="nutritionReveal(${task.id})"
                             >
                                 <p class='select-none'>${task.task}</p>
                             </div>
                         `);
 
                         row.append(taskElement);
+
+                        taskElement.on('click', function() {
+                            nutritionReveal(`${task.id}`)
+                        })
+
                         taskTable.append(row);
 
                         // Fade in after a slight delay for a smoother effect
@@ -631,5 +727,6 @@
                 })
 
             })
+        })();
     </script>
 </x-app-layout>

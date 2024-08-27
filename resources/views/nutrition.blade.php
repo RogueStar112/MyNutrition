@@ -67,7 +67,7 @@
                         <p class="text-white p-4">Log your Water Intake.</p>
                     </a>
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2" href="{{route('exercise.form')}}">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2" href="{{route('sleep.form')}}">
 
                         <div class="flex justify-between text-indigo-500 border-b-4 border-b-indigo-500 items-center">
                             <h2 class="text-5xl uppercase p-4 font-black">Sleep</h2>

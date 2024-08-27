@@ -64,3 +64,11 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Image Credits:
+
+
+Sleep Form
+Photo by Andrea Piacquadio: https://www.pexels.com/photo/woman-in-gray-tank-top-lying-on-bed-3807760/
+
+Images for Food Items taken from numerous websites. I do not own them.

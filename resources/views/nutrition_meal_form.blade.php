@@ -134,6 +134,7 @@
 
                         // adjust height to accomodate for nutritional info
                         // $(`#food_item_${index_selector}`).toggleClass('h-24');
+                        $(`#nutritional-media-buttons-${index_selector}`).toggleClass('hidden');
 
                         // change direction of icon arrow
                         $(`#item_icon_${index_selector}`).toggleClass('fas fa-chevron-down');
