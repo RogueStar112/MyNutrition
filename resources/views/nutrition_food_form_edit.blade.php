@@ -35,7 +35,7 @@
             <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
                 <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="POST" enctype="multipart/form-data" action='{{ route("food.edit", ['id' => $food->id])}}'>
                     @csrf
-                    <div id="FOOD_FORM_INPUTS" class="relative /max-h-[682px] md:max-h-[750px] overflow-hidden">
+                    <div id="FOOD_FORM_INPUTS" class="relative /max-h-[682px] md:max-h-[1150px] overflow-hidden">
                        <x-food-input-item index="1"
                        
                        :servingUnitOptions="$food_form_options"
@@ -46,7 +46,15 @@
                        calories="{{$food_macronutrients->calories ?? ''}}"
                        fat="{{$food_macronutrients->fat ?? ''}}"
                        carbs="{{$food_macronutrients->carbohydrates ?? ''}}"
-                       protein="{{$food_macronutrients->protein ?? ''}}"/>
+                       protein="{{$food_macronutrients->protein ?? ''}}"
+                       
+                       
+                       sugars="{{$food_micronutrients->sugars ?? ''}}"
+                       saturates="{{$food_micronutrients->saturates ?? ''}}"
+                       fibre="{{$food_micronutrients->fibre ?? ''}}"
+                       salt="{{$food_micronutrients->salt ?? ''}}"
+
+                       />
 
                     </div>
 

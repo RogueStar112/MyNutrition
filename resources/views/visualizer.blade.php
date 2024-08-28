@@ -752,7 +752,7 @@
             // Initial load
             loadTasksForDay(currentDay);
             loadTasksForDay_list(currentDay);
-            loadTaskDates(currentDay);
+            // loadTaskDates(currentDay);
 
             prevDayBtn.on('click', () => {
                 currentDay = Math.max(0, currentDay - 1); // Don't go before the first day
@@ -763,7 +763,7 @@
 
                 loadTasksForDay(currentDay);
                 loadTasksForDay_list(currentDay);
-                loadTaskDates(currentDay);
+                // loadTaskDates(currentDay);
             });
 
             nextDayBtn.on('click', () => {
@@ -775,7 +775,7 @@
 
                 loadTasksForDay(currentDay);
                 loadTasksForDay_list(currentDay);
-                loadTaskDates(currentDay);
+                // loadTaskDates(currentDay);
             });
 
 
@@ -822,7 +822,7 @@
 
                             loadTasksForDay(currentDay);
                             loadTasksForDay_list(currentDay);
-                            loadTaskDates(currentDay);
+                            // loadTaskDates(currentDay);
 
                             $('#DAILY-DATE-SELECTED').text(`${Object.keys(taskData)[currentDay]}`)
                         }

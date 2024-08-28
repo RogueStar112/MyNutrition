@@ -136,7 +136,7 @@
 
                 {{-- Food Nutrients. --}}
                 
-                <div class="h-full flex p-6 gap-3 [&>*]:text-clip [&>*]:flex-1 [&>*]:text-lg [&>*]:text-center [&>*]:flex [&>*]:flex-col [&>*>p]:text-clip">
+                <div class="h-fit flex px-6 pt-4 pb-2 gap-3 [&>*]:text-clip [&>*]:flex-1 [&>*]:text-lg [&>*]:text-center [&>*]:flex [&>*]:flex-col [&>*>p]:text-clip">
                 
 
                     <section>
@@ -186,10 +186,11 @@
                     </section>
 
                     {{-- <br>{{$food['protein'] ? $food['protein'] : "0" }}g --}}
-
                    
 
                 </div>
+
+                <p class="w-full text-center text-gray-500 select-none">{{$food['description']}}</p>
 
                 {{-- <div class="h-full"></div> --}}
             </div>

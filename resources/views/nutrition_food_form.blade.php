@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold italic text-center uppercase dark:text-white text-3xl text-gray-800 leading-tight">
+        <h1 class="font-semibold italic text-center uppercase dark:text-white text-3xl text-gray-800 leading-tight">
             {{ __('Create New Food') }}
-        </h2>
+        </h1>
     </x-slot>
 
     @if ($errors->any())
     <div class="alert alert-danger max-w-7xl rounded-lg mx-auto text-center bg-red-800 text-white">
-        <h1 class="text-2xl font-extrabold">Input Error</h1>
+        <h2 class="text-2xl font-extrabold">Input Error</h2>
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -19,7 +19,7 @@
     @isset($validated_data)
         
         <div class="alert alert-danger max-w-7xl rounded-lg mx-auto text-center bg-green-800 text-white p-6">
-            <h1 class="text-2xl font-extrabold">Data Insertion Success!</h1>
+            <h2 class="text-2xl font-extrabold">Data Insertion Success!</h2>
 
             <div class="w-full flex justify-center mt-6">
             <table class="w-2/3">
@@ -82,7 +82,7 @@
             <div class="max-w-3xl mx-auto px-6 sm:px-6 lg:px-8">
                 <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="POST" enctype="multipart/form-data" action="{{ route('food.store')}}">
                     @csrf
-                    <div id="FOOD_FORM_INPUTS" class="relative /md:max-h-[682px] /md:max-h-[750px] md:max-h-[950px] overflow-hidden">
+                    <div id="FOOD_FORM_INPUTS" class="relative /md:max-h-[682px] /md:max-h-[750px] md:max-h-[1100px] overflow-hidden">
 
 
                        <x-food-input-item index="1" :servingUnitOptions="$food_form_options"/>

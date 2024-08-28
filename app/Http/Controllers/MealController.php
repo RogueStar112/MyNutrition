@@ -15,6 +15,7 @@ use App\Models\FoodSource;
 use App\Models\FoodUnit;
 
 use App\Models\Macronutrients;
+use App\Models\Micronutrients;
 
 use App\Models\Meal;
 use App\Models\MealItems;
@@ -61,6 +62,9 @@ class MealController extends Controller
             $macronutrients_search = Macronutrients::where('food_id', $food_search->id)
                                         ->first();
 
+            $micronutrients_search = Micronutrients::where('food_id', $food_search->id)
+                                        ->first();
+
             $food_unit = FoodUnit::where('id', $macronutrients_search->food_unit_id)
                 ->first();
 
@@ -80,6 +84,12 @@ class MealController extends Controller
                 "meal_fat_$food_pages_x" => 'nullable|numeric|max:5000',
                 "meal_carbs_$food_pages_x" => 'nullable|numeric|max:5000',
                 "meal_protein_$food_pages_x" => 'nullable|numeric|max:5000',
+                "meal_sugars_$food_pages_x" => 'nullable|numeric|max:1000',
+                "meal_saturates_$food_pages_x" => 'nullable|numeric|max:1000',
+                "meal_fibre_$food_pages_x" => 'nullable|numeric|max:1000',
+                "meal_salt_$food_pages_x" => 'required|numeric|max:1000',
+
+
                 
             ]);
 
@@ -92,6 +102,17 @@ class MealController extends Controller
             $food_fat = $macronutrients_search->fat;
             $food_carbs = $macronutrients_search->carbohydrates;
             $food_protein = $macronutrients_search->protein;
+        
+            // $food_sugars = $request->input("meal_sugars_$food_pages_x");
+            // $food_saturates = $request->input("meal_saturates_$food_pages_x");
+            // $food_fibre = $request->input("meal_fibre_$food_pages_x");
+            // $food_salt = $request->input("meal_salt_$food_pages_x");
+
+            $food_sugars = $micronutrients_search->sugars ?? 0;
+            $food_saturates = $micronutrients_search->saturates ?? 0;
+            $food_fibre = $micronutrients_search->fibre ?? 0;
+            $food_salt = $micronutrients_search->salt ?? 0;
+
             
             $food_array[$x]['name'] = $food_name;
             $food_array[$x]['source'] = $food_source;
@@ -106,6 +127,11 @@ class MealController extends Controller
             $food_array[$x]['carbohydrates'] =  $food_carbs;
             $food_array[$x]['protein'] = $food_protein;
             $food_array[$x]['img_url'] = $food_imgurl;
+
+            $food_array[$x]['sugars'] = $food_sugars;
+            $food_array[$x]['saturates'] = $food_saturates;
+            $food_array[$x]['fibre'] = $food_fibre;
+            $food_array[$x]['salt'] = $food_salt;
 
             
             if ($food_servingsize == NULL) {
@@ -312,7 +338,7 @@ class MealController extends Controller
             $food_array[$meal_datendex]['food_unit_short'] = $food_unit->short_name;
             $food_array[$meal_datendex]['carbohydrates'] = $macronutrients_search->carbohydrates;
             $food_array[$meal_datendex]['protein'] = $macronutrients_search->protein;
-
+            $food_array[$meal_datendex]['description'] = $food->description ?? '';
             
 
         }                   
@@ -382,6 +408,9 @@ class MealController extends Controller
             $macronutrients_search = Macronutrients::where('food_id', $food_search->id)
                                                 ->first();
 
+            $micronutrients_search = Micronutrients::where('food_id', $food_search->id)
+                                                ->first();
+
             $food_unit = FoodUnit::where('id', $macronutrients_search->food_unit_id)
                                 ->first();
 
@@ -410,6 +439,16 @@ class MealController extends Controller
             $food_array[$meal_datendex]['carbohydrates'] = $macronutrients_search->carbohydrates;
             $food_array[$meal_datendex]['protein'] = $macronutrients_search->protein;
             $food_array[$meal_datendex]['img_url'] = $food_imgurl;
+            
+            $food_array[$meal_datendex]['sugars'] = $micronutrients_search->sugars ?? 0 ;
+            $food_array[$meal_datendex]['saturates'] = $micronutrients_search->saturates ?? 0;
+            $food_array[$meal_datendex]['fibre'] = $micronutrients_search->fibre ?? 0 ;
+            $food_array[$meal_datendex]['salt'] = $micronutrients_search->salt ?? 0;
+
+            $food_sugars = $micronutrients_search->sugars ?? 0 ;
+            $food_saturates = $micronutrients_search->saturates ?? 0;
+            $food_fibre = $micronutrients_search->fibre ?? 0 ;
+            $food_salt = $micronutrients_search->salt ?? 0;
 
             // $food_array_html[$meal_datendex] = new MealFoodItem($query_no, $food_array, $servingSize, $quantity);
             
@@ -429,6 +468,14 @@ class MealController extends Controller
               <input id='meal_servingsize_$food_id' type='hidden' name='meal_servingsize_$food_id' value='$servingSize' index='$meal_datendex_no' readonly />
              <input id='meal_quantity_$food_id' type='hidden' name='meal_quantity_$food_id' value='$quantity' index='$meal_datendex_no' readonly />
              <input id='meal_foodunitid_$food_id' type='hidden' name='meal_foodunitid_$food_id' value='$food_unit_id' index='$meal_datendex_no' readonly />
+             <input id='meal_sugars_$food_id' type='hidden' name='meal_sugars_$food_id' value='$food_sugars' index='$meal_datendex_no' readonly />
+              <input id='meal_saturates_$food_id' type='hidden' name='meal_saturates_$food_id' value='$food_saturates' index='$meal_datendex_no' readonly />
+             <input id='meal_fibre_$food_id' type='hidden' name='meal_fibre_$food_id' value='$food_fibre' index='$meal_datendex_no' readonly />
+             <input id='meal_salt_$food_id' type='hidden' name='meal_salt_$food_id' value='$food_salt' index='$meal_datendex_no' readonly />
+             
+             
+             
+             
              ";
 
 
@@ -451,6 +498,11 @@ class MealController extends Controller
                   <input id='meal_servingsize_$food_id' type='hidden' name='meal_servingsize_$food_id' value='$servingSize' index='$meal_datendex_no' readonly />
                  <input id='meal_quantity_$food_id' type='hidden' name='meal_quantity_$food_id' value='$quantity' index='$meal_datendex_no' readonly />
                  <input id='meal_foodunitid_$food_id' type='hidden' name='meal_quantity_$food_id' value='$quantity' index='$meal_datendex_no' readonly />
+                <input id='meal_sugars_$food_id' type='hidden' name='meal_sugars_$food_id' value='$food_sugars' index='$meal_datendex_no' readonly />
+                <input id='meal_saturates_$food_id' type='hidden' name='meal_saturates_$food_id' value='$food_saturates' index='$meal_datendex_no' readonly />
+                <input id='meal_fibre_$food_id' type='hidden' name='meal_fibre_$food_id' value='$food_fibre' index='$meal_datendex_no' readonly />
+                <input id='meal_salt_$food_id' type='hidden' name='meal_salt_$food_id' value='$food_salt' index='$meal_datendex_no' readonly />
+
                  ";
 
 

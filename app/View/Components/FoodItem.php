@@ -21,7 +21,14 @@ class FoodItem extends Component
     public $carbs;
     public $protein;
 
-    public function __construct($index = '', $name = '', $servingSize = '', $servingUnit = '', $source = '', $calories = '', $fat = '', $carbs = '', $protein = '')
+    public $sugars;
+    public $saturates;
+    public $fibre;
+    public $salt;
+
+    public $description;
+
+    public function __construct($index = '', $name = '', $servingSize = '', $servingUnit = '', $source = '', $calories = '', $fat = '', $carbs = '', $protein = '', $sugars = '', $saturates = '', $fibre = '', $salt = '', $description = '')
     {
         $this->index = $index;
         $this->name = $name;
@@ -32,6 +39,13 @@ class FoodItem extends Component
         $this->fat = $fat;
         $this->carbs = $carbs;
         $this->protein = $protein;
+
+        $this->sugars = $sugars;
+        $this->saturates = $saturates;
+        $this->fibre = $fibre;
+        $this->salt = $salt;
+
+        $this->description = $description;
     }
 
     public function render(): View|Closure|string

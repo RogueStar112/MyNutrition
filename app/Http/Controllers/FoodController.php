@@ -15,6 +15,7 @@ use App\Models\FoodSource;
 use App\Models\Food;
 use App\Models\FoodUnit;
 use App\Models\Macronutrients;
+use App\Models\Micronutrients;
 use App\Models\MealItems;
 
 use Illuminate\Support\Facades\Validator;
@@ -66,7 +67,12 @@ class FoodController extends Controller
                 "food_fat_$array_index_x" => 'nullable|numeric|max:1000',
                 "food_carbs_$array_index_x" => 'nullable|numeric|max:1000',
                 "food_protein_$array_index_x" => 'nullable|numeric|max:1000',
-                "food_image_$array_index_x" => 'image'
+                "food_image_$array_index_x" => 'image',
+                "food_sugars_$array_index_x" => 'nullable|numeric|max:1000',
+                "food_saturates_$array_index_x" => 'nullable|numeric|max:1000',
+                "food_fibre_$array_index_x" => 'nullable|numeric|max:1000',
+                "food_salt_$array_index_x" => 'nullable|numeric|max:1000',
+
             ]);
 
             if ($request->file("food_image_$array_index_x") != NULL) {
@@ -107,6 +113,12 @@ class FoodController extends Controller
             $food_carbs = $request->input("food_carbs_$array_index_x");
             $food_protein = $request->input("food_protein_$array_index_x");
             
+            $food_sugars = $request->input("food_sugars_$array_index_x");
+            $food_saturates = $request->input("food_saturates_$array_index_x");
+            $food_fibre = $request->input("food_fibre_$array_index_x");
+            $food_salt = $request->input("food_salt_$array_index_x");
+
+            $food_description = $request->input("food_description_$array_index_x");
 
             $existingFoodSource = FoodSource::where('name', $food_source)->first();
 
@@ -143,6 +155,8 @@ class FoodController extends Controller
 
                 $newFood->img_url = $food_image;
 
+                $newFood->description = $food_description;
+
                 $newFood->save();
 
                 $food_query = Food::where('name', "$food_name")
@@ -171,6 +185,7 @@ class FoodController extends Controller
                     $newMacronutrients->carbohydrates = (float)$food_carbs;
 
                     $newMacronutrients->protein = (float)$food_protein;
+
                     // $newMacronutrients->calories = round((float)$food_calories / (float)$food_servingsize, 0);
 
                     // $newMacronutrients->fat = round((float)$food_fat / (float)$food_servingsize, 1);
@@ -180,6 +195,22 @@ class FoodController extends Controller
                     // $newMacronutrients->protein = round((float)$food_protein / (float)$food_servingsize, 1);
 
                     $newMacronutrients->save();
+
+                    
+                    $newMicronutrients = new Micronutrients();
+
+                    $newMicronutrients->food_id =  (int)$food_id;
+
+                    $newMicronutrients->sugars = (float)$food_sugars;
+
+                    $newMicronutrients->saturates = (float)$food_saturates;
+
+                    $newMicronutrients->fibre = (float)$food_fibre;
+
+                    $newMicronutrients->salt = (float)$food_salt;
+
+                    $newMicronutrients->save();
+
 
                     $macronutrients_query = Macronutrients::where('food_id', $food_id)
                                                           ->where('user_id', $user_id)
@@ -198,7 +229,11 @@ class FoodController extends Controller
                     'food_calories' => $food_calories,
                     'food_fat' => $food_fat,
                     'food_carbs' => $food_carbs,
-                    'food_protein' => $food_protein];
+                    'food_protein' => $food_protein,
+                    'food_sugars' => $food_sugars,
+                    'food_saturates' => $food_saturates,
+                    'food_fibre' => $food_fibre,
+                    'food_salt' => $food_salt];
 
 
                 } else {
@@ -462,12 +497,16 @@ class FoodController extends Controller
         $food_macronutrients_search = Macronutrients::where('food_id', $id)
                                                 ->first();
 
+        $food_micronutrients_search = Micronutrients::where('food_id', $id)
+                                                ->first();
+
         if ($food_search['user_id'] === $user_id) {
 
             
             return view('nutrition_food_form_edit')->with('food', $food_search)
                                                    ->with('food_source', $food_source_search)
                                                    ->with('food_macronutrients', $food_macronutrients_search)
+                                                   ->with('food_micronutrients', $food_micronutrients_search)
                                                    ->with('food_form_options', $food_form_options);
         } else {
             return view('nutrition_food_form');
@@ -491,6 +530,13 @@ class FoodController extends Controller
         $food_fat = $request->input("food_fat_1");
         $food_carbs = $request->input("food_carbs_1");
         $food_protein = $request->input("food_protein_1");
+
+        $food_sugars = $request->input("food_sugars_1");
+        $food_saturates = $request->input("food_saturates_1");
+        $food_fibre = $request->input("food_fibre_1");
+        $food_salt = $request->input("food_salt_1");
+
+        $food_description = $request->input("food_description_1");
 
         if ($request->file("food_image_1") != NULL) {
             $filename = time() . '.' . $request->file("food_image_1")->extension();  // Generate unique filename
@@ -545,6 +591,9 @@ class FoodController extends Controller
                 $macronutrients_to_update = Macronutrients::where('food_id', $id)
                                                 ->first();
 
+                $micronutrients_to_update = Micronutrients::where('food_id', $id)
+                                                ->first();
+
                 $meal_items_to_update = MealItems::where('food_id', $id)
                                           ->get();
 
@@ -552,6 +601,7 @@ class FoodController extends Controller
                 $food_to_update->name = $food_name;
                 $food_to_update->source_id = $food_search->source_id;
                 $food_to_update->img_url = $food_image; 
+                $food_to_update->description = $food_description;
                 
                 $food_to_update->save();
                 $food_to_update->touch();
@@ -565,6 +615,12 @@ class FoodController extends Controller
 
                 $macronutrients_to_update->save();
 
+                $micronutrients_to_update->sugars = $food_sugars;
+                $micronutrients_to_update->saturates = $food_saturates;
+                $micronutrients_to_update->fibre = $food_fibre;
+                $micronutrients_to_update->salt = $food_salt;
+
+                $micronutrients_to_update->save();
 
                 // Update for meal items to have the same food unit item to use. 19/08/2024
                 foreach($meal_items_to_update as $meal_item_to_update) {

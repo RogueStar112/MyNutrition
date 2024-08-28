@@ -132,6 +132,8 @@ class VisualizerController extends Controller
                                     ->where('meal_id', '=', $meal_selected->id)
                                     ->get();
 
+        
+
         function get_macro_sum_of_meal($meal_id) {
 
             $meal_items_of_task = DB::table('meal_items')

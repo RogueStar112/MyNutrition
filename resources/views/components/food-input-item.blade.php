@@ -1,6 +1,6 @@
 <div id="food_number_{{$index}}" class="inline-block {{$active}}">
     <div class="p-6">
-    <h1 class="text-white text-2xl">1. Food Name and Source</h1>
+    <h2 class="text-white text-2xl">1. Food Name and Source</h2>
     <p class="text-gray-500 italic mt-2">The basic information. Fields required.</p>
     </div>
 
@@ -44,7 +44,7 @@
     </div> 
 
     <div class="p-6">
-    <h1 class="text-white text-2xl">2. Nutritional Info</h1>
+    <h2 class="text-white text-2xl">2. Nutritional Info</h2>
     <p class="text-gray-500 italic mt-2">According to serving size. All fields optional.</p>
     </div>
 
@@ -72,6 +72,30 @@
         <label class="block px-6 py-4 md:p-6">
             <span class="text-white">Protein (g)</span>
             <input type="text" id="food_protein_{{$index}}" name="food_protein_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="11.7"  value="{{$protein}}" />
+        </label>
+
+         
+        <label class="block px-6 py-4 md:p-6">
+            <span class="text-white">Sugars (g)</span>
+            <input type="text" id="food_sugars_{{$index}}" name="food_sugars_{{$index}}" class="block bg-slate-800 text-gray-200 w-full mt-1 rounded-md" placeholder="4.7"  value="{{$sugars}}" />
+        </label>
+
+        
+        <label class="block px-6 py-4 md:p-6">
+            <span class="text-white">Saturates (g)</span>
+            <input type="text" id="food_saturates_{{$index}}" name="food_saturates_{{$index}}" class="block bg-slate-800 text-gray-200 w-full mt-1 rounded-md" placeholder="8.1"  value="{{$saturates}}" />
+        </label>
+
+        <label class="block px-6 py-4 md:p-6">
+            <span class="text-white">Fibre (g)</span>
+            <input type="text" id="food_fibre_{{$index}}" name="food_fibre_{{$index}}" class="block bg-slate-800 text-gray-200 w-full mt-1 rounded-md" placeholder="0.4"  value="{{$fibre}}" />
+        </label>
+
+        <label class="block px-6 py-4 md:p-6">
+            <span class="text-white">Salt (g)</span>
+            <input type="text" id="food_salt_{{$index}}" name="food_salt_{{$index}}" class="block bg-slate-800 text-gray-200 w-full mt-1 rounded-md" placeholder="1.1"  value="{{$salt}}" />
+
+
         </label>
     </div>
 

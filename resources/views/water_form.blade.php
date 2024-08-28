@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex flex-col gap-0 relative" aria-label="water-form-banner">
+        <div class="flex flex-col gap-0 relative" aria-label="water-form-banner" style="/background: radial-gradient(closest-side, #0465A5, #334155);">
 
             <div class="relative w-full h-full overflow-hidden">
 
@@ -46,14 +46,17 @@
     <form class="shadow-2xl max-w-[1216px] mx-auto relative">
 
         <i class="collapse md:visible fas fa-clock fa-3x p-4 text-blue-200 scale-[1.7] absolute right-[80px] bottom-16 translate-x-1/2 -translate-y-1/2"></i>
-            
+        
+        {{-- background: radial-gradient(closest-side, #0465A5, #334155); --}}
+        <div style="background: radial-gradient(closest-side, #0465A5, #334155);">
 
-        <div class="w-full max-w-[1216px] mx-auto bg-[#0465A5] text-center pt-4 text-white text-3xl">
+        
+        <div class="w-full max-w-[1216px] /bg-[#0465A5] mx-auto text-center pt-4 text-white text-3xl">
             <p class="w-fit primary-water-form mx-auto p-4 -skew-x-12">Step one: Number of things</p>
             <p id="assume-text" class="w-fit secondary-water-form mx-auto p-4 -skew-x-12 text-lg">Assume each glass is 200ml.</p>
         </div>
 
-        <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24" style="background-color: #0465A5;">
+        <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24" style="/background-color: #0465A5; /background: radial-gradient(#0465A5, #9198e5);">
 
 
                     <i class="fa-solid fa-circle-minus fa-3x text-white" id="decrease-glass"></i>
@@ -71,27 +74,29 @@
 
         </div>
         
-                        <p id="total-drank" class="text-white text-center bg-[#0465A5] max-w-[1216px] mx-auto">You have drunk <span id='litres-drank'>1</span>L.</p>
-                        <p class="text-white text-center bg-[#0465A5] max-w-[1216px] mx-auto">That's <span id='glasses-drank'>5</span> <span id='glasses-type'>glasses</span> of <span class='drink-type'>water</span>.</p>
+                        <p id="total-drank" class="text-white text-center /bg-[#0465A5] max-w-[1216px] mx-auto">You have drunk <span id='litres-drank'>1</span>L.</p>
+                        <p class="text-white text-center /bg-[#0465A5] max-w-[1216px] mx-auto">That's <span id='glasses-drank'>5</span> <span id='glasses-type'>glasses</span> of <span class='drink-type'>water</span>.</p>
 
-        <div class="w-full max-w-[1216px] mx-auto bg-[#0465A5] text-center pt-4 text-white text-3xl">
+        <div class="w-full max-w-[1216px] mx-auto /bg-[#0465A5] text-center pt-4 text-white text-3xl">
             <p class="w-fit primary-water-form mx-auto p-4 -skew-x-12">Step two: Time drunk</p>
             <p class="w-fit secondary-water-form mx-auto p-4 -skew-x-12 text-lg">When did you take this amount of <span class='drink-type'>water</span>?</p>
         </div>
 
 
-        <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24" style="background-color: #0465A5;">
+        <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24" style="/background-color: #0465A5; /background: radial-gradient(#e66465, #9198e5);">
 
                     <input type="hidden" name="water-amount" id="water-amount" value="5"></input>
-                    <input type="hidden" name="fluid-type" id="fluid-type" value=""></input>
+                    <input type="hidden" name="fluid-type" id="fluid-type" value="0"></input>
                     <input id="water-when" name="water-when" class="mx-auto p-4 rounded-full text-[#0465A5]" type="datetime-local" value="2024-03-31T06:00"/>
 
         </div>
 
 
-        <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24 bg-[#0465A5]">
+        <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24 /bg-[#0465A5]">
 
             <button id="add-fluid-entry" class="bg-green-500 text-white mx-auto p-4">ADD ENTRY</button>
+
+        </div>
 
         </div>
     </div>
