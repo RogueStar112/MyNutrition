@@ -353,7 +353,7 @@
                                     </tr>
                                     `
                                 responseHTML_TNTopSection += `<div class="relative h-full object-cover opacity-60 hover:opacity-100 duration-100 [&>p]:hover:opacity-100 [&>p]:opacity-0">
-                                    <p class="absolute left-0 top-0 text-sm h-full">${item}</p>
+                                    <p class="absolute left-0 top-0 text-sm w-full h-full mt-2">${item}</p>
                                     <img class="h-full object-cover text-sm" src="${responseBreakdown[item]['img_url']}" alt="${item}">
 
                                 </div>
