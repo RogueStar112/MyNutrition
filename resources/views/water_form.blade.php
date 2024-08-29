@@ -6,7 +6,7 @@
 
                 <h1 class="font-semibold text-6xl md:text-6xl uppercase dark:text-white text-3xl text-gray-800 leading-tight p-4 absolute top-1/2 z-50 primary-water-form -skew-y-6" style="width: 597px;">
                     {{-- {{ __('Log Water Intake') }} --}}
-                    Log <select id="drink-type" class="no-select-arrow appearance-none dark:text-white text-5xl text-gray-800 leading-tight p-4 top-1/2 z-50 primary-water-form border-none uppercase px-2 w-[180px]" style="-moz-appearance: none;">
+                    Log <select id="drink-type" class="no-select-arrow text-4xl appearance-none dark:text-white text-gray-800 leading-tight p-4 top-1/2 z-50 primary-water-form border-none uppercase px-2 w-[180px]" style="-moz-appearance: none;">
                            <option selected value="0" text-value="water">Water</option>
                            <option value="1" text-value="coke">Coke</option>
                            <option value="2" text-value="milk">Milk</option>
@@ -20,7 +20,7 @@
             </svg>
 
 
-            <div class="absolute tertiary-water-form w-[128px] h-[128px] right-[53.5%] top-[83%] -skew-x-[24deg] z-20">
+            <div class="absolute tertiary-water-form w-[128px] h-[128px] right-[53.5%] top-[79%] -skew-x-[24deg] z-20">
                 
             </div>
 
@@ -43,8 +43,10 @@
         </div>
     </x-slot>
 
-    <form class="shadow-2xl max-w-[1216px] mx-auto relative">
+    <form id="WATER-FORM" method="POST" class="shadow-2xl max-w-[1216px] mx-auto relative" action="{{ route('water.store') }}">
+        @csrf
 
+        
         <i class="collapse md:visible fas fa-clock fa-3x p-4 text-blue-200 scale-[1.7] absolute right-[80px] bottom-16 translate-x-1/2 -translate-y-1/2"></i>
         
         {{-- background: radial-gradient(closest-side, #0465A5, #334155); --}}
@@ -94,7 +96,7 @@
 
         <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24 /bg-[#0465A5]">
 
-            <button id="add-fluid-entry" class="bg-green-500 text-white mx-auto p-4">ADD ENTRY</button>
+            <button type="submit" id="add-fluid-entry" class="bg-green-500 text-white mx-auto p-4">ADD ENTRY</button>
 
         </div>
 

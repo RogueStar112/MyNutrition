@@ -17,6 +17,8 @@ use App\Models\Macronutrients;
 use App\Models\Meal;
 use App\Models\MealItems;
 
+use App\Models\Water;
+
 use Illuminate\Support\Facades\DB;
 
 
@@ -28,6 +30,7 @@ class VisualizerController extends Controller
 
         $user_id = Auth::user()->id;
 
+        // MEAL LOADING
 
         $tasks = DB::table('meal')
                     ->where('user_id', '=', $user_id)
@@ -67,17 +70,31 @@ class VisualizerController extends Controller
 
         }
 
-        
+
+        $calorie_limit = 2500;
 
         foreach($tasks as $task) {
             $date = Carbon::parse($task->time_planned)->format('d/m/Y');
 
             $calorie_sum = get_calorie_sum_of_meal($task->id);
 
-            $calorie_limit = 2500;
+            
+            $meal_time_multiplier = round((($calorie_sum/$calorie_limit)*24)*60, 2);
 
-            $meal_time_multiplier = round(($calorie_sum/$calorie_limit)*24, 0);
-
+            if ($calorie_limit == 0 || $calorie_sum == 0) {
+                // Handle the case where division by zero is possible
+                // You can either set a default value for $meal_time_multiplier
+                // or skip this iteration of the loop.
+        
+                // For example, set a default value of 0:
+                $meal_time_multiplier = 120; 
+        
+                // Or skip this iteration:
+                // continue; 
+            } else {
+                $meal_time_multiplier = round((($calorie_sum/$calorie_limit)*24)*60, 0);
+            }
+        
 
             // Check if the date already exists in the taskData array
             if (!isset($taskData[$date])) {
@@ -86,20 +103,85 @@ class VisualizerController extends Controller
             
             $taskData_setup = array(
                 "id" => $task->id,
+                "task_type" => "meal",
                 "date" => Carbon::parse($task->time_planned)->format('d/m/Y h:i'),
                 "date_short" => Carbon::parse($task->time_planned)->format('d/m/Y'),
                 "task" => $task->name,
                 "description" => "...",
-                "time_start" => Carbon::parse($task->time_planned)->format('H'),
-                "time_end" => Carbon::parse($task->time_planned)->add("$meal_time_multiplier hours")->format('H'), 
+                "time_start" => substr(Carbon::parse($task->time_planned)->format('H:i'), 0, 5),
+                "time_end" => substr(Carbon::parse($task->time_planned)->add("$meal_time_multiplier minutes")->format('H:i'), 0, 5), 
                 // (int)$task->time_planned+(int)$meal_time_multiplier
                 "bg_color" => "EE0000"
             );
 
+
             $taskData[$date][] = $taskData_setup;
 
         }
+        
 
+        // WATER LOADING
+
+        $tasksWater = DB::table('water')
+                        ->where('user_id', '=', $user_id)
+                        ->whereBetween('time_taken', [date("$start_date 00:00:00"), date("$end_date 23:59:59")])
+                        ->groupBy('time_taken')
+                        ->orderBy('time_taken', 'asc')
+                        ->get();
+
+
+        foreach($tasksWater as $task_water) {
+            $date = Carbon::parse($task_water->time_taken)->format('d/m/Y');
+            
+            if (!isset($taskData[$date])) {
+                $taskData[$date] = []; 
+            }
+
+            $fluid_str = "";
+
+            for($i=0; $i<$task_water->amount; $i++) {
+
+                $fluid_str .= "💧";
+
+            }
+            
+            $fluid_type = $task_water->fluid_id;
+
+            switch ($fluid_type) {
+                case 0:
+                    $fluid_taskcolor = "2196F3";
+                    break;
+
+                case 1:
+                    $fluid_taskcolor = "9A511A";
+                    break;
+
+                case 2:
+                    $fluid_taskcolor = "FFFFFF";
+                    break;
+
+                case 3:
+                    $fluid_taskcolor = "009B00";
+                    break;
+
+            }
+
+            $taskData_setup = array(
+                "id" => $task_water->id,
+                "task_type" => "water",
+                "date" => Carbon::parse($task_water->time_taken)->format('d/m/Y h:i'),
+                "date_short" => Carbon::parse($task_water->time_taken)->format('d/m/Y'),
+                "task" => $fluid_str,
+                "description" => "...",
+                "time_start" => Carbon::parse($task_water->time_taken)->format('H'),
+                "time_end" => Carbon::parse($task_water->time_taken)->add("3 hours")->format('H'), 
+                "bg_color" => "$fluid_taskcolor",
+            );
+
+            $taskData[$date][] = $taskData_setup;
+            
+        }
+                        
         return $taskData;
 
         

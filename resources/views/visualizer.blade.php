@@ -548,103 +548,161 @@
                 const tableHeight = taskTable.height();
                 let dateKeys = Object.keys(taskData);
 
-                console.log("DKS", dateKeys)
-                console.log("TDBFFE", taskData)
-                console.log("_DI", _dayIndex)
-
                 dateKeys.forEach((dateKey, dayIndex) => {
+         
+                const tasksForDay = taskData[dateKeys[_dayIndex]];
+                
+                taskTable.empty();
 
-                    taskTable.empty()
+                tasksForDay.forEach((task, taskIndex) => {
                     
-                    const tasksForDay = taskData[dateKeys[_dayIndex]]; 
-                    
-                    console.log("TFD", tasksForDay)
+                    const row = $('<tr>');
 
-                    // if (_dayIndex > 0) {
-                    //     taskTable.empty();
-                    //         const prevDayTasks = taskData[dateKeys[_dayIndex - 1]];
+                    let startTime = parseFloat(task.time_start);
+                    let endTime = parseFloat(task.time_end);
 
-                    //         if prevDayTasks.keys()[0] = dateKeys[_dayIndex]
-                    //         prevDayTasks.forEach(task => {
-                    //             if (task.time_end > 24) {
-                    //                 // Calculate Segment 2 for the overflow event
-                    //                 const overflowTask = {
-                    //                     ...task, // Copy other task properties
-                    //                     time_start: 0, 
-                    //                     time_end: task.time_end - 24 
-                    //                 };
-                    //                 tasksForDay.push(overflowTask); // Add to current day's tasks
-                    //             }
-                    //         });
-                    //     }
+                    // Check if the conversions were successful
+                    if (isNaN(startTime) || isNaN(endTime)) {
+                        console.error("Invalid time format for task:", task);
+                        // You might want to skip this task or provide a default position/width
+                        return; // Skip this task
+                    }
 
-                    tasksForDay.forEach((task, taskIndex) => {
-                        
-                        const row = $('<tr>');
+                    // Adjust for tasks ending past midnight
+                    if (endTime < startTime) {
+                        endTime += 24; 
+                    }
 
-                        if (task.time_end < task.time_start) {
-                            task.time_end += 25; // Add 24 hours to represent the next day
-                        }
+                    let leftPercent = Math.max(0, Math.min(100, (startTime / 24) * 100));
+                    let widthPercent = Math.max(0, Math.min(100, ((endTime - startTime) / 24) * 100));
 
-                        let leftPercent = (task.time_start / 25) * 100;
-                        let widthPercent = ((task.time_end - task.time_start) / 25) * 100;    
+                    const taskElement = $(`
+                        <div 
+                            id='task-${dayIndex}-${taskIndex}' 
+                            class="new-task bg-green-500 rounded-lg text-white absolute flex justify-center items-center h-8 z-0 opacity-0 cursor-pointer hover:bg-green-500 duration-100" 
+                            style="
+                                background-color: #${task.bg_color}; 
+                                left: ${leftPercent}%; 
+                                width: ${widthPercent}%; 
+                                top: ${(taskIndex + 1) * (tableHeight / 40)}%;
+                                transition: opacity 0.3s ease; 
+                            "
+                        >
+                            <p class='select-none'>${task.task}</p>
+                        </div>
+                    `);
 
-                        if (leftPercent > 150) {
-                            leftPercent = 50;
-                        }
+                    row.append(taskElement);
 
-                        if (widthPercent > 150) {
-                            widthPercent = 50;
-                        }
+                    taskElement.on('click', function() {
+                        nutritionReveal(`${task.id}`)
+                    });
 
+                    taskTable.append(row);
 
-                        // const leftPercent = (task.time_start / 25) * 100;
+                    setTimeout(() => {
+                        taskElement.addClass('opacity-100'); 
+                    }, 50); 
+                });
+            });
 
-                        // // if(task.time_start < 12) {
-                        // //     task.time_start += 12
-                        // // }
-
-                        // // if(task.time_end < 12) {
-                        // //     task.time_end += 12
-                        // // }
-
-                        
-                        
-                        // const widthPercent = ((task.time_end - task.time_start) / 25) * 100;
-
-                        
-
-                        const taskElement = $(`
-                            <div 
-                                id='task-${dayIndex}-${taskIndex}' 
-                                class="new-task bg-green-500 rounded-lg text-white absolute flex justify-center items-center h-8 z-0 opacity-0 cursor-pointer hover:bg-green-500 duration-100" 
-                                style="
-                                    background-color: #${task.bg_color}; 
-                                    left: ${leftPercent}%; 
-                                    width: ${widthPercent}%; 
-                                    top: ${(taskIndex + 1) * (tableHeight / 40)}%;
-                                    transition: opacity 0.3s ease; /* Add transition property */
-                                "
-                            >
-                                <p class='select-none'>${task.task}</p>
-                            </div>
-                        `);
-
-                        row.append(taskElement);
-
-                        taskElement.on('click', function() {
-                            nutritionReveal(`${task.id}`)
-                        })
-
-                        taskTable.append(row);
-
-                        // Fade in after a slight delay for a smoother effect
-                        setTimeout(() => {
-                            taskElement.addClass('opacity-100'); // Use Tailwind's opacity-100 class
-                        }, 50); // Adjust the delay (50ms) as needed
-                    })
-                })
             }
+
+            //     dateKeys.forEach((dateKey, dayIndex) => {
+
+            //         taskTable.empty()
+                    
+            //         const tasksForDay = taskData[dateKeys[_dayIndex]]; 
+                    
+            //         console.log("TFD", tasksForDay)
+
+            //         // if (_dayIndex > 0) {
+            //         //     taskTable.empty();
+            //         //         const prevDayTasks = taskData[dateKeys[_dayIndex - 1]];
+
+            //         //         if prevDayTasks.keys()[0] = dateKeys[_dayIndex]
+            //         //         prevDayTasks.forEach(task => {
+            //         //             if (task.time_end > 24) {
+            //         //                 // Calculate Segment 2 for the overflow event
+            //         //                 const overflowTask = {
+            //         //                     ...task, // Copy other task properties
+            //         //                     time_start: 0, 
+            //         //                     time_end: task.time_end - 24 
+            //         //                 };
+            //         //                 tasksForDay.push(overflowTask); // Add to current day's tasks
+            //         //             }
+            //         //         });
+            //         //     }
+
+            //         tasksForDay.forEach((task, taskIndex) => {
+                        
+            //             const row = $('<tr>');
+
+            //             if (task.time_end < task.time_start) {
+            //                 task.time_end += 25; // Add 24 hours to represent the next day
+            //             }
+
+            //             let leftPercent = (task.time_start / 25) * 100;
+            //             let widthPercent = ((task.time_end - task.time_start) / 25) * 100;    
+
+            //             if (leftPercent > 150) {
+            //                 leftPercent = 50;
+            //             }
+
+            //             if (widthPercent > 150) {
+            //                 widthPercent = 50;
+            //             }
+
+
+            //             // const leftPercent = (task.time_start / 25) * 100;
+
+            //             // // if(task.time_start < 12) {
+            //             // //     task.time_start += 12
+            //             // // }
+
+            //             // // if(task.time_end < 12) {
+            //             // //     task.time_end += 12
+            //             // // }
+
+                        
+                        
+            //             // const widthPercent = ((task.time_end - task.time_start) / 25) * 100;
+
+                        
+
+            //             const taskElement = $(`
+            //                 <div 
+            //                     id='task-${dayIndex}-${taskIndex}' 
+            //                     class="new-task bg-green-500 rounded-lg text-white absolute flex justify-center items-center h-8 z-0 opacity-0 cursor-pointer hover:bg-green-500 duration-100" 
+            //                     style="
+            //                         background-color: #${task.bg_color}; 
+            //                         left: ${leftPercent}%; 
+            //                         width: ${widthPercent}%; 
+            //                         top: ${(taskIndex + 1) * (tableHeight / 40)}%;
+            //                         transition: opacity 0.3s ease; /* Add transition property */
+            //                     "
+            //                 >
+            //                     <p class='select-none'>${task.task}</p>
+            //                 </div>
+            //             `);
+
+            //             row.append(taskElement);
+
+            //             taskElement.on('click', function() {
+            //                 nutritionReveal(`${task.id}`)
+            //             })
+
+            //             taskTable.append(row);
+
+            //             // Fade in after a slight delay for a smoother effect
+            //             setTimeout(() => {
+            //                 taskElement.addClass('opacity-100'); // Use Tailwind's opacity-100 class
+            //             }, 50); // Adjust the delay (50ms) as needed
+            //         })
+            //     })
+            // }
+
+            
 
             function getDecimals(num) {
                 return num - Math.floor(num); 
@@ -672,8 +730,13 @@
 
                     taskTable_dailyList.empty()
 
+
                     tasksForDay.forEach((task, taskIndex) => {
                         const row = $('<tr>');
+
+                            
+                        const taskStart = `${task.time_start}`;
+                        const taskEnd = `${task.time_end}`;
 
                         const taskElement = $(`
                             <div 
@@ -687,7 +750,7 @@
                                 <p class='select-none'>${task.task}</p>
 
                                 <div>
-                                    <p>${convertTimeToReadableString(task.time_start)} - ${convertTimeToReadableString(task.time_end)}</p>
+                                    <p>${taskStart.substring(0, 5)} - ${taskEnd.substring(0, 5)}</p>
                                 </div>
                             </div>
                         `);
