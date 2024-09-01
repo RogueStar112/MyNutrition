@@ -125,7 +125,7 @@ class VisualizerController extends Controller
         $tasksWater = DB::table('water')
                         ->where('user_id', '=', $user_id)
                         ->whereBetween('time_taken', [date("$start_date 00:00:00"), date("$end_date 23:59:59")])
-                        ->groupBy('time_taken')
+                        ->groupBy('time_taken', 'fluid_id')
                         ->orderBy('time_taken', 'asc')
                         ->get();
 
@@ -138,8 +138,10 @@ class VisualizerController extends Controller
             }
 
             $fluid_str = "";
+            
+            $fluid_amount_original = $task_water->amount;
 
-            for($i=0; $i<$task_water->amount; $i++) {
+            for($i=0; $i<$fluid_amount_original; $i++) {
 
                 $fluid_str .= "💧";
 
@@ -150,18 +152,26 @@ class VisualizerController extends Controller
             switch ($fluid_type) {
                 case 0:
                     $fluid_taskcolor = "2196F3";
+                    $fluid_name = "Water";
+                    $fluid_amount = round($fluid_amount_original / 5, 1);
                     break;
 
                 case 1:
                     $fluid_taskcolor = "9A511A";
+                    $fluid_name = "Coke";
+                    $fluid_amount = round($fluid_amount_original / 5, 1);
                     break;
 
                 case 2:
-                    $fluid_taskcolor = "FFFFFF";
+                    $fluid_taskcolor = "DDDDDD";
+                    $fluid_name = "Milk";
+                    $fluid_amount = round($fluid_amount_original / 5, 1);
                     break;
 
                 case 3:
                     $fluid_taskcolor = "009B00";
+                    $fluid_amount = round($fluid_amount_original, 1);
+                    $fluid_name = "Fruit";
                     break;
 
             }
@@ -171,10 +181,10 @@ class VisualizerController extends Controller
                 "task_type" => "water",
                 "date" => Carbon::parse($task_water->time_taken)->format('d/m/Y h:i'),
                 "date_short" => Carbon::parse($task_water->time_taken)->format('d/m/Y'),
-                "task" => $fluid_str,
+                "task" => "$fluid_name | $fluid_amount" . "L",
                 "description" => "...",
                 "time_start" => Carbon::parse($task_water->time_taken)->format('H'),
-                "time_end" => Carbon::parse($task_water->time_taken)->add("3 hours")->format('H'), 
+                "time_end" => Carbon::parse($task_water->time_taken)->add("$fluid_amount_original hours")->format('H'), 
                 "bg_color" => "$fluid_taskcolor",
             );
 
