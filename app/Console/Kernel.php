@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('app:prompt-scheduled-meals')->everyTenMinutes();; // Adjust the schedule as needed
+        $schedule->command('app:prompt-scheduled-meals')->everyMinute(); // Adjust the schedule as needed
     }
 
     /**
