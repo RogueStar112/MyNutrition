@@ -7,7 +7,7 @@ use App\View\Components\MealFoodItem;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
+use Carbon\CarbonPeriod;
 
 use Auth;
 
@@ -22,7 +22,12 @@ use App\Models\Macronutrients;
 use App\Models\Meal;
 use App\Models\MealItems;
 
+use App\Models\UserHealthLogs;
+
 use App\Http\Traits\CalendarGenerator;
+
+use Illuminate\Support\Collection;
+use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 
 
 
@@ -31,6 +36,73 @@ class DashboardController extends Controller
 {   
     
     use CalendarGenerator;
+
+    public function renderBodyStatsChart() {
+
+        $user_id = Auth::user()->id;
+
+        $start = Carbon::parse();
+        $end = Carbon::now();
+
+        $period = CarbonPeriod::create($start, "1 month", $end);
+
+        $bodyStats = collect($period)->map(function ($date) {
+            $endDate = $date->copy()->endOfMonth();
+            $user_id = Auth::user()->id;
+
+            return [
+                "weight" => UserHealthLogs::where('time_updated', '<=', $endDate)
+                                          ->where('user_id', '=', $user_id)
+                                          ->get(),
+
+                "day" => $endDate->format("Y-m-d")
+            ];
+        });
+
+
+        $data_weight = $bodyStats->pluck('weight')->toArray();
+        $data_bmi = $bodyStats->pluck('bmi')->toArray();
+        $data_bodyfat = $bodyStats->pluck('body_fat')->toArray();
+
+        $labels = $bodyStats->pluck('weight')->toArray();
+
+        return $data_weight;
+
+        // $chart = Chartjs::build()
+        //     ->name("BodyStatsChart")
+        //     ->type("line")
+        //     ->size(["width" => 400, "height" => 200])
+        //     ->labels($labels)
+        //     ->datasets([
+        //         [
+        //             "label" => "Weight (kg)",
+        //             "backgroundColor" => "rgba(38, 185, 154, 0.31)",
+        //             "borderColor" => "rgba(38, 185, 154, 0.7)",
+        //             "data" => $data_weight
+        //         ]
+        //     ])
+        //     ->options([
+        //         'scales' => [
+        //             'x' => [
+        //                 'type' => 'time',
+        //                 'time' => [
+        //                     'unit' => 'month'
+        //                 ],
+        //                 'min' => $start->format("Y-m-d"),
+        //             ]
+        //         ],
+        //         'plugins' => [
+        //             'title' => [
+        //                 'display' => true,
+        //                 'text' => 'Body Stats'
+        //             ]
+        //         ]
+        //     ]);
+
+        // return view("user.chart", compact("chart"));
+
+    }
+
 
     public function showMealCalendar() {
         $calendarData = $this->calendar();

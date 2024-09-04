@@ -37,7 +37,11 @@ Route::get('/nutrition', function () {
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard/render/body_stats_chart', [DashboardController::class, 'renderBodyStatsChart']);
+
+
     Route::get('/dashboard/{start_date}/{end_date}', [DashboardController::class, 'dashboard_stats'])->name('dashboard.stats');
+
 
     Route::get('/nutrition/food', [FoodController::class, 'food_form'])->name('food.create');
 

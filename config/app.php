@@ -185,4 +185,6 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'Chartjs' => IcehouseVentures\LaravelChartjs\Facades\Chartjs::class,
+
 ];
