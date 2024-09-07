@@ -592,7 +592,7 @@ class FoodController extends Controller
                                                 ->first();
 
                 $micronutrients_to_update = Micronutrients::where('food_id', $id)
-                                                ->first();
+                                                ->first() ?? new Micronutrients();
 
                 $meal_items_to_update = MealItems::where('food_id', $id)
                                           ->get();
@@ -615,10 +615,11 @@ class FoodController extends Controller
 
                 $macronutrients_to_update->save();
 
-                $micronutrients_to_update->sugars = $food_sugars;
-                $micronutrients_to_update->saturates = $food_saturates;
-                $micronutrients_to_update->fibre = $food_fibre;
-                $micronutrients_to_update->salt = $food_salt;
+                $micronutrients_to_update->food_id = $id;
+                $micronutrients_to_update->sugars = $food_sugars ?? 0;
+                $micronutrients_to_update->saturates = $food_saturates ?? 0;
+                $micronutrients_to_update->fibre = $food_fibre ?? 0;
+                $micronutrients_to_update->salt = $food_salt ?? 0;
 
                 $micronutrients_to_update->save();
 

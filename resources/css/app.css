@@ -258,3 +258,6 @@ label {
     background-size: contain;
 }
 
+#drink-type:focus {
+    outline: 0;
+}

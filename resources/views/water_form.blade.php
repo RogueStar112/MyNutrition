@@ -4,9 +4,9 @@
 
             <div class="relative w-full h-full overflow-hidden">
 
-                <h1 class="font-semibold text-6xl md:text-6xl uppercase dark:text-white text-3xl text-gray-800 leading-tight p-4 absolute top-1/2 z-50 primary-water-form -skew-y-6" style="width: 597px;">
+                <h1 class="font-semibold text-3xl md:text-6xl uppercase dark:text-white text-3xl text-gray-800 leading-tight text-center md:text-left md:p-4 md:absolute top-1/2 z-50 primary-water-form md:-skew-y-6 md:w-[597px]" style="">
                     {{-- {{ __('Log Water Intake') }} --}}
-                    Log <select id="drink-type" class="no-select-arrow text-4xl appearance-none dark:text-white text-gray-800 leading-tight p-4 top-1/2 z-50 primary-water-form border-none uppercase px-2 w-[180px]" style="-moz-appearance: none;">
+                    Log <select id="drink-type" class="no-select-arrow text-4xl appearance-none dark:text-white text-gray-800 leading-tight p-4 top-1/2 z-50 primary-water-form border-none uppercase px-2 w-[180px] outline-0 focus:outline-0" style="-moz-appearance: none;">
                            <option selected value="0" text-value="water">Water</option>
                            <option value="1" text-value="coke">Coke</option>
                            <option value="2" text-value="milk">Milk</option>
@@ -15,23 +15,23 @@
                 </h1>
 
 
-            <svg class="absolute top-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320 z-50">
+            <svg class="absolute top-4  collapse md:visible" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320 z-50">
                 <path fill="#0465A5" fill-opacity="0.5" d="M0,160L48,144C96,128,192,96,288,122.7C384,149,480,235,576,245.3C672,256,768,192,864,192C960,192,1056,256,1152,261.3C1248,267,1344,213,1392,186.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
 
 
-            <div class="absolute tertiary-water-form w-[128px] h-[128px] right-[53.5%] top-[79%] -skew-x-[24deg] z-20">
+            <div class="absolute collapse md:visible tertiary-water-form w-[128px] h-[128px] right-[53.5%] top-[79%] -skew-x-[24deg] z-20">
                 
             </div>
 
-            <div class="absolute primary-water-form w-[384px] /h-[64px] h-[128px] top-[14rem] right-[24.41rem] -skew-x-[24deg] -skew-y-[10deg] z-0">
+            <div class="absolute collapse md:visible primary-water-form w-[384px] /h-[64px] h-[128px] top-[14rem] right-[24.41rem] -skew-x-[24deg] -skew-y-[10deg] z-10">
                 
             </div>
 
             
 
 
-            <svg class="shadow-2xl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="0.75" d="M0,160L48,144C96,128,192,96,288,122.7C384,149,480,235,576,245.3C672,256,768,192,864,192C960,192,1056,256,1152,261.3C1248,267,1344,213,1392,186.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+            <svg class="hidden md:block md:relative shadow-2xl bottom-0 select-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="0.75" d="M0,160L48,144C96,128,192,96,288,122.7C384,149,480,235,576,245.3C672,256,768,192,864,192C960,192,1056,256,1152,261.3C1248,267,1344,213,1392,186.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
             </div>
 
             <i class="collapse md:visible fas fa-tint fa-3x p-4 text-blue-200 scale-[1.7] -rotate-[30deg] absolute right-[20px] bottom-16 translate-x-1/2 -translate-y-1/2"></i>
@@ -58,7 +58,7 @@
             <p id="assume-text" class="w-fit secondary-water-form mx-auto p-4 -skew-x-12 text-lg">Assume each glass is 200ml.</p>
         </div>
 
-        <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24" style="/background-color: #0465A5; /background: radial-gradient(#0465A5, #9198e5);">
+        <div class="w-full max-h-[256px] md:h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-2 md:px-24 py-12 md:py-0" style="/background-color: #0465A5; /background: radial-gradient(#0465A5, #9198e5);">
 
 
                     <i class="fa-solid fa-circle-minus fa-3x text-white" id="decrease-glass"></i>
