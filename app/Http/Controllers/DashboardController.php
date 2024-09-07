@@ -27,9 +27,10 @@ use App\Models\UserHealthLogs;
 use App\Http\Traits\CalendarGenerator;
 
 use Illuminate\Support\Collection;
-use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 
+// use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 
+use Chartjs;
 
 
 class DashboardController extends Controller
@@ -66,40 +67,40 @@ class DashboardController extends Controller
 
         $labels = $bodyStats->pluck('weight')->toArray();
 
-        return $data_weight;
+        // return $data_weight;
 
-        // $chart = Chartjs::build()
-        //     ->name("BodyStatsChart")
-        //     ->type("line")
-        //     ->size(["width" => 400, "height" => 200])
-        //     ->labels($labels)
-        //     ->datasets([
-        //         [
-        //             "label" => "Weight (kg)",
-        //             "backgroundColor" => "rgba(38, 185, 154, 0.31)",
-        //             "borderColor" => "rgba(38, 185, 154, 0.7)",
-        //             "data" => $data_weight
-        //         ]
-        //     ])
-        //     ->options([
-        //         'scales' => [
-        //             'x' => [
-        //                 'type' => 'time',
-        //                 'time' => [
-        //                     'unit' => 'month'
-        //                 ],
-        //                 'min' => $start->format("Y-m-d"),
-        //             ]
-        //         ],
-        //         'plugins' => [
-        //             'title' => [
-        //                 'display' => true,
-        //                 'text' => 'Body Stats'
-        //             ]
-        //         ]
-        //     ]);
+        $chart = Chartjs::build()
+            ->name("BodyStatsChart")
+            ->type("line")
+            ->size(["width" => 400, "height" => 200])
+            ->labels($labels)
+            ->datasets([
+                [
+                    "label" => "Weight (kg)",
+                    "backgroundColor" => "rgba(38, 185, 154, 0.31)",
+                    "borderColor" => "rgba(38, 185, 154, 0.7)",
+                    "data" => $data_weight
+                ]
+            ])
+            ->options([
+                'scales' => [
+                    'x' => [
+                        'type' => 'time',
+                        'time' => [
+                            'unit' => 'month'
+                        ],
+                        'min' => $start->format("Y-m-d"),
+                    ]
+                ],
+                'plugins' => [
+                    'title' => [
+                        'display' => true,
+                        'text' => 'Body Stats'
+                    ]
+                ]
+            ]);
 
-        // return view("user.chart", compact("chart"));
+        return view("user.chart", compact("chart"));
 
     }
 

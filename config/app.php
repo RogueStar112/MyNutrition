@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider;
 
 return [
 
@@ -183,8 +184,10 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        
+        'Chartjs' => IcehouseVentures\LaravelChartjs\Facades\Chartjs::class,
     ])->toArray(),
 
-    'Chartjs' => IcehouseVentures\LaravelChartjs\Facades\Chartjs::class,
+    
 
 ];

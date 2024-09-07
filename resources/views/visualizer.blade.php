@@ -588,7 +588,7 @@
                                 transition: opacity 0.3s ease; 
                             "
                         >
-                            <p class='select-none'>${task.task}</p>
+                            <p class='select-none text-nowrap whitespace-nowrap w-fit'>${task.task}</p>
                         </div>
                     `);
 
