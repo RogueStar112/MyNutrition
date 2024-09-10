@@ -261,3 +261,11 @@ label {
 #drink-type:focus {
     outline: 0;
 }
+
+.primary-sleep-form {
+    background-color: #B692C2;
+}
+
+.tertiary-sleep-form {
+    background-color: #9071A8;
+}
