@@ -20,7 +20,11 @@ use App\Models\Micronutrients;
 use App\Models\Meal;
 use App\Models\MealItems;
 
+use App\Models\MealNotifications;
+
 use Illuminate\Support\Facades\DB;
+
+use Livewire\Livewire;
 
 class MealController extends Controller
 {
@@ -221,7 +225,22 @@ class MealController extends Controller
 
         $newMeal->name = $request->input('MEAL_NAME');
 
+        $is_DaylightSavings = date('I');
+        
+
+        // $date_time = strtotime($request->input('MEAL_TIME')) + 60*60;
+
+        // $is_DaylightSavings = date('I');
+
+        // // Get the timezone offset in seconds 
+        // $timezone_offset = date('Z'); 
+
+        // // Adjust timestamp if it's Daylight Saving Time 
         $date_time = strtotime($request->input('MEAL_TIME'));
+        // if ($is_DaylightSavings) {
+        //     $date_time += $timezone_offset; 
+        // } 
+
         $newMeal->time_planned = date('Y-m-d H:i:s', $date_time);
 
         // if the new meal's planned time is in the past...
@@ -915,6 +934,44 @@ class MealController extends Controller
         }
 
         return view('nutrition_meal_edit_form', ['meals' => $meal_select, 'meals_array' => $meals_array]);
+    }
+
+    public function load_meal_notifications() {
+
+        $user_id = Auth::user()->id;
+
+        $get_all_mealids_from_user = DB::table('meal')
+                                        ->select('id')
+                                        ->where('user_id', $user_id)
+                                        ->where('is_eaten', 0)
+                                        ->get();
+
+        // dd($get_all_mealids_from_user);
+
+        $meal_notifications_array = [];
+
+        // $meal_notifications_array[$user_id] = [];
+
+        foreach ($get_all_mealids_from_user as $meal_id) {
+
+            $meal_notifications_array[$meal_id->id] = DB::table('meal_notifications')->select('id', 'message')->where('meal_id', $meal_id->id)->get();
+
+
+        }
+        
+        // dd($meal_notifications_array);
+
+        foreach ($meal_notifications_array as $meal_notification) {
+
+            
+
+
+        }
+
+        return $meal_notifications_array;
+
+
+
     }
 
 }

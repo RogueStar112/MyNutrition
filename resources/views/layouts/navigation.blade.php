@@ -28,23 +28,36 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6 sm:gap-8">
-                <div class="flex relative justify-end fill-white text-3xl">
-        
-                      
-                    <svg class="invert" width="24px" height="24px" viewBox="0 0 32 32" id="Lager_95" data-name="Lager 95" xmlns="http://www.w3.org/2000/svg">
-                        <g id="Rectangle_1" data-name="Rectangle 1" transform="translate(4)" fill="none" stroke="#040505" stroke-miterlimit="10" stroke-width="4">
-                          <path d="M12,0h0A12,12,0,0,1,24,12V24a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V12A12,12,0,0,1,12,0Z" stroke="none"/>
-                          <path d="M12,2h0A10,10,0,0,1,22,12v8a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V12A10,10,0,0,1,12,2Z" fill="none"/>
-                        </g>
-                        <rect id="Rectangle_2" data-name="Rectangle 2" width="32" height="4" rx="2" transform="translate(0 20)" fill="#040505"/>
-                        <path id="Path_9" data-name="Path 9" d="M16,32h0a4,4,0,0,1-4-4V26h8v2A4,4,0,0,1,16,32Z" fill="#040505"/>
-                      </svg>
 
-                      <span class="hidden relative /flex mr-3 h-3 w-3">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                      </span>
-                </div>
+                @livewire('show-meal-notifications')
+
+                <form id="NOTIFICATION-FORM" method="GET">
+                    @csrf
+                    <button type="submit" id="notification-bell" class="flex relative justify-end fill-white text-3xl has-notifications cursor-pointer">
+            
+                        <div id="notifications-found" class="absolute bottom-0 right-0 bg-red-500 w-3 h-3 z-50 animate-ping rounded-full select-none">
+                        
+                        </div>  
+
+                        <div id="notifications-found-base" class="absolute bottom-0 right-0 bg-red-500 w-3 h-3 z-50 rounded-full text-sm select-none">
+                        54
+                        </div>  
+
+                        <svg class="invert" width="24px" height="24px" viewBox="0 0 32 32" id="Lager_95" data-name="Lager 95" xmlns="http://www.w3.org/2000/svg">
+                            <g id="Rectangle_1" data-name="Rectangle 1" transform="translate(4)" fill="none" stroke="#040505" stroke-miterlimit="10" stroke-width="4">
+                            <path d="M12,0h0A12,12,0,0,1,24,12V24a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V12A12,12,0,0,1,12,0Z" stroke="none"/>
+                            <path d="M12,2h0A10,10,0,0,1,22,12v8a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V12A10,10,0,0,1,12,2Z" fill="none"/>
+                            </g>
+                            <rect id="Rectangle_2" data-name="Rectangle 2" width="32" height="4" rx="2" transform="translate(0 20)" fill="#040505"/>
+                            <path id="Path_9" data-name="Path 9" d="M16,32h0a4,4,0,0,1-4-4V26h8v2A4,4,0,0,1,16,32Z" fill="#040505"/>
+                        </svg>
+
+                        <span class="hidden relative /flex mr-3 h-3 w-3">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                        </span>
+                    </button>
+                </form>
 
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -127,4 +140,35 @@
             </div>
         </div>
     </div>
+
+    <script>
+         var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+         $('#notification-bell').on("click", function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                            url: `/nutrition/notifications/load`,
+                            method: 'GET',
+                            headers: {
+                                'X-CSRF-TOKEN': csrfToken
+
+                            },
+                            data: {
+                                
+                                // no_of_foods: no_of_foods,
+                                // balancer: replacement_balancer,
+                                // query: query,
+                                // servingSize: servingSize,
+                                // quantity: quantity
+                                // ignoreServingSize: ignoreServingSize
+                            },
+                            success: function(response) {
+                                console.log(response);
+                            }
+
+            });
+         })
+    </script>
+
 </nav>

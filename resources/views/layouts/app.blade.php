@@ -29,6 +29,7 @@
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+        @livewireStyles
     </head>
     <body class="font-sans antialiased bg-slate-700">
         <div class="min-h-screen dark:bg-slate-700">
@@ -57,5 +58,6 @@
         <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 
+        @livewireStyles
     </body>
 </html>
