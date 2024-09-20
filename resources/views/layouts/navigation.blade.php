@@ -31,9 +31,9 @@
 
                 @livewire('show-meal-notifications')
 
-                <form id="NOTIFICATION-FORM" method="GET">
+                <form id="NOTIFICATION-FORM" method="GET" x-data="{ expanded: false }">
                     @csrf
-                    <button type="submit" id="notification-bell" class="flex relative justify-end fill-white text-3xl has-notifications cursor-pointer">
+                    <button type="submit" id="notification-bell" class="flex relative justify-end fill-white text-3xl has-notifications cursor-pointer" x-on:click="expanded = ! expanded">
             
                         <div id="notifications-found" class="absolute bottom-0 right-0 bg-red-500 w-3 h-3 z-50 animate-ping rounded-full select-none">
                         
@@ -41,6 +41,28 @@
 
                         <div id="notifications-found-base" class="absolute bottom-0 right-0 bg-red-500 w-3 h-3 z-50 rounded-full text-sm select-none">
                         54
+                        </div>  
+
+                        <div id="notifications-base" x-show="expanded" class="rounded-lg absolute top-[100%] bg-slate-900 h-[128px] w-[384px]">
+
+                            <div class="text-2xl italic text-center font-extrabold" >NOTIFICATIONS</div>
+
+
+                            <div id="notification-meal" class="w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-justify px-4 relative">
+                                
+                                <span class="text-slate-400">1)</span>
+                                Your meal named Meal Deal has passed the time planned (08/08/2023 11:00). Have you eaten this meal?
+
+
+                                <div class="flex w-full px-4 justify-around items-end [&>*]:p-2 [&>*]:w-full [&>*]:text-center mt-2 gap-4">
+                                    <div class="bg-green-600">YES</div>
+                                    <div class="bg-red-600">NO</div>
+                                </div>
+
+                            </div>
+
+                        
+                            
                         </div>  
 
                         <svg class="invert" width="24px" height="24px" viewBox="0 0 32 32" id="Lager_95" data-name="Lager 95" xmlns="http://www.w3.org/2000/svg">
@@ -144,6 +166,31 @@
     <script>
          var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
+         $( document ).ready(function() {
+            $.ajax({
+                            url: `/nutrition/notifications/load_count`,
+                            method: 'GET',
+                            headers: {
+                                'X-CSRF-TOKEN': csrfToken
+
+                            },
+                            data: {
+                                
+                                // no_of_foods: no_of_foods,
+                                // balancer: replacement_balancer,
+                                // query: query,
+                                // servingSize: servingSize,
+                                // quantity: quantity
+                                // ignoreServingSize: ignoreServingSize
+                            },
+                            success: function(response) {
+                                console.log(response)
+                                $('#notifications-found-base').html(response)
+                            }
+
+            });
+        });
+        
          $('#notification-bell').on("click", function(e) {
             e.preventDefault();
 
@@ -164,7 +211,8 @@
                                 // ignoreServingSize: ignoreServingSize
                             },
                             success: function(response) {
-                                console.log(response);
+                                console.log(response)
+                                $('#notifications-base').html(response)
                             }
 
             });

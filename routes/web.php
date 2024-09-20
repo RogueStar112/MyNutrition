@@ -103,7 +103,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/nutrition/visualizer/meal_widget_load/{id}', [VisualizerController::class, 'visualizer_mealwidget_load'])->name('visualizer.load_mealwidget');
 
+
+
     Route::get('/nutrition/notifications/load', [MealController::class, 'load_meal_notifications'])->name('notifications.meal');
+
+
+
+    Route::get('/nutrition/notifications/load_count', [MealController::class, 'load_meal_notifications_count'])->name('notifications.meal_count');
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])

@@ -109,7 +109,7 @@
 
                                             $meal_serving_x_quantity =  $meal[$meal_time][$food_item]['serving_x_quantity'];
 
-
+                                            
 
                                         @endphp
                                         <td><a class="text-orange-500" href="{{ route('food.view_item', ['user_id'=>$user_id, 'food_id'=>$meal_foodid, 'serving_size'=>$meal_servingsize])}}">{{$meal_foodname_display}}</a></td>
@@ -221,6 +221,7 @@
         </div>
         
     </div>
+    
 
     <script>
 

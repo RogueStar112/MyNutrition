@@ -944,6 +944,89 @@ class MealController extends Controller
                                         ->select('id')
                                         ->where('user_id', $user_id)
                                         ->where('is_eaten', 0)
+                                        ->orderBy('id', 'desc')
+                                        ->get();
+
+        // dd($get_all_mealids_from_user);
+
+        $meal_notifications_array = [];
+
+        // $meal_notifications_array[$user_id] = [];
+
+        foreach ($get_all_mealids_from_user as $meal_id) {
+
+            $meal_notifications_array[$meal_id->id] = DB::table('meal_notifications')->select('id', 'message')->where('meal_id', $meal_id->id)->first();
+
+
+        }
+        
+        // dd($meal_notifications_array);
+        $meal_notifications_html = "";
+        
+        
+
+        foreach ($meal_notifications_array as $meal_idkey => $meal_notification) {
+
+            $meal_message = $meal_notification->message ?? "waiting";
+            
+
+            $meal_notifications_html = "";
+
+            $meal_notifications_html .= '<div class="text-2xl italic text-center font-extrabold" >NOTIFICATIONS</div>';
+
+
+            foreach ($meal_notifications_array as $meal_idkey => $meal_notification) {
+                $meal_message = $meal_notification->message ?? "waiting";
+
+                $meal_notifications_html .= '
+                    <div id="notification-meal-' . $meal_idkey . '" class="py-4 w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-center px-4 relative z-50 flex justify-between items-center">
+                        <div class="grow w-[1/3]">
+                        <span class="text-slate-400 grow">' . $meal_idkey . ')</span> ' .
+                        $meal_message . '
+                        </div>
+                        <div class="flex w-full px-4 justify-center items-end [&>*]:p-2 [&>*]:rounded-full [&>*]:w-full [&>*]:text-center mt-2">
+                            <div class="bg-green-600"><i class="fas fa-check"></i></div>
+                            <div class="bg-yellow-300 text-black"><i class="fas fa-pencil"></i></div>
+                            <div class="bg-red-600"><i class="fas fa-x"></i></div>
+                        </div>
+                    </div>
+                ';
+            }
+
+
+        }
+
+        // $meal_notifications_html = `
+        // <div id="notification-meal-$meal_idkey" class="w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-justify px-4 relative">
+                                
+        //                         <span class="text-slate-400">1)</span>
+        //                         Your meal named Meal Deal has passed the time planned (08/08/2023 11:00). Have you eaten this meal?
+
+
+        //                         <div class="flex w-full px-4 justify-around items-end [&>*]:p-2 [&>*]:w-full [&>*]:text-center mt-2 gap-4">
+        //                             <div class="bg-green-600">YES</div>
+        //                             <div class="bg-red-600">NO</div>
+        //                         </div>
+
+        //                     </div>
+        // `
+
+        
+
+        return $meal_notifications_html;
+
+
+
+    }
+
+    public function load_meal_notifications_count() {
+
+        $user_id = Auth::user()->id;
+
+        $get_all_mealids_from_user = DB::table('meal')
+                                        ->select('id')
+                                        ->where('user_id', $user_id)
+                                        ->where('is_eaten', 0)
                                         ->get();
 
         // dd($get_all_mealids_from_user);
@@ -961,17 +1044,14 @@ class MealController extends Controller
         
         // dd($meal_notifications_array);
 
-        foreach ($meal_notifications_array as $meal_notification) {
+        foreach ($meal_notifications_array as $meal_idkey => $meal_notification) {
 
             
 
 
         }
 
-        return $meal_notifications_array;
-
-
+        return count($meal_notifications_array);
 
     }
-
 }

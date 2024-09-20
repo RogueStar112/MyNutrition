@@ -60,7 +60,21 @@ class PromptScheduledMeals extends Command
                 $meal_reminder_time = date("d/m/Y H:i", strtotime($meal->time_planned));
                 $meal_name = $meal->name;
                 
-                $meal_notification->message = "Your meal named $meal_name has passed the time planned ($meal_reminder_time). Have you eaten this meal?";
+                $rng = rand(0, 2);
+
+                switch($rng) {
+                    case 0:
+                        $meal_notification->message = "Your meal named $meal_name has passed the time planned ($meal_reminder_time). Have you eaten this meal?";
+                        break;
+                    case 1:
+                        $meal_notification->message = "Your meal: $meal_name was planned at $meal_reminder_time. Have you eaten this?";
+                        break;
+                    case 2:
+                        $meal_notification->message = "$meal_name was planned at $meal_reminder_time. Have you eaten it?";
+                        break;
+
+                }
+                
 
                 $meal_notification->is_accepted = 0;
 
