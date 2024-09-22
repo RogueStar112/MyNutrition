@@ -1,4 +1,4 @@
-<nav class="bg-white dark:bg-slate-800 dark:text-white border-b border-gray-800">
+<nav class="bg-white dark:bg-slate-800 dark:text-white border-b border-gray-800" x-data="{ open : true }">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -29,9 +29,9 @@
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6 sm:gap-8">
 
-                @livewire('show-meal-notifications')
+                {{-- @livewire('show-meal-notifications') --}}
 
-                <form id="NOTIFICATION-FORM" method="GET"  x-data="{ expanded: false }" >
+                <form id="NOTIFICATION-FORM" class="relative" method="GET"  x-data="{ expanded: false }">
                     @csrf
                     <button type="submit" id="notification-bell" class="flex relative justify-end fill-white text-3xl has-notifications cursor-pointer"" x-on:click="expanded = ! expanded">
             
@@ -43,7 +43,7 @@
                         
                         </div>  
 
-                        <div id="notifications-base" class="rounded-lg absolute top-[100%] bg-slate-900 h-[128px] w-[256px]"  x-collapse.duration.1000ms x-show="expanded">
+                        {{-- <div id="notifications-base" class="rounded-lg absolute top-[100%] bg-slate-900 h-[128px] w-[256px]"  x-show="expanded">
 
                             <div class="text-2xl italic text-left font-extrabold px-4" >NOTIFICATIONS</div>
 
@@ -63,7 +63,7 @@
 
                         
                             
-                        </div>  
+                        </div>   --}}
 
                         <svg class="invert" width="24px" height="24px" viewBox="0 0 32 32" id="Lager_95" data-name="Lager 95" xmlns="http://www.w3.org/2000/svg">
                             <g id="Rectangle_1" data-name="Rectangle 1" transform="translate(4)" fill="none" stroke="#040505" stroke-miterlimit="10" stroke-width="4">
@@ -79,7 +79,31 @@
                             <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
                         </span>
                     </button>
+
+                    <div id="notifications-base" class="rounded-lg absolute top-[100%] bg-slate-900 h-[128px] w-[256px] right-0"  x-show="expanded">
+
+                        <div class="text-2xl italic text-left font-extrabold px-4" >NOTIFICATIONS</div>
+
+
+                        <div id="notification-meal" class="w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-justify px-4 relative items-start">
+                            
+                            <span class="text-slate-400">1)</span>
+                            Your meal named Meal Deal has passed the time planned (08/08/2023 11:00). Have you eaten this meal?
+
+
+                            <div class="flex w-full px-4 justify-around items-end [&>*]:p-2 [&>*]:w-full [&>*]:text-center mt-2 gap-4">
+                                <div class="bg-green-600">YES</div>
+                                <div class="bg-red-600">NO</div>
+                            </div>
+
+                        </div>
+
+                    
+                        
+                    </div>  
                 </form>
+
+                
 
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -223,16 +247,21 @@
             });
          })
 
-         document.addEventListener('click', function(event) {
-            const notificationsBase = document.getElementById('notifications-base');
-            const notificationBell = document.getElementById('notification-bell');
+        //  document.addEventListener('click', function(event) {
+        //     const notificationsBase = document.getElementById('notifications-base');
+        //     const notificationBell = document.getElementById('notification-bell');
 
-            // Check if the click is outside the notification dropdown and the bell button
-            if (notificationsBase && !notificationsBase.contains(event.target) && !notificationBell.contains(event.target)) {
-                // Close the dropdown
-                Alpine.store('expanded', false); // Assuming you're using Alpine.js for x-data
-            }
-        });
+        //     if (notificationsBase && !notificationsBase.contains(event.target) && !notificationBell.contains(event.target)) {
+        //         // Find the x-data element controlling the dropdown
+        //         const xDataElement = notificationsBase.closest('[x-data]');
+
+        //         console.log('DATA ELEMENT?', xDataElement)
+        //         if (xDataElement) {
+        //             // Dispatch a custom event to toggle the 'expanded' state
+        //             xDataElement.dispatchEvent(new CustomEvent('toggle-notifications')); 
+        //         }
+        //     }
+        // });
     </script>
 
 </nav>

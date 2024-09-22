@@ -105,7 +105,7 @@
 
         @endphp
 
-        <div class="grid grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6" id="food-item-{{$food['food_id']}}">
+        <div class="grid grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6" id="food-item-{{$food['food_id']}}" x-data="{ serving_size: {{$servingSize}}, quantity: {{$quantity}} }">
 
             <div class="bg-transparent self-center">
                 <img class="/p-6 object-cover rounded-full /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="" />
@@ -129,9 +129,29 @@
 
                 
             <div class="text-white h-full text-center mr-2 self-center" aria-label="food-macros">
-            
-                <p class="w-full">Per {{($servingSize != $food['serving_size']) ? $servingSize : $food['serving_size']}}{{$food['food_unit_short']}}. (normally {{$food['serving_size'] . $food['food_unit_short']}}) </p>
+                <div class="flex justify-center gap-6 [&>button]:w-[16px] [&>button]:h-[16px]">
 
+                    <div class="flex gap-3 justify-center">
+                        <button class="text-red-600" x-on:click.prevent="serving_size -= 10"><i class="fa fa-minus"></i></button>
+                    
+                        <button class="text-red-400" x-on:click.prevent="parseFloat((serving_size -= 1).toFixed(1))"><i class="fa fa-minus"></i></button>
+
+                        <button class="text-red-200" x-on:click.prevent="serving_size = parseFloat((serving_size - 0.1).toFixed(1))"><i class="fa fa-minus"></i></button>
+                    </div>
+
+
+                    {{-- <p class="w-fit">Per {{($servingSize != $food['serving_size']) ? $servingSize : $food['serving_size']}}{{$food['food_unit_short']}}. (normally {{$food['serving_size'] . $food['food_unit_short']}}) </p> --}}
+
+                    <p class="w-fit">Per <span x-text="serving_size"> </span>{{$food['food_unit_short']}}</p>
+
+                    <div class="flex gap-3 justify-center">
+                        <button class="text-green-200" x-on:click.prevent="serving_size = parseFloat((serving_size + 0.1).toFixed(1))"><i class="fa fa-plus"></i></button>
+
+                        <button class="text-green-400" x-on:click.prevent="serving_size += 1"><i class="fa fa-plus"></i></button>
+
+                        <button class="text-green-600" x-on:click.prevent="serving_size += 10"><i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
                 {{-- <div class="h-full"></div> --}}
 
                 {{-- Food Nutrients. --}}
@@ -140,7 +160,7 @@
                 
 
                     <section>
-                        <p>{{ ($food['calories'] > 1000) ? round($food['calories']/1000) . 'k ' : $food['calories'] . 'kcal' }}</p>
+                        <p x-text="parseFloat(serving_size * {{$food['calories']}}).toFixed(0) + 'kcal'">{{ ($food['calories'] > 1000) ? round($food['calories']/1000) . 'k ' : $food['calories'] . 'kcal' }}</p>
                         <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-blue-900">
                             <div id="food_progressbar_calories_{{$index}}" class="bg-blue-600 h-2.5 rounded-full {{$calorieExceedGlow ? "drop-shadow-glow animate-pulse" : ""}}" style="width: {{ $caloriePerc }}%"></div>
                         </div>
