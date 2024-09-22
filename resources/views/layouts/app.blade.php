@@ -45,7 +45,7 @@
             @endif
 
             <!-- Page Content -->
-            <main class="dark:bg-slate-700 h-full">
+            <main class="dark:bg-slate-700 h-full" x-data="{ expanded: false }" x-on:click="expanded = false">
                 {{ $slot }}
             </main>
         </div>

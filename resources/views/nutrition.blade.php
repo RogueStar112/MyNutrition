@@ -79,7 +79,7 @@
 {{-- 
                 <h2 class="text-6xl italic font-extrabold text-white m-4 pb-6 border-b-4 border-gray-500 w-full col-span-6">ACHIEVE</h2> --}}
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-3" href="{{route('goals.form')}}">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2" href="{{route('goals.form')}}">
 
                         <div class="flex justify-between text-blue-300 border-b-4 border-b-blue-300 items-center">
                             <h2 class="text-5xl uppercase p-4 font-black">Goals</h2>
@@ -89,11 +89,21 @@
                         <p class="text-white p-4">Set Macro and Sleep Goals.</p>
                     </a>
 
+                    
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2" href="{{route('compare.form')}}">
+
+                        <div class="flex justify-between text-purple-300 border-b-4 border-b-blue-300 items-center">
+                            <h2 class="text-5xl uppercase p-4 font-black">Compare</h2>
+                            <i class="fas fa-balance-scale fa-3x p-4"></i>
+                        </div>
+
+                        <p class="text-white p-4">Compare nutrition between certain foods!</p>
+                    </a>
                     {{-- <a href="col-span-3 slot-for-later"></a> --}}
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-3 relative">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2 relative">
 
-                        <p class="-rotate-12 text-5xl absolute left-1/2 top-1/4 text-white opacity-100 font-black -translate-x-1/2 translate-y-1/2 w-full text-center z-50">Coming Eventually</p>
+                        <p class="-rotate-12 text-5xl absolute left-1/2 top-1/4 text-white opacity-100 font-black -translate-x-1/2 translate-y-1/2 w-full text-center z-40">Coming Eventually</p>
 
                         <div class="flex justify-between text-yellow-500 border-b-4 border-b-yellow-500 opacity-80 blur-sm select-none items-center">
                             <h2 class="text-5xl uppercase p-4 font-black">Trophies</h2>

@@ -689,5 +689,9 @@ class FoodController extends Controller
         return $component->render()->with($component->data());
     }
 
+    public function compare_form() {
 
+        return view('nutrition_compare');
+
+    }
 }

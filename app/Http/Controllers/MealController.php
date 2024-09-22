@@ -618,6 +618,7 @@ class MealController extends Controller
         $meal_dates_select = Meal::selectRaw('strftime("%Y-%m-%d", time_planned) as date')
                                 ->where('user_id', $user_id)
                                 // ->orderBy('time_planned', 'desc')
+                                ->where('is_eaten', 1)
                                 ->orderByRaw('date(time_planned) DESC')
                                 ->distinct()
                                 ->get();
@@ -645,7 +646,9 @@ class MealController extends Controller
 
             $meal_select = Meal::where('user_id', $user_id)
                             ->whereBetween('time_planned', [$meal_date . ' 00:00:00', $meal_date . ' 23:59:59'])
+                            ->where('is_eaten', 1)
                             ->orderByRaw('time_planned ASC')
+
                             ->get();
 
 
@@ -953,9 +956,9 @@ class MealController extends Controller
 
         // $meal_notifications_array[$user_id] = [];
 
-        foreach ($get_all_mealids_from_user as $meal_id) {
+        foreach ($get_all_mealids_from_user as $index => $meal_id) {
 
-            $meal_notifications_array[$meal_id->id] = DB::table('meal_notifications')->select('id', 'message')->where('meal_id', $meal_id->id)->first();
+            $meal_notifications_array[$index+1] = DB::table('meal_notifications')->select('id', 'message')->where('meal_id', $meal_id->id)->first();
 
 
         }
@@ -972,25 +975,24 @@ class MealController extends Controller
 
             $meal_notifications_html = "";
 
-            $meal_notifications_html .= '<div class="text-2xl italic text-center font-extrabold" >NOTIFICATIONS</div>';
+            $meal_notifications_html .= '<div class="text-2xl italic text-left font-extrabold p-4" >NOTIFICATIONS</div>';
 
 
             foreach ($meal_notifications_array as $meal_idkey => $meal_notification) {
                 $meal_message = $meal_notification->message ?? "waiting";
 
                 $meal_notifications_html .= '
-                    <div id="notification-meal-' . $meal_idkey . '" class="py-4 w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-center px-4 relative z-50 flex justify-between items-center">
-                        <div class="grow w-[1/3]">
-                        <span class="text-slate-400 grow">' . $meal_idkey . ')</span> ' .
-                        $meal_message . '
-                        </div>
-                        <div class="flex w-full px-4 justify-center items-end [&>*]:p-2 [&>*]:rounded-full [&>*]:w-full [&>*]:text-center mt-2">
-                            <div class="bg-green-600"><i class="fas fa-check"></i></div>
-                            <div class="bg-yellow-300 text-black"><i class="fas fa-pencil"></i></div>
-                            <div class="bg-red-600"><i class="fas fa-x"></i></div>
-                        </div>
+                <div id="notification-meal-' . $meal_idkey . '" class="py-4 w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-center px-4 relative z-50 flex flex-col justify-left gap-4 items-start" x-show="expanded">
+                    <div class="grow w-[1/3]">
+                        <span class="text-slate-400 grow">' . $meal_idkey . ')</span> ' . $meal_message . '
                     </div>
-                ';
+                    <div class="flex w-full px-4 justify-around gap-4 items-end [&>*]:p-2 [&>*]:rounded-lg [&>*]:w-fit gap-6 [&>*]:text-center mt-2 min-w-max">
+                        <div class="bg-blue-600 hover:bg-blue-700 text-white" wire:click="markAsEaten(' . $meal_idkey . ')">Yes</div>
+                        <div class="bg-red-600 hover:bg-red-700 text-white" wire:click="markAsDeleted(' . $meal_idkey . ')">No</div>
+                        <div class="bg-yellow-600 hover:bg-yellow-700">Edit</div> 
+                    </div>
+                </div>
+            ';
             }
 
 

@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-slate-800 dark:text-white border-b border-gray-800">
+<nav class="bg-white dark:bg-slate-800 dark:text-white border-b border-gray-800">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -31,24 +31,24 @@
 
                 @livewire('show-meal-notifications')
 
-                <form id="NOTIFICATION-FORM" method="GET" x-data="{ expanded: false }">
+                <form id="NOTIFICATION-FORM" method="GET"  x-data="{ expanded: false }" >
                     @csrf
-                    <button type="submit" id="notification-bell" class="flex relative justify-end fill-white text-3xl has-notifications cursor-pointer" x-on:click="expanded = ! expanded">
+                    <button type="submit" id="notification-bell" class="flex relative justify-end fill-white text-3xl has-notifications cursor-pointer"" x-on:click="expanded = ! expanded">
             
-                        <div id="notifications-found" class="absolute bottom-0 right-0 bg-red-500 w-3 h-3 z-50 animate-ping rounded-full select-none">
+                        <div id="notifications-found" class="absolute bottom-0 right-0 bg-red-500 w-3 h-3 z-50 animate-ping rounded-full select-none hidden">
                         
                         </div>  
 
-                        <div id="notifications-found-base" class="absolute bottom-0 right-0 bg-red-500 w-3 h-3 z-50 rounded-full text-sm select-none">
-                        54
+                        <div id="notifications-found-base" class="absolute bottom-0 right-0 bg-red-500 w-3 h-3 z-50 rounded-full text-sm select-none hidden">
+                        
                         </div>  
 
-                        <div id="notifications-base" x-show="expanded" class="rounded-lg absolute top-[100%] bg-slate-900 h-[128px] w-[384px]">
+                        <div id="notifications-base" class="rounded-lg absolute top-[100%] bg-slate-900 h-[128px] w-[256px]"  x-collapse.duration.1000ms x-show="expanded">
 
-                            <div class="text-2xl italic text-center font-extrabold" >NOTIFICATIONS</div>
+                            <div class="text-2xl italic text-left font-extrabold px-4" >NOTIFICATIONS</div>
 
 
-                            <div id="notification-meal" class="w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-justify px-4 relative">
+                            <div id="notification-meal" class="w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-justify px-4 relative items-start">
                                 
                                 <span class="text-slate-400">1)</span>
                                 Your meal named Meal Deal has passed the time planned (08/08/2023 11:00). Have you eaten this meal?
@@ -186,6 +186,11 @@
                             success: function(response) {
                                 console.log(response)
                                 $('#notifications-found-base').html(response)
+
+                                if(response > 0) {
+                                    $('#notifications-found').removeClass('hidden')
+                                    $('#notifications-found-base').removeClass('hidden')
+                                }
                             }
 
             });
@@ -211,12 +216,23 @@
                                 // ignoreServingSize: ignoreServingSize
                             },
                             success: function(response) {
-                                console.log(response)
+                                // console.log(response)
                                 $('#notifications-base').html(response)
                             }
 
             });
          })
+
+         document.addEventListener('click', function(event) {
+            const notificationsBase = document.getElementById('notifications-base');
+            const notificationBell = document.getElementById('notification-bell');
+
+            // Check if the click is outside the notification dropdown and the bell button
+            if (notificationsBase && !notificationsBase.contains(event.target) && !notificationBell.contains(event.target)) {
+                // Close the dropdown
+                Alpine.store('expanded', false); // Assuming you're using Alpine.js for x-data
+            }
+        });
     </script>
 
 </nav>

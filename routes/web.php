@@ -110,6 +110,10 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/nutrition/notifications/load_count', [MealController::class, 'load_meal_notifications_count'])->name('notifications.meal_count');
+
+    Route::get('/nutrition/compare', [FoodController::class, 'compare_form'])->name('compare.form');
+
+    Route::get('/nutrition/compare/p2', [FoodController::class, 'compare_food'])->name('compare.food');
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])
