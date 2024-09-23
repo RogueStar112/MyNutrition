@@ -31,9 +31,9 @@
 
                 {{-- @livewire('show-meal-notifications') --}}
 
-                <form id="NOTIFICATION-FORM" class="relative" method="GET"  x-data="{ expanded: false }">
+                <form id="NOTIFICATION-FORM" class="relative" method="GET"  x-data="{ expand_notifications: false }">
                     @csrf
-                    <button type="submit" id="notification-bell" class="flex relative justify-end fill-white text-3xl has-notifications cursor-pointer"" x-on:click="expanded = ! expanded">
+                    <button type="submit" id="notification-bell" class="flex relative justify-end fill-white text-3xl has-notifications cursor-pointer"" x-on:click="expand_notifications = ! expand_notifications">
             
                         <div id="notifications-found" class="absolute bottom-0 right-0 bg-red-500 w-3 h-3 z-50 animate-ping rounded-full select-none hidden">
                         
@@ -80,7 +80,7 @@
                         </span>
                     </button>
 
-                    <div id="notifications-base" class="rounded-lg absolute top-[100%] bg-slate-900 h-[128px] w-[256px] right-0"  x-show="expanded">
+                    <div id="notifications-base" class="rounded-lg absolute top-[100%] bg-slate-900 max-h-[384px] overflow-y-scroll w-[256px] right-0"  x-show="expand_notifications">
 
                         <div class="text-2xl italic text-left font-extrabold px-4" >NOTIFICATIONS</div>
 
@@ -101,6 +101,19 @@
                     
                         
                     </div>  
+
+                    <script>
+                        document.addEventListener('click', function(event) {
+                            const notificationsBase = document.getElementById('notifications-base');
+                            const notificationBell = document.getElementById('notification-bell');
+
+                            // Check if the click is outside the notification dropdown and the bell button
+                            if (notificationsBase && !notificationsBase.contains(event.target) && !notificationBell.contains(event.target)) {
+                                // Close the dropdown
+                                Alpine.store('expanded_notifications', false); // Assuming you're using Alpine.js for x-data
+                            }
+                        });
+                    </script>
                 </form>
 
                 
@@ -247,21 +260,7 @@
             });
          })
 
-        //  document.addEventListener('click', function(event) {
-        //     const notificationsBase = document.getElementById('notifications-base');
-        //     const notificationBell = document.getElementById('notification-bell');
-
-        //     if (notificationsBase && !notificationsBase.contains(event.target) && !notificationBell.contains(event.target)) {
-        //         // Find the x-data element controlling the dropdown
-        //         const xDataElement = notificationsBase.closest('[x-data]');
-
-        //         console.log('DATA ELEMENT?', xDataElement)
-        //         if (xDataElement) {
-        //             // Dispatch a custom event to toggle the 'expanded' state
-        //             xDataElement.dispatchEvent(new CustomEvent('toggle-notifications')); 
-        //         }
-        //     }
-        // });
+         
     </script>
 
 </nav>
