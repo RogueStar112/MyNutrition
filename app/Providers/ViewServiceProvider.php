@@ -11,10 +11,10 @@ use App\Models\MealNotifications;
 
 use Illuminate\Support\Facades\DB;
 
-class AppServiceProvider extends ServiceProvider
+class ViewServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      */
     public function register(): void
     {
@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      */
     public function boot(): void
     {
@@ -41,8 +41,8 @@ class AppServiceProvider extends ServiceProvider
 
             foreach ($get_all_mealids_from_user as $index => $meal_id) {
 
-                $mealNotifications[$index+1] = DB::table('meal_notifications')->select('id', 'message')->where('meal_id', $meal_id->id)->first() ?? ['id' => 1];
-                
+                $mealNotifications[$index+1] = DB::table('meal_notifications')->select('id', 'message')->where('meal_id', $meal_id->id)->first();
+
 
             }
 

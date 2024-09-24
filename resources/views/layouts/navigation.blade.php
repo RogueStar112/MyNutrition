@@ -30,6 +30,7 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6 sm:gap-8">
 
                 {{-- @livewire('show-meal-notifications') --}}
+                
 
                 <form id="NOTIFICATION-FORM" class="relative" method="GET"  x-data="{ expand_notifications: false }">
                     @csrf
@@ -80,9 +81,18 @@
                         </span>
                     </button>
 
-                    <div id="notifications-base" class="rounded-lg absolute top-[100%] bg-slate-900 max-h-[384px] overflow-y-scroll w-[256px] right-0"  x-show="expand_notifications">
+                    {{-- <livewire:meal-notification-livewire :id=20 /> --}}
 
-                        <div class="text-2xl italic text-left font-extrabold px-4" >NOTIFICATIONS</div>
+                    {{-- @foreach ($mealNotifications as $mealNotification)
+                        <livewire:meal-notification-livewire :id="$mealNotification->id" />
+                    @endforeach --}}
+
+                    <div id="notifications-base" class="rounded-lg absolute top-[100%] bg-slate-900 max-h-[440px] overflow-y-scroll w-[256px] right-0"  x-show="expand_notifications">
+
+                        @foreach ($mealNotifications as $mealNotification)
+                        <livewire:meal-notification-livewire :id="$mealNotification->id" />
+                         @endforeach
+                        {{-- <div class="text-2xl italic text-left font-extrabold px-4 border-b-4 border-b-slate-500" >NOTIFICATIONS</div>
 
 
                         <div id="notification-meal" class="w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-justify px-4 relative items-start">
@@ -96,13 +106,13 @@
                                 <div class="bg-red-600">NO</div>
                             </div>
 
-                        </div>
+                        </div> --}}
 
                     
                         
                     </div>  
 
-                    <script>
+                    {{-- <script>
                         document.addEventListener('click', function(event) {
                             const notificationsBase = document.getElementById('notifications-base');
                             const notificationBell = document.getElementById('notification-bell');
@@ -113,7 +123,7 @@
                                 Alpine.store('expanded_notifications', false); // Assuming you're using Alpine.js for x-data
                             }
                         });
-                    </script>
+                    </script> --}}
                 </form>
 
                 
@@ -254,7 +264,19 @@
                             },
                             success: function(response) {
                                 // console.log(response)
-                                $('#notifications-base').html(response)
+                                // $('#notifications-base').html(response)
+
+                                // response_Keys = Object.keys(response);
+
+                                // console.log(response)
+                                // console.log(response_Keys);
+                                
+                               let notificationsContainer = $('#notifications-base'); // Or any other suitable container
+                                notificationsContainer.empty(); // Clear previous notifications if needed
+
+                                $.each(response.components, function(index, componentHtml) {
+                                    notificationsContainer.append(componentHtml);
+                                });
                             }
 
             });

@@ -950,15 +950,13 @@ class MealController extends Controller
                                         ->orderBy('id', 'desc')
                                         ->get();
 
-        // dd($get_all_mealids_from_user);
-
         $meal_notifications_array = [];
 
-        // $meal_notifications_array[$user_id] = [];
+
 
         foreach ($get_all_mealids_from_user as $index => $meal_id) {
 
-            $meal_notifications_array[$index+1] = DB::table('meal_notifications')->select('id', 'message')->where('meal_id', $meal_id->id)->first();
+            $meal_notifications_array[$index+1] = DB::table('meal_notifications')->select('id', 'message')->where('meal_id', $meal_id->id)->where('is_accepted', 0)->first();
 
 
         }
@@ -976,29 +974,43 @@ class MealController extends Controller
 
             $meal_notifications_html = "";
 
-            $meal_notifications_html .= '<div class="text-2xl italic text-left font-extrabold p-4" >NOTIFICATIONS</div>';
+            $meal_notifications_html .= '<div class="text-2xl mb-2 border-b-2 border-b-slate-500 italic text-left font-extrabold p-4" >NOTIFICATIONS</div>';
 
+            
+            $renderedComponents = [];
+
+            $renderedComponents[] = '<div class="text-2xl mb-2 border-b-2 border-b-slate-500 italic text-left font-extrabold p-4" >NOTIFICATIONS</div>';
 
             foreach ($meal_notifications_array as $meal_idkey => $meal_notification) {
                 $meal_message = $meal_notification->message ?? "waiting";
 
                 $meal_id = $meal_notification->id ?? "NaN";
 
-                $meal_notifications_html .= '
-                <div id="notification-meal-' . $meal_idkey . '" class="py-4 w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-center px-4 relative z-50 flex flex-col justify-left gap-4 items-start">
-                    <div class="grow w-[1/3]">
-                        <span class="text-slate-400 grow">' . $meal_idkey . ')</span> ' . $meal_message . '
-                    </div>
-                    <div class="flex w-full px-4 justify-around gap-4 items-end [&>*]:p-2 [&>*]:rounded-lg [&>*]:w-fit gap-6 [&>*]:text-center [&>*]:cursor-pointer mt-2 min-w-max">
-                        <div class="bg-blue-600 hover:bg-blue-700 text-white" wire:click="markAsEaten(' . $meal_id . ')">Yes</div>
-                        <div class="bg-red-600 hover:bg-red-700 text-white" wire:click="markAsDeleted(' . $meal_id . ')">No</div>
-                        <div class="bg-yellow-600 hover:bg-yellow-700">Edit</div> 
-                    </div>
-                </div>
-            ';
+                
+                    $renderedComponents[] = view('livewire.meal-notification', [
+                        'key' => $meal_idkey ?? "NaN",
+                        'id' => $meal_notification->id ?? "NaN",
+                        'message' => $meal_notification->message ?? "NaN", 
+                    ])->render();
+
+                    
+
+            
+            //     $meal_notifications_html .= '
+            //     <div id="notification-meal-' . $meal_idkey . '" class="py-4 w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-center px-4 relative z-50 flex flex-col justify-left gap-4 items-start">
+            //         <div class="grow">
+            //             <span class="text-slate-400 grow">' . $meal_idkey . ')</span> ' . $meal_message . '
+            //         </div>
+            //         <div class="flex w-full px-4 justify-around gap-4 items-end [&>*]:p-2 [&>*]:rounded-lg [&>*]:w-fit gap-6 [&>*]:text-center [&>*]:cursor-pointer mt-2 min-w-max">
+            //             <button type="button" class="bg-blue-600 hover:bg-blue-700 text-white" wire:click.prevent="markAsEaten(' . $meal_id . ')">Yes</button>
+            //             <button type="button"  class="bg-red-600 hover:bg-red-700 text-white" wire:click.prevent="markAsDeleted(' . $meal_id . ')">No</button>
+            //             <button type="button"  class="bg-yellow-600 hover:bg-yellow-700">Edit</button> 
+            //         </div>
+            //     </div>
+            // ';
             }
 
-
+            return response()->json(['components' => $renderedComponents]);
         // $meal_notifications_html = `
         // <div id="notification-meal-$meal_idkey" class="w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-justify px-4 relative">
                                 
@@ -1015,8 +1027,6 @@ class MealController extends Controller
         // `
 
         
-
-        return $meal_notifications_html;
 
 
 

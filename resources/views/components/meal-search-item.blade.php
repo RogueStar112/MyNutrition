@@ -160,7 +160,7 @@
                 
 
                     <section>
-                        <p x-text="parseFloat(serving_size * {{$food['calories']}}).toFixed(0) + 'kcal'">{{ ($food['calories'] > 1000) ? round($food['calories']/1000) . 'k ' : $food['calories'] . 'kcal' }}</p>
+                        <p>{{ ($food['calories'] > 1000) ? round($food['calories']/1000) . 'k ' : $food['calories'] . 'kcal' }}</p>
                         <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-blue-900">
                             <div id="food_progressbar_calories_{{$index}}" class="bg-blue-600 h-2.5 rounded-full {{$calorieExceedGlow ? "drop-shadow-glow animate-pulse" : ""}}" style="width: {{ $caloriePerc }}%"></div>
                         </div>

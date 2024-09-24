@@ -12,6 +12,10 @@ use App\Http\Controllers\SleepController;
 use App\Http\Controllers\VisualizerController;
 use Illuminate\Support\Facades\Route;
 
+
+use Livewire\Component;
+use App\Livewire\MealNotificationLivewire;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -114,6 +118,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/nutrition/compare', [FoodController::class, 'compare_form'])->name('compare.form');
 
     Route::get('/nutrition/compare/p2', [FoodController::class, 'compare_food'])->name('compare.food');
+
+    Route::get('/components/meal_notifications/show/{id}', MealNotificationLivewire::class);
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])
