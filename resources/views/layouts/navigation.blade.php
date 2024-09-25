@@ -34,7 +34,7 @@
 
                 <form id="NOTIFICATION-FORM" class="relative" method="GET"  x-data="{ expand_notifications: false }">
                     @csrf
-                    <button type="submit" id="notification-bell" class="flex relative justify-end fill-white text-3xl has-notifications cursor-pointer"" x-on:click="expand_notifications = ! expand_notifications">
+                    <button type="submit" id="notification-bell" class="flex relative justify-end fill-white text-3xl has-notifications cursor-pointer"" x-on:click="expand_notifications = ! expand_notifications" >
             
                         <div id="notifications-found" class="absolute bottom-0 right-0 bg-red-500 w-3 h-3 z-50 animate-ping rounded-full select-none hidden">
                         
@@ -90,7 +90,9 @@
                     <div id="notifications-base" class="rounded-lg absolute top-[100%] bg-slate-900 max-h-[440px] overflow-y-scroll w-[256px] right-0"  x-show="expand_notifications">
 
                         @foreach ($mealNotifications as $mealNotification)
-                        <livewire:meal-notification-livewire :id="$mealNotification->id" />
+                            @isset($mealNotification->id)
+                                <livewire:meal-notification-livewire :id="$mealNotification->id" />
+                            @endisset
                          @endforeach
                         {{-- <div class="text-2xl italic text-left font-extrabold px-4 border-b-4 border-b-slate-500" >NOTIFICATIONS</div>
 

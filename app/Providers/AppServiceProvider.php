@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\View;
 
 use Auth;
 
+use Carbon\Carbon;
+
 use App\Models\MealNotifications;
 
 use Illuminate\Support\Facades\DB;
@@ -27,6 +29,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('layouts.navigation', function ($view) {
+            
+            $now = Carbon::now()->format('Y-m-d H:i:s');
+
             $user_id = Auth::user()->id;
 
             $get_all_mealids_from_user = DB::table('meal')
@@ -41,12 +46,12 @@ class AppServiceProvider extends ServiceProvider
 
             foreach ($get_all_mealids_from_user as $index => $meal_id) {
 
-                $mealNotifications[$index+1] = DB::table('meal_notifications')->select('id', 'message')->where('meal_id', $meal_id->id)->first() ?? ['id' => 1];
+                $mealNotifications[$index+1] = DB::table('meal_notifications')->select('id', 'meal_id', 'message', 'type')->where('meal_id', $meal_id->id)->first() ?? null;
                 
 
             }
 
-      
+            
             $view->with('mealNotifications', $mealNotifications);
         });
     }

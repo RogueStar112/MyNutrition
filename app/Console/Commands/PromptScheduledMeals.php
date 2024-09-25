@@ -43,8 +43,9 @@ class PromptScheduledMeals extends Command
     public function handle()
     {   
 
-        
-        $now = Carbon::now()->format('Y-m-d H:i:s');
+        $is_DaylightSavings = date('I');
+
+        $now = Carbon::now()->format('Y-m-d H:i:s') + ($is_DaylightSavings ? 60*60 : 0);
         $meals = Meal::where('time_planned', '<=', $now)
                     ->where('is_eaten', '=', 0)
                     ->where('is_notified', '=', 0)
@@ -77,6 +78,7 @@ class PromptScheduledMeals extends Command
                 
 
                 $meal_notification->is_accepted = 0;
+                $meal_notification->type = 1;
 
                 $meal_notification->save();
                 $meal_notification->touch();

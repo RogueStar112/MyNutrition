@@ -225,7 +225,6 @@ class MealController extends Controller
 
         $newMeal->name = $request->input('MEAL_NAME');
 
-        $is_DaylightSavings = date('I');
         
 
         // $date_time = strtotime($request->input('MEAL_TIME')) + 60*60;
@@ -274,6 +273,22 @@ class MealController extends Controller
 
 
         }
+
+        $newMeal_notification_prompt = new MealNotifications();
+
+        $newMeal_notification_prompt->meal_id = $newMeal_search->id;
+        
+        $newMeal_name = $newMeal_search->name;
+        $newMeal_notification_prompt_time = date("d/m/Y H:i", $date_time);
+
+        $newMeal_notification_prompt->message = "You have planned a meal named '$newMeal_name' for $newMeal_notification_prompt_time. Don't forget about it!";
+
+        $newMeal_notification_prompt->is_accepted = 0;
+        $newMeal_notification_prompt->type = 2;
+
+        $newMeal_notification_prompt->save();
+        $newMeal_notification_prompt->touch();
+
 
         return view('nutrition_meal_form');
         
@@ -956,7 +971,7 @@ class MealController extends Controller
 
         foreach ($get_all_mealids_from_user as $index => $meal_id) {
 
-            $meal_notifications_array[$index+1] = DB::table('meal_notifications')->select('id', 'message')->where('meal_id', $meal_id->id)->where('is_accepted', 0)->first();
+            $meal_notifications_array[$index+1] = DB::table('meal_notifications')->select('id', 'meal_id', 'message', 'type')->where('meal_id', $meal_id->id)->where('is_accepted', 0)->first();
 
 
         }
@@ -981,6 +996,8 @@ class MealController extends Controller
 
             $renderedComponents[] = '<div class="text-2xl mb-2 border-b-2 border-b-slate-500 italic text-left font-extrabold p-4" >NOTIFICATIONS</div>';
 
+            // dd($meal_notifications_array);
+
             foreach ($meal_notifications_array as $meal_idkey => $meal_notification) {
                 $meal_message = $meal_notification->message ?? "waiting";
 
@@ -988,8 +1005,8 @@ class MealController extends Controller
 
                 
                     $renderedComponents[] = view('livewire.meal-notification', [
-                        'key' => $meal_idkey ?? "NaN",
-                        'id' => $meal_notification->id ?? "NaN",
+                        'key' => $meal_notification->id ?? "NaN",
+                        'mealId' => $meal_notification->meal_id ?? "NaN",
                         'message' => $meal_notification->message ?? "NaN", 
                     ])->render();
 
@@ -1050,7 +1067,7 @@ class MealController extends Controller
 
         foreach ($get_all_mealids_from_user as $meal_id) {
 
-            $meal_notifications_array[$meal_id->id] = DB::table('meal_notifications')->select('id', 'message')->where('meal_id', $meal_id->id)->get();
+            $meal_notifications_array[$meal_id->id] = DB::table('meal_notifications')->select('id', 'message', 'type')->where('meal_id', $meal_id->id)->get();
 
 
         }
