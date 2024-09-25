@@ -46,10 +46,19 @@ class AppServiceProvider extends ServiceProvider
 
             foreach ($get_all_mealids_from_user as $index => $meal_id) {
 
-                $mealNotifications[$index+1] = DB::table('meal_notifications')->select('id', 'meal_id', 'message', 'type')->where('meal_id', $meal_id->id)->first() ?? null;
+                // $mealNotifications[$index+1] = DB::table('meal_notifications')->select('id', 'meal_id', 'message', 'type')->where('meal_id', $meal_id->id)->first() ?? null;
                 
+                $meal_notifications_search = DB::table('meal_notifications')->select('id', 'meal_id', 'message', 'type')->where('meal_id', $meal_id->id)->orderBy('created_at', 'asc')->get() ?? null;
+                
+                foreach ($meal_notifications_search as $notification) {
+
+                    $mealNotifications[$index+1][$notification->type] = $notification;
+
+                }
 
             }
+
+            // dd($mealNotifications);
 
             
             $view->with('mealNotifications', $mealNotifications);

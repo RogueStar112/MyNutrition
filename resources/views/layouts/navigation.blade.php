@@ -90,9 +90,11 @@
                     <div id="notifications-base" class="rounded-lg absolute top-[100%] bg-slate-900 max-h-[440px] overflow-y-scroll w-[256px] right-0"  x-show="expand_notifications">
 
                         @foreach ($mealNotifications as $mealNotification)
-                            @isset($mealNotification->id)
-                                <livewire:meal-notification-livewire :id="$mealNotification->id" />
-                            @endisset
+                            @foreach($mealNotification as $notification)
+                                @isset($notification->id)
+                                  <livewire:meal-notification-livewire :id="$notification->id" />
+                                @endisset
+                            @endforeach
                          @endforeach
                         {{-- <div class="text-2xl italic text-left font-extrabold px-4 border-b-4 border-b-slate-500" >NOTIFICATIONS</div>
 

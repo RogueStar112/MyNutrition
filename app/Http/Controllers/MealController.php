@@ -1065,14 +1065,26 @@ class MealController extends Controller
 
         // $meal_notifications_array[$user_id] = [];
 
-        foreach ($get_all_mealids_from_user as $meal_id) {
+        // foreach ($get_all_mealids_from_user as $meal_id) {
 
-            $meal_notifications_array[$meal_id->id] = DB::table('meal_notifications')->select('id', 'message', 'type')->where('meal_id', $meal_id->id)->get();
+        //     $meal_notifications_array[$meal_id->id] = DB::table('meal_notifications')->select('id', 'message', 'type')->where('meal_id', $meal_id->id)->get();
 
+        $notificationsCount = 0;
+        // }
+        foreach ($get_all_mealids_from_user as $index => $meal_id) {
 
-        }
+        $meal_notifications_search = DB::table('meal_notifications')->select('id', 'meal_id', 'message', 'type')->where('meal_id', $meal_id->id)->get() ?? null;
+                
+                foreach ($meal_notifications_search as $notification) {
+
+                    $meal_notifications_array[$index+1][$notification->type] = $notification;
+
+                    $notificationsCount += 1;
+
+                }
         
         // dd($meal_notifications_array);
+        }
 
         foreach ($meal_notifications_array as $meal_idkey => $meal_notification) {
 
@@ -1081,7 +1093,7 @@ class MealController extends Controller
 
         }
 
-        return count($meal_notifications_array);
+        return $notificationsCount;
 
     }
 }
