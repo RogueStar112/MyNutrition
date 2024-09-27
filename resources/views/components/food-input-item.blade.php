@@ -33,7 +33,7 @@
             </select>
         </label>
 
-        <label class="hidden md:block md:visible px-6 py-4 md:p-6 col-span-2" for="food_image_{{$index}}">
+        <label class="hidden /md:block md:visible px-6 py-4 md:p-6 col-span-2" for="food_image_{{$index}}">
 
             <span class="text-white">Upload Image (optional)</span>
 

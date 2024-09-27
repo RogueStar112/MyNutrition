@@ -1,5 +1,17 @@
 <div class="max-w-7xl overflow-x-auto px-6">
-    
+    @php
+        function getInitials($str) {
+            $words = explode(" ", $str); // Split the string into an array of words
+            $initials = "";
+
+            foreach ($words as $word) {
+                $initials .= $word[0]; // Append the first letter of each word
+            }
+
+            return strtoupper($initials); // Convert to uppercase and return
+        }
+    @endphp
+
     @foreach($foods as $index=>$food)
         
         @php
@@ -103,12 +115,16 @@
         } 
         
 
+        
+
+        $food_name_initials = getInitials($food['name']);
+
         @endphp
 
         <div class="grid grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6" id="food-item-{{$food['food_id']}}" x-data="{ serving_size: {{$servingSize}}, quantity: {{$quantity}} }">
 
-            <div class="bg-transparent self-center">
-                <img class="/p-6 object-cover rounded-full /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="" />
+            <div class="bg-transparent self-center flex justify-center items-center [&>img]:flex [&>img]:justify-evenly [&>img]:items-center rounded-full border-4 border-white">
+                <img class="/p-6 object-cover rounded-full text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="{{$food_name_initials}}" />
             </div>
 
             <div class="desc-box m-6 self-center">
