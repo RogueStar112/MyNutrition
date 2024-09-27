@@ -82,7 +82,10 @@
                                 
                                 <tr class="m-4">
                                     <td class="bg-orange-800 text-xl w-[170px]" colspan="1">{{ date('H:i', strtotime($meal_time)) }}</td>
-                                    <td class="bg-orange-900" colspan="4">{{ $meal[$meal_time]['meal_name'] }}</td>
+                                    <td class="bg-orange-900 relative" colspan="4">{{ $meal[$meal_time]['meal_name'] }}
+
+                                        <span class="absolute right-4 bg-orange-950 rounded-full px-1"><a href="{{ route('meal.edit_form', $meal[$meal_time]['meal_id']) }}"><i class="fas fa-pencil-alt"></i></a></span>
+                                    </td>
                                 </tr>
 
                                 @foreach(array_keys($meal[$meal_time]) as $food_item) 

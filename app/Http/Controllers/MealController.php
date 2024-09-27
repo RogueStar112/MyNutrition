@@ -683,7 +683,7 @@ class MealController extends Controller
                 // $meal_dates_ymd[$meal_date]['meal_date'] = $meal_date;
                 // $meal_dates_ymd[$meal_date]['time_planned'] = date('H:i', strtotime($meal->time_planned));
                 $meal_dates_ymd[0][$meal_date][$meal_time]['meal_name'] = $meal->name;
-
+                $meal_dates_ymd[0][$meal_date][$meal_time]['meal_id'] = $meal->id;
                 
                 // $meal_dates_ymd[$meal_date]['calories'] = 0;
                 // $meal_dates_ymd[$meal_date]['fat'] = 0;
@@ -799,6 +799,8 @@ class MealController extends Controller
         }
 
         // return $meal_dates_ymd;
+
+        // dd ($meal_dates_ymd);
 
         return view('nutrition_meal_view', ['meals' => $meal_dates_ymd, 'calendar' => $calendar, 'user_id' => $user_id]);
 
