@@ -231,13 +231,13 @@
                 {{-- <div class="h-full"></div> --}}
             </div>
 
-            <div id="food-add-{{$food['food_id']}}" class="absolute flex flex-col justify-center items-center h-full rounded-r-lg right-0 bg-green-500 add_food_icon cursor-pointer max-w-[44px]" value="{{$food['id']}}">
+            <div id="food-add-{{$food['food_id']}}" class="absolute flex flex-col justify-center items-center h-full rounded-r-lg right-0 bg-green-500 cursor-pointer max-w-[44px]">
                     
-                    <div class="grow flex justify-center items-center">
+                    <div class="grow flex justify-center items-center add_food_icon" value="{{$food['id']}}">
                     <i id="food-add-icon-{{$food['food_id']}}" class="flex fas fa-plus fa-2x text-white self-center cursor-pointer py-auto px-2"></i>
                     </div>
 
-                    <div class="grow bg-red-800 rounded-br-lg flex justify-center items-center" >
+                    <div class="grow bg-red-800 rounded-br-lg flex justify-center items-center delete_food_icon" value="{{$food['id']}}">
                     <i id="food-del-icon-{{$food['food_id']}}" class="flex fas fa-trash fa-2x text-white self-center cursor-pointer py-auto px-2"></i>
                     </div>
                     
@@ -670,10 +670,27 @@
                     });
 
                     
+                    
 
 
             });
 
+            $('.delete_food_icon').on("click", function(e) {
+                e.preventDefault();
+
+                var query_delete = $(this).attr('value');
+
+                var newArray = foods_pages.filter(function(e) { 
+                    return e != query_delete; // Removed template literal
+                });
+
+                console.log('NEW DELETED ARRAY', newArray);
+
+                foods_pages = newArray;
+            });
+            
+            
         });
+
     </script>
 </div>

@@ -952,7 +952,9 @@ class MealController extends Controller
             $meals_array[$key]['quantity'] = $value->quantity;
             
         }
-
+        
+        // dd($meals_array);
+        
         return view('nutrition_meal_edit_form', ['meals' => $meal_select, 'meals_array' => $meals_array]);
     }
 
@@ -1088,12 +1090,12 @@ class MealController extends Controller
         // dd($meal_notifications_array);
         }
 
-        foreach ($meal_notifications_array as $meal_idkey => $meal_notification) {
+        // foreach ($meal_notifications_array as $meal_idkey => $meal_notification) {
 
             
 
 
-        }
+        // }
 
         return $notificationsCount;
 

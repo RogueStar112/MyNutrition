@@ -155,7 +155,7 @@
             
              for (let i=0; i<meals_array.length; i++) {
 
-              meal_json[meals_array[i]['food_id']] = {'index': i, 'query': meals_array[i]['food_id'], 'servingSize': meals_array[i]['servingSize'],'quantity': meals_array[i]['quantity']};
+              meal_json[meals_array[i]['food_id']] = {'index': i+1, 'query': meals_array[i]['food_id'], 'servingSize': meals_array[i]['servingSize'],'quantity': meals_array[i]['quantity']};
               console.log(meal_json);
 
               food_array.push(meal_json[meals_array[i]['food_id']]);
@@ -278,6 +278,8 @@
                             // $("#no_of_foods").val(0)
 
                             console.log('NO OF FOODS: SUCCESS', no_of_foods);
+
+                            no_of_foods += 1;
 
                             console.log('food_array', food_array);
 
