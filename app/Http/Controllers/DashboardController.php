@@ -265,4 +265,9 @@ class DashboardController extends Controller
 
         return view('visualizer');
     }
+
+    public function advanced_menu() {
+
+        return view('nutrition_advanced');
+    }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\GoalsController;
 use App\Http\Controllers\WaterController;
 use App\Http\Controllers\SleepController;
 use App\Http\Controllers\VisualizerController;
+use App\Http\Controllers\SuggesterController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -120,6 +121,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/nutrition/compare/p2', [FoodController::class, 'compare_food'])->name('compare.food');
 
     Route::get('/components/meal_notifications/show/{id}', MealNotificationLivewire::class);
+
+    Route::get('/nutrition/advanced', [DashboardController::class, 'advanced_menu'])->name('nutrition_advancedMenu');
+
+    Route::get('/nutrition/advanced/suggester', [SuggesterController::class, 'suggester_form'])->name('advanced.suggester');
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])

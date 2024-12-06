@@ -20,9 +20,9 @@ return new class extends Migration
             $table->float('salt', 8, 1)->nullable();
         });
 
-        Schema::table('food', function (Blueprint $table) {
-            $table->longText('description')->nullable();
-        });
+        // Schema::table('food', function (Blueprint $table) {
+        //     $table->longText('description')->nullable();
+        // });
     }
 
     /**

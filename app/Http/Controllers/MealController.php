@@ -91,7 +91,7 @@ class MealController extends Controller
                 "meal_sugars_$food_pages_x" => 'nullable|numeric|max:1000',
                 "meal_saturates_$food_pages_x" => 'nullable|numeric|max:1000',
                 "meal_fibre_$food_pages_x" => 'nullable|numeric|max:1000',
-                "meal_salt_$food_pages_x" => 'required|numeric|max:1000',
+                "meal_salt_$food_pages_x" => 'nullable|numeric|max:1000',
 
 
                 
@@ -245,8 +245,10 @@ class MealController extends Controller
         // if the new meal's planned time is in the past...
         if (date('Y-m-d H:i:s', $date_time) < Carbon::now()->format('Y-m-d H:i:s')) {
             $newMeal->is_eaten = 1;
+            $newMeal->is_notified = 0;
         } else {
             $newMeal->is_eaten = 0;
+            $newMeal->is_notified = 1;
         }
 
         $newMeal->save();

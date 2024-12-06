@@ -124,7 +124,9 @@
         <div class="grid grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6" id="food-item-{{$food['food_id']}}" x-data="{ serving_size: {{$servingSize}}, quantity: {{$quantity}} }">
 
             <div class="bg-transparent self-center flex justify-center items-center [&>img]:flex [&>img]:justify-evenly [&>img]:items-center rounded-full border-4 border-slate-500">
-                <img class="/p-6 object-cover rounded-full text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="{{$food_name_initials}}" />
+
+                
+                <img class="/p-6 object-cover {{ empty($food['img_url']) ? "hidden" : "" }} rounded-full text-center leading-[128px] text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="{{$food_name_initials}}" />
             </div>
 
             <div class="desc-box m-6 self-center">

@@ -35,7 +35,7 @@
     <body class="font-sans antialiased bg-slate-700">
         <div class="min-h-screen dark:bg-slate-700">
             @include('layouts.navigation')
-
+            
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white dark:bg-slate-700 shadow">
@@ -47,6 +47,7 @@
 
             <!-- Page Content -->
             <main class="dark:bg-slate-700 h-full">
+               
                 {{ $slot }}
             </main>
         </div>

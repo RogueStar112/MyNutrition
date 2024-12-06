@@ -14,23 +14,50 @@ return new class extends Migration
         Schema::create('food', function (Blueprint $table) {
             $table->id();
             $table->string('name', 64);
+            $table->integer('user_id');
+            $table->integer('source_id');
+            $table->timestamps();
+            $table->softDeletes();
+            $table->string('img_url', 256)->nullable();
+            $table->string('description', 256)->nullable();
+
         });
+
+        Schema::create('food_source', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 64);
+        });
+
 
         Schema::create('meal', function (Blueprint $table) {
             $table->id();
             $table->string('name', 64);
+            $table->integer('user_id');
+            $table->dateTime('time_planned');
+            $table->timestamps();
+            $table->integer('is_eaten');
+            $table->integer('is_notified')->nullable();
+        });
+
+        Schema::create('meal_items', function (Blueprint $table) {
+
+            $table->id();
+            $table->string('name', 64);
             $table->integer('meal_id');
             $table->integer('food_id');
-            $table->timestamp('created_at');
-            $table->integer('quantity')->nullable();
+            $table->integer('food_unit_id');
             $table->integer('serving_size');
-            $table->integer('serving_unit_id');
+            $table->float('quantity', 8, 1);
+            $table->timestamps();
+
         });
 
         Schema::create('macronutrients', function (Blueprint $table) {
             $table->id();
             $table->integer('food_id');
-            $table->integer('serving_unit_id');
+            $table->integer('food_unit_id');
+            // $table->integer('serving_unit_id');
+            $table->float('serving_size', 8, 1);
             $table->float('calories', 8, 1)->nullable();
             $table->float('fat', 8, 1)->nullable();
             $table->float('carbohydrates', 8, 1)->nullable();

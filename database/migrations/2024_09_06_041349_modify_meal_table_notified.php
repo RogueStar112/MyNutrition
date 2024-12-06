@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('meal', function (Blueprint $table) {
-            $table->boolean('is_notified')->default(0);
-        });
+        // Schema::table('meal', function (Blueprint $table) {
+        //     $table->boolean('is_notified')->default(0);
+        // });
     }
 
     public function down()

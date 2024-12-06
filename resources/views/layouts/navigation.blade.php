@@ -19,6 +19,10 @@
                     <x-nav-link :href="route('nutrition_mainMenu')" :active="request()->routeIs('nutrition_mainMenu')">
                         {{ __('Nutrition') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('nutrition_advancedMenu')" :active="request()->routeIs(['nutrition_advancedMenu', 'suggester'])">
+                        {{ __('Advanced') }}
+                    </x-nav-link>
                 </div>
 
                 <!-- Links Before User -->
