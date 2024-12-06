@@ -16,9 +16,9 @@ use App\Models\Micronutrients;
 use App\Models\UserHealthDetails;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Meal>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FoodSource>
  */
-class MealFactory extends Factory
+class FoodSourceFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -29,12 +29,6 @@ class MealFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'user_id' => User::factory(),
-            'time_planned' => now()->addMinutes(5),
-            'updated_at' => now(),
-            'created_at' => now(),
-            'is_eaten' => 1,
-            'is_notified' => 0,
         ];
     }
 }
