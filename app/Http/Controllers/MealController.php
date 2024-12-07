@@ -324,8 +324,15 @@ class MealController extends Controller
         $food_search = Food::where('name', 'LIKE', "%{$foods}%")
                         //    ->where('user_id', $user_id)
                            ->orderBy('id', 'desc')
-                           ->groupBy('name', 'source_id')
+                        //    ->groupBy('name', 'source_id')
                            ->paginate(15);
+
+
+        // $food_search = Food::selectRaw('MAX(id) as id, name, source_id, MAX(created_at) as created_at, MAX(updated_at) as updated_at')
+        //     ->where('name', 'LIKE', "%{$foods}%")
+        //     ->orderBy('id', 'desc') // This applies to the aggregated column
+        //     ->groupBy('name', 'source_id')
+        //     ->paginate(15);
 
         $food_array = [];
 
@@ -431,7 +438,7 @@ class MealController extends Controller
 
             $food_search = Food::where('id', "$query_no")
                             // ->where('user_id', $user_id)
-                            ->groupBy('name', 'source_id')
+                            // ->groupBy('name', 'source_id')
                             ->first();
 
             $food_source_search = FoodSource::where('id', $food_search->source_id)
