@@ -212,9 +212,8 @@ class FoodController extends Controller
                     $newMicronutrients->save();
 
 
-                    $macronutrients_query = Macronutrients::where('food_id', $food_id)
-                                                          ->where('user_id', $user_id)
-                                                          ->get();
+                    // $macronutrients_query = Macronutrients::where('food_id', $food_id)
+                    //                                       ->get();
 
 
                     $food_unit_to_get = FoodUnit::where('id', $food_servingunit)->first();
