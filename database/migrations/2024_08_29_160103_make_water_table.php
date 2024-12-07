@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fluid_type', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-        });
+        // Schema::create('fluid_type', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('name');
+        // });
 
         Schema::create('water', function (Blueprint $table) {
             $table->id();
@@ -32,12 +32,12 @@ return new class extends Migration
         });
 
 
-        DB::table('fluid_type')->insert([
-            ['name' => 'water'],
-            ['name' => 'coke'],
-            ['name' => 'milk'],
-            ['name' => 'fruit']
-        ]);
+        // DB::table('fluid_type')->insert([
+        //     ['name' => 'water'],
+        //     ['name' => 'coke'],
+        //     ['name' => 'milk'],
+        //     ['name' => 'fruit']
+        // ]);
     }
 
     /**
