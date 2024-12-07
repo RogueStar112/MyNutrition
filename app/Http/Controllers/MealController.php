@@ -639,7 +639,7 @@ class MealController extends Controller
         $calendar = $this->calendar();
 
         // returns a series of Y-m-d dates.
-        $meal_dates_select = Meal::selectRaw('strftime("%Y-%m-%d", time_planned) as date')
+        $meal_dates_select = Meal::selectRaw('DATE_FORMAT("%Y-%m-%d", time_planned) as date')
                                 ->where('user_id', $user_id)
                                 // ->orderBy('time_planned', 'desc')
                                 ->where('is_eaten', 1)
