@@ -43,13 +43,14 @@ class PromptScheduledMeals extends Command
     public function handle()
     {   
 
-  
+        $user_id = Auth::user()->id;
 
         $now = Carbon::now()->format('Y-m-d H:i:s');
         
         $meals = Meal::where('time_planned', '<=', $now)
                     ->where('is_eaten', '=', 0)
                     ->where('is_notified', '=', 0)
+                    ->where('user_id', '=', $user_id)
                     ->get();
 
         foreach ($meals as $meal) {

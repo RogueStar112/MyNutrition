@@ -639,13 +639,20 @@ class MealController extends Controller
         $calendar = $this->calendar();
 
         // returns a series of Y-m-d dates.
-        $meal_dates_select = Meal::selectRaw('DATE_FORMAT("%Y-%m-%d", time_planned) as date')
-                                ->where('user_id', $user_id)
-                                // ->orderBy('time_planned', 'desc')
-                                ->where('is_eaten', 1)
-                                ->orderByRaw('date(time_planned) DESC')
-                                ->distinct()
-                                ->get();
+        // $meal_dates_select = Meal::selectRaw('DATE_FORMAT("%Y-%m-%d", time_planned) as date')
+        //                         ->where('user_id', $user_id)
+        //                         // ->orderBy('time_planned', 'desc')
+        //                         ->where('is_eaten', 1)
+        //                         ->orderByRaw('date(time_planned) DESC')
+        //                         ->distinct()
+        //                         ->get();
+
+        $meal_dates_select =        DB::table('meal')
+                                        ->selectRaw('DISTINCT DATE_FORMAT(time_planned, "%Y-%m-%d") as date, time_planned')
+                                        ->where('user_id', 1)
+                                        ->where('is_eaten', 1)
+                                        ->orderBy('time_planned', 'desc')
+                                        ->get();
 
         $meal_dates_ymd = [];
 
