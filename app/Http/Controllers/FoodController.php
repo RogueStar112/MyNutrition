@@ -559,32 +559,34 @@ class FoodController extends Controller
         if($food_unit_to_get) { 
 
 
-            // $existingFoodSource = FoodSource::where('name', $food_source)->first();
+            $existingFoodSource = FoodSource::where('name', $food_source)->first();
 
-            // if ($existingFoodSource) {
-            //     // do nothing
+            if ($existingFoodSource) {
+                // do nothing
 
-            //     $food_source_id = $existingFoodSource->id;
+                $food_source_id = $existingFoodSource->id;
                 
-            // } else {
+            } else {
                 
-            //     $newFoodSource = new FoodSource();
+                $newFoodSource = new FoodSource();
 
-            //     $newFoodSource->name = "$food_source";
+                $newFoodSource->name = "$food_source";
 
-            //     $newFoodSource->save();
+                $newFoodSource->save();
 
-            //     $query = FoodSource::where('name', $food_source)->first();
+                $query = FoodSource::where('name', $food_source)->first();
 
-            //     $food_source_id = $query->id;
+                $food_source_id = $query->id;
 
-            // }
+            }
 
             if ($food_search) {
                 $food_to_update = Food::find($id);
 
                 $food_source_search = FoodSource::where('id', $food_search->source_id)
-                                            ->first();
+                                            ->first() ?? new FoodSource();
+
+                $food_source_search->name = "$food_source" ?? FoodSource::find($food_source_id)->name;
 
 
                 $macronutrients_to_update = Macronutrients::where('food_id', $id)
