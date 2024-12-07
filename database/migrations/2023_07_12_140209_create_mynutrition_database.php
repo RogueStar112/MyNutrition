@@ -86,9 +86,9 @@ return new class extends Migration
 
         Schema::create('user_configuration', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('weight_unit_id');
-            $table->integer('height_unit_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('weight_unit_id');
+            $table->unsignedBigInteger('height_unit_id');
         });
 
         Schema::create('user_health_details', function (Blueprint $table) {
@@ -106,7 +106,7 @@ return new class extends Migration
         Schema::create('user_health_logs', function (Blueprint $table) {
 
             $table->id();
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->float('weight', 5, 2)->nullable();
             $table->float('height', 5, 2)->nullable();
             $table->float('bmi', 3, 1)->nullable();
