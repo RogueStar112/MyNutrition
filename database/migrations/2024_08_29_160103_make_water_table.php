@@ -13,19 +13,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('water', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('fluid_id');
-            $table->unsignedBigInteger('amount');
-            $table->timestamp('time_taken');
-            $table->timestamps();
-        });
-
         Schema::create('fluid_type', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('name');
         });
+
+        Schema::create('water', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('fluid_id');
+            $table->float('amount', 8, 1);
+            $table->timestamp('time_taken');
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('fluid_id')->references('id')->on('fluid_type');
+
+        });
+
 
         DB::table('fluid_type')->insert([
             ['name' => 'water'],

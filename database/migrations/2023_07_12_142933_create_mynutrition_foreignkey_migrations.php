@@ -21,56 +21,56 @@ return new class extends Migration
         //     $table->timestamps();
         // });
 
-        Schema::table('food', function(Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('source_id')->references('id')->on('food_source');
+        // Schema::table('food', function(Blueprint $table) {
+        //     $table->foreign('user_id')->references('id')->on('users');
+        //     $table->foreign('source_id')->references('id')->on('food_source');
 
         
-        });
+        // });
 
-        Schema::table('meal', function(Blueprint $table) {
+        // Schema::table('meal', function(Blueprint $table) {
 
-            $table->foreign('food_id')->references('id')->on('food');
-            $table->foreign('user_id')->references('id')->on('users');
+        //     $table->foreign('food_id')->references('id')->on('food');
+        //     $table->foreign('user_id')->references('id')->on('users');
             
-        });
+        // });
 
-        Schema::table('meal_items', function(Blueprint $table) {
+        // Schema::table('meal_items', function(Blueprint $table) {
 
-            $table->foreign('meal_id')->references('id')->on('meal');
-            $table->foreign('food_id')->references('id')->on('food');
-            $table->foreign('food_unit_id')->references('id')->on('food_unit');
+        //     $table->foreign('meal_id')->references('id')->on('meal');
+        //     $table->foreign('food_id')->references('id')->on('food');
+        //     $table->foreign('food_unit_id')->references('id')->on('food_unit');
 
 
-        });
+        // });
 
-        Schema::table('macronutrients', function(Blueprint $table) {
+        // Schema::table('macronutrients', function(Blueprint $table) {
             
-            $table->foreign('food_id')->references('id')->on('food');
-            // $table->foreign('serving_unit_id')->references('id')->on('serving_unit');
-            $table->foreign('food_unit_id')->references('id')->on('food_unit');
+        //     $table->foreign('food_id')->references('id')->on('food');
+        //     // $table->foreign('serving_unit_id')->references('id')->on('serving_unit');
+        //     $table->foreign('food_unit_id')->references('id')->on('food_unit');
 
 
-        });
+        // });
 
-        Schema::table('user_configuration', function(Blueprint $table) {
+        // Schema::table('user_configuration', function(Blueprint $table) {
             
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('weight_unit_id')->references('id')->on('weight_unit');
-            $table->foreign('height_unit_id')->references('id')->on('height_unit');
+        //     $table->foreign('user_id')->references('id')->on('users');
+        //     $table->foreign('weight_unit_id')->references('id')->on('weight_unit');
+        //     $table->foreign('height_unit_id')->references('id')->on('height_unit');
 
 
-        });
+        // });
 
-        Schema::table('user_health_details', function(Blueprint $table) {
+        // Schema::table('user_health_details', function(Blueprint $table) {
             
-            $table->foreign('user_id')->references('id')->on('users');
-        });
+        //     $table->foreign('user_id')->references('id')->on('users');
+        // });
 
-        Schema::table('user_health_logs', function(Blueprint $table) {
+        // Schema::table('user_health_logs', function(Blueprint $table) {
             
-            $table->foreign('user_id')->references('id')->on('users');
-        });
+        //     $table->foreign('user_id')->references('id')->on('users');
+        // });
     }
 
     /**
