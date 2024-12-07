@@ -35,7 +35,7 @@ class VisualizerController extends Controller
         $tasks = DB::table('meal')
                     ->where('user_id', '=', $user_id)
                     ->whereBetween('time_planned', [date("$start_date 00:00:00"), date("$end_date 23:59:59")])
-                    ->groupBy('time_planned')
+                    // ->groupBy('time_planned')
                     ->orderBy('time_planned', 'asc')
                     ->get();
 
