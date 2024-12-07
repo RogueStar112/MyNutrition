@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('food', function (Blueprint $table) {
             $table->id();
             $table->string('name', 64);
-            $table->integer('user_id');
-            $table->integer('source_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('source_id');
             $table->timestamps();
             $table->softDeletes();
             $table->string('img_url', 256)->nullable();
@@ -32,7 +32,7 @@ return new class extends Migration
         Schema::create('meal', function (Blueprint $table) {
             $table->id();
             $table->string('name', 64);
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->dateTime('time_planned');
             $table->timestamps();
             $table->integer('is_eaten');
@@ -43,10 +43,10 @@ return new class extends Migration
 
             $table->id();
             $table->string('name', 64);
-            $table->integer('meal_id');
-            $table->integer('food_id');
-            $table->integer('food_unit_id');
-            $table->integer('serving_size');
+            $table->unsignedBigInteger('meal_id');
+            $table->unsignedBigInteger('food_id');
+            $table->unsignedBigInteger('food_unit_id');
+            $table->float('serving_size', 8, 1);
             $table->float('quantity', 8, 1);
             $table->timestamps();
 
@@ -54,8 +54,8 @@ return new class extends Migration
 
         Schema::create('macronutrients', function (Blueprint $table) {
             $table->id();
-            $table->integer('food_id');
-            $table->integer('food_unit_id');
+            $table->unsignedBigInteger('food_id');
+            $table->unsignedBigInteger('food_unit_id');
             // $table->integer('serving_unit_id');
             $table->float('serving_size', 8, 1);
             $table->float('calories', 8, 1)->nullable();

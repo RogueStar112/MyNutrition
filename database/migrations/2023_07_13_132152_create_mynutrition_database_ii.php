@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('short_name')->nullable();
             $table->float('base_value');
-            $table->integer('unit_type_id');
+            $table->unsignedBigInteger('unit_type_id');
         });
 
         Schema::create('food_unit', function (Blueprint $table) {
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('short_name')->nullable();
             $table->float('base_value');
-            $table->integer('unit_type_id');
+            $table->unsignedBigInteger('unit_type_id');
         });
 
         DB::table('food_unit')->insert([

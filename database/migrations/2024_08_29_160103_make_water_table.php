@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('water', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('fluid_id');
-            $table->integer('amount');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('fluid_id');
+            $table->unsignedBigInteger('amount');
             $table->timestamp('time_taken');
             $table->timestamps();
         });
 
         Schema::create('fluid_type', function (Blueprint $table) {
             $table->id();
-            $table->integer('name');
+            $table->unsignedBigInteger('name');
         });
 
         DB::table('fluid_type')->insert([
