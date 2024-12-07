@@ -588,6 +588,7 @@ class FoodController extends Controller
 
                 $food_source_search->name = "$food_source" ?? FoodSource::find($food_source_id)->name;
 
+                $food_source_search->save();
 
                 $macronutrients_to_update = Macronutrients::where('food_id', $id)
                                                 ->first();
