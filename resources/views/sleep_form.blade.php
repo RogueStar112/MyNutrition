@@ -17,11 +17,11 @@
 
                     <h1 class="font-semibold text-3xl md:text-6xl uppercase dark:text-white text-3xl text-gray-800 leading-tight text-center md:text-left md:p-4 md:absolute top-1/2 z-50 primary-sleep-form md:-skew-y-6 md:w-[597px]" style="">
                         
-                        Log <select id="drink-type" class="no-select-arrow text-4xl appearance-none dark:text-white text-gray-800 leading-tight p-4 top-1/2 z-50 primary-sleep-form border-none uppercase px-2 w-[180px] outline-0 focus:outline-0" style="-moz-appearance: none;">
-                            <option selected="" value="0" text-value="water">Basic</option>
-                            <option value="1" text-value="coke">REM</option>
-                            <option value="2" text-value="milk">Core</option>
-                            <option value="3" text-value="fruit">Deep</option>
+                        Log <select id="sleep-type" class="no-select-arrow text-4xl appearance-none dark:text-white text-gray-800 leading-tight p-4 top-1/2 z-50 primary-sleep-form border-none uppercase px-2 w-[180px] outline-0 focus:outline-0" style="-moz-appearance: none;">
+                            <option selected="" value="0" text-value="basic">Basic</option>
+                            <option value="1" text-value="rem">REM</option>
+                            <option value="2" text-value="core">Core</option>
+                            <option value="3" text-value="deep">Deep</option>
                             </select>Sleep
                     </h1>
 
@@ -94,9 +94,9 @@
                 <div class="w-full max-h-[256px] md:h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-2 md:px-24 py-12 md:py-0" style="/background-color: #0465A5; /background: radial-gradient(#0465A5, #9198e5);">
         
         
-                            <i class="fa-solid fa-circle-minus fa-3x text-white" id="decrease-glass"></i>
+                            <i class="fa-solid fa-circle-minus fa-3x text-white" id="decrease-sleep"></i>
         
-                            <div id="no-of-glasses" value="5" class="text-[#0465A5] bg-white rounded-full fa-2x p-4 duration-100 ">
+                            <div id="no-of-beds" value="5" class="text-[#0465A5] bg-white rounded-full fa-2x p-4 duration-100 ">
                                 <i class="fa-solid fa-bed"></i>
                                 <i class="fa-solid fa-bed"></i>
                                 <i class="fa-solid fa-bed"></i>
@@ -105,24 +105,24 @@
                             </div>
         
                             
-                            <i class="fa-solid fa-circle-plus fa-3x  text-white" id="increase-glass"></i>
+                            <i class="fa-solid fa-circle-plus fa-3x  text-white" id="increase-sleep"></i>
         
                 </div>
                 
-                                <p id="total-drank" class="text-white text-center /bg-[#0465A5] max-w-[1216px] mx-auto">You have slept for <span id="litres-drank">1 </span>hours.</p>
-                                <p class="text-white text-center /bg-[#0465A5] max-w-[1216px] mx-auto">That's <span id="glasses-drank">5</span> <span id="glasses-type">glasses</span> of <span class="drink-type">water</span>.</p>
+                                <p id="total-slept" class="text-white text-center /bg-[#0465A5] max-w-[1216px] mx-auto">You have slept for <span id="hours-taken">1 </span>hours.</p>
+                                <p class="text-white text-center /bg-[#0465A5] max-w-[1216px] mx-auto">That's <span id="hours-slept">5</span> <span id="sleep-duration">hours</span> of sleep</span>.</p>
         
                 <div class="w-full max-w-[1216px] mx-auto /bg-[#0465A5] text-center pt-4 text-white text-3xl">
                     <p class="w-fit primary-sleep-form mx-auto p-4 -skew-x-12">Step two: When slept</p>
-                    <p class="w-fit secondary-sleep-form mx-auto p-4 -skew-x-12 text-lg">When did you take this amount of <span class="drink-type">water</span>?</p>
+                    <p class="w-fit secondary-sleep-form mx-auto p-4 -skew-x-12 text-lg">When did you take this amount of <span class="sleep-type">sleep</span>?</p>
                 </div>
         
         
                 <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24" style="/background-color: #0465A5; /background: radial-gradient(#e66465, #9198e5);">
         
-                            <input type="hidden" name="water-amount" id="water-amount" value="5">
-                            <input type="hidden" name="fluid-type" id="fluid-type" value="0">
-                            <input id="water-when" name="water-when" class="mx-auto p-4 rounded-full text-[#0465A5]" type="datetime-local" value="2024-03-31T06:00">
+                            <input type="hidden" name="sleep-amount" id="sleep-amount" value="5">
+                            <input type="hidden" name="sleep-type" id="sleep-type" value="0">
+                            <input id="sleep-when" name="sleep-when" class="mx-auto p-4 rounded-full text-[#0465A5]" type="datetime-local" value="2024-03-31T06:00">
         
                 </div>
         
@@ -152,10 +152,10 @@
                 </label>
     
     
-                <label for="no-of-glasses">
+                <label for="no-of-beds">
                     Number of glasses (max 12)
     
-                    <input type="number" id="no-of-glasses" name="no-of-glasses" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" min="0" max="12" placeholder="" value="" required/>
+                    <input type="number" id="no-of-beds" name="no-of-beds" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" min="0" max="12" placeholder="" value="" required/>
                 
                 </label>
                 
@@ -194,10 +194,10 @@
 
         let nounToUse = 'water'
 
-        let drinkVal = $('#drink-type').val();
-        let verbToUse = drinkVal == 3 ? 'pieces' : 'glasses'
+        let sleepTypeVal = $('#sleep-type').val();
+        let verbToUse = sleepTypeVal == 3 ? 'pieces' : 'glasses'
 
-        console.log('VTU', verbToUse)
+        // console.log('VTU', verbToUse)
 
 
         const currentDate = new Date();
@@ -233,15 +233,15 @@
 
         }
 
-        $('#water-when').val(`${year}-${month}-${day}T${hours}:${minutes}`);
+        $('#sleep-when').val(`${year}-${month}-${day}T${hours}:${minutes}`);
 
-        $('#water-when').attr('value', `${year}-${month}-${day}T${hours}:${minutes}`);
+        $('#sleep-when').attr('value', `${year}-${month}-${day}T${hours}:${minutes}`);
 
         let no_of_hrs_slept = 5;
 
-        $('#increase-glass, #decrease-glass').on('click', function() {
+        $('#increase-sleep, #decrease-sleep').on('click', function() {
 
-            if(this.id == 'increase-glass') {
+            if(this.id == 'increase-sleep') {
                 no_of_hrs_slept += 1;
                 } else {
                 no_of_hrs_slept -= 1;
@@ -259,7 +259,7 @@
 
             let output_str = '';
             for(let i = 0; i<no_of_hrs_slept; i++) {
-                if($('#drink-type').find(":selected").val() == 3) {
+                if($('#sleep-type').find(":selected").val() == 3) {
                     output_str += '<i class="fas fa-apple-alt"></i> ';
                 } else {
                     output_str += '<i class="fa-solid fa-bed"></i> ';
@@ -268,18 +268,18 @@
             }
 
 
-            $('#no-of-glasses').html(output_str);
-            // $('#litres-drank').html(Number.parseFloat(1*no_of_hrs_slept).toFixed(2));
-            $('#litres-drank').html(` ${1*no_of_hrs_slept}`);
-            $('#glasses-drank').html(no_of_hrs_slept)
-            $('#no-of-glasses').attr('value', no_of_hrs_slept);
-            $('#water-amount').val(no_of_hrs_slept)
+            $('#no-of-beds').html(output_str);
+            // $('#hours-taken').html(Number.parseFloat(1*no_of_hrs_slept).toFixed(2));
+            $('#hours-taken').html(` ${1*no_of_hrs_slept}`);
+            $('#hours-slept').html(no_of_hrs_slept)
+            $('#no-of-beds').attr('value', no_of_hrs_slept);
+            $('#sleep-amount').val(no_of_hrs_slept)
         })
 
         // $('#log-water-btn').on('click', function() {
 
         //     let water_time = $('#water-time').val();
-        //     let water_glasses = $('#no-of-glasses').val();
+        //     let water_glasses = $('#no-of-beds').val();
 
         //     console.log(water_time, water_glasses)
 
@@ -288,7 +288,7 @@
 
         // });
 
-        $('#drink-type').on('change', function() {
+        $('#sleep-type').on('change', function() {
 
             // console.log(this)
             // console.log(this.value);
@@ -296,63 +296,63 @@
             //IF WATER
             if(this.value == 0) {
 
-                $(".primary-sleep-form").css("background-color", "#14b8a6");
-                  $(".primary-sleep-form").css("color", "rgb(255, 255, 255)");
+                // $(".primary-sleep-form").css("background-color", "#14b8a6");
+                //   $(".primary-sleep-form").css("color", "rgb(255, 255, 255)");
 
-                $(".secondary-sleep-form").css("background-color", "#0d9488");
-                $(".tertiary-water-form").css("background-color", "#0f766e");
+                // $(".secondary-sleep-form").css("background-color", "#0d9488");
+                // $(".tertiary-water-form").css("background-color", "#0f766e");
 
-                $("#no-of-glasses>*").addClass('fa-solid fa-bed');
-                $("#no-of-glasses>*").removeClass('fas fa-apple-alt');
+                $("#no-of-beds>*").addClass('fa-solid fa-bed');
+                $("#no-of-beds>*").removeClass('fas fa-apple-alt');
                 
-                $('#glasses-type').text('glasses')
+                // $('#sleep-type').text('glasses')
 
-                $('#assume-text').text('Assume each glass is 200ml.')
+                $('#assume-text').text('Assume each bed is 1 hour.')
 
-                $('#total-drank').removeClass('hidden');
+                $('#total-slept').removeClass('hidden');
 
-                $('#fluid-type').val(this.value);
+                $('#sleep-type').val(this.value);
             }
             
             // IF COKE
             if(this.value == 1) {
 
-                $(".primary-sleep-form").css("background-color", "rgb(154, 81, 26)");
-                $(".primary-sleep-form").css("color", "rgb(255, 255, 255)");
-                $(".secondary-sleep-form").css("background-color", "rgb(115, 60, 19)");
-                $(".tertiary-water-form").css("background-color", "rgb(95, 60, 19)");
+                // $(".primary-sleep-form").css("background-color", "rgb(154, 81, 26)");
+                // $(".primary-sleep-form").css("color", "rgb(255, 255, 255)");
+                // $(".secondary-sleep-form").css("background-color", "rgb(115, 60, 19)");
+                // $(".tertiary-water-form").css("background-color", "rgb(95, 60, 19)");
 
-               $("#no-of-glasses>*").addClass('fa-solid fa-bed');
-               $("#no-of-glasses>*").removeClass('fas fa-apple-alt');
+               $("#no-of-beds>*").addClass('fa-solid fa-bed');
+               $("#no-of-beds>*").removeClass('fas fa-apple-alt');
 
-                $('#glasses-type').text('glasses')
+                $('#sleep-duration').text('hours')
 
-                $('#assume-text').text('Assume each glass is 200ml.')
+                $('#assume-text').text('Assume each bed is 1 hour.')
 
-                $('#total-drank').removeClass('hidden');
+                $('#total-slept').removeClass('hidden');
 
-                $('#fluid-type').val(this.value);
+                $('#sleep-type').val(this.value);
             }
 
 
             // IF MILK
             if(this.value == 2) {
 
-                $(".primary-sleep-form").css("background-color", "rgb(254,250,235)");
-                $(".primary-sleep-form").css("color", "rgb(0, 0, 0)");
-                $(".secondary-sleep-form").css("background-color", "rgb(135, 135, 135)");
-                $(".tertiary-water-form").css("background-color", "rgb(125, 125, 125)");
+                // $(".primary-sleep-form").css("background-color", "rgb(254,250,235)");
+                // $(".primary-sleep-form").css("color", "rgb(0, 0, 0)");
+                // $(".secondary-sleep-form").css("background-color", "rgb(135, 135, 135)");
+                // $(".tertiary-water-form").css("background-color", "rgb(125, 125, 125)");
 
-                $("#no-of-glasses>*").addClass('fa-solid fa-bed');
-                $("#no-of-glasses>*").removeClass('fas fa-apple-alt');
+                $("#no-of-beds>*").addClass('fa-solid fa-bed');
+                $("#no-of-beds>*").removeClass('fas fa-apple-alt');
                 
-                $('#glasses-type').text('glasses')
+                $('#sleep-duration').text('hours')
 
-                $('#assume-text').text('Assume each glass is 200ml.')
+                $('#assume-text').text('Assume each bed is 1 hour.')
 
-                $('#total-drank').removeClass('hidden');
+                $('#total-slept').removeClass('hidden');
 
-                $('#fluid-type').val(this.value);
+                $('#sleep-type').val(this.value);
             }
 
             // IF FRUIT
@@ -361,25 +361,25 @@
             
                 $(".primary-sleep-form").css("background-color", "rgb(0, 80, 0)");
                 $(".primary-sleep-form").css("color", "rgb(0, 230, 0)");
-                $("#no-of-glasses>*").removeClass('fa-solid fa-bed');
-                $("#no-of-glasses>*").addClass('fas fa-apple-alt');
+                $("#no-of-beds>*").removeClass('fa-solid fa-bed');
+                $("#no-of-beds>*").addClass('fas fa-apple-alt');
 
 
 
-                $(".secondary-sleep-form").css("background-color", "rgb(0, 155, 0)");
-                $(".tertiary-water-form").css("background-color", "rgb(0, 135, 0)");
+                // $(".secondary-sleep-form").css("background-color", "rgb(0, 155, 0)");
+                // $(".tertiary-water-form").css("background-color", "rgb(0, 135, 0)");
                 
-                $('#glasses-type').text('pieces');
+                $('#sleep-duration').text('pieces');
 
-                $('#assume-text').text('Assume each fruit is part of your 5 a day.')
+                $('#assume-text').text('Assume each bed is 1 hour.')
 
-                $('#total-drank').addClass('hidden');
+                $('#total-slept').addClass('hidden');
 
-                $('#fluid-type').val(this.value);
+                $('#sleep-type').val(this.value);
 
             }
 
-            $('.drink-type').text($(this).find(":selected").attr('text-value'))
+            $('.sleep-type').text($(this).find(":selected").attr('text-value'))
 
 
 

@@ -154,7 +154,7 @@
 {{-- 
         <i class="fas fa-tint fa-3x p-4 text-blue-400 opacity-60 scale-[3] -rotate-[30deg] absolute right-20 bottom-0 translate-x-1/2 -translate-y-1/2"></i>
          --}}
-</form> --}}
+</form> 
 
     <script>
 
