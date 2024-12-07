@@ -18,15 +18,15 @@
                     <h1 class="font-semibold text-3xl md:text-6xl uppercase dark:text-white text-3xl text-gray-800 leading-tight text-center md:text-left md:p-4 md:absolute top-1/2 z-50 primary-sleep-form md:-skew-y-6 md:w-[597px]" style="">
                         
                         Log <select id="sleep-type" class="no-select-arrow text-4xl appearance-none dark:text-white text-gray-800 leading-tight p-4 top-1/2 z-50 primary-sleep-form border-none uppercase px-2 w-[180px] outline-0 focus:outline-0" style="-moz-appearance: none;">
-                            <option selected="" value="0" text-value="basic">Basic</option>
-                            <option value="1" text-value="rem">REM</option>
-                            <option value="2" text-value="core">Core</option>
-                            <option value="3" text-value="deep">Deep</option>
+                            <option selected="" value="0" text-value="Basic">Basic</option>
+                            <option value="1" text-value="REM">REM</option>
+                            <option value="2" text-value="Core">Core</option>
+                            <option value="3" text-value="Deep">Deep</option>
                             </select>Sleep
                     </h1>
 
 
-                <svg class="absolute top-4  collapse md:visible" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320 z-50">
+                <svg class="absolute top-4 collapse md:visible" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320 z-50">
                     <path fill="#0465A5" fill-opacity="0.5" d="M0,160L48,144C96,128,192,96,288,122.7C384,149,480,235,576,245.3C672,256,768,192,864,192C960,192,1056,256,1152,261.3C1248,267,1344,213,1392,186.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
                 </svg>
 
@@ -114,7 +114,7 @@
         
                 <div class="w-full max-w-[1216px] mx-auto /bg-[#0465A5] text-center pt-4 text-white text-3xl">
                     <p class="w-fit primary-sleep-form mx-auto p-4 -skew-x-12">Step two: When slept</p>
-                    <p class="w-fit secondary-sleep-form mx-auto p-4 -skew-x-12 text-lg">When did you take this amount of <span class="sleep-type">sleep</span>?</p>
+                    <p class="w-fit secondary-sleep-form mx-auto p-4 -skew-x-12 text-lg">When did you take this amount of <span class="sleep-type"></span> sleep?</p>
                 </div>
         
         
@@ -359,10 +359,10 @@
             if(this.value == 3) {
 
             
-                $(".primary-sleep-form").css("background-color", "rgb(0, 80, 0)");
-                $(".primary-sleep-form").css("color", "rgb(0, 230, 0)");
-                $("#no-of-beds>*").removeClass('fa-solid fa-bed');
-                $("#no-of-beds>*").addClass('fas fa-apple-alt');
+                // $(".primary-sleep-form").css("background-color", "rgb(0, 80, 0)");
+                // $(".primary-sleep-form").css("color", "rgb(0, 230, 0)");
+                // $("#no-of-beds>*").removeClass('fa-solid fa-bed');
+                // $("#no-of-beds>*").addClass('fas fa-apple-alt');
 
 
 
