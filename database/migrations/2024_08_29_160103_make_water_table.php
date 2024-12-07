@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('fluid_type', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('name');
+            $table->string('name');
         });
 
         Schema::create('water', function (Blueprint $table) {
