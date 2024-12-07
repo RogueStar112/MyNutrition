@@ -33,6 +33,7 @@ class VisualizerController extends Controller
         // MEAL LOADING
 
         $tasks = DB::table('meal')
+                    ->select('*')
                     ->where('user_id', '=', $user_id)
                     ->whereBetween('time_planned', [date("$start_date 00:00:00"), date("$end_date 23:59:59")])
                     // ->groupBy('time_planned')
@@ -125,7 +126,7 @@ class VisualizerController extends Controller
         $tasksWater = DB::table('water')
                         ->where('user_id', '=', $user_id)
                         ->whereBetween('time_taken', [date("$start_date 00:00:00"), date("$end_date 23:59:59")])
-                        ->groupBy('time_taken', 'fluid_id')
+                        // ->groupBy('time_taken', 'fluid_id')
                         ->orderBy('time_taken', 'asc')
                         ->get();
 
