@@ -582,13 +582,14 @@ class FoodController extends Controller
 
             if ($food_search) {
                 $food_to_update = Food::find($id);
+                
 
-                $food_source_search = FoodSource::where('id', $food_search->source_id)
-                                            ->first() ?? new FoodSource();
+                // $food_source_search = FoodSource::where('id', $food_search->source_id)
+                //                             ->first();
 
-                $food_source_search->name = "$food_source" ?? FoodSource::find($food_source_id)->name;
+                // $food_source_search->name = $food_source ?? $existingFoodSource;
 
-                $food_source_search->save();
+                // $food_source_search->save();
 
                 $macronutrients_to_update = Macronutrients::where('food_id', $id)
                                                 ->first();
@@ -601,7 +602,7 @@ class FoodController extends Controller
 
 
                 $food_to_update->name = $food_name;
-                $food_to_update->source_id = $food_search->source_id;
+                $food_to_update->source_id = $food_source_id;
                 $food_to_update->img_url = $food_image; 
                 $food_to_update->description = $food_description;
                 
