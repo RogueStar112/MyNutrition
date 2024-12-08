@@ -87,7 +87,7 @@
 
     <script>
 
-        console.log('meal json and food_array reset');
+        // console.log('meal json and food_array reset');
         var meal_json = {};
         var food_array = [];
         var foods_pages = [];
@@ -112,7 +112,6 @@
 
             var targetElement = $('#FOOD-ITEMS-CONTAINER')[0];
 
-            // thank you to ChatGPT for the mutationobserver tip!
             // Create a new MutationObserver instance
             var observer = new MutationObserver(function(mutations) {
                 mutations.forEach(function(mutation) {

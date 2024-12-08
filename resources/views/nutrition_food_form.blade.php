@@ -390,7 +390,6 @@
 
                 var targetElement = $('#FOOD-ITEMS-CONTAINER')[0];
 
-                // thank you to ChatGPT for the mutationobserver tip!
                 // Create a new MutationObserver instance
                 var observer = new MutationObserver(function(mutations) {
                     mutations.forEach(function(mutation) {
