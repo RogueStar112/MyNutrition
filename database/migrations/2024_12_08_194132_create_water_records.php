@@ -17,6 +17,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::table('fluid_type', function (Blueprint $table) {
+            $table->string('name');
+        });
+
         DB::table('fluid_type')->insert([
             ['name' => 'water'],
             ['name' => 'coke'],
