@@ -88,7 +88,7 @@
         <div class="w-full h-[128px] max-w-[1216px] mx-auto flex items-center justify-between px-24" style="/background-color: #0465A5; /background: radial-gradient(#e66465, #9198e5);">
 
                     <input type="hidden" name="water-amount" id="water-amount" value="5"></input>
-                    <input type="hidden" name="fluid-type" id="fluid-type" value="0"></input>
+                    <input type="hidden" name="fluid-type" id="fluid-type" value="1"></input>
                     <input id="water-when" name="water-when" class="mx-auto p-4 rounded-full text-[#0465A5]" type="datetime-local" value="2024-03-31T06:00"/>
 
         </div>
