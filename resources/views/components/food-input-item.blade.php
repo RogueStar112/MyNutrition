@@ -33,13 +33,13 @@
             </select>
         </label>
 
-        <label class="hidden /md:block md:visible px-6 py-4 md:p-6 col-span-2" for="food_image_{{$index}}">
+        {{-- <label class="hidden /md:block md:visible px-6 py-4 md:p-6 col-span-2" for="food_image_{{$index}}">
 
             <span class="text-white">Upload Image (optional)</span>
 
             <input type="file" name="food_image_{{$index}}" id="food_image_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md p-3"/>
 
-        </label>
+        </label> --}}
         
     </div> 
 
@@ -105,7 +105,7 @@
 
     <div class="mb-3">
         <label class="block px-6 py-4 md:p-6">
-            <span class="text-white">Food Icon</span>
+            <span class="text-white">Food Icon (optional)</span>
             {{-- <input type="text" name="food_icon_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="" /> --}}
 
             {{-- <label class="radio">
