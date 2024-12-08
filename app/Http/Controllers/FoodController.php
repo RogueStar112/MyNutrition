@@ -538,6 +538,8 @@ class FoodController extends Controller
         $food_fibre = $request->input("food_fibre_1");
         $food_salt = $request->input("food_salt_1");
 
+
+        $food_icon = $request->input("food-icon-1");
         $food_description = $request->input("food_description_1");
 
         if ($request->file("food_image_1") != NULL) {
@@ -608,6 +610,7 @@ class FoodController extends Controller
                 $food_to_update->source_id = $food_source_id;
                 $food_to_update->img_url = $food_image; 
                 $food_to_update->description = $food_description;
+                $food_to_update->icon_class = $food_icon ?? NULL;
                 
                 $food_to_update->save();
                 $food_to_update->touch();
