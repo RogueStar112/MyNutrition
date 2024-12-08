@@ -129,7 +129,7 @@
 
                 <i class="{{ empty($food['icon_class']) ? "hidden" : "$food_class scale-150 leading-[128px] h-[128px] w-[128px] max-w-[128px] max-h-[128px]" }}">
                 
-                <img class="/p-6 object-cover {{ empty($food['img_url']) ? "hidden" : "" }} rounded-full {{ $food['icon_class']) ? "hidden" : "" }} text-center leading-[128px] text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="{{empty($food['icon_class']) ? $food_name_initials : ""}}  " />
+                <img class="/p-6 object-cover {{ empty($food['img_url']) ? "hidden" : "" }} rounded-full {{ $food['icon_class'] ? "hidden" : "" }} text-center leading-[128px] text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="{{empty($food['icon_class']) ? $food_name_initials : ""}}  " />
             </div>
 
             <div class="desc-box m-6 self-center">
