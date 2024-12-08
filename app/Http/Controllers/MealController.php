@@ -382,6 +382,7 @@ class MealController extends Controller
             $food_array[$meal_datendex]['carbohydrates'] = $macronutrients_search->carbohydrates;
             $food_array[$meal_datendex]['protein'] = $macronutrients_search->protein;
             $food_array[$meal_datendex]['description'] = $food->description ?? '';
+            $food_array[$meal_datendex]['icon_class'] = $food->icon_class ?? '';
             
 
         }                   
