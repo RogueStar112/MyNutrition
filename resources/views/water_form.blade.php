@@ -259,7 +259,7 @@
             // console.log(this.value);
             
             //IF WATER
-            if(this.value == 0) {
+            if(this.value == 1) {
 
                 $(".primary-water-form").css("background-color", "#14b8a6");
                   $(".primary-water-form").css("color", "rgb(255, 255, 255)");
@@ -280,7 +280,7 @@
             }
             
             // IF COKE
-            if(this.value == 1) {
+            if(this.value == 2) {
 
                 $(".primary-water-form").css("background-color", "rgb(154, 81, 26)");
                 $(".primary-water-form").css("color", "rgb(255, 255, 255)");
@@ -301,7 +301,7 @@
 
 
             // IF MILK
-            if(this.value == 2) {
+            if(this.value == 3) {
 
                 $(".primary-water-form").css("background-color", "rgb(254,250,235)");
                 $(".primary-water-form").css("color", "rgb(0, 0, 0)");
@@ -321,7 +321,7 @@
             }
 
             // IF FRUIT
-            if(this.value == 3) {
+            if(this.value == 4) {
 
             
                 $(".primary-water-form").css("background-color", "rgb(0, 80, 0)");
