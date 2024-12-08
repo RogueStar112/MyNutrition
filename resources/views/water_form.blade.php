@@ -7,10 +7,10 @@
                 <h1 class="font-semibold text-3xl md:text-6xl uppercase dark:text-white text-3xl text-gray-800 leading-tight text-center md:text-left md:p-4 md:absolute top-1/2 z-50 primary-water-form md:-skew-y-6 md:w-[597px]" style="">
                     {{-- {{ __('Log Water Intake') }} --}}
                     Log <select id="drink-type" class="no-select-arrow text-4xl appearance-none dark:text-white text-gray-800 leading-tight p-4 top-1/2 z-50 primary-water-form border-none uppercase px-2 w-[180px] outline-0 focus:outline-0" style="-moz-appearance: none;">
-                           <option selected value="0" text-value="water">Water</option>
-                           <option value="1" text-value="coke">Coke</option>
-                           <option value="2" text-value="milk">Milk</option>
-                           <option value="3" text-value="fruit">Fruit</option>
+                           <option selected value="1" text-value="water">Water</option>
+                           <option value="2" text-value="coke">Coke</option>
+                           <option value="3" text-value="milk">Milk</option>
+                           <option value="4" text-value="fruit">Fruit</option>
                         </select> Intake
                 </h1>
 
