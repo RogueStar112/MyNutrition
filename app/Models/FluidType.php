@@ -9,6 +9,8 @@ class FluidType extends Model
 {
     use HasFactory;
 
+    protected $table = 'fluid_type';
+
     public $timestamps = false;
 
 }
