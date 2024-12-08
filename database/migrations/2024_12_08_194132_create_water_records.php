@@ -16,7 +16,12 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
+    {   
+        Schema::table('fluid_type', function($table) {
+            $table->dropColumn('name');
+        });
+
+
         Schema::table('fluid_type', function (Blueprint $table) {
             $table->string('name');
         });
