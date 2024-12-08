@@ -151,25 +151,25 @@ class VisualizerController extends Controller
             $fluid_type = $task_water->fluid_id;
 
             switch ($fluid_type) {
-                case 0:
+                case 1:
                     $fluid_taskcolor = "2196F3";
                     $fluid_name = "Water";
                     $fluid_amount = round($fluid_amount_original / 5, 1);
                     break;
 
-                case 1:
+                case 2:
                     $fluid_taskcolor = "9A511A";
                     $fluid_name = "Coke";
                     $fluid_amount = round($fluid_amount_original / 5, 1);
                     break;
 
-                case 2:
+                case 3:
                     $fluid_taskcolor = "DDDDDD";
                     $fluid_name = "Milk";
                     $fluid_amount = round($fluid_amount_original / 5, 1);
                     break;
 
-                case 3:
+                case 4:
                     $fluid_taskcolor = "009B00";
                     $fluid_amount = round($fluid_amount_original, 1);
                     $fluid_name = "Fruit";
