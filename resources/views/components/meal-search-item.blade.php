@@ -125,7 +125,7 @@
 
         <div class="grid grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6" id="food-item-{{$food['food_id']}}" x-data="{ serving_size: {{$servingSize}}, quantity: {{$quantity}} }">
 
-            <div class="bg-transparent self-center flex justify-center items-center [&>img]:hidden [&>img]:justify-evenly [&>img]:items-center rounded-full border-4 border-slate-500">
+            <div class="bg-transparent self-center flex justify-center items-center {{ $food_class ? "[&>img]:hidden [&>i]:scale-150" : "[&>img]:flex" }} [&>img]:justify-evenly [&>img]:items-center rounded-full border-4 border-slate-500">
 
                 <i class="{{ empty($food_class) ? "hidden" : "$food_class text-white scale-150 leading-[128px] h-[128px] w-[128px] max-w-[128px] max-h-[128px]" }}"></i>
                 
