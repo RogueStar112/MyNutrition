@@ -73,6 +73,7 @@ class FoodController extends Controller
                 "food_fibre_$array_index_x" => 'nullable|numeric|max:1000',
                 "food_salt_$array_index_x" => 'nullable|numeric|max:1000',
 
+
             ]);
 
             if ($request->file("food_image_$array_index_x") != NULL) {
@@ -112,7 +113,7 @@ class FoodController extends Controller
             $food_fat = $request->input("food_fat_$array_index_x");
             $food_carbs = $request->input("food_carbs_$array_index_x");
             $food_protein = $request->input("food_protein_$array_index_x");
-            
+            $food_icon = $request->input("food-icon-$array_index_x") ?? NULL;
             $food_sugars = $request->input("food_sugars_$array_index_x");
             $food_saturates = $request->input("food_saturates_$array_index_x");
             $food_fibre = $request->input("food_fibre_$array_index_x");
@@ -156,6 +157,8 @@ class FoodController extends Controller
                 $newFood->img_url = $food_image;
 
                 $newFood->description = $food_description;
+
+                $newFood->icon_class = $food_icon;
 
                 $newFood->save();
 
