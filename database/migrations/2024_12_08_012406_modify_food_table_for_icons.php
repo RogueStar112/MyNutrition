@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('meal_notifications', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('meal_id');
-            $table->string('message');
-            $table->boolean('is_accepted');
-            $table->timestamps();
+        Schema::table('food', function (Blueprint $table) {
+
+            $table->string('icon_class')->nullable();
+
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('meal_notifications');
+        //
     }
 };

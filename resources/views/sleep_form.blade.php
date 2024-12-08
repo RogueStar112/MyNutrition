@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h1 class="font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight">
+        <h1 class="font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight hidden sm:block">
             {{ __('Log Sleep Patterns') }}
         </h1>
     </x-slot>
@@ -10,7 +10,7 @@
     <div class="py-4 relative mx-auto max-w-7xl overflow-hidden">
 
         <div id="SLEEP-HERO">
-            <div class="max-w-7xl mx-auto pt-6 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto sm:pt-6 sm:px-6 lg:px-8">
                 <div class="flex flex-col gap-0 relative" aria-label="water-form-banner" style="/background: radial-gradient(closest-side, #0465A5, #334155);">
 
                 <div class="relative w-full h-full overflow-hidden">
@@ -109,7 +109,7 @@
         
                 </div>
                 
-                                <p id="total-slept" class="text-white text-center /bg-[#0465A5] max-w-[1216px] mx-auto">You have slept for <span id="hours-taken">1 </span>hours.</p>
+                                <p id="total-slept" class="text-white text-center /bg-[#0465A5] max-w-[1216px] mx-auto">You have slept for <span id="hours-taken">1</span> hours.</p>
                                 <p class="text-white text-center /bg-[#0465A5] max-w-[1216px] mx-auto">That's <span id="hours-slept">5</span> <span id="sleep-duration">hours</span> of sleep</span>.</p>
         
                 <div class="w-full max-w-[1216px] mx-auto /bg-[#0465A5] text-center pt-4 text-white text-3xl">
@@ -186,7 +186,7 @@
     {{-- 
             <i class="fas fa-tint fa-3x p-4 text-blue-400 opacity-60 scale-[3] -rotate-[30deg] absolute right-20 bottom-0 translate-x-1/2 -translate-y-1/2"></i>
              --}}
-    </form> --}}
+    </form>
     </div>
 
 

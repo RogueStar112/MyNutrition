@@ -13,6 +13,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        {{-- <link rel="stylesheet" href="dist/fontawesome-5.11.2/css/all.min.css" /> --}}
 
 
         <!-- Scripts -->
@@ -25,6 +26,8 @@
 			  src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
 			  integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
 			  crossorigin="anonymous"></script>
+
+        
 
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -60,6 +63,7 @@
         <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 
+        
         @livewireScripts
     </body>
 </html>

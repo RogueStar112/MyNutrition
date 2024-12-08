@@ -82,7 +82,7 @@
             <div class="max-w-3xl mx-auto px-6 sm:px-6 lg:px-8">
                 <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="POST" enctype="multipart/form-data" action="{{ route('food.store')}}">
                     @csrf
-                    <div id="FOOD_FORM_INPUTS" class="relative /md:max-h-[682px] /md:max-h-[750px] md:max-h-[935px] overflow-hidden">
+                    <div id="FOOD_FORM_INPUTS" class="relative /md:max-h-[682px] /md:max-h-[750px] /md:max-h-[935px] md:max-h-[1130px] overflow-hidden">
 
 
                        <x-food-input-item index="1" :servingUnitOptions="$food_form_options"/>
@@ -184,6 +184,7 @@
                         },
                         success: function(response) {
                             $('#FOOD-ITEMS-CONTAINER').append(response);
+                            nextPage();
                         },
                         error: function(xhr) {
                             console.log(xhr.responseText);
@@ -245,13 +246,12 @@
                     // If the page number basically isn't one, go to the previous page.
                     pageNumber_index -= 1
                     pageNumber = page_numbers[pageNumber_index]
-                    console.log('prev page!')
+
                 } else {
                     // If Page Number is less than 1, go to the most recent page. THIS IS INTENDED so the user doesn't have to click a lot of times to get to a certain page.
                     pageNumber_index = page_numbers.length-1 //page_numbers.slice(-1)[0]-1;
                     pageNumber = page_numbers[pageNumber_index];
 
-                    console.log('most recent page!')
                 }
 
                 updatePageNumber();
@@ -263,11 +263,11 @@
                 if (pageNumber_index >= 0 && pageNumber_index < noOfPages-1) {
                     pageNumber_index += 1
                     pageNumber = page_numbers[pageNumber_index]
-                    console.log('next page!')
+         
                 } else {
                     pageNumber_index = 0;
                     pageNumber = page_numbers[pageNumber_index]
-                    console.log('first page overflow!')
+          
                 }
                 
                 updatePageNumber();

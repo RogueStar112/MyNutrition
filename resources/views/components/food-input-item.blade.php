@@ -105,6 +105,109 @@
 
     <div class="mb-3">
         <label class="block px-6 py-4 md:p-6">
+            <span class="text-white">Food Icon</span>
+            {{-- <input type="text" name="food_icon_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="" /> --}}
+
+            {{-- <label class="radio">
+                <input type="radio" name="food_icon_{{$index}}" value="" />
+                Yes
+              </label>
+              <label class="radio">
+                <input type="radio" name="food_icon_{{$index}}" value="" />
+                No
+              </label> --}}
+        </label>
+
+        <div class="flex gap-4 ml-4 flex-wrap [&>*>label>*]:scale-[1.5] justify-evenly">
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_1" type="radio" value="fa-solid fa-lemon" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_1" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-lemon"></i> </label>
+            </div>
+
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_2" type="radio" value="fa-solid fa-hamburger" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_2" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-hamburger"></i> </label>
+            </div>
+
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_3" type="radio" value="fa-solid fa-egg" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_3" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-egg"></i> </label>
+            </div>
+
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_4" type="radio" value="fa-solid fa-carrot" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_4" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-carrot"></i> </label>
+            </div>
+
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_5" type="radio" value="fa-solid fa-pizza-slice" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_5" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-pizza-slice"></i> </label>
+            </div>
+
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_6" type="radio" value="fa-solid fa-pepper-hot" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_6" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-pepper-hot"></i> </label>
+            </div>
+
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_7" type="radio" value="fa-solid fa-stroopwafel" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_7" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-stroopwafel"></i> </label>
+            </div>
+
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_8" type="radio" value="fa-solid fa-cheese" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_8" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-cheese"></i> </label>
+            </div>
+
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_9" type="radio" value="fa-solid fa-fish" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_9" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-fish"></i> </label>
+            </div>
+
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_10" type="radio" value="fa-solid fa-bread-slice" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_10" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-bread-slice"></i> </label>
+            </div>
+
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_11" type="radio" value="fa-solid fa-bowl-rice" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_11" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-bowl-rice"></i> </label>
+            </div>
+
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_12" type="radio" value="fa-solid fa-drumstick-bite" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_12" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-drumstick-bite"></i> </label>
+            </div>
+
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_13" type="radio" value="fa-solid fa-bottle-water" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_13" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-bottle-water"></i> </label>
+            </div>
+
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_14" type="radio" value="fa-solid fa-beer-mug-empty" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_14" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-beer-mug-empty"></i> </label>
+            </div>
+
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_15" type="radio" value="fa-solid fa-candy-cane" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_15" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-candy-cane"></i> </label>
+            </div>
+
+            <div class="flex items-center">
+                <input id="default-radio-{{$index}}_16" type="radio" value="fa-solid fa-ban" name="default-radio-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-radio-{{$index}}_16" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-ban"></i> </label>
+            </div>
+
+         
+        </div>
+
+
+
+    </div>
+
+    <div class="mb-3">
+        <label class="block px-6 py-4 md:p-6">
             <span class="text-white">Description</span>
             <input type="text" name="food_description_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="Tastes good on pizza" />
         </label>

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('exercise', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('exercise_type_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('exercise_type_id');
             $table->float('distance');
             $table->float('duration');
             $table->timestamp('exercise_start');
