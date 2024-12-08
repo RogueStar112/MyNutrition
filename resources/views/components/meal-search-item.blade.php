@@ -127,7 +127,7 @@
 
             <div class="bg-transparent self-center flex justify-center items-center {{ $food_class ? "[&>img]:hidden [&>i]:scale-150" : "[&>img]:flex" }} [&>img]:justify-evenly [&>img]:items-center rounded-full border-4 border-slate-500">
 
-                <i class="{{ empty($food_class) ? "hidden" : "$food_class text-white scale-150 leading-[128px] h-[128px] w-[128px] max-w-[128px] max-h-[128px] text-center" }}"></i>
+                <i class="{{ empty($food_class) ? "hidden" : "$food_class text-white scale-150 leading-[128px] h-[128px] w-[128px] max-w-[128px] max-h-[128px] text-center " }} text-lg md:text-2xl"></i>
                 
                 <img class="/p-6 object-cover {{ empty($food['img_url']) ? "hidden" : "" }} rounded-full {{  $food_class ? "hidden" : "" }} text-center leading-[128px] text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="{{empty($food_class) ? $food_name_initials : ""}}  " />
             </div>
