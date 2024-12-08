@@ -13,15 +13,7 @@ class WaterController extends Controller
 {
     
     public function water_form() {
-
-        $recordCount = FluidType::count();
-
-        if ($recordCount > 0) {
-            dd("There are $recordCount records in the fluid_type table.");
-        } else {
-            dd("No records found in the fluid_type table.");
-        }
-
+        
         return view('water_form');
 
     }
@@ -34,7 +26,7 @@ class WaterController extends Controller
 
         $validated = $request->validate([
             "fluid-type" => 'required|numeric|min:1|max:4|exists:fluid_type,id',
-            "water-amount" => 'required|numeric|min:1|max:15',
+            "water-amount" => 'required|numeric|min:0|max:15',
             "water-when" => 'required|date'
         ]);
 
