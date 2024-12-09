@@ -135,7 +135,7 @@ class VisualizerController extends Controller
 
             foreach ($tasksExercise as $task_exercise) {
 
-                $date = Carbon::parse($task->exercise_start)->format('d/m/Y');
+                $date = Carbon::parse($task_exercise->exercise_start)->format('d/m/Y');
 
                 $exercise_duration = $task_exercise->duration;
                 $exercise_type = ExerciseType::find($task_exercise->exercise_type_id)?->name;
