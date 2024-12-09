@@ -19,6 +19,8 @@ use App\Models\MealItems;
 
 use App\Models\Water;
 
+use App\Models\ExerciseType;
+
 use Illuminate\Support\Facades\DB;
 
 
@@ -119,6 +121,41 @@ class VisualizerController extends Controller
             $taskData[$date][] = $taskData_setup;
 
         }
+
+
+
+        $tasksExercise = DB::table('exercise')
+                            ->where('user_id', '=', $user_id)
+                            ->whereBetween('exercise_start', [date("$start_date 00:00:00"), date("$end_date 23:59:59")])
+                            // ->groupBy('time_taken', 'fluid_id')
+                            ->orderBy('exercise_start', 'asc')
+                            ->get();
+        
+        if ($tasksExercise) {
+
+            foreach ($tasksExercise as $task_exercise) {
+
+                $exercise_duration = $task_exercise->duration;
+                $exercise_type = ExerciseType::find($task_exercise->exercise_type_id)?->name;
+
+                $taskData_setup = array(
+                    "id" => $task_exercise->id,
+                    "task_type" => "exercise",
+                    "date" => Carbon::parse($task_exercise->exercise_start)->format('d/m/Y h:i'),
+                    "date_short" => Carbon::parse($task_exercise->exercise_start)->format('d/m/Y'),
+                    "task" => "$exercise_type | $exercise_duration" . "mins",
+                    "description" => "...",
+                    "time_start" => Carbon::parse($task_exercise->exercise_start)->format('H'),
+                    "time_end" => Carbon::parse($task_exercise->exercise_start)->add("$exercise_duration minutes")->format('H'), 
+                    "bg_color" => "#058743", // emerald green
+                );
+    
+                $taskData[$date][] = $taskData_setup;
+
+            }
+
+        }
+        
         
 
         // WATER LOADING
@@ -130,7 +167,7 @@ class VisualizerController extends Controller
                         ->orderBy('time_taken', 'asc')
                         ->get();
 
-
+        
         foreach($tasksWater as $task_water) {
             $date = Carbon::parse($task_water->time_taken)->format('d/m/Y');
             

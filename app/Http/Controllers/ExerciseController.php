@@ -48,11 +48,16 @@ class ExerciseController extends Controller
 
 
 
-        $active_calories = (float)$request->input('active-calories')!=NULL ? (float)$request->input('active-calories') : 0;
+        // $active_calories = (float)$request->input('active-calories')!=NULL ? (float)$request->input('active-calories') : 0;
 
-        $total_calories = (float)$request->input('total-calories')!=NULL ? (float)$request->input('total-calories') : 0;
+        // $total_calories = (float)$request->input('total-calories')!=NULL ? (float)$request->input('total-calories') : 0;
 
-        $avg_heart_rate = (float)$request->input('avg-heart-rate')!=NULL ? (float)$request->input('avg-heart-rate') : 0;
+        // $avg_heart_rate = (float)$request->input('avg-heart-rate')!=NULL ? (float)$request->input('avg-heart-rate') : 0;
+
+        $active_calories = (float)($request->input('active-calories') ?? 0);
+        $total_calories = (float)($request->input('total-calories') ?? 0);
+        $avg_heart_rate = (float)($request->input('avg-heart-rate') ?? 0);
+        
 
         $exercise_time = $request->input('exercise-time');
         $exercise_time_ymdhis = date('Y-m-d H:i:s', strtotime($exercise_time));
