@@ -11,6 +11,8 @@ class Food extends Model
 
     protected $table = 'food';
 
+    protected $guarded = ['id']; 
+
     public $timestamps = true;
 
     

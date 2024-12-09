@@ -17,7 +17,7 @@
     @endif
 
     @isset($validated_data)
-        
+        @if(count($validated_data) > 0)
         <div class="alert alert-danger max-w-7xl rounded-lg mx-auto text-center bg-green-800 text-white p-6">
             <h2 class="text-2xl font-extrabold">Data Insertion Success!</h2>
 
@@ -55,26 +55,28 @@
 
                     <tr class="@if(!$isEven)dark:bg-gray-900 @else dark:bg-gray-500 @endif ">
                         <td class="px-6 py-3 hidden md:table-cell">{{$loop->iteration}}</td> 
-                        <td>{{$data['food_name']}}</td>
-                        <td>{{$data['food_source']}}</td>
+                        <td>{{$data['food_name'] ?? ""}}</td>
+                        <td>{{$data['food_source'] ?? ""}}</td>
 
-                        @if($data['food_servingunit'] == 'slice' || $data['food_servingunit'] == 'pc')
-                            <td>{{$data['food_servingsize']}} {{$data['food_servingunit']}}s</td>
-                        @else
-                            <td>{{$data['food_servingsize']}}{{$data['food_servingunit']}}</td>
-                        @endif
+                        @isset($data['food_servingunit'])
+                            @if($data['food_servingunit'] == 'slice' || $data['food_servingunit'] == 'pc')
+                                <td>{{$data['food_servingsize'] ?? ""}} {{$data['food_servingunit'] ?? ""}}s</td>
+                            @else
+                                <td>{{$data['food_servingsize'] ?? ""}}{{$data['food_servingunit'] ?? ""}}</td>
+                            @endif
+                        @endisset
 
-                        <td>{{$data['food_calories']}}</td>
-                        <td>{{$data['food_fat']}}</td>
-                        <td>{{$data['food_carbs']}}</td>
-                        <td>{{$data['food_protein']}}</td>
+                        <td>{{$data['food_calories'] ?? ""}}</td>
+                        <td>{{$data['food_fat'] ?? ""}}</td>
+                        <td>{{$data['food_carbs'] ?? ""}}</td>
+                        <td>{{$data['food_protein'] ?? ""}}</td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
             </div>
         </div>
-
+        @endif
     @endisset
 
     <div class="flex py-4 justify-center">
@@ -104,7 +106,7 @@
                             <input type="hidden" id="pages" name="food_pages" value="1"/>
                             <button type="button" class="bg-red-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-trash"></i>  DELETE</button>
                             <button type="button" class="bg-blue-600 text-white p-4 m-4 rounded-lg"><a href="{{ route('food.view')}}"><i class="fas fa-eye"></i>  VIEW</a></button>
-                            <button type="submit" class="bg-lime-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-check"></i>  SUBMIT</button>
+                            <button id="SUBMIT-FOOD-BTN" type="submit" class="bg-lime-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-check"></i>  SUBMIT</button>
                         </div>
                     </div>
                     
@@ -138,6 +140,18 @@
     </div>
 
     <script>
+
+
+            // Thanks to stackoverflow for this 'single-form submission check' 
+            // https://stackoverflow.com/questions/17106885/disable-submit-button-only-after-submit
+
+            $(document).ready(function () {
+                $("#FOOD_FORM").submit(function () {
+                    $("#SUBMIT-FOOD-BTN").attr("disabled", true);
+                    return true;
+                });
+            });
+
 
             var pageNumber = 1;
             var pageNumber_index = 0;

@@ -30,9 +30,13 @@ class FoodController extends Controller
     {   
 
         // Food unit options are stored in the database.
+        // $validatedData = session('validated_data', NULL);
         $food_form_options = FoodUnit::all();
 
+
         return view('nutrition_food_form', ['food_form_options' => $food_form_options]);
+
+        // $request->session()->forget('validated_data');
     }
 
     public function food_form_store(Request $request) 
@@ -44,11 +48,9 @@ class FoodController extends Controller
          // will be used later to visualize what items go through!
          $added_items = [];
 
-         if ($user) {
-            $user_id = $user->id;
-         } else {
-            return 'You must be logged in first.';
-         }
+         if (!$user) {
+            return redirect()->route('login')->withErrors('You must be logged in first.');
+        }
 
          $array_index = $request->input('food_pages');
          
@@ -123,127 +125,164 @@ class FoodController extends Controller
 
             $existingFoodSource = FoodSource::where('name', $food_source)->first();
 
-            if ($existingFoodSource) {
-                // do nothing
+            // if ($existingFoodSource) {
+            //     // do nothing
 
-                $food_source_id = $existingFoodSource->id;
+            //     $food_source_id = $existingFoodSource->id;
                 
-            } else {
+            // } else {
                 
-                $newFoodSource = new FoodSource();
+            //     $newFoodSource = new FoodSource();
 
-                $newFoodSource->name = "$food_source";
+            //     $newFoodSource->name = "$food_source";
 
-                $newFoodSource->save();
+            //     $newFoodSource->save();
 
-                $query = FoodSource::where('name', $food_source)->first();
+            //     $query = FoodSource::where('name', $food_source)->first();
 
-                $food_source_id = $query->id;
+            //     $food_source_id = $query->id;
 
-            }
+            // }
+
+            $food_source = $request->input("food_source_$array_index_x");
+            $existingFoodSource = FoodSource::firstOrCreate(['name' => $food_source]);
+            $food_source_id = $existingFoodSource->id;
 
 
             // Add Food Source
             if ($food_source_id) {
 
-                $newFood = new Food();
+                // $newFood = new Food();
 
-                $newFood->name = "$food_name";
+                // $newFood->name = "$food_name";
 
-                $newFood->user_id = $user_id;
+                // $newFood->user_id = $user_id;
 
-                $newFood->source_id = $food_source_id;
+                // $newFood->source_id = $food_source_id;
 
-                $newFood->img_url = $food_image;
+                // $newFood->img_url = $food_image;
 
-                $newFood->description = $food_description;
+                // $newFood->description = $food_description;
 
-                $newFood->icon_class = $food_icon;
+                // $newFood->icon_class = $food_icon;
 
-                $newFood->save();
+                // $newFood->save();
 
-                $food_query = Food::where('name', "$food_name")
-                                  ->where('source_id', $food_source_id)
-                                  ->where('user_id', $user_id)
-                                  ->latest('created_at')
-                                  ->first();
+                $newFood = Food::create([
+                    'name' => $request->input("food_name_$array_index_x"),
+                    'user_id' => $user->id,
+                    'source_id' => $food_source_id,
+                    'img_url' => $food_image,
+                    'description' => $request->input("food_description_$array_index_x"),
+                    'icon_class' => $request->input("food-icon-$array_index_x"),
+                ]);
 
-                $food_id = $food_query->id;
-                if ($food_id) {
+                // $food_query = Food::where('name', "$food_name")
+                //                   ->where('source_id', $food_source_id)
+                //                   ->where('user_id', $user_id)
+                //                   ->latest('created_at')
+                //                   ->first();
 
-                    $newMacronutrients = new Macronutrients();
+                Macronutrients::create([
+                    'food_id' => $newFood->id,
+                    'food_unit_id' => (int) $request->input("food_servingunit_$array_index_x"),
+                    'serving_size' => (float) $request->input("food_servingsize_$array_index_x"),
+                    'calories' => (float) $request->input("food_calories_$array_index_x"),
+                    'fat' => (float) round($request->input("food_fat_$array_index_x"), 1),
+                    'carbohydrates' => (float) round($request->input("food_carbs_$array_index_x"), 1),
+                    'protein' => (float) round($request->input("food_protein_$array_index_x"), 1),
+                ]);
 
-                    $newMacronutrients->food_id = $food_id;
+                Micronutrients::create([
+                    'food_id' => $newFood->id,
+                    'sugars' => (float) round($request->input("food_sugars_$array_index_x"), 1),
+                    'saturates' => (float) round($request->input("food_saturates_$array_index_x"), 1),
+                    'fibre' => (float) round($request->input("food_fibre_$array_index_x"), 1),
+                    'salt' => (float) round($request->input("food_salt_$array_index_x"), 1),
+                ]);
 
-                    $newMacronutrients->food_unit_id = (int)$food_servingunit;
-
-                    
-
-                    $newMacronutrients->serving_size = (float)$food_servingsize;
-
-                    $newMacronutrients->calories = (float)$food_calories;
-
-                    $newMacronutrients->fat = (float)$food_fat;
-
-                    $newMacronutrients->carbohydrates = (float)$food_carbs;
-
-                    $newMacronutrients->protein = (float)$food_protein;
-
-                    // $newMacronutrients->calories = round((float)$food_calories / (float)$food_servingsize, 0);
-
-                    // $newMacronutrients->fat = round((float)$food_fat / (float)$food_servingsize, 1);
-
-                    // $newMacronutrients->carbohydrates = round((float)$food_carbs / (float)$food_servingsize, 1);
-
-                    // $newMacronutrients->protein = round((float)$food_protein / (float)$food_servingsize, 1);
-
-                    $newMacronutrients->save();
-
-                    
-                    $newMicronutrients = new Micronutrients();
-
-                    $newMicronutrients->food_id =  (int)$food_id;
-
-                    $newMicronutrients->sugars = (float)$food_sugars;
-
-                    $newMicronutrients->saturates = (float)$food_saturates;
-
-                    $newMicronutrients->fibre = (float)$food_fibre;
-
-                    $newMicronutrients->salt = (float)$food_salt;
-
-                    $newMicronutrients->save();
-
-
-                    // $macronutrients_query = Macronutrients::where('food_id', $food_id)
-                    //                                       ->get();
-
-
-                    $food_unit_to_get = FoodUnit::where('id', $food_servingunit)->first();
-
-                    $food_servingunit_short = $food_unit_to_get->short_name;
-                    
-                    $added_items[] = ['index' => $x, 
-                    'food_name' => $food_name, 
-                    'food_source' => $food_source,
-                    'food_servingunit' => $food_servingunit_short, 
-                    'food_servingsize' => $food_servingsize,
-                    'food_calories' => $food_calories,
-                    'food_fat' => $food_fat,
-                    'food_carbs' => $food_carbs,
-                    'food_protein' => $food_protein,
-                    'food_sugars' => $food_sugars,
-                    'food_saturates' => $food_saturates,
-                    'food_fibre' => $food_fibre,
-                    'food_salt' => $food_salt];
-
-
-                } else {
-
-                    // do nothing
-                    return "Your food doesn't exist";
                 
-                }    
+
+
+
+                // $food_id = $food_query->id;
+                // if ($food_id) {
+
+                //     $newMacronutrients = new Macronutrients();
+
+                //     $newMacronutrients->food_id = $food_id;
+
+                //     $newMacronutrients->food_unit_id = (int)$food_servingunit;
+
+                    
+
+                //     $newMacronutrients->serving_size = (float)$food_servingsize;
+
+                //     $newMacronutrients->calories = (float)$food_calories;
+
+                //     $newMacronutrients->fat = (float)$food_fat;
+
+                //     $newMacronutrients->carbohydrates = (float)$food_carbs;
+
+                //     $newMacronutrients->protein = (float)$food_protein;
+
+                //     // $newMacronutrients->calories = round((float)$food_calories / (float)$food_servingsize, 0);
+
+                //     // $newMacronutrients->fat = round((float)$food_fat / (float)$food_servingsize, 1);
+
+                //     // $newMacronutrients->carbohydrates = round((float)$food_carbs / (float)$food_servingsize, 1);
+
+                //     // $newMacronutrients->protein = round((float)$food_protein / (float)$food_servingsize, 1);
+
+                //     $newMacronutrients->save();
+
+                    
+                //     $newMicronutrients = new Micronutrients();
+
+                //     $newMicronutrients->food_id =  (int)$food_id;
+
+                //     $newMicronutrients->sugars = (float)$food_sugars;
+
+                //     $newMicronutrients->saturates = (float)$food_saturates;
+
+                //     $newMicronutrients->fibre = (float)$food_fibre;
+
+                //     $newMicronutrients->salt = (float)$food_salt;
+
+                //     $newMicronutrients->save();
+
+
+                //     // $macronutrients_query = Macronutrients::where('food_id', $food_id)
+                //     //                                       ->get();
+
+
+                    // fix this later 09122024
+
+                    // $food_unit_to_get = FoodUnit::where('id', $food_servingunit)->first();
+
+                    // $food_servingunit_short = $food_unit_to_get->short_name;
+                    
+                    // $added_items[] = ['index' => $x, 
+                    // 'food_name' => $food_name, 
+                    // 'food_source' => $food_source,
+                    // 'food_servingunit' => $food_servingunit_short, 
+                    // 'food_servingsize' => $food_servingsize,
+                    // 'food_calories' => $food_calories,
+                    // 'food_fat' => $food_fat,
+                    // 'food_carbs' => $food_carbs,
+                    // 'food_protein' => $food_protein,
+                    // 'food_sugars' => $food_sugars,
+                    // 'food_saturates' => $food_saturates,
+                    // 'food_fibre' => $food_fibre,
+                    // 'food_salt' => $food_salt];
+
+
+                // } else {
+
+                //     // do nothing
+                //     return "Your food doesn't exist";
+                
+                // }    
                 
                 
 
@@ -253,11 +292,17 @@ class FoodController extends Controller
 
 
 
-
+            session([
+                // 'validated_data' => $added_items,
+                'food_form_options' => $food_form_options,
+            ]);
             
          }
 
-        return view('nutrition_food_form', ['validated_data' => $added_items, 'food_form_options' => $food_form_options]);
+        
+        return redirect()->route('food.create');
+        
+        // return view('nutrition_food_form', ['validated_data' => $added_items, 'food_form_options' => $food_form_options]);
         // return $added_items;
 
 

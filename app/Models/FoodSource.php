@@ -10,6 +10,9 @@ class FoodSource extends Model
     use HasFactory;
 
     protected $table = 'food_source';
+
+    protected $guarded = ['id']; 
+    
     public $timestamps = false;
     
 }
