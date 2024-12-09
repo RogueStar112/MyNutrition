@@ -140,7 +140,8 @@
                         <p class="text-gray-500 text-lg">{{$food['source_name']}}</p>
 
                         <div class="flex">
-                            <img src="{{url('/img/blankpfp.png')}}" width="24" height="24">
+                            {{-- <img src="{{url('/img/blankpfp.png')}}" width="24" height="24"> --}}
+                            <i class="fa-solid fa-user text-center text-2xl text-white"></i>
                             <p class="mx-3 text-gray-500">{{$food['user_name']}}</p>
                         </div>
                     </div>
