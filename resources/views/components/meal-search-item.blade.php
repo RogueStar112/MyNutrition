@@ -139,9 +139,9 @@
                         <p class="text-white font-extrabold text-xl">{{$food['name']}}</p>
                         <p class="text-gray-500 text-lg">{{$food['source_name']}}</p>
 
-                        <div class="flex">
+                        <div class="flex items-center">
                             {{-- <img src="{{url('/img/blankpfp.png')}}" width="24" height="24"> --}}
-                            <i class="fa-solid fa-user text-center text-2xl text-white"></i>
+                            <i class="fa-solid fa-user text-center text-md text-white"></i>
                             <p class="mx-3 text-gray-500">{{$food['user_name']}}</p>
                         </div>
                     </div>
