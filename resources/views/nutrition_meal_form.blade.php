@@ -149,6 +149,46 @@
 
             var config = { childList: true, subtree: true };
             observer.observe(targetElement, config);
-        });        
+
+
+            $( "#FOOD-ITEMS-CONTAINER" ).on( "change", function() {
+                
+                console.log('food_items_container_change: Tanzania')
+
+                // Reorder remaining items
+                reorderItems();
+
+                // Trigger onchange event for FOOD-ITEMS-CONTAINER
+
+             } );
+
+
+             function reorderItems() {
+                // Get all meal items
+                $("#FOOD-ITEMS-CONTAINER .meal_item").each(function (index) {
+                    const newIndex = index + 1; // Start at 1
+
+                    // Update attributes and inner content
+                    $(this).attr("id", `meal_item_${newIndex}`).attr("index", newIndex);
+                    $(this).find("[aria-label='index_number']").text(newIndex);
+                    $(this).find("button").attr("id", `item_revealbtn_${newIndex}`).attr("index", newIndex);
+                    $(this).find("i").attr("id", `item_icon_${newIndex}`);
+                    $(this).find(`#food_wrapper_${index}`).attr("id", `food_wrapper_${newIndex}`);
+                    $(this).find(`#food_text_name_${index}`).attr("id", `food_text_name_${newIndex}`);
+                    $(this).find(`#food_servingsize_${index}`).attr("id", `food_servingsize_${newIndex}`);
+                    $(this).find(`#food_text_source_${index}`).attr("id", `food_text_source_${newIndex}`);
+                    $(this).find(`#nutritional_wrapper_${index}`).attr("id", `nutritional_wrapper_${newIndex}`);
+                    $(this).find(`#food_text_calories_${index}`).attr("id", `food_text_calories_${newIndex}`);
+                    $(this).find(`#food_progressbar_calories_${index}`).attr("id", `food_progressbar_calories_${newIndex}`);
+                    $(this).find(`#food_text_fat_${index}`).attr("id", `food_text_fat_${newIndex}`);
+                    $(this).find(`#food_progressbar_fat_${index}`).attr("id", `food_progressbar_fat_${newIndex}`);
+                    $(this).find(`#food_text_carbs_${index}`).attr("id", `food_text_carbs_${newIndex}`);
+                    $(this).find(`#food_progressbar_carbs_${index}`).attr("id", `food_progressbar_carbs_${newIndex}`);
+                    $(this).find(`#food_text_protein_${index}`).attr("id", `food_text_protein_${newIndex}`);
+                    $(this).find(`#food_progressbar_protein_${index}`).attr("id", `food_progressbar_protein_${newIndex}`);
+                    $(this).find(`#mealitem-edit-btn-${index}`).attr("id", `mealitem-edit-btn-${newIndex}`);
+                });
+            }
+                });        
     </script>
 </x-app-layout>

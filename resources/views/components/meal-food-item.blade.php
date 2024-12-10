@@ -7,8 +7,10 @@ $food['fat'] = round(($food['fat']/($food['serving_size']))*$servingSize*$quanti
 $food['carbohydrates'] = round(($food['carbohydrates']/($food['serving_size']))*$servingSize*$quantity, 1);
 $food['protein'] = round(($food['protein']/($food['serving_size']))*$servingSize*$quantity, 1);
 
+$food_id = $food['food_id']
+
 @endphp
-<div id="meal_item_{{ $foodIndex }}" class="meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg @if($showNutrients == true) py-6 @else @endif  pt-6 text-white shadow-md shadow-black overflow-hidden" index="{{$foodIndex}}">
+<div id="meal_item_{{ $foodIndex }}" class="meal_{{$food_id}} meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg @if($showNutrients == true) py-6 @else @endif  pt-6 text-white shadow-md shadow-black overflow-hidden" index="{{$foodIndex}}">
     <ul class="relative @isset($food['img_url']) @else relative @endisset">
         <button id="item_revealbtn_{{ $foodIndex }}" index="{{ $foodIndex }}" class="food_revealbtn absolute right-0 bg-lime-800 text-white p-3 mr-6 rounded-lg @if($showNutrients == true)hidden @endif">
             <i id="item_icon_{{ $foodIndex }}" class="fas fa-chevron-down"> </i>

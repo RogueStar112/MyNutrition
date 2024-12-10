@@ -435,7 +435,11 @@ class MealController extends Controller
             $servingSize = $meal['servingSize'];
             $quantity = $meal['quantity'];
 
+            $food_array[$meal_datendex]['food_id'] = $query_no;
+            
             $food_array[$meal_datendex]['index'] = $meal_datendex_no;
+
+    
 
             $food_search = Food::where('id', "$query_no")
                             // ->where('user_id', $user_id)
@@ -472,7 +476,7 @@ class MealController extends Controller
             // } else {
             //     // ignore
             // }
-
+            
             $food_array[$meal_datendex]['serving_size_input'] = $servingSize;
             $food_array[$meal_datendex]['quantity'] = $quantity;
             $food_array[$meal_datendex]['serving_size'] = $macronutrients_search->serving_size;
@@ -503,19 +507,19 @@ class MealController extends Controller
             $food_array_html[$meal_datendex]['render_html'] = (string)$food_array_component->render()->with($food_array_component->data());
             $food_array_html[$meal_datendex]['form_data'] = "
 
-            <input id='meal_foodname_$food_id' type='hidden' name='meal_foodname_$food_id' value='$food_name' index='$meal_datendex_no' readonly />
-            <input id='meal_foodid_$food_id' type='hidden' name='meal_foodid_$food_id' value='$food_id' index='$meal_datendex_no' readonly />
-            <input id='meal_calories_$food_id' type='hidden' name='meal_calories_$food_id' value='$macronutrients_search->calories' index='$meal_datendex_no' readonly />
-              <input id='meal_fat_$food_id' type='hidden' name='meal_fat_$food_id' value='$macronutrients_search->fat' index='$meal_datendex_no' readonly />
-             <input id='meal_carbs_$food_id' type='hidden' name='meal_carbs_$food_id' value='$macronutrients_search->carbohydrates' index='$meal_datendex_no' readonly />
-              <input id='meal_protein_$food_id' type='hidden' name='meal_protein_$food_id' value='$macronutrients_search->protein' index='$meal_datendex_no' readonly />
-              <input id='meal_servingsize_$food_id' type='hidden' name='meal_servingsize_$food_id' value='$servingSize' index='$meal_datendex_no' readonly />
-             <input id='meal_quantity_$food_id' type='hidden' name='meal_quantity_$food_id' value='$quantity' index='$meal_datendex_no' readonly />
-             <input id='meal_foodunitid_$food_id' type='hidden' name='meal_foodunitid_$food_id' value='$food_unit_id' index='$meal_datendex_no' readonly />
-             <input id='meal_sugars_$food_id' type='hidden' name='meal_sugars_$food_id' value='$food_sugars' index='$meal_datendex_no' readonly />
-              <input id='meal_saturates_$food_id' type='hidden' name='meal_saturates_$food_id' value='$food_saturates' index='$meal_datendex_no' readonly />
-             <input id='meal_fibre_$food_id' type='hidden' name='meal_fibre_$food_id' value='$food_fibre' index='$meal_datendex_no' readonly />
-             <input id='meal_salt_$food_id' type='hidden' name='meal_salt_$food_id' value='$food_salt' index='$meal_datendex_no' readonly />
+            <input class='meal_$food_id' id='meal_foodname_$food_id' type='hidden' name='meal_foodname_$food_id' value='$food_name' index='$meal_datendex_no' readonly />
+            <input class='meal_$food_id'   id='meal_foodid_$food_id' type='hidden' name='meal_foodid_$food_id' value='$food_id' index='$meal_datendex_no' readonly />
+            <input class='meal_$food_id'  id='meal_calories_$food_id' type='hidden' name='meal_calories_$food_id' value='$macronutrients_search->calories' index='$meal_datendex_no' readonly />
+              <input class='meal_$food_id'  id='meal_fat_$food_id' type='hidden' name='meal_fat_$food_id' value='$macronutrients_search->fat' index='$meal_datendex_no' readonly />
+             <input class='meal_$food_id'  id='meal_carbs_$food_id' type='hidden' name='meal_carbs_$food_id'. value='$macronutrients_search->carbohydrates' index='$meal_datendex_no' readonly />
+              <input class='meal_$food_id'  id='meal_protein_$food_id' type='hidden' name='meal_protein_$food_id' value='$macronutrients_search->protein' index='$meal_datendex_no' readonly />
+              <input class='meal_$food_id'  id='meal_servingsize_$food_id' type='hidden' name='meal_servingsize_$food_id' value='$servingSize' index='$meal_datendex_no' readonly />
+             <input class='meal_$food_id'  id='meal_quantity_$food_id' type='hidden' name='meal_quantity_$food_id' value='$quantity' index='$meal_datendex_no' readonly />
+             <input class='meal_$food_id'  id='meal_foodunitid_$food_id' type='hidden' name='meal_foodunitid_$food_id' value='$food_unit_id' index='$meal_datendex_no' readonly />
+             <input class='meal_$food_id'  id='meal_sugars_$food_id' type='hidden' name='meal_sugars_$food_id' value='$food_sugars' index='$meal_datendex_no' readonly />
+              <input class='meal_$food_id'  id='meal_saturates_$food_id' type='hidden' name='meal_saturates_$food_id' value='$food_saturates' index='$meal_datendex_no' readonly />
+             <input class='meal_$food_id'  id='meal_fibre_$food_id' type='hidden' name='meal_fibre_$food_id' value='$food_fibre' index='$meal_datendex_no' readonly />
+             <input class='meal_$food_id'  id='meal_salt_$food_id' type='hidden' name='meal_salt_$food_id' value='$food_salt' index='$meal_datendex_no' readonly />
              
              
              
@@ -648,8 +652,16 @@ class MealController extends Controller
         //                         ->distinct()
         //                         ->get();
 
+        $check_if_local = env('DB_CONNECTION') === 'sqlite';
+        
+        if ($check_if_local) {
+            $meal_dates_select_filterstr = "strftime('%Y-%m-%d', time_planned) as date, time_planned";
+        } else {
+            $meal_dates_select_filterstr = "DISTINCT DATE_FORMAT(time_planned, '%Y-%m-%d') as date, time_planned";
+        }
+
         $meal_dates_select =        DB::table('meal')
-                                        ->selectRaw('DISTINCT DATE_FORMAT(time_planned, "%Y-%m-%d") as date, time_planned')
+                                        ->selectRaw($meal_dates_select_filterstr)
                                         ->where('user_id', 1)
                                         ->where('is_eaten', 1)
                                         ->orderBy('time_planned', 'desc')

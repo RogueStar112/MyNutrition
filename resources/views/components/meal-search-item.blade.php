@@ -243,7 +243,7 @@
                     <i id="food-add-icon-{{$food['food_id']}}" class="flex fas fa-plus fa-2x text-white self-center cursor-pointer py-auto px-2"></i>
                     </div>
 
-                    <div class="grow bg-red-800 rounded-br-lg flex justify-center items-center delete_food_icon text-md" value="{{$food['id']}}">
+                    <div class="grow bg-red-800 rounded-br-lg flex justify-center items-center delete_food_icon text-md" value="{{$food['id']}}" value="{{$food['food_id']}}">
                     <i id="food-del-icon-{{$food['food_id']}}" class="flex fas fa-trash fa-2x text-white self-center cursor-pointer py-auto px-2"></i>
                     </div>
                     
@@ -513,6 +513,13 @@
                 console.log('NEW DELETED ARRAY', newArray);
 
                 foods_pages = newArray;
+
+                $('#foods_pages').val(newArray);
+
+                $(`.meal_${query_delete}`).remove();
+
+                $("#FOOD-ITEMS-CONTAINER").trigger("change");
+                
             });
             
             
