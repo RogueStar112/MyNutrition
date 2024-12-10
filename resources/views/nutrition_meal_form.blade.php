@@ -15,16 +15,14 @@
             <div class="max-w-7xl /w-[768px] mx-auto sm:px-6 lg:px-8">
                 <form id="FOOD_FORM" class="bg-gray-800 max-w-[65rem] /h-32 rounded-lg" method="GET" action="{{ route('meal.create_p2')}}">
                     @csrf
+
+                    
                     <div id="FOOD_FORM_INPUTS" class="relative w-full max-w-[400px] md:max-w-full md:max-h-[682px] overflow-hidden">
                        <x-meal-input-item index="1"/>
 
                     </div>
 
-                    <div id="FOOD-SEARCH-CONTAINER">
-                        <!-- x-meal-search-items -->
-                    </div>
-
-                    <div id="food-media-controls">
+                    <div id="food-media-controls" class="sticky top-0 z-50 bg-gray-800">
                         {{-- <div class="flex justify-center">
                             <button id="PREV-PAGE-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-arrow-left"></i></button>
                             <button id="ADD-FOOD-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-plus"></i></button>
@@ -42,6 +40,12 @@
                             <button type="submit" class="bg-lime-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-check"></i>  SUBMIT</button>
                         </div>
                     </div>
+
+                    <div id="FOOD-SEARCH-CONTAINER">
+                        <!-- x-meal-search-items -->
+                    </div>
+
+                    
                     
 
                     <input type="hidden" id="no_of_foods" value="0" autocomplete="off">
