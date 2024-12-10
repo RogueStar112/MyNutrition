@@ -325,7 +325,7 @@ class MealController extends Controller
                         //    ->where('user_id', $user_id)
                            ->orderBy('id', 'desc')
                         //    ->groupBy('name', 'source_id')
-                           ->paginate(15);
+                           ->paginate(6);
 
 
         // $food_search = Food::selectRaw('MAX(id) as id, name, source_id, MAX(created_at) as created_at, MAX(updated_at) as updated_at')

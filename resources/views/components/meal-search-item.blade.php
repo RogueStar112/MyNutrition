@@ -123,11 +123,11 @@
 
         @endphp
 
-        <div class="grid grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6" id="food-item-{{$food['food_id']}}" x-data="{ serving_size: {{$servingSize}}, quantity: {{$quantity}} }">
+        <div class="md:grid md:grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6" id="food-item-{{$food['food_id']}}" x-data="{ serving_size: {{$servingSize}}, quantity: {{$quantity}} }">
 
-            <div class="bg-transparent self-center flex justify-center items-center {{ $food_class ? "[&>img]:hidden [&>i]:scale-150" : "[&>img]:flex" }} [&>img]:justify-evenly [&>img]:items-center rounded-full border-4 border-slate-500">
+            <div class="bg-transparent self-center flex justify-center items-center h-[128px] w-[128px] max-w-[128px] max-h-[128px] {{ $food_class ? "[&>img]:hidden [&>i]:scale-150" : "[&>img]:flex" }} [&>img]:justify-evenly [&>img]:items-center rounded-full border-4 border-slate-500">
 
-                <i class="{{ empty($food_class) ? "hidden" : "$food_class text-white scale-150 leading-[128px] h-[128px] w-[128px] max-w-[128px] max-h-[128px] text-center " }} text-2xl md:text-4xl"></i>
+                <i class="{{ empty($food_class) ? "hidden" : "$food_class text-white scale-150 leading-[128px] h-[128px] w-[128px] max-w-[128px] max-h-[128px] text-center " }} text-2xl sm:text-3xl md:text-4xl"></i>
                 
                 <img class="/p-6 object-cover {{ empty($food['img_url']) ? "hidden" : "" }} rounded-full {{  $food_class ? "hidden" : "" }} text-center leading-[128px] text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="{{empty($food_class) ? $food_name_initials : ""}}  " />
             </div>
@@ -237,13 +237,13 @@
                 {{-- <div class="h-full"></div> --}}
             </div>
 
-            <div id="food-add-{{$food['food_id']}}" class="absolute flex flex-col justify-center items-center h-full rounded-r-lg right-0 bg-green-500 cursor-pointer max-w-[44px]">
+            <div id="food-add-{{$food['food_id']}}" class="absolute top-0 md:top-auto flex flex-col justify-center items-center h-min md:h-full md:rounded-r-lg right-0 cursor-pointer max-w-[44px] [&>*]:max-h-[2rem] [&>*]:max-w-[2rem] [&>*]:rounded-full md:max-h-max md:max-w-max">
                     
-                    <div class="grow flex justify-center items-center add_food_icon" value="{{$food['id']}}">
+                    <div class="grow flex justify-center items-center add_food_icon mb-4 rounded-full bg-green-500 m-4 text-md" value="{{$food['id']}}">
                     <i id="food-add-icon-{{$food['food_id']}}" class="flex fas fa-plus fa-2x text-white self-center cursor-pointer py-auto px-2"></i>
                     </div>
 
-                    <div class="grow bg-red-800 rounded-br-lg flex justify-center items-center delete_food_icon" value="{{$food['id']}}">
+                    <div class="grow bg-red-800 rounded-br-lg flex justify-center items-center delete_food_icon text-md" value="{{$food['id']}}">
                     <i id="food-del-icon-{{$food['food_id']}}" class="flex fas fa-trash fa-2x text-white self-center cursor-pointer py-auto px-2"></i>
                     </div>
                     
@@ -459,11 +459,11 @@
                                     
                                     // console.log('FOOD_ARRAY JACKSON', food_array);
 
-                                    $(`#food-add-${query}`).addClass(`bg-yellow-500 [&>*]:text-black`);
+                                    // $(`#food-add-${query}`).addClass(`bg-yellow-500 [&>*]:text-black`);
                                     
-                                    $(`#food-add-icon-${query}`).addClass(`fa-pencil`);
+                                    // $(`#food-add-icon-${query}`).addClass(`fa-pencil`);
 
-                                    $(`#food-add-icon-${query}`).removeClass(`fa-plus`);
+                                    // $(`#food-add-icon-${query}`).removeClass(`fa-plus`);
 
                                 }
                             }

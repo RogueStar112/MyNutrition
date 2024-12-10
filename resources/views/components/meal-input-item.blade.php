@@ -1,11 +1,7 @@
 <div id="meal_number_{{$index}}" class="/inline-block">
     <div class="p-6">
-    <h1 class="text-white text-2xl">1. Select Foods To Add</h1>
-    <p class="text-gray-500 italic mt-2">Type in all three inputs, then press enter.</p>
-    </div>
-
-    <div class="mb-3 md:grid md:grid-cols-2 gap-1 w-[50rem]">
-        
+    <h1 class="text-white text-2xl text-center md:text-left">1. Select Foods To Add</h1>
+    <p class="text-gray-500 italic mt-2 text-center md:text-left">Type in all three inputs, then press enter.</p>
     </div>
 
     <div class="mb-3 md:grid md:grid-cols-3 gap-1 /w-[50rem]">
