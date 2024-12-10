@@ -7,7 +7,7 @@
 
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="grid grid-flow-row-dense grid-cols-1 md:grid-cols-6 md:grid-rows-1 gap-3 [&>*]:mx-2 md:[&>*]:mx-0">
+            <div class="grid grid-flow-row-dense grid-cols-1 md:grid-cols-3 md:grid-rows-1 gap-3 [&>*]:mx-2 md:[&>*]:mx-0">
 
                 <!--
                 Menu One: Logging
@@ -20,7 +20,7 @@
 
                 {{-- <h2 class="text-6xl italic font-extrabold text-white col-span-3 md:col-span-6 m-4 pb-6 border-b-4 border-gray-500">Main Menu</h2> --}}
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-2  duration-300 hover:bg-red-800 [&>*]:hover:text-black [&>*]:hover:border-b-black" href="{{route('food.create')}}">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-2  duration-300 hover:bg-red-800 [&>*]:hover:text-black [&>*]:hover:border-b-black" href="{{route('food.create')}}">
 
                         <div class="flex justify-between text-red-500 border-b-4 border-b-red-500 p-4 items-center">
                             <h2 class="text-4xl uppercase font-black">Food</h2>
@@ -29,7 +29,7 @@
                         <p class="text-white p-4">Create new Food Items.</p>
                     </a>
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-2  duration-300 hover:bg-orange-800 [&>*]:hover:text-black [&>*]:hover:border-b-black" href="{{route('meal.create')}}">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-2  duration-300 hover:bg-orange-800 [&>*]:hover:text-black [&>*]:hover:border-b-black" href="{{route('meal.create')}}">
                         <div class="flex justify-between text-orange-500 border-b-4 border-b-orange-500 items-center">
                             <h2 class="text-4xl uppercase p-4 font-black">Meal</h2>
                             <i class="fas fa-utensils fa-3x p-4"></i>
@@ -37,7 +37,7 @@
                         <p class="text-white p-4">Create new Meals with existing Food.</p>
                     </a>
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-2  duration-300 hover:bg-yellow-800 [&>*]:hover:text-black [&>*]:hover:border-b-black" href="{{route('exercise.form')}}">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-2  duration-300 hover:bg-yellow-800 [&>*]:hover:text-black [&>*]:hover:border-b-black" href="{{route('exercise.form')}}">
 
                         <div class="flex justify-between text-yellow-500 border-b-4 border-b-yellow-500 items-center">
                             <h2 class="text-4xl uppercase p-4 font-black">Exercise</h2>
@@ -47,7 +47,7 @@
                         <p class="text-white p-4">Log your Exercises.</p>
                     </a>   
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-2  duration-300 hover:bg-cyan-800 [&>*]:hover:text-black [&>*]:hover:border-b-black" href="{{route('body_stats.form')}}">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-2  duration-300 hover:bg-cyan-800 [&>*]:hover:text-black [&>*]:hover:border-b-black" href="{{route('body_stats.form')}}">
 
                         <div class="flex justify-between text-teal-500 border-b-4 border-b-teal-500 items-center">
                             <h2 class="text-4xl uppercase p-4 font-black">Body</h2>
@@ -57,7 +57,7 @@
                         <p class="text-white p-4">Weight, Height & Body Fat.</p>
                     </a>
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-2 hover:bg-blue-800 [&>*]:hover:text-black [&>*]:hover:border-b-black duration-300" href="{{route('water.form')}}">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-2 hover:bg-blue-800 [&>*]:hover:text-black [&>*]:hover:border-b-black duration-300" href="{{route('water.form')}}">
 
                         <div class="flex justify-between text-blue-500 border-b-4 border-b-blue-500 items-center">
                             <h2 class="text-4xl uppercase p-4 font-black">Water</h2>
@@ -67,7 +67,7 @@
                         <p class="text-white p-4">Log your Water Intake.</p>
                     </a>
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-2 hover:bg-indigo-800 [&>*]:hover:text-black [&>*]:hover:border-b-black duration-300" href="{{route('sleep.form')}}">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-2 hover:bg-indigo-800 [&>*]:hover:text-black [&>*]:hover:border-b-black duration-300" href="{{route('sleep.form')}}">
 
                         <div class="flex justify-between text-indigo-500 border-b-4 border-b-indigo-500 items-center">
                             <h2 class="text-4xl uppercase p-4 font-black">Sleep</h2>
@@ -79,7 +79,7 @@
 {{-- 
                 <h2 class="text-6xl italic font-extrabold text-white m-4 pb-6 border-b-4 border-gray-500 w-full col-span-6">ACHIEVE</h2> --}}
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-2 hover:bg-blue-600 [&>*]:hover:text-black [&>*]:hover:border-b-black duration-300" href="{{route('goals.form')}}">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-2 hover:bg-blue-600 [&>*]:hover:text-black [&>*]:hover:border-b-black duration-300" href="{{route('goals.form')}}">
 
                         <div class="flex justify-between text-blue-300 border-b-4 border-b-blue-300 items-center">
                             <h2 class="text-4xl uppercase p-4 font-black">Goals</h2>
@@ -90,7 +90,7 @@
                     </a>
 
                     
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-2 hover:bg-blue-700 [&>*]:hover:text-black [&>*]:hover:border-b-black duration-300" href="{{route('compare.form')}}">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-2 hover:bg-blue-700 [&>*]:hover:text-black [&>*]:hover:border-b-black duration-300" href="{{route('compare.form')}}">
 
                         <div class="flex justify-between text-purple-300 border-b-4 border-b-blue-300 items-center">
                             <h2 class="text-4xl uppercase p-4 font-black">Compare</h2>
@@ -101,7 +101,7 @@
                     </a>
                     {{-- <a href="col-span-3 slot-for-later"></a> --}}
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-2 hover:bg-orange-800 [&>*]:hover:text-black [&>*]:hover:border-b-black duration-300" href="{{route('visualizer.show')}}">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-2 hover:bg-orange-800 [&>*]:hover:text-black [&>*]:hover:border-b-black duration-300" href="{{route('visualizer.show')}}">
 
                         <div class="flex justify-between text-orange-300 border-b-4 border-b-orange-300 items-center">
                             <h2 class="text-4xl uppercase p-4 font-black">Visualizer</h2>
@@ -111,7 +111,7 @@
                         <p class="text-white p-4">See how each day goes! (Beta)</p>
                     </a>
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-3  relative">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-3  relative">
 
                         <p class="-rotate-12 text-4xl absolute left-1/2 top-1/4 text-white opacity-100 font-black -translate-x-1/2 translate-y-1/2 w-full text-center z-40">Coming Eventually</p>
 
@@ -125,7 +125,7 @@
 
                 {{-- <h2 class="text-6xl italic font-extrabold text-white m-4 pb-6 border-b-4 border-gray-500 w-full col-span-6">STATISTICS</h2> --}}
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-3 relative">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-3 relative">
 
                         <p class="-rotate-12 text-4xl absolute left-1/2 top-1/4 text-white opacity-100 font-black -translate-x-1/2 translate-y-1/2  text-center w-full z-50">Coming Someday</p>
                         
@@ -147,7 +147,7 @@
                         <p class="text-white p-4">See how each day goes! (Beta)</p>
                     </a> --}}
 
-                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-6 relative overflow-hidden">
+                    <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-6 relative overflow-hidden">
 
                         <p class="-rotate-12 text-4xl absolute left-1/2 top-1/4 text-white opacity-100 font-black -translate-x-1/2 translate-y-1/2  text-center w-full">Coming Soon</p>
 
