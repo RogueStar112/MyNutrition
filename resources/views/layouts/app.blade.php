@@ -49,9 +49,21 @@
             @endif
 
             <!-- Page Content -->
-            <main class="dark:bg-slate-700 h-full">
+            <main class="dark:bg-slate-700 h-full relative">
                
                 {{ $slot }}
+
+                @if(Route::currentRouteName() === 'meal.create' || Route::currentRouteName() === 'food.create')
+
+                    <div class="w-full h-full flex md:hidden justify-end absolute sticky bottom-0">
+                        <button id="SHOW-ITEMS-BTN-MOBILE" class="sticky absolute bg-orange-600 text-white flex justify-center items-center sm:hidden rounded-full z-[9999] [&>*]:z-9999 top-0 cursor-pointer w-[3rem] h-[3rem] m-8"> 
+                            <i class="fa-solid fa-cart-shopping text-2xl"></i>
+                        </button>
+                    </div>
+
+                @endif
+
+
             </main>
         </div>
 

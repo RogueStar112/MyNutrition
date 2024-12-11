@@ -145,6 +145,20 @@
                             <p class="mx-3 text-gray-500">{{$food['user_name']}}</p>
                         </div>
                     </div>
+
+                    {{-- <div class="h-1/2 block md:hidden">
+                        <p class="text-white font-extrabold text-xl">{{$food['name']}}</p>
+                        
+                        <div class="flex justify-between mb-3 border-b-2 border-b-orange-400 border-opacity-40" >
+                            <p class="text-gray-500 text-lg grow">{{$food['source_name']}}</p>
+
+                            <div class="flex grow flex-row-reverse text-lg">
+                            <i class="fa-solid fa-user text-center text-white"></i>
+                            <p class="mx-3 text-gray-500">by {{$food['user_name']}}</p>
+                            </div>
+                        </div>
+                        
+                    </div> --}}
                 </div>
 
             </div>
@@ -237,13 +251,13 @@
                 {{-- <div class="h-full"></div> --}}
             </div>
 
-            <div id="food-add-{{$food['food_id']}}" class="absolute top-0 md:top-auto flex flex-col justify-center items-center h-min md:h-full md:rounded-r-lg right-0 cursor-pointer max-w-[44px] [&>*]:max-h-[2rem] [&>*]:max-w-[2rem] [&>*]:rounded-full md:max-h-max md:max-w-max">
+            <div id="food-add-{{$food['food_id']}}" class="absolute top-0 md:top-auto flex flex-col gap-8 md:gap-0 justify-center items-center h-min md:h-full md:rounded-r-lg right-0 cursor-pointer md:max-w-[44px] p-4 md:p-0">
                     
-                    <div class="grow flex justify-center items-center add_food_icon mb-4 rounded-full bg-green-500 m-4 text-md" value="{{$food['id']}}">
-                    <i id="food-add-icon-{{$food['food_id']}}" class="flex fas fa-plus fa-2x text-white self-center cursor-pointer py-auto px-2"></i>
+                    <div class="grow flex justify-center items-center add_food_icon bg-green-500 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-tr-lg text-md" value="{{$food['id']}}">
+                    <i id="food-add-icon-{{$food['food_id']}}" class="flex fas fa-plus fa-2x text-white self-center cursor-pointer py-auto px-2 rounded-tr-lg"></i>
                     </div>
 
-                    <div class="grow bg-red-800 rounded-br-lg flex justify-center items-center delete_food_icon text-md" value="{{$food['id']}}" value="{{$food['food_id']}}">
+                    <div class="grow bg-red-800 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-br-lg flex justify-center items-center delete_food_icon text-md" value="{{$food['id']}}" value="{{$food['food_id']}}">
                     <i id="food-del-icon-{{$food['food_id']}}" class="flex fas fa-trash fa-2x text-white self-center cursor-pointer py-auto px-2"></i>
                     </div>
                     
@@ -518,8 +532,10 @@
 
                 $(`.meal_${query_delete}`).remove();
 
+                console.log('MEAL_JSON Kilimanjaro', meal_json);
+
                 $("#FOOD-ITEMS-CONTAINER").trigger("change");
-                
+
             });
             
             

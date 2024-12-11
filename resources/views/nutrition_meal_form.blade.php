@@ -11,7 +11,8 @@
     </div>
 
     <div class="flex py-4 justify-center">
-        <div class="flex max-w-7xl">
+        <div class="flex max-w-7xl flex-col-reverse md:flex-row relative">
+
             <div class="max-w-7xl /w-[768px] mx-auto sm:px-6 lg:px-8">
                 <form id="FOOD_FORM" class="bg-gray-800 max-w-[65rem] /h-32 rounded-lg" method="GET" action="{{ route('meal.create_p2')}}">
                     @csrf
@@ -22,7 +23,7 @@
 
                     </div>
 
-                    <div id="food-media-controls" class="sticky top-0 z-50 bg-gray-800">
+                    <div id="food-media-controls" class="sticky top-0 z-0 bg-gray-800">
                         {{-- <div class="flex justify-center">
                             <button id="PREV-PAGE-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-arrow-left"></i></button>
                             <button id="ADD-FOOD-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-plus"></i></button>

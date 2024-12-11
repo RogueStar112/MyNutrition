@@ -91,6 +91,27 @@
 
                     </div>
 
+                    <div id="FOOD-ITEMS-CONTAINER-MOBILE" class="hidden sm:hidden max-w-sm mx-auto max-h-screen /sm:px-6 /lg:px-8 [&>*]:my-3 [&>*]:mx-auto [&>div]:bg-slate-900">
+                
+                        <h2 class="text-center text-white text-2xl italic mt-4 font-extrabold">FOOD LIST</h2>
+                        {{-- <x-food-item 
+                         index="1"
+                         name="Ricotta Cheese" 
+                         calories="380" 
+                         fat="21.7"
+                         carbs="17.4" 
+                         protein="23.4" />
+        
+                        <x-food-item 
+                        index="2" 
+                        name="Pizza Slice" 
+                        calories="274" 
+                        fat="23.3" 
+                        carbs="27.1" 
+                        protein="8.4" /> --}}
+        
+                    </div>
+
                     <div id="food-media-controls">
                         <div class="flex justify-center">
                             <button id="PREV-PAGE-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-arrow-left"></i></button>
@@ -144,6 +165,7 @@
 
             // Thanks to stackoverflow for this 'single-form submission check' 
             // https://stackoverflow.com/questions/17106885/disable-submit-button-only-after-submit
+            // this is to prevent submitting more than once accidentally.
 
             $(document).ready(function () {
                 $("#FOOD_FORM").submit(function () {
@@ -198,6 +220,7 @@
                         },
                         success: function(response) {
                             $('#FOOD-ITEMS-CONTAINER').append(response);
+                            $('#FOOD-ITEMS-CONTAINER-MOBILE').append(response);
                             nextPage();
                         },
                         error: function(xhr) {
@@ -435,6 +458,9 @@
                 observer.observe(targetElement, config);
             });
 
+
+
+
             // $("#FOOD-ITEMS-CONTAINER").on("change", function () {
             //         console.log('change detected!')
             //         $('.food_revealbtn').click(function() {
@@ -453,5 +479,14 @@
             //         });
 
             // });
+
+            $(document).ready(function () {
+                $("#SHOW-ITEMS-BTN-MOBILE").on( "click", function() {
+                    $('#FOOD_FORM_INPUTS').toggleClass('hidden');
+                    $('#FOOD-ITEMS-CONTAINER-MOBILE').toggleClass('hidden');
+                    $('#FOOD-ITEMS-CONTAINER-MOBILE').toggleClass('block');
+                } );
+            });
+
     </script>
 </x-app-layout>

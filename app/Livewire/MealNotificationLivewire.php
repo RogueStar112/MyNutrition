@@ -93,6 +93,12 @@ class MealNotificationLivewire extends Component
 
         $changeMessage->save();
 
+        $changeMeal = Meal::findOrFail($this->mealId);
+        $changeMeal->is_notified = 1;
+        $changeMeal->save();
+
+        $this->result->delete();
+
   
     }
     
