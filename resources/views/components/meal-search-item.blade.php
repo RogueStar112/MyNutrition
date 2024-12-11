@@ -528,13 +528,23 @@
 
                 foods_pages = newArray;
 
+                delete meal_json[`${query_delete}`];
+
+                console.log('MEAL_JSON DELETION', meal_json);
+
                 $('#foods_pages').val(newArray);
+
+                
 
                 $(`.meal_${query_delete}`).remove();
 
                 console.log('MEAL_JSON Kilimanjaro', meal_json);
 
                 $("#FOOD-ITEMS-CONTAINER").trigger("change");
+
+                var no_of_foods = parseInt($("#no_of_foods").val());
+
+                $("#no_of_foods").val(no_of_foods - 1)
 
             });
             

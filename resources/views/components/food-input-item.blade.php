@@ -208,7 +208,7 @@
 
     <div class="mb-3">
         <label class="block px-6 py-4 md:p-6">
-            <span class="text-white">Description</span>
+            <span class="text-white">Description (optional)</span>
             <input type="text" name="food_description_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="Tastes good on pizza" />
         </label>
     </div>

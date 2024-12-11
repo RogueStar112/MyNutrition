@@ -23,7 +23,7 @@
 
                     </div>
 
-                    <div id="food-media-controls" class="sticky top-0 z-0 bg-gray-800">
+                    <div id="food-media-controls" class="sticky top-0 z-0 md:z-50 bg-gray-800">
                         {{-- <div class="flex justify-center">
                             <button id="PREV-PAGE-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-arrow-left"></i></button>
                             <button id="ADD-FOOD-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-plus"></i></button>
@@ -129,7 +129,7 @@
                     $(`.food_revealbtn`).click(function() {
                     // get index of button
                         var index_selector = $(this).attr('index');
-            
+                        
                         // open/close nutritional info
                         $(`#nutritional_wrapper_${index_selector}`).toggleClass('slide-down');
                         // $(`#nutritional_wrapper_${index_selector}`).toggleClass('collapse');
@@ -155,7 +155,7 @@
             $( "#FOOD-ITEMS-CONTAINER" ).on( "change", function() {
                 
                 console.log('food_items_container_change: Tanzania')
-
+                
                 // Reorder remaining items
                 reorderItems();
 
@@ -167,7 +167,17 @@
              function reorderItems() {
                 // Get all meal items
                 $("#FOOD-ITEMS-CONTAINER .meal_item").each(function (index) {
-                    const newIndex = index + 1; // Start at 1
+                    let newIndex = index + 1; // Start at 1
+
+
+                    if ($("#FOOD-ITEMS-CONTAINER .meal_item").length === 1) {
+                        newIndex = 1;
+                        index = 2;
+
+                        console.log('COUNT IS ONE, I REPEAT, COUNT IS ONE')
+                    } else {
+                      // do nothing
+                    }
 
                     // Update attributes and inner content
                     $(this).attr("id", `meal_item_${newIndex}`).attr("index", newIndex);
