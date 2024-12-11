@@ -435,6 +435,7 @@
                             // $('#FOOD-ITEMS-CONTAINER').append(response['html']['render_html']);
                             
                             $('#FOOD-ITEMS-CONTAINER').empty();
+                            $('#FOOD-ITEMS-CONTAINER-MOBILE').empty();
                             $('#form-meal-foods').empty();
 
                             foods_pages = [];
@@ -454,6 +455,8 @@
 
 
                                     $('#FOOD-ITEMS-CONTAINER').append(response['html'][food_array[i]['query']]['render_html']);
+
+                                    $('#FOOD-ITEMS-CONTAINER-MOBILE').append(response['html'][food_array[i]['query']]['render_html']);
 
                                     // console.log('FOODS PAGES PUSH', response['html'][food_array[i]['query']]);
 
@@ -503,6 +506,7 @@
 
                             console.log('NO OF FOODS: SUCCESS', no_of_foods);
                             
+                            $("#ITEMS-COUNT-MOBILE").text(`${Object.keys(meal_json).length}`)
                         },
                         error: function(xhr) {
                             console.log(xhr.responseText);

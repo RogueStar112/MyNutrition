@@ -56,9 +56,14 @@
                 @if(Route::currentRouteName() === 'meal.create' || Route::currentRouteName() === 'food.create')
 
                     <div class="w-full h-full flex md:hidden justify-end absolute sticky bottom-0">
-                        <button id="SHOW-ITEMS-BTN-MOBILE" class="sticky absolute bg-orange-600 text-white flex justify-center items-center sm:hidden rounded-full z-[9999] [&>*]:z-9999 top-0 cursor-pointer w-[3rem] h-[3rem] m-8"> 
-                            <i class="fa-solid fa-cart-shopping text-2xl"></i>
+
+                        <div class="relative m-8">
+
+                            <div id="ITEMS-COUNT-MOBILE" class="absolute bottom-[-11px] right-[-11px] w-6 h-6 bg-orange-700 text-white rounded-full z-[9999] flex items-center justify-center text-center" value="0">0</div>
+                            <button id="SHOW-ITEMS-BTN-MOBILE" class="sticky absolute bg-orange-600 text-white flex justify-center items-center sm:hidden rounded-full z-[9998] [&>*]:z-9999 top-0 cursor-pointer w-[3rem] h-[3rem]"> 
+                                <i class="fa-solid fa-cart-shopping text-2xl"></i>
                         </button>
+                        </div>
                     </div>
 
                 @endif
@@ -75,7 +80,21 @@
         <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 
-        
+        <script>
+
+            // var meal_json = {};
+            
+            // $(document).ready(function () {
+
+            //     $( "#FOOD-ITEMS-CONTAINER" ).on( "change", function() {
+
+            //         console.log('This should work POTATOLAND')
+            //         $("#ITEMS-COUNT-MOBILE").text(`${meal_json.length}`)
+
+            //     })
+
+            // });
+        </script>
         @livewireScripts
     </body>
 </html>

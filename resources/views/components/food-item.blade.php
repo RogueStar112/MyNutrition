@@ -1,6 +1,6 @@
 <div id="food_item_{{ $index }}" class="cursor-pointer min-h-[100px] active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg p-6 text-white overflow-hidden" onclick="goToPage({{$index}})">
     <ul class="relative">
-        <button id="item_revealbtn_{{ $index }}" index="{{ $index }}" class="food_revealbtn absolute right-0 bg-lime-800 text-white p-3 rounded-lg">
+        <button class="item_revealbtn_{{$index}}"  id="item_revealbtn_{{ $index }}" index="{{ $index }}" class="food_revealbtn absolute right-0 bg-lime-800 text-white p-3 rounded-lg">
             <i id="item_icon_{{ $index }}" class="fas fa-chevron-down"> </i>
         </button>
 
@@ -14,7 +14,7 @@
 
         </div>
         
-        <div id="nutritional_wrapper_{{ $index }}" class="">
+        <div class="nutritional_wrapper_{{$index}}" id="nutritional_wrapper_{{ $index }}" class="">
             <div class="relative mt-3">
                 <li id="food_text_calories_{{$index}}" class="italic">{{ $calories }}kcal</li>
 

@@ -433,12 +433,12 @@
                     if (mutation.type === 'childList' && mutation.target === targetElement) {
                         // Additional code to handle the change
 
-                        $(`#item_revealbtn_${noOfPages-1}`).click(function() {
+                        $(`.item_revealbtn_${noOfPages-1}`).click(function() {
                         // get index of button
                             var index_selector = $(this).attr('index');
 
                             // open/close nutritional info
-                            $(`#nutritional_wrapper_${index_selector}`).toggleClass('slide-down');
+                            $(`.nutritional_wrapper_${index_selector}`).toggleClass('slide-down');
                             // $(`#nutritional_wrapper_${index_selector}`).toggleClass('collapse');
                             // $(`#nutritional_wrapper_${index_selector}`).toggleClass('hidden');
                             
@@ -447,8 +447,8 @@
                             // $(`#food_item_${index_selector}`).toggleClass('h-24');
 
                             // change direction of icon arrow
-                            $(`#item_icon_${index_selector}`).toggleClass('fas fa-chevron-down');
-                            $(`#item_icon_${index_selector}`).toggleClass('fas fa-chevron-up');
+                            $(`.item_icon_${index_selector}`).toggleClass('fas fa-chevron-down');
+                            $(`.item_icon_${index_selector}`).toggleClass('fas fa-chevron-up');
                         });
                     }
                     });
