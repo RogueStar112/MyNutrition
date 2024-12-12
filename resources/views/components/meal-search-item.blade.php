@@ -178,7 +178,7 @@
 
                     {{-- <p class="w-fit">Per {{($servingSize != $food['serving_size']) ? $servingSize : $food['serving_size']}}{{$food['food_unit_short']}}. (normally {{$food['serving_size'] . $food['food_unit_short']}}) </p> --}}
 
-                    <p class="w-fit">Per <span x-text="serving_size"> </span>{{$food['food_unit_short']}}</p>
+                    <p class="w-fit">Per <span x-text="serving_size"> </span>{{$food['food_unit_short']}} {{($quantity != 1) ? "x $quantity" : ""}}</p>
 
                     {{-- <div class="flex gap-3 justify-center">
                         <button class="text-green-200" x-on:click.prevent="serving_size = parseFloat((serving_size + 0.1).toFixed(1))"><i class="fa fa-plus"></i></button>

@@ -68,6 +68,7 @@
                                 <thead>
                                     <tr class="uppercase text-gray-500">
                                         <th>Time</th>
+                                        <th>Size</th>
                                         <th>Calories</th>
                                         <th class="hidden md:table-cell">Fat</th>
                                         <th class="hidden md:table-cell">Carbs</th>
@@ -81,7 +82,7 @@
                                 @foreach($meal['times_planned'] as $meal_time)
                                 
                                 <tr class="m-4">
-                                    <td class="bg-orange-800 text-xl w-[170px]" colspan="1">{{ date('H:i', strtotime($meal_time)) }}</td>
+                                    <td class="bg-orange-800 text-xl w-[170px]" colspan="2">{{ date('H:i', strtotime($meal_time)) }}</td>
                                     <td class="bg-orange-900 relative" colspan="4">{{ $meal[$meal_time]['meal_name'] }}
 
                                         <span class="absolute right-4 bg-orange-950 rounded-full px-4"><a href="{{ route('meal.edit_form', $meal[$meal_time]['meal_id']) }}"><i class="fas fa-pencil-alt"></i></a></span>
@@ -116,6 +117,7 @@
 
                                         @endphp
                                         <td><a class="text-orange-500" href="{{ route('food.view_item', ['user_id'=>$user_id, 'food_id'=>$meal_foodid, 'serving_size'=>$meal_servingsize])}}">{{$meal_foodname_display}}</a></td>
+                                        <td class="text-orange-700 pr-1 border-r-2 border-r-orange-800">{{$meal[$meal_time][$food_item]['serving_size'] ?? "1"}}{{$meal[$meal_time][$food_item]['serving_unit_short'] ?? "g"}}</td>
                                         <td>{{$meal[$meal_time][$food_item]['calories']}}kcal</td>
                                         <td class="hidden md:table-cell">{{$meal[$meal_time][$food_item]['fat']}}g</td>
                                         <td class="hidden md:table-cell">{{$meal[$meal_time][$food_item]['carbs']}}g</td>
@@ -139,7 +141,7 @@
                                         </a>
                                         <br><p class="invisible">_</p> 
                                     </td> --}}
-                   
+                                    <td class="hidden md:table-cell"></td>
                                     <td>{{ $meal[$meal_time]['calories'] }}kcal</td>
                                     <td class="hidden md:table-cell">{{ $meal[$meal_time]['fat'] }}g</td>
                                     <td class="hidden md:table-cell">{{ $meal[$meal_time]['carbs'] }}g</td>
@@ -191,7 +193,7 @@
                             </tr>
 
                             <tr class="m-3 place-items-center border-t-white border-transparent border-4 text-xl">
-                                <td class="hidden md:table-cell border-t-white border-t-2 p-2 mt-2 text-2xl">TOTAL</td>
+                                <td class="hidden md:table-cell border-t-white border-t-2 p-2 mt-2 text-2xl" colspan="2">TOTAL</td>
 
                                 <td class="hidden md:table-cell border-t-white border-t-2 flex-auto p-2 m-2 bg-gray-800 text-center">{{$meal['calories']}}kcal</td>
                                                                 {{-- <br><p class="text-sm text-gray-400">CALORIES</p></td> --}}
