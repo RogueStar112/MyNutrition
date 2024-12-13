@@ -3,6 +3,8 @@
         <h2 class="font-semibold italic text-center uppercase dark:text-white text-3xl text-gray-800 leading-tight">
             {{ __('Nutrition - View Meals') }}
         </h2>
+
+        <p class="text-white text-center">Loading last 14 recorded days...</p>
     </x-slot>
 
     {{-- <div class="flex py-4 justify-center">
@@ -82,10 +84,11 @@
                                 @foreach($meal['times_planned'] as $meal_time)
                                 
                                 <tr class="m-4">
-                                    <td class="bg-orange-800 text-xl w-[170px]" colspan="2">{{ date('H:i', strtotime($meal_time)) }}</td>
+                                    <td class="bg-orange-800 text-xl w-[170px]">{{ date('H:i', strtotime($meal_time)) }}</td>
+                                    <td class="bg-orange-800 text-xl"></td>
                                     <td class="bg-orange-900 relative" colspan="4">{{ $meal[$meal_time]['meal_name'] }}
 
-                                        <span class="absolute right-4 bg-orange-950 rounded-full px-4"><a href="{{ route('meal.edit_form', $meal[$meal_time]['meal_id']) }}"><i class="fas fa-pencil-alt"></i></a></span>
+                                        <span class="hidden sm:inline-block sm:absolute right-4 bg-orange-950 rounded-full px-4"><a href="{{ route('meal.edit_form', $meal[$meal_time]['meal_id']) }}"><i class="fas fa-pencil-alt"></i></a></span>
                                     </td>
                                 </tr>
 
@@ -131,6 +134,7 @@
 
                                 <tr class="text-xl">
                                     <td></td>
+                                    <td class="table-cell sm:hidden edit-meal-btn-mobile"><span class="bg-orange-950 rounded-full px-4"><a href="{{ route('meal.edit_form', $meal[$meal_time]['meal_id']) }}"><i class="fas fa-pencil-alt"></i></a></span></td>
                                     {{-- <td> Meal #{{$loop->iteration}} Total </td> --}}
                                     {{-- <td class="uppercase text-gray-500 text-sm bg-gray-700 p-2 m-2 rounded-full"><a class="bg-gray-800 p-2 m-2 rounded-full">
                                         <i class="fas fa-pencil-alt text-yellow-500"></i>
@@ -226,10 +230,4 @@
         </div>
         
     </div>
-    
-
-    <script>
-
-        
-    </script>
 </x-app-layout>

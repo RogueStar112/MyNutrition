@@ -43,20 +43,21 @@ class PromptScheduledMeals extends Command
     public function handle()
     {   
 
-        $user_id = Auth::user()->id;
+        // $user_id = Auth::user()->id;
 
         $now = Carbon::now()->format('Y-m-d H:i:s');
         
         $meals = Meal::where('time_planned', '<=', $now)
                     ->where('is_eaten', '=', 0)
                     ->where('is_notified', '=', 0)
-                    ->where('user_id', '=', $user_id)
+                    // ->where('user_id', '=', $user_id)
                     ->get();
 
         foreach ($meals as $meal) {
             // Prompt the user to edit the meal
 
-            if($meal->is_notified == 0) {
+            // if($meal->is_notified == 0) {
+
                 $meal_notification = new MealNotifications();
                 $meal_notification->meal_id = $meal->id;
                 
@@ -84,11 +85,11 @@ class PromptScheduledMeals extends Command
 
                 $meal_notification->save();
                 $meal_notification->touch();
-            }    
 
-            $meal->is_notified = 1;
-            $meal->save();
+            // }    
 
+                $meal->is_notified = 1;
+                $meal->save();
         
 
 

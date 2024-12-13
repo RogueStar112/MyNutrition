@@ -91,7 +91,62 @@
         var meal_json = {};
         var food_array = [];
         var foods_pages = [];
-                    var csrfToken = $('meta[name="csrf-token"]').attr('content');
+        let food_index = 0;
+        let food_id = 0;
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+        $( "#FOOD-ITEMS-CONTAINER" ).on( "change", function() {
+                
+                // console.log('food_items_container_change: Tanzania')
+                
+                // load deletion scripts
+
+                loadMealSelfDeletionScripts();
+
+                // Reorder remaining items
+                reorderItems();
+
+                // Trigger onchange event for FOOD-ITEMS-CONTAINER
+
+             } );
+
+
+             function reorderItems() {
+                // Get all meal items
+                $("#FOOD-ITEMS-CONTAINER .meal_item").each(function (index) {
+                    let newIndex = index + 1; // Start at 1
+
+
+                    if ($("#FOOD-ITEMS-CONTAINER .meal_item").length === 1) {
+                        newIndex = 1;
+                        index = 2;
+
+                        console.log('COUNT IS ONE, I REPEAT, COUNT IS ONE')
+                    } else {
+                      // do nothing
+                    }
+
+                    // Update attributes and inner content
+                    $(this).attr("id", `meal_item_${newIndex}`).attr("index", newIndex);
+                    $(this).find("[aria-label='index_number']").text(newIndex);
+                    $(this).find("button").attr("id", `item_revealbtn_${newIndex}`).attr("index", newIndex);
+                    $(this).find("i").attr("id", `item_icon_${newIndex}`);
+                    $(this).find(`#food_wrapper_${index}`).attr("id", `food_wrapper_${newIndex}`);
+                    $(this).find(`#food_text_name_${index}`).attr("id", `food_text_name_${newIndex}`);
+                    $(this).find(`#food_servingsize_${index}`).attr("id", `food_servingsize_${newIndex}`);
+                    $(this).find(`#food_text_source_${index}`).attr("id", `food_text_source_${newIndex}`);
+                    $(this).find(`#nutritional_wrapper_${index}`).attr("id", `nutritional_wrapper_${newIndex}`);
+                    $(this).find(`#food_text_calories_${index}`).attr("id", `food_text_calories_${newIndex}`);
+                    $(this).find(`#food_progressbar_calories_${index}`).attr("id", `food_progressbar_calories_${newIndex}`);
+                    $(this).find(`#food_text_fat_${index}`).attr("id", `food_text_fat_${newIndex}`);
+                    $(this).find(`#food_progressbar_fat_${index}`).attr("id", `food_progressbar_fat_${newIndex}`);
+                    $(this).find(`#food_text_carbs_${index}`).attr("id", `food_text_carbs_${newIndex}`);
+                    $(this).find(`#food_progressbar_carbs_${index}`).attr("id", `food_progressbar_carbs_${newIndex}`);
+                    $(this).find(`#food_text_protein_${index}`).attr("id", `food_text_protein_${newIndex}`);
+                    $(this).find(`#food_progressbar_protein_${index}`).attr("id", `food_progressbar_protein_${newIndex}`);
+                    $(this).find(`#mealitem-edit-btn-${index}`).attr("id", `mealitem-edit-btn-${newIndex}`);
+                });
+            }                 
 
         $(document).ready(function() {
             
@@ -106,6 +161,9 @@
             //     console.log(no_of_foods);
             //     });
             // });
+
+            var food_index = 0;
+            var food_id = 0;
 
             var no_of_foods = parseInt($("#no_of_foods").val())
             
@@ -131,7 +189,7 @@
                         $(`#nutritional_wrapper_${index_selector}`).toggleClass('slide-down');
                         // $(`#nutritional_wrapper_${index_selector}`).toggleClass('collapse');
                         // $(`#nutritional_wrapper_${index_selector}`).toggleClass('hidden');
-                        
+                        $(`.nutritional-media-buttons-${index_selector}`).toggleClass('hidden');
 
                         // adjust height to accomodate for nutritional info
                         // $(`#food_item_${index_selector}`).toggleClass('h-24');
@@ -148,9 +206,9 @@
             observer.observe(targetElement, config);
         });
 
-        var meals_array = <?php echo json_encode($meals_array); ?>
+        var meals_array = <?php echo json_encode($meals_array, JSON_HEX_TAG); ?>
 
-        $(document).ready(function(){
+        $(document).ready(function() {
             var no_of_foods = parseInt($("#no_of_foods").val())
             
              for (let i=0; i<meals_array.length; i++) {
@@ -293,9 +351,29 @@
             }
  
         });
-        
-                     // $("#no_of_foods").val(no_of_foods)
 
+        function confirmToDelete(id) {
+
+            $(`#mealitem-delete-btn-${id}`).addClass('hidden');
+            $(`#mealitem-delete-btn-confirmcontainer-${id}`).removeClass('hidden');
+
+        }
+
+        function confirmToDelete_no(id) {
+
+            $(`#mealitem-delete-btn-${id}`).removeClass('hidden');
+            $(`#mealitem-delete-btn-confirmcontainer-${id}`).addClass('hidden');
+
+        }
+
+        function confirmToDelete_yes(id) {
+
+            $(`.meal_${id}`).remove();
+
+            reorderItems();
+
+        }
+                
                     
     </script>
 </x-app-layout>

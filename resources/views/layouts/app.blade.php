@@ -61,7 +61,7 @@
 
                             <div id="ITEMS-COUNT-MOBILE" class="absolute bottom-[-11px] right-[-11px] w-6 h-6 bg-orange-700 text-white rounded-full z-[9999] flex items-center justify-center text-center" value="0">0</div>
                             <button id="SHOW-ITEMS-BTN-MOBILE" class="sticky absolute bg-orange-600 text-white flex justify-center items-center sm:hidden rounded-full z-[9998] [&>*]:z-9999 top-0 cursor-pointer w-[3rem] h-[3rem]"> 
-                                <i class="fa-solid fa-cart-shopping text-2xl"></i>
+                                <i id="SHOW-ITEMS-ICON" class="fa-solid fa-cart-shopping text-2xl"></i>
                         </button>
                         </div>
                     </div>

@@ -116,6 +116,9 @@
         var food_array = [];
         var foods_pages = [];
 
+        let food_index = 0;
+        let food_id = 0;
+
         $(document).ready(function() {
             
             // var no_of_foods = parseInt($("#no_of_foods").val());
@@ -227,6 +230,10 @@
                     $('#food-media-controls').toggleClass('hidden');
                     $('#FOOD-ITEMS-CONTAINER-MOBILE').toggleClass('hidden');
                     $('#FOOD-ITEMS-CONTAINER-MOBILE').toggleClass('block');
+                    $('#FOOD-SEARCH-CONTAINER').toggleClass('hidden');
+
+                    $('#SHOW-ITEMS-ICON').toggleClass('fa-cart-shopping');
+                    $('#SHOW-ITEMS-ICON').toggleClass('fa-magnifying-glass');
                 } );
             });
 
@@ -241,5 +248,82 @@
 
             });
 
+            // $(document).ready(function() {
+
+            //     function confirmToDelete(id) {
+
+            //     $(`#mealitem-delete-btn-${id}`).addClass('hidden');
+            //     $(`#mealitem-delete-btn-confirmcontainer-${id}`).removeClass('hidden');
+
+            //     }
+
+            //     function confirmToDelete_no(id) {
+
+            //     $(`#mealitem-delete-btn-${id}`).removeClass('hidden');
+            //     $(`#mealitem-delete-btn-confirmcontainer-${id}`).addClass('hidden');
+
+            //     }
+
+            //     function confirmToDelete_yes(id) {
+
+            //     $(`.meal_${id}`).remove();
+
+            //     reorderItems();
+
+            //     }
+
+            // });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                document.addEventListener('click', (e) => {
+                    if (e.target && e.target.id.startsWith('mealitem-delete-btn-')) {
+                        const food_id = e.target.dataset.id;       // Access data-id
+                        const food_index = e.target.dataset.index; // Access data-index
+
+                        console.log(`Food ID: ${food_id}, Food Index: ${food_index}`);
+
+                        // Toggle the clicked button's hidden class
+                        $(e.target).toggleClass('hidden');
+
+                        // Toggle the confirm container's hidden class
+                        const confirmContainer = document.getElementById(`mealitem-delete-btn-confirmcontainer-${food_index}`);
+                        console.log(confirmContainer); // Check if it exists
+                        if (confirmContainer) {
+                            $(confirmContainer).toggleClass('hidden');
+                        } else {
+                            console.error(`Element #mealitem-delete-btn-confirmcontainer-${food_index} not found.`);
+                        }
+                    }
+                });
+            });
+
+
+
+            // Delete button click listener
+            $(document).on("click", `#mealitem-delete-btn-${food_index}`, function () {
+                $(`#mealitem-delete-btn-${food_index}`).addClass('hidden');
+                $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).removeClass('hidden');
+            });
+
+            // Confirm delete button click listener
+            $(document).on("click", `#mealitem-delete-btn-yes-${food_index}`, function () {
+                $(`.meal_${food_id}`).remove();
+                reorderItems();
+            });
+
+            // Cancel delete button click listener
+            $(document).on("click", `#mealitem-delete-btn-no-${food_index}`, function () {
+                $(`#mealitem-delete-btn-${food_index}`).removeClass('hidden');
+                $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).addClass('hidden');
+            });
+
+            console.log(`FOOD ID: ${food_id} UPDATED`);
+    
+
+
+    </script>
+
+    <script>
+       
     </script>
 </x-app-layout>
