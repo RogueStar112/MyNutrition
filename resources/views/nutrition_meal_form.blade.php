@@ -5,13 +5,9 @@
         </h2>
     </x-slot>
 
-    <div class="flex py-4 justify-center">
-        
-
-    </div>
 
     <div class="flex py-4 justify-center">
-        <div class="flex max-w-7xl flex-col-reverse md:flex-row relative">
+        <div class="flex max-w-7xl flex-col-reverse md:flex-row relative mx-auto">
 
             <div class="max-w-7xl /w-[768px] mx-auto sm:px-6 lg:px-8">
                 <form id="FOOD_FORM" class="bg-gray-800 max-w-[65rem] /h-32 rounded-lg mx-4" method="GET" action="{{ route('meal.create_p2')}}">
@@ -44,10 +40,177 @@
 
 
             
-                    <div id="FOOD-ITEMS-CONTAINER-MOBILE" class="hidden sm:hidden max-w-sm mx-auto max-h-screen /sm:px-6 /lg:px-8 [&>*]:my-3 [&>*]:mx-auto [&>div]:bg-slate-900">
+                    <div id="FOOD-ITEMS-CONTAINER-MOBILE" class="hidden sm:hidden max-w-sm mx-auto max-h-screen pb-4 /sm:px-6 /lg:px-8 [&>*]:my-3 [&>*]:mx-auto [&>div]:bg-slate-900">
                 
-                        <h2 class="text-center text-white text-2xl italic mt-4 font-extrabold">FOOD LIST</h2>
-                   
+                        <h2 class="text-center text-white text-2xl italic mt-4 font-extrabold opacity-40">FOOD LIST</h2>
+
+                        <p class="text-center text-gray-400 opacity-40">An example of what adding these items look like!</p>
+                        
+                        <div id="meal_item_1" class="opacity-40 meal_248 meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg    pt-6 text-white shadow-md shadow-black overflow-hidden" index="1">
+                            <ul class="relative  relative ">
+                                <button type="button" id="item_revealbtn_1" index="1" class="item_revealbtn_1 food_revealbtn absolute right-0 bg-lime-800 text-white p-3 mr-6 rounded-lg ">
+                                    <i id="item_icon_1" class="item_icon_1 fas fa-chevron-up"> </i>
+                                </button>
+                        
+                                <div class="px-6">
+                                    <div class="select-none max-h-[108px]" id="food_wrapper_1">
+                                        
+                        
+                                        
+                        
+                                                            <p aria-label="index_number" class="absolute  left-[50%]  text-8xl font-black opacity-10 select-none">1</p>
+                                        
+                                                    
+                        
+                                        <li class="text-balance max-w-[144px]" id="food_text_name_1">Sweet Potato Fries</li>
+                        
+                                        
+                                        <p class="text-gray-500"><span id="food_servingsize_1">100 g</span> x 1</p>
+                                        <span id="food_text_source_1" class="text-right text-gray-500">Lidl</span>
+                                        
+                        
+                                    </div>
+                                    
+                                    <div id="nutritional_wrapper_1" class="nutritional_wrapper_1 relative slide-down">
+                                        <div class="relative mt-3">
+                                            <li id="food_text_calories_1" class="italic">240kcal</li>
+                        
+                                            <p class="absolute right-0 top-0 text-gray-500">Calories</p>
+                        
+                        
+                                            <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                                <div id="food_progressbar_calories_1" class="bg-blue-600 h-2.5 rounded-full" style="width: 16%"></div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="relative mt-3">
+                                            <li id="food_text_fat_1" class="italic">13.6g</li>
+                                            <p class="absolute right-0 top-0 text-gray-500">Fat</p>
+                        
+                                            <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                                <div id="food_progressbar_fat_1" class="bg-orange-600 h-2.5 rounded-full" style="width: 14.020618556701%"></div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="relative mt-3">
+                                            <li id="food_text_carbs_1" class="italic">21.6g</li>
+                                            <p class="absolute right-0 top-0 text-gray-500">Carbs</p>
+                        
+                                            <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                                <div id="food_progressbar_carbs_1" class="bg-yellow-600 h-2.5 rounded-full" style="width: 22.268041237113%"></div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="relative mt-3">
+                                            <li id="food_text_protein_1" class="italic">16.9g</li>
+                                            <p class="absolute right-0 top-0 text-gray-500">Protein</p>
+                        
+                                            <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                                <div id="food_progressbar_protein_1" class="bg-green-600 h-2.5 rounded-full" style="width: 21.125%"></div>
+                                            </div>
+                                        </div>
+                        
+                                        
+                                    </div>
+                                </div>
+                        
+                                <div id="nutritional-media-buttons-1" class="nutritional-media-buttons-1 nutritional-media-buttons w-full flex text-center mt-3 [&amp;>*]:my-auto absolute left-0 bottom-0 duration-200 [&amp;>*]:cursor-pointer [&amp;>*>*]:cursor-pointer">
+                        
+                                    <div id="mealitem-edit-btn-1" class="w-full bg-yellow-500 hover:bg-yellow-600 duration-150 text-black">EDIT</div>
+                                    <div id="mealitem-delete-btn-1" class="w-full bg-red-500 hover:bg-red-600 duration-150 text-white" data-id="248" data-index="1">DELETE</div>
+                        
+                                    <div id="mealitem-delete-btn-confirmcontainer-1" class="w-full flex p-0 hidden" data-id="248">
+                                        <div id="mealitem-delete-btn-no-1" class="w-full bg-red-500">X</div>
+                                        <div id="mealitem-delete-btn-yes-1" class="w-full bg-green-500">🗑️</div>
+                                    </div>
+                        
+                                </div>
+                            </ul>
+                        </div>
+
+                        <div id="meal_item_2" class="opacity-40 meal_97 meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg    pt-6 text-white shadow-md shadow-black overflow-hidden" index="2">
+                            <ul class="relative  ">
+                                <button type="button" id="item_revealbtn_2" index="2" class="item_revealbtn_2 food_revealbtn absolute right-0 bg-lime-800 text-white p-3 mr-6 rounded-lg ">
+                                    <i id="item_icon_2" class="item_icon_2 fa-chevron-down fas"> </i>
+                                </button>
+                        
+                                <div class="px-6">
+                                    <div class="select-none max-h-[108px]" id="food_wrapper_2">
+                                        
+                        
+                                        
+                        
+                                                                            
+                                        
+                                        <p aria-label="index_number" class="absolute  left-[50%]  text-8xl font-black opacity-10 select-none">2</p>
+                                        
+                                                                    
+                        
+                                        <li class="text-balance max-w-[144px]" id="food_text_name_2">Hummus and Carrot Fries</li>
+                        
+                                        
+                                        <p class="text-gray-500"><span id="food_servingsize_2">100 g</span> x 1</p>
+                                        <span id="food_text_source_2" class="text-right text-gray-500">Homemade</span>
+                                        
+                        
+                                    </div>
+                                    
+                                    <div id="nutritional_wrapper_2" class="nutritional_wrapper_2 relative">
+                                        <div class="relative mt-3">
+                                            <li id="food_text_calories_2" class="italic">127kcal</li>
+                        
+                                            <p class="absolute right-0 top-0 text-gray-500">Calories</p>
+                        
+                        
+                                            <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                                <div id="food_progressbar_calories_2" class="bg-blue-600 h-2.5 rounded-full" style="width: 8.4666666666667%"></div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="relative mt-3">
+                                            <li id="food_text_fat_2" class="italic">8.5g</li>
+                                            <p class="absolute right-0 top-0 text-gray-500">Fat</p>
+                        
+                                            <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                                <div id="food_progressbar_fat_2" class="bg-orange-600 h-2.5 rounded-full" style="width: 8.7628865979381%"></div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="relative mt-3">
+                                            <li id="food_text_carbs_2" class="italic">11g</li>
+                                            <p class="absolute right-0 top-0 text-gray-500">Carbs</p>
+                        
+                                            <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                                <div id="food_progressbar_carbs_2" class="bg-yellow-600 h-2.5 rounded-full" style="width: 11.340206185567%"></div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="relative mt-3">
+                                            <li id="food_text_protein_2" class="italic">4g</li>
+                                            <p class="absolute right-0 top-0 text-gray-500">Protein</p>
+                        
+                                            <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                                <div id="food_progressbar_protein_2" class="bg-green-600 h-2.5 rounded-full" style="width: 5%"></div>
+                                            </div>
+                                        </div>
+                        
+                                        
+                                    </div>
+                                </div>
+                        
+                                <div id="nutritional-media-buttons-2" class="nutritional-media-buttons-2 nutritional-media-buttons w-full flex text-center mt-3 [&amp;>*]:my-auto absolute left-0 bottom-0 duration-200 [&amp;>*]:cursor-pointer [&amp;>*>*]:cursor-pointer hidden">
+                        
+                                    <div id="mealitem-edit-btn-2" class="w-full bg-yellow-500 hover:bg-yellow-600 duration-150 text-black">EDIT</div>
+                                    <div id="mealitem-delete-btn-2" class="w-full bg-red-500 hover:bg-red-600 duration-150 text-white" data-id="97" data-index="2">DELETE</div>
+                        
+                                    <div id="mealitem-delete-btn-confirmcontainer-2" class="w-full flex p-0 hidden" data-id="97">
+                                        <div id="mealitem-delete-btn-no-2" class="w-full bg-red-500">X</div>
+                                        <div id="mealitem-delete-btn-yes-2" class="w-full bg-green-500">🗑️</div>
+                                    </div>
+                        
+                                </div>
+                            </ul>
+                        </div>
                         {{-- <div id="food-media-controls-mobile" class="sticky top-0 z-0 md:z-50 bg-gray-800 sm:hidden">
                          
                             <div class="flex justify-center">
@@ -61,8 +224,238 @@
 
                     
 
-                    <div id="FOOD-SEARCH-CONTAINER">
+                    <div id="FOOD-SEARCH-CONTAINER" class="[&>*]:m-4 pb-4">
                         <!-- x-meal-search-items -->
+
+                        <p class="text-center text-gray-400 opacity-40">An example of what searching looks like...</p>
+
+                        <div class="md:grid md:grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6 opacity-40 select-none" id="" x-data="{ serving_size: 100, quantity: 1 }">
+
+                            <div class="bg-transparent self-center flex justify-center items-center h-[128px] w-[128px] max-w-[128px] max-h-[128px] [&amp;>img]:hidden [&amp;>i]:scale-150 [&amp;>img]:justify-evenly [&amp;>img]:items-center rounded-full border-4 border-slate-500">
+                
+                                <i class="fa-solid fa-carrot text-white scale-150 /leading-[128px] /h-[128px] /w-[128px] /max-w-[128px] /max-h-[128px] text-center  text-2xl sm:text-3xl md:text-4xl"></i>
+                                
+                                <img class="/p-6 object-cover hidden rounded-full hidden text-center leading-[128px] text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]" src="http://localhost:8000/" alt="  ">
+                            </div>
+                
+                            <div class="desc-box m-6 self-center">
+                
+                                <div class="h-full">
+                                    <div class="h-1/2">
+                                        <p class="text-white font-extrabold text-xl">Sweet Potato Fries</p>
+                                        <p class="text-gray-500 text-lg">Lidl</p>
+                
+                                        <div class="flex items-center">
+                                            
+                                            <i class="fa-solid fa-user text-center text-md text-white"></i>
+                                            <p class="mx-3 text-gray-500">FitnessAnon123</p>
+                                        </div>
+                                    </div>
+                
+                                    
+                                </div>
+                
+                            </div>
+                
+                                
+                            <div class="text-white h-full text-center mr-2 self-center" aria-label="food-macros">
+                                <div class="flex justify-center gap-6 [&amp;>button]:w-[16px] [&amp;>button]:h-[16px]">
+                
+                                    
+                
+                
+                                    
+                
+                                    <p class="w-fit">Per <span x-text="serving_size">100</span>g </p>
+                
+                                    
+                                </div>
+                                
+                
+                                
+                                
+                                <div class="h-fit flex px-6 pt-4 pb-2 gap-3 [&amp;>*]:text-clip [&amp;>*]:flex-1 [&amp;>*]:text-lg [&amp;>*]:text-center [&amp;>*]:flex [&amp;>*]:flex-col [&amp;>*>p]:text-clip">
+                                
+                
+                                    <section>
+                                        <p>240kcal</p>
+                                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-blue-900">
+                                            <div id="food_progressbar_calories_0" class="bg-blue-600 h-2.5 rounded-full " style="width: 19.2%"></div>
+                                        </div>
+                                        <p class="mt-1 text-blue-600">Calories</p>
+                                    
+                                    </section>
+                
+                                    <section>
+                                        <p>13.6g</p>
+                                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-orange-900">
+                                            <div id="food_progressbar_fat_0" class="bg-orange-600 h-2.5 rounded-full " style="width: 15.111111111111%"></div>
+                                        </div>
+                                        <p class="mt-1 text-orange-600">Fat</p>
+                                    
+                                    </section>
+                
+                
+                                    <section>
+                                        <p>21.6g
+                                        </p>
+                
+                                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-yellow-900">
+                                            <div id="food_progressbar_carbs_0" class="bg-yellow-500 h-2.5 rounded-full " style="width: 18%"></div>
+                                        </div>
+                
+                                        <p class="mt-1 text-yellow-500">Carbs</p>
+                                    </section>
+                
+                
+                                    <section>
+                                        <p>16.9g
+                                        </p>
+                
+                                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-green-900">
+                                            <div id="food_progressbar_protein_0" class="bg-green-600 h-2.5 rounded-full " style="width: 17.604166666667%"></div>
+                                        </div>
+                
+                                        <p class="mt-1 text-green-600">Protein</p>
+                                    </section>
+                
+                                    
+                                   
+                
+                                </div>
+                
+                                <p class="w-full text-center text-gray-500 select-none"></p>
+                
+                                
+                            </div>
+                
+                            <div id="food-add-248" class="absolute top-0 md:top-auto flex flex-col gap-8 md:gap-0 justify-center items-center h-min md:h-full md:rounded-r-lg right-0 md:max-w-[44px] p-4 md:p-0">
+                                    
+                                    <div class="grow flex justify-center items-center add_food_icon bg-green-500 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-tr-lg text-md" value="248">
+                                    <i id="food-add-icon-248" class="flex fas fa-plus fa-2x text-white self-center py-auto px-2 rounded-tr-lg"></i>
+                                    </div>
+                
+                                    <div class="grow bg-red-800 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-br-lg flex justify-center items-center delete_food_icon text-md" value="248">
+                                    <i id="food-del-icon-248" class="flex fas fa-trash fa-2x text-white self-center py-auto px-2"></i>
+                                    </div>
+                                    
+                            </div>
+
+                            
+                        </div>
+
+                        <div class="md:grid md:grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6 opacity-40 select-none" id="" x-data="{ serving_size: 100, quantity: 1 }">
+
+                            <div class="bg-transparent self-center flex justify-center items-center h-[128px] w-[128px] max-w-[128px] max-h-[128px] [&amp;>img]:flex [&amp;>img]:justify-evenly [&amp;>img]:items-center rounded-full border-4 border-slate-500">
+                
+                                <i class="hidden text-2xl sm:text-3xl md:text-4xl"></i>
+                                
+                                <img class="/p-6 object-cover  rounded-full  text-center leading-[128px] text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]" src="http://localhost:8000/storage/images/food/Kutas6UEoBMSUNyHdkLef94umTrlev24v3cgDK0p.jpg" alt="HACF  ">
+                            </div>
+                
+                            <div class="desc-box m-6 self-center">
+                
+                                <div class="h-full">
+                                    <div class="h-1/2">
+                                        <p class="text-white font-extrabold text-xl">Hummus and Carrot Fries</p>
+                                        <p class="text-gray-500 text-lg">Homemade</p>
+                
+                                        <div class="flex items-center">
+                                            
+                                            <i class="fa-solid fa-user text-center text-md text-white"></i>
+                                            <p class="mx-3 text-gray-500">FitnessAnon123</p>
+                                        </div>
+                                    </div>
+                
+                                    
+                                </div>
+                
+                            </div>
+                
+                                
+                            <div class="text-white h-full text-center mr-2 self-center" aria-label="food-macros">
+                                <div class="flex justify-center gap-6 [&amp;>button]:w-[16px] [&amp;>button]:h-[16px]">
+                
+                                    
+                
+                
+                                    
+                
+                                    <p class="w-fit">Per <span x-text="serving_size">100</span>g </p>
+                
+                                    
+                                </div>
+                                
+                
+                                
+                                
+                                <div class="h-fit flex px-6 pt-4 pb-2 gap-3 [&amp;>*]:text-clip [&amp;>*]:flex-1 [&amp;>*]:text-lg [&amp;>*]:text-center [&amp;>*]:flex [&amp;>*]:flex-col [&amp;>*>p]:text-clip">
+                                
+                
+                                    <section>
+                                        <p>318kcal</p>
+                                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-blue-900">
+                                            <div id="food_progressbar_calories_3" class="bg-blue-600 h-2.5 rounded-full " style="width: 25.44%"></div>
+                                        </div>
+                                        <p class="mt-1 text-blue-600">Calories</p>
+                                    
+                                    </section>
+                
+                                    <section>
+                                        <p>21.3g</p>
+                                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-orange-900">
+                                            <div id="food_progressbar_fat_3" class="bg-orange-600 h-2.5 rounded-full " style="width: 23.666666666667%"></div>
+                                        </div>
+                                        <p class="mt-1 text-orange-600">Fat</p>
+                                    
+                                    </section>
+                
+                
+                                    <section>
+                                        <p>27.5g
+                                        </p>
+                
+                                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-yellow-900">
+                                            <div id="food_progressbar_carbs_3" class="bg-yellow-500 h-2.5 rounded-full " style="width: 22.916666666667%"></div>
+                                        </div>
+                
+                                        <p class="mt-1 text-yellow-500">Carbs</p>
+                                    </section>
+                
+                
+                                    <section>
+                                        <p>10g
+                                        </p>
+                
+                                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-green-900">
+                                            <div id="food_progressbar_protein_3" class="bg-green-600 h-2.5 rounded-full " style="width: 10.416666666667%"></div>
+                                        </div>
+                
+                                        <p class="mt-1 text-green-600">Protein</p>
+                                    </section>
+                
+                                    
+                                   
+                
+                                </div>
+                
+                                <p class="w-full text-center text-gray-500 select-none"></p>
+                
+                                
+                            </div>
+                
+                            <div id="food-add-97" class="absolute top-0 md:top-auto flex flex-col gap-8 md:gap-0 justify-center items-center h-min md:h-full md:rounded-r-lg right-0 md:max-w-[44px] p-4 md:p-0">
+                                    
+                                    <div class="grow flex justify-center items-center add_food_icon bg-green-500 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-tr-lg text-md" value="97">
+                                    <i id="food-add-icon-97" class="flex fas fa-plus fa-2x text-white self-center  py-auto px-2 rounded-tr-lg"></i>
+                                    </div>
+                
+                                    <div class="grow bg-red-800 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-br-lg flex justify-center items-center delete_food_icon text-md" value="97">
+                                    <i id="food-del-icon-97" class="flex fas fa-trash fa-2x text-white self-center py-auto px-2"></i>
+                                    </div>
+                                    
+                            </div>
+                        </div>
                     </div>
 
                     
@@ -79,7 +472,173 @@
 
             <div id="FOOD-ITEMS-CONTAINER" class="hidden sm:block max-w-sm mx-auto max-h-screen /sm:px-6 /lg:px-8 [&>div]:mb-3">
                 
+                <p class="text-center text-gray-300 opacity-40 italic m-4">What adding items looks like!</p>
+
+                <div id="meal_item_1" class="opacity-40 meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg    pt-6 text-white shadow-md shadow-black overflow-hidden" index="1">
+                    <ul class="relative  relative ">
+                        <button type="button" id="item_revealbtn_1" index="1" class="item_revealbtn_1 food_revealbtn absolute right-0 bg-lime-800 text-white p-3 mr-6 rounded-lg ">
+                            <i id="item_icon_1" class="item_icon_1 fas fa-chevron-up"> </i>
+                        </button>
                 
+                        <div class="px-6">
+                            <div class="select-none max-h-[108px]" id="food_wrapper_1">
+                                
+                
+                                
+                
+                                                    <p aria-label="index_number" class="absolute  left-[50%]  text-8xl font-black opacity-10 select-none">1</p>
+                                
+                                            
+                
+                                <li class="text-balance max-w-[144px]" id="food_text_name_1">Sweet Potato Fries</li>
+                
+                                
+                                <p class="text-gray-500"><span id="food_servingsize_1">100 g</span> x 1</p>
+                                <span id="food_text_source_1" class="text-right text-gray-500">Lidl</span>
+                                
+                
+                            </div>
+                            
+                            <div id="nutritional_wrapper_1" class="nutritional_wrapper_1 relative slide-down">
+                                <div class="relative mt-3">
+                                    <li id="food_text_calories_1" class="italic">240kcal</li>
+                
+                                    <p class="absolute right-0 top-0 text-gray-500">Calories</p>
+                
+                
+                                    <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                        <div id="food_progressbar_calories_1" class="bg-blue-600 h-2.5 rounded-full" style="width: 16%"></div>
+                                    </div>
+                                </div>
+                
+                                <div class="relative mt-3">
+                                    <li id="food_text_fat_1" class="italic">13.6g</li>
+                                    <p class="absolute right-0 top-0 text-gray-500">Fat</p>
+                
+                                    <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                        <div id="food_progressbar_fat_1" class="bg-orange-600 h-2.5 rounded-full" style="width: 14.020618556701%"></div>
+                                    </div>
+                                </div>
+                
+                                <div class="relative mt-3">
+                                    <li id="food_text_carbs_1" class="italic">21.6g</li>
+                                    <p class="absolute right-0 top-0 text-gray-500">Carbs</p>
+                
+                                    <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                        <div id="food_progressbar_carbs_1" class="bg-yellow-600 h-2.5 rounded-full" style="width: 22.268041237113%"></div>
+                                    </div>
+                                </div>
+                
+                                <div class="relative mt-3">
+                                    <li id="food_text_protein_1" class="italic">16.9g</li>
+                                    <p class="absolute right-0 top-0 text-gray-500">Protein</p>
+                
+                                    <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                        <div id="food_progressbar_protein_1" class="bg-green-600 h-2.5 rounded-full" style="width: 21.125%"></div>
+                                    </div>
+                                </div>
+                
+                                
+                            </div>
+                        </div>
+                
+                        <div id="nutritional-media-buttons-1" class="nutritional-media-buttons-1 nutritional-media-buttons w-full flex text-center mt-3 [&amp;>*]:my-auto absolute left-0 bottom-0 duration-200 [&amp;>*]:cursor-pointer [&amp;>*>*]:cursor-pointer">
+                
+                            <div id="mealitem-edit-btn-1" class="w-full bg-yellow-500 hover:bg-yellow-600 duration-150 text-black">EDIT</div>
+                            <div id="mealitem-delete-btn-1" class="w-full bg-red-500 hover:bg-red-600 duration-150 text-white" data-id="248" data-index="1">DELETE</div>
+                
+                            <div id="mealitem-delete-btn-confirmcontainer-1" class="w-full flex p-0 hidden" data-id="248">
+                                <div id="mealitem-delete-btn-no-1" class="w-full bg-red-500">X</div>
+                                <div id="mealitem-delete-btn-yes-1" class="w-full bg-green-500">🗑️</div>
+                            </div>
+                
+                        </div>
+                    </ul>
+                </div>
+
+                <div id="meal_item_2" class="opacity-40 meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg    pt-6 text-white shadow-md shadow-black overflow-hidden" index="2">
+                    <ul class="relative  ">
+                        <button type="button" id="item_revealbtn_2" index="2" class="item_revealbtn_2 food_revealbtn absolute right-0 bg-lime-800 text-white p-3 mr-6 rounded-lg ">
+                            <i id="item_icon_2" class="fas fa-chevron-down item_icon_2"> </i>
+                        </button>
+                
+                        <div class="px-6">
+                            <div class="select-none max-h-[108px]" id="food_wrapper_2">
+                                
+                
+                                
+                
+                                                                    
+                                
+                                <p aria-label="index_number" class="absolute  left-[50%]  text-8xl font-black opacity-10 select-none">2</p>
+                                
+                                                            
+                
+                                <li class="text-balance max-w-[144px]" id="food_text_name_2">Hummus and Carrot Fries</li>
+                
+                                
+                                <p class="text-gray-500"><span id="food_servingsize_2">100 g</span> x 1</p>
+                                <span id="food_text_source_2" class="text-right text-gray-500">Homemade</span>
+                                
+                
+                            </div>
+                            
+                            <div id="nutritional_wrapper_2" class="nutritional_wrapper_2 relative ">
+                                <div class="relative mt-3">
+                                    <li id="food_text_calories_2" class="italic">127kcal</li>
+                
+                                    <p class="absolute right-0 top-0 text-gray-500">Calories</p>
+                
+                
+                                    <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                        <div id="food_progressbar_calories_2" class="bg-blue-600 h-2.5 rounded-full" style="width: 8.4666666666667%"></div>
+                                    </div>
+                                </div>
+                
+                                <div class="relative mt-3">
+                                    <li id="food_text_fat_2" class="italic">8.5g</li>
+                                    <p class="absolute right-0 top-0 text-gray-500">Fat</p>
+                
+                                    <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                        <div id="food_progressbar_fat_2" class="bg-orange-600 h-2.5 rounded-full" style="width: 8.7628865979381%"></div>
+                                    </div>
+                                </div>
+                
+                                <div class="relative mt-3">
+                                    <li id="food_text_carbs_2" class="italic">11g</li>
+                                    <p class="absolute right-0 top-0 text-gray-500">Carbs</p>
+                
+                                    <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                        <div id="food_progressbar_carbs_2" class="bg-yellow-600 h-2.5 rounded-full" style="width: 11.340206185567%"></div>
+                                    </div>
+                                </div>
+                
+                                <div class="relative mt-3">
+                                    <li id="food_text_protein_2" class="italic">4g</li>
+                                    <p class="absolute right-0 top-0 text-gray-500">Protein</p>
+                
+                                    <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                        <div id="food_progressbar_protein_2" class="bg-green-600 h-2.5 rounded-full" style="width: 5%"></div>
+                                    </div>
+                                </div>
+                
+                                
+                            </div>
+                        </div>
+                
+                        <div id="nutritional-media-buttons-2" class="nutritional-media-buttons-2 nutritional-media-buttons w-full flex text-center mt-3 [&amp;>*]:my-auto absolute left-0 bottom-0 hidden duration-200 [&amp;>*]:cursor-pointer [&amp;>*>*]:cursor-pointer">
+                
+                            <div id="mealitem-edit-btn-2" class="w-full bg-yellow-500 hover:bg-yellow-600 duration-150 text-black">EDIT</div>
+                            <div id="mealitem-delete-btn-2" class="w-full bg-red-500 hover:bg-red-600 duration-150 text-white" data-id="97" data-index="2">DELETE</div>
+                
+                            <div id="mealitem-delete-btn-confirmcontainer-2" class="w-full flex p-0 hidden" data-id="97">
+                                <div id="mealitem-delete-btn-no-2" class="w-full bg-red-500">X</div>
+                                <div id="mealitem-delete-btn-yes-2" class="w-full bg-green-500">🗑️</div>
+                            </div>
+                
+                        </div>
+                    </ul>
+                </div>
                 {{-- <x-food-item 
                  index="1"
                  name="Ricotta Cheese" 
@@ -194,7 +753,7 @@
 
                     if ($("#FOOD-ITEMS-CONTAINER .meal_item").length === 1) {
                         newIndex = 1;
-                        index = 2;
+                        index = 1;
 
                         console.log('COUNT IS ONE, I REPEAT, COUNT IS ONE')
                     } else {
