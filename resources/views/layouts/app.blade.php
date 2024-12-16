@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="dark w-full h-screen" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,8 +35,8 @@
         @livewireStyles
         
     </head>
-    <body class="font-sans antialiased bg-slate-700">
-        <div class="min-h-screen dark:bg-slate-700">
+    <body class="font-sans antialiased bg-slate-700 h-full w-full">
+        <div class="min-h-screen dark:bg-slate-700 relative">
             @include('layouts.navigation')
             
             <!-- Page Heading -->
@@ -53,13 +53,18 @@
                
                 {{ $slot }}
 
-                @if(Route::currentRouteName() === 'meal.create' || Route::currentRouteName() === 'food.create')
+                
+
+
+            </main>
+
+            @if(Route::currentRouteName() === 'meal.create' || Route::currentRouteName() === 'food.create')
                     
-                    <div class="w-[4rem] min-h-screen md:hidden justify-end absolute top-0 right-0 select-none [&>*]:select-auto">
+                    <div class="w-[4rem] h-full md:hidden justify-end absolute top-0 right-0 select-none">
 
-                        <div class="h-full w-full sticky top-0 right-0">
+                        <div class="sticky top-0 bottom-0 right-0 select-none pt-24">
 
-                            <div class="flex flex-col gap-8 pt-6">
+                            <div class="flex flex-col justify-end gap-8 select-none [&>*]:select-auto">
                         {{-- <div class="relative m-4 w-full h-full"> --}}
 
                                 <div class="relative self-center">
@@ -92,9 +97,6 @@
                     </div>
 
                 @endif
-
-
-            </main>
         </div>
 
         <script src="node_modules\chart.js\dist\chart.umd.js"></script>
@@ -121,5 +123,7 @@
             // });
         </script>
         @livewireScripts
+
+        
     </body>
 </html>

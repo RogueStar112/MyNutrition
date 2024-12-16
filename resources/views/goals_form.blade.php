@@ -5,6 +5,8 @@
       </h1>
   </x-slot>
 
+  <p class="w-full text-white text-center">{{$last14Days}}</p>
+
   {{-- Stands for Cyclic Tracking --}}
   <section id="CT-CONTAINER" class="max-w-7xl mx-auto" >
     <h2 class="font-semibold max-w-7xl mx-auto italic uppercase dark:text-white text-3xl text-gray-800 leading-tight text-left pt-6 px-4 sm:px-6 lg:px-8"">

@@ -294,8 +294,8 @@ class MealController extends Controller
         $newMeal_notification_prompt->touch();
 
 
-        return view('nutrition_meal_form');
-        
+        // return view('nutrition_meal_form');
+        return redirect()->route('meal.create');
     }
 
     public function search_food(Request $request) {
@@ -655,6 +655,8 @@ class MealController extends Controller
         //                         ->get();
 
         $check_if_local = env('DB_CONNECTION') === 'sqlite';
+
+        dd(env('DB_CONNECTION'));
         
         if ($check_if_local) {
             $meal_dates_select_filterstr = "strftime('%Y-%m-%d', time_planned) as date, time_planned";
@@ -680,7 +682,7 @@ class MealController extends Controller
 
         $meal_dates_select =        DB::table('meal')
                 ->selectRaw($meal_dates_select_filterstr)
-                ->where('user_id', 1)
+                ->where('user_id', $user_id)
                 ->where('is_eaten', 1)
                 ->orderBy('time_planned', 'desc')
                 ->limit(14)

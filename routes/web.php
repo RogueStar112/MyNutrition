@@ -11,6 +11,8 @@ use App\Http\Controllers\WaterController;
 use App\Http\Controllers\SleepController;
 use App\Http\Controllers\VisualizerController;
 use App\Http\Controllers\SuggesterController;
+use App\Http\Controllers\MacroController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -98,7 +100,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/nutrition/visualizer', [DashboardController::class, 'visualizer_show'])->name('visualizer.show');
 
-    Route::get('/goals/create', [GoalsController::class, 'goals_form'])->name('goals.form');
+    // Route::get('/goals/create', [GoalsController::class, 'goals_form'])->name('goals.form');
+
+    Route::get('/goals/create', [MacroController::class, 'goals_form'])->name('goals.form');
 
     Route::get('/water/create', [WaterController::class, 'water_form'])->name('water.form');
 
