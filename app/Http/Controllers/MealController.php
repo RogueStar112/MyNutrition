@@ -655,8 +655,6 @@ class MealController extends Controller
         //                         ->get();
 
         $check_if_local = env('DB_CONNECTION') === 'sqlite';
-
-        dd(env('DB_CONNECTION'));
         
         if ($check_if_local) {
             $meal_dates_select_filterstr = "strftime('%Y-%m-%d', time_planned) as date, time_planned";
