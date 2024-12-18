@@ -57,7 +57,7 @@
 
                     <!-- Page Heading -->
 
-                    <div id="MOBILE-WIDGETS" class="w-full h-full flex flex-col md:hidden justify-end absolute sticky bottom-[4rem] gap-8 select-none">
+                    <div id="MOBILE-WIDGETS" class="w-full h-min flex flex-col md:hidden justify-end absolute sticky bottom-[4rem] gap-8 select-none">
 
                         <div class="relative m-6">
                             <div id="NOTIFICATIONS-COUNT-MOBILE" class="absolute bottom-[-11px] right-[-11px] w-6 h-6 bg-orange-500 text-white rounded-full z-[9999] flex items-center justify-center text-center" value="0">0</div>
