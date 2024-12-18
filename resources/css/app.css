@@ -281,3 +281,12 @@ label {
 .tertiary-sleep-form {
     background-color: #9071A8;
 }
+
+@media only screen and (min-width: 350px) {
+
+    #MOBILE-WIDGETS {
+        position: fixed;
+        left: 0;
+    }
+
+}

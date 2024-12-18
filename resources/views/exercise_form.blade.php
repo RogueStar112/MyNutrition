@@ -54,7 +54,7 @@
           <input type="text" name="exercise-distance" class="bg-slate-700 text-gray-200 rounded-full" />
 
           <select class="absolute right-0 rounded-r-full mt-1/2 border-l-2 border-slate-500 bg-slate-700 text-gray-200 border-r-0 border-t-0 border-b-0 pr-6 w-[113px]" name="exercise-distance-unit" id="exercise-distance-unit">
-                <option id="exercise-unit-kilometres" value="kms">kms</option>
+                <option id="exercise-unit-kilometres" value="kms">km</option>
                 <option id="exercise-unit-miles" value="miles">miles</option>
           </select>
 

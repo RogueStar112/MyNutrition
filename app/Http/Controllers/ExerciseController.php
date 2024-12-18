@@ -29,7 +29,7 @@ class ExerciseController extends Controller
 
         $user_id = Auth::user()->id;
 
-        // Default distance unit is Kilometres (kms).
+        // Default distance unit is Kilometres (km).
         // Default duration unit is Minutes (mins).
 
         $distance_val = (float)$request->input('exercise-distance');

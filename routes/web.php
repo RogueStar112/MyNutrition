@@ -100,8 +100,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/nutrition/visualizer', [DashboardController::class, 'visualizer_show'])->name('visualizer.show');
 
-    // Route::get('/goals/create', [GoalsController::class, 'goals_form'])->name('goals.form');
-
     Route::get('/goals/create', [MacroController::class, 'goals_form'])->name('goals.form');
 
     Route::get('/water/create', [WaterController::class, 'water_form'])->name('water.form');

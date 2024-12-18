@@ -679,7 +679,7 @@ class MealController extends Controller
         }
 
         $meal_dates_select =        DB::table('meal')
-                ->selectRaw($meal_dates_select_filterstr)
+                ->selectRaw("strftime('%Y-%m-%d', time_planned) as date, time_planned")
                 ->where('user_id', $user_id)
                 ->where('is_eaten', 1)
                 ->orderBy('time_planned', 'desc')
