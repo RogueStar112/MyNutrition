@@ -671,6 +671,7 @@ class MealController extends Controller
                                             ->groupBy('time_planned')
                                             ->orderBy('time_planned', 'desc')
                                             ->distinct()
+                                            ->limit(14)
                                             ->get();
 
 
@@ -683,18 +684,20 @@ class MealController extends Controller
                                             ->where('user_id', 1)
                                             ->where('is_eaten', 1)
                                             ->orderBy('time_planned', 'desc')
+                                            ->distinct()
+                                            ->limit(14)
                                             ->get();
         }
 
 
 
-        $meal_dates_select =        DB::table('meal')
-                ->selectRaw("$meal_dates_select_filterstr")
-                ->where('user_id', $user_id)
-                ->where('is_eaten', 1)
-                ->orderBy('time_planned', 'desc')
-                ->limit(14)
-                ->get();
+        // $meal_dates_select =        DB::table('meal')
+        //         ->selectRaw("$meal_dates_select_filterstr")
+        //         ->where('user_id', $user_id)
+        //         ->where('is_eaten', 1)
+        //         ->orderBy('time_planned', 'desc')
+        //         ->limit(14)
+        //         ->get();
 
         $exercise_dates_select = DB::table('exercise')
                 ->selectRaw("$exercise_dates_select_filterstr")
