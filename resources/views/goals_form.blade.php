@@ -1,11 +1,143 @@
 <x-app-layout>
   <x-slot name="header">
-      <h1 class="font-semibold max-w-7xl mx-auto text-left italic uppercase dark:text-white text-3xl text-gray-800 leading-tight">
-          {{ __('Goals') }}
-      </h1>
-  </x-slot>
+    <div class="flex flex-col gap-0 relative" aria-label="water-form-banner" style="/background: radial-gradient(closest-side, #0465A5, #334155);">
 
-  <p class="w-full text-white text-center">{{$last14Days}}</p>
+        <div class="relative w-full h-full overflow-hidden">
+
+            <h1 class="font-semibold text-3xl md:text-6xl uppercase dark:text-white text-3xl text-gray-800 leading-tight text-center md:text-left md:p-4 md:absolute top-1/2 z-50 bg-[#9a3412] md:-skew-y-6 md:w-[597px]" style="">
+                {{-- {{ __('Log Water Intake') }} --}}
+                Set <select id="drink-type" class="no-select-arrow text-4xl appearance-none dark:text-white text-gray-800 leading-tight p-4 top-1/2 z-50 bg-[#9a3412] border-none uppercase px-2 w-[190px] outline-0 focus:outline-0" style="-moz-appearance: none;">
+                       <option selected value="1" text-value="macro">Macro</option>
+                       <option value="2" text-value="micro">Micro</option>
+                    </select> Goals
+            </h1>
+
+
+        <svg class="absolute top-4  collapse md:visible" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320 z-50">
+            <path fill="#0465A5" fill-opacity="0.5" d="M0,160L48,144C96,128,192,96,288,122.7C384,149,480,235,576,245.3C672,256,768,192,864,192C960,192,1056,256,1152,261.3C1248,267,1344,213,1392,186.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+
+
+        <div class="absolute collapse md:visible  bg-[#fed7aa] w-[128px] h-[128px] right-[53.5%] top-[79%] -skew-x-[24deg] z-20">
+            
+        </div>
+
+        <div class="absolute collapse md:visible bg-[#9a3412] w-[384px] /h-[64px] h-[128px] top-[14rem] right-[24.41rem] -skew-x-[24deg] -skew-y-[10deg] z-10">
+            
+        </div>
+
+        
+
+
+        <svg class="hidden md:block md:relative shadow-2xl bottom-0 select-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#FFA500" fill-opacity="0.75" d="M0,160L48,144C96,128,192,96,288,122.7C384,149,480,235,576,245.3C672,256,768,192,864,192C960,192,1056,256,1152,261.3C1248,267,1344,213,1392,186.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+        </div>
+
+        <i class="collapse md:visible fa-solid fa-bullseye fa-3x p-4 text-purple-300 scale-[1.5] -rotate-[30deg] absolute right-[20px] bottom-[5.5rem] translate-x-1/2 -translate-y-1/2"></i>
+        
+        <i class="collapse md:visible fa-solid fa-bullseye fa-3x p-4 text-green-300 scale-[2.4] -rotate-[30deg] absolute right-[128px] bottom-[128px] translate-x-1/2 -translate-y-1/2"></i>
+    
+        <i class="collapse md:visible fa-solid fa-bullseye fa-3x p-4 text-orange-100 scale-[3] -rotate-[30deg] absolute right-20 bottom-0 translate-x-1/2 -translate-y-1/2"></i>
+    
+    </div>
+</x-slot>
+
+
+
+  <form id="WATER-FORM" method="POST" class="shadow-2xl max-w-[1216px] mx-auto relative" action="{{ route('water.store') }}">
+    @csrf
+      
+      {{-- background: radial-gradient(closest-side, #0465A5, #334155); --}}
+      <div class="" style="background: radial-gradient(closest-side, #9a3412, #334155);">
+
+        <p class="text-center text-2xl text-white my-4">1. Select a goal type</p>
+
+
+
+
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Tailored Option -->
+            <label class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-1 duration-300 hover:bg-red-800 [&>*]:hover:text-black [&>*]:hover:border-b-black grow focus-within:border-4 focus-within:border-red-700 cursor-pointer">
+                <input type="radio" name="goal_type" value="tailored" class="hidden" />
+                <div class="flex justify-between text-red-500 border-b-4 border-b-red-500 p-4 items-center">
+                    <h2 class="text-4xl uppercase font-black">Tailored</h2>
+                    <i class="fa-solid fa-person-running fa-3x"></i>
+                </div>
+                <p class="text-white p-4">Create simple and quick goals.</p>
+            </label>
+        
+            <!-- Custom Option -->
+            <label class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-1 duration-300 hover:bg-blue-800 [&>*]:hover:text-black [&>*]:hover:border-b-black grow focus-within:border-4 focus-within:border-blue-700 cursor-pointer">
+                <input type="radio" name="goal_type" value="custom" class="hidden" />
+                <div class="flex justify-between text-blue-500 border-b-4 border-b-blue-500 p-4 items-center">
+                    <h2 class="text-4xl uppercase font-black">Custom</h2>
+                    <i class="fa-solid fa-palette fa-3x"></i>
+                </div>
+                <p class="text-white p-4">Create customized goals.</p>
+            </label>
+          </div>
+    
+    
+
+
+
+  
+      
+
+      </div>
+  </div>
+  {{-- <div class="max-w-7xl mx-auto border-4 border-blue-500 p-24 dark:text-white relative my-6 mx-4 sm:px-6 lg:px-8">
+      <div class="py-4 relative mx-auto max-w-3xl overflow-hidden">
+          
+          <p>For context, A glass of water is about 200ml.</p>
+
+      </div>
+
+
+      <form action="" class="text-white max-w-3xl flex gap-4 justify-between">
+
+          <label for="water-time">
+              Time drinking water:
+
+              <input type="datetime-local" id="water-time" name="water-time" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="" value="" required/>
+          
+          </label>
+
+
+          <label for="no-of-glasses">
+              Number of glasses (max 12)
+
+              <input type="number" id="no-of-glasses" name="no-of-glasses" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" min="0" max="12" placeholder="" value="" required/>
+          
+          </label>
+          
+          
+          
+      </form>
+
+      <div class="flex justify-end">
+
+          <button id="log-water-btn" class="bg-green-500 text-white px-6 mt-4 p-4">SUBMIT</button>
+
+
+
+      </div>
+
+      <form class="mt-4 flex flex-col gap-3"  id="WATER-LOG">
+
+          <p class="text-3xl uppercase italic border-b-2 border-white">Water Log</p>
+
+          
+
+          
+          
+          
+          
+
+      </form>
+  {{-- 
+      <i class="fas fa-tint fa-3x p-4 text-blue-400 opacity-60 scale-[3] -rotate-[30deg] absolute right-20 bottom-0 translate-x-1/2 -translate-y-1/2"></i>
+      --}}
+  </form> 
 
   {{-- Stands for Cyclic Tracking --}}
   <section id="CT-CONTAINER" class="max-w-7xl mx-auto" >
@@ -77,7 +209,7 @@
 
   </section>
 
-
+  
 
 <script>
   
