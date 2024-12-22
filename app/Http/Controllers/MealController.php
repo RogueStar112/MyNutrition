@@ -967,7 +967,7 @@ class MealController extends Controller
             }
         }
 
-        dd($meal_dates_ymd);
+        dd(krsort($meal_dates_ymd));
         // return $meal_dates_ymd;
 
         // dd ($meal_dates_ymd);
