@@ -967,7 +967,6 @@ class MealController extends Controller
             }
         }
 
-        dd(krsort($meal_dates_ymd));
         // return $meal_dates_ymd;
 
         // dd ($meal_dates_ymd);
@@ -975,7 +974,7 @@ class MealController extends Controller
 
         // dd($meal_dates_ymd);
 
-        return view('nutrition_meal_view', ['meals' => krsort($meal_dates_ymd), 'calendar' => $calendar, 'user_id' => $user_id]);
+        return view('nutrition_meal_view', ['meals' => $meal_dates_ymd, 'calendar' => $calendar, 'user_id' => $user_id]);
 
     
         // return $meal_dates_select;
