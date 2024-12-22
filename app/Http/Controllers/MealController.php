@@ -775,7 +775,7 @@ class MealController extends Controller
                 = 0;
 
 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['calories'] = "-" . $exercise->calories_total;
+                $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['calories'] = 0 - $exercise->calories_total;
 
 
 
@@ -975,7 +975,7 @@ class MealController extends Controller
 
         // dd($meal_dates_ymd);
 
-        return view('nutrition_meal_view', ['meals' => $meal_dates_ymd, 'calendar' => $calendar, 'user_id' => $user_id]);
+        return view('nutrition_meal_view', ['meals' => krsort($meal_dates_ymd), 'calendar' => $calendar, 'user_id' => $user_id]);
 
     
         // return $meal_dates_select;
