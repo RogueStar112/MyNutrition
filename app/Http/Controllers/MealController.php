@@ -680,8 +680,8 @@ class MealController extends Controller
 
         } else {
             // Deployment Environment
-            $meal_dates_select_filterstr = "DISTINCT DATE_FORMAT(time_planned, '%Y-%m-%d') as time_planned, date";
-            $exercise_dates_select_filterstr = "DISTINCT DATE_FORMAT(exercise_start, '%Y-%m-%d') as exercise_start, date";
+            $meal_dates_select_filterstr = "DISTINCT DATE_FORMAT(time_planned, '%Y-%m-%d') as date, time_planned";
+            $exercise_dates_select_filterstr = "DISTINCT DATE_FORMAT(exercise_start, '%Y-%m-%d') as date, exercise_start";
             
             $meal_dates_select =        DB::table('meal')
                                             ->selectRaw($meal_dates_select_filterstr)
