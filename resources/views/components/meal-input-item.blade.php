@@ -40,15 +40,15 @@
 
     </div> 
 
-    <div class="flex gap-2 mx-6 text-white items-center opacity-60">
+    {{-- <div class="flex gap-2 mx-6 text-white items-center opacity-60">
 
         <div class="w-full border-b-4 border-white"></div>
         <div>OR</div>
         <div class="w-full border-b-4 border-white"></div>
 
-    </div>
+    </div> --}}
 
-    <div class="p-6 text-center" >
+    {{-- <div class="p-6 text-center" >
         <h2 class="text-white text-2xl text-center mb-6 rounded-lg">1b. Add Non-Database Food To Meal</h2>    
         
         <div class="flex justify-center bg-slate-900">
@@ -151,7 +151,7 @@
 
         </div>
         
-    </div>
+    </div> --}}
 
     <div class="mb-3 md:grid md:grid-cols-3 gap-1 /w-[50rem]">
         
