@@ -23,11 +23,20 @@
                   <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2 duration-300 hover:bg-red-800 [&>*]:hover:text-black [&>*]:hover:border-b-black" href="{{route('advanced.suggester')}}">
 
                       <div class="flex justify-between text-red-500 border-b-4 border-b-red-500 p-4 items-center">
-                          <h2 class="text-4xl uppercase font-black">Suggester</h2>
-                          <i class="fas fa-hotdog fa-3x"></i>
+                          <h2 class="text-4xl uppercase font-black">Nutritional Breakdown</h2>
+                          <i class="fas fa-flask fa-3x"></i>
                       </div>
-                      <p class="text-white p-4">Get food recommendations!</p>
+                      <p class="text-white p-4">TBA 2025</p>
                   </a>
+
+                  <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2 duration-300 hover:bg-yellow-800 [&>*]:hover:text-black [&>*]:hover:border-b-black" href="{{route('advanced.suggester')}}">
+
+                    <div class="flex justify-between text-yellow-500 border-b-4 border-yellow-500 p-4 items-center">
+                        <h2 class="text-4xl uppercase font-black">Recipes</h2>
+                        <i class="fas fa-burger fa-3x"></i>
+                    </div>
+                    <p class="text-white p-4">Make recipes out of existing meals/food!</p>
+                </a>
 
               
               {{-- <x-dashboard-link colspan="3" heading="Overview" textalign="center">

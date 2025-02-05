@@ -202,9 +202,9 @@ input[type=number]::-webkit-inner-spin-button {
     @apply ring-2 ring-green-500; 
   }
 
-  input[type=radio] {
+  /* input[type=radio] {
     display:none;
- }
+ } */
  
  input[type=radio] + label {
     display: inline-block;
@@ -213,11 +213,28 @@ input[type=number]::-webkit-inner-spin-button {
     margin-right: 10px;
     color: #eee;
     cursor: pointer;
+    list-style: none;
+ }
+
+label > input[type=radio] {
+    display: inline-block;
+    border: 1px solid #eee;
+    padding: 10px;
+    margin-right: 10px;
+    color: #eee;
+    cursor: pointer;
+    transition-duration: 0.3s;
  }
 
  input[type=radio]:checked + label {
     background: #eee;
     color: #000;
+ }
+
+ label > input[type=radio]:checked {
+    background: #eee;
+    color: #000;
+    transition-duration: 0.3s;
  }
 
 /* #TASKS .next-day-active {

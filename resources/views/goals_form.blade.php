@@ -43,7 +43,7 @@
 
 
 
-  <form id="WATER-FORM" method="POST" class="shadow-2xl max-w-[1216px] mx-auto relative" action="{{ route('water.store') }}">
+  <form id="GOALS-FORM" method="POST" class="shadow-2xl max-w-[1216px] mx-auto relative" action="{{ route('water.store') }}">
     @csrf
       
       {{-- background: radial-gradient(closest-side, #0465A5, #334155); --}}
@@ -54,7 +54,7 @@
 
 
 
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid md:grid-cols-2 gap-4">
             <!-- Tailored Option -->
             <label class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-1 duration-300 hover:bg-red-800 [&>*]:hover:text-black [&>*]:hover:border-b-black grow focus-within:border-4 focus-within:border-red-700 cursor-pointer">
                 <input type="radio" name="goal_type" value="tailored" class="hidden" />
@@ -75,12 +75,174 @@
                 <p class="text-white p-4">Create customized goals.</p>
             </label>
           </div>
-    
-    
+          
+          <div id="GOALS-TAILORED-FORM" class="text-white p-4">
+
+            <p class="text-white text-left text-4xl italic mb-4 font-extrabold">TAILORED QUESTIONS</p>
+
+            <div class="flex gap-4 place-items-center mb-4">
+              <label for="exercise-activity-level"><span class="question_number text-4xl font-extrabold mb-4">1) </span>What is your Exercise Activity Level?</label>
+
+              <select name="exercise-activity-level" id="exercise-activity-level" class="bg-slate-700 text-white">
+                <option value="sedentary">None (0 Days)</option>
+                <option value="lightly_active">Lightly active (1 - 2 Days)</option>
+                <option value="moderately_active">Moderately active (3 - 4 Days)</option>
+                <option value="very_active">Very active (5+ Days)</option>
+              </select> 
+            </div>
+
+            
+
+            <p>
+              <span class="question_number text-4xl font-extrabold mb-4">2) </span>
+              Here are your average macros based on the data you've inserted.<br>
+
+              Calorie: <span id="calorie-amount" class="ml-2"></span><br>
+              Fat: <span id="fat-amount" class="ml-2"></span><br>
+              Carbs: <span id="carbs-amount" class="ml-2"></span><br>
+              Protein: <span id="protein-amount" class="ml-2"></span><br>
+              
+              
+
+              Tick if you want More or Less of each Macro.<br>
+              (the app will calculate an average based on your exercise and activity.)
+            </p>
+
+
+            <div class="flex justify-start items-center">
+                <div class="w-full max-w-[960px] mx-auto grid grid-cols-6 gap-4 m-4">
+                    <!-- Header Row for Labels -->
+                    <div></div>
+                    <div class="flex justify-center items-center text-white">Even Less</div>
+                    <div class="flex justify-center items-center text-white">Less</div>
+                    <div class="flex justify-center items-center text-white">Maintain</div>
+                    <div class="flex justify-center items-center text-white">More</div>
+                    <div class="flex justify-center items-center text-white">Even More</div>
+            
+                    <!-- Row for Calorie -->
+                    <div class="flex justify-center items-center">
+                        <span class="text-white">Calorie</span>
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="calorie" value="even-less">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="calorie" value="less">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="calorie" value="maintain">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="calorie" value="more">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="calorie" value="even-more">
+                    </div>
+            
+                    <!-- Row for Fat -->
+                    <div class="flex justify-center items-center">
+                        <span class="text-white">Fat</span>
+
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="fat" value="even-less">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="fat" value="less">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="fat" value="maintain">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="fat" value="more">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="fat" value="even-more">
+                    </div>
+            
+                    <!-- Row for Carbs -->
+                    <div class="flex justify-center items-center">
+                        <span class="text-white">Carbs</span>
+   
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="carbs" value="even-less">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="carbs" value="less">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="carbs" value="maintain">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="carbs" value="more">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="carbs" value="even-more">
+                    </div>
+            
+                    <!-- Row for Protein -->
+                    <div class="flex justify-center items-center">
+                        <span class="text-white">Protein</span>
+
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="protein" value="even-less">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="protein" value="less">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="protein" value="maintain">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="protein" value="more">
+                    </div>
+            
+                    <div class="flex justify-center items-center">
+                        <input type="radio" name="protein" value="even-more">
+                    </div>
+                </div>
+            </div>
+            
+            
+          
+
+
+          </div>
+
+          <div id="GOALS-CUSTOM-FORM">
 
 
 
-  
+          </div>
+
+
+          
+          <div id="SUBMIT-BTN">
+
+            <button type="submit" class="bg-green-500 text-white w-full text-center p-4">SUBMIT</button>
+
+          </div>
       
 
       </div>
@@ -140,8 +302,8 @@
   </form> 
 
   {{-- Stands for Cyclic Tracking --}}
-  <section id="CT-CONTAINER" class="max-w-7xl mx-auto" >
-    <h2 class="font-semibold max-w-7xl mx-auto italic uppercase dark:text-white text-3xl text-gray-800 leading-tight text-left pt-6 px-4 sm:px-6 lg:px-8"">
+  <section id="CT-CONTAINER" class="max-w-7xl mx-auto hidden" >
+    <h2 class="font-semibold max-w-7xl mx-auto italic uppercase dark:text-white text-3xl text-gray-800 leading-tight text-left md:pt-6 md:px-4 sm:px-6 lg:px-8"">
       {{ __('Weekly Cyclic Macro Tracking') }}
     </h2>
 

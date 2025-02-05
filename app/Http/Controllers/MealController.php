@@ -663,7 +663,7 @@ class MealController extends Controller
         // dd(env('DB_CONNECTION'));
     
 
-        if ($check_if_local) {
+        // if ($check_if_local) {
             // Local Environment
 
             $meal_dates_select_filterstr = "strftime('%Y-%m-%d', time_planned) as date, time_planned";
@@ -680,20 +680,20 @@ class MealController extends Controller
                                             ->get();
 
 
-        } else {
-            // Deployment Environment
-            $meal_dates_select_filterstr = "DISTINCT DATE_FORMAT(time_planned, '%Y-%m-%d') as date, time_planned";
-            $exercise_dates_select_filterstr = "DISTINCT DATE_FORMAT(exercise_start, '%Y-%m-%d') as date, exercise_start";
+        // } else {
+        //     // Deployment Environment
+        //     $meal_dates_select_filterstr = "DISTINCT DATE_FORMAT(time_planned, '%Y-%m-%d') as date, time_planned";
+        //     $exercise_dates_select_filterstr = "DISTINCT DATE_FORMAT(exercise_start, '%Y-%m-%d') as date, exercise_start";
             
-            $meal_dates_select =        DB::table('meal')
-                                            ->selectRaw($meal_dates_select_filterstr)
-                                            ->where('user_id', 1)
-                                            ->where('is_eaten', 1)
-                                            ->orderBy('time_planned', 'desc')
-                                            ->limit(14)
-                                            ->get();
+        //     $meal_dates_select =        DB::table('meal')
+        //                                     ->selectRaw($meal_dates_select_filterstr)
+        //                                     ->where('user_id', 1)
+        //                                     ->where('is_eaten', 1)
+        //                                     ->orderBy('time_planned', 'desc')
+        //                                     ->limit(14)
+        //                                     ->get();
 
-        }
+        // }
 
 
 
@@ -705,86 +705,86 @@ class MealController extends Controller
         //         ->limit(14)
         //         ->get();
 
-        $exercise_dates_select = DB::table('exercise')
-                ->selectRaw("$exercise_dates_select_filterstr")
-                ->where('user_id', $user_id)
-                ->orderBy("exercise_start", "desc")
-                ->distinct()
-                ->limit(14)
-                ->get();
+        // $exercise_dates_select = DB::table('exercise')
+        //         ->selectRaw("$exercise_dates_select_filterstr")
+        //         ->where('user_id', $user_id)
+        //         ->orderBy("exercise_start", "desc")
+        //         ->distinct()
+        //         ->limit(14)
+        //         ->get();
 
         // dd($exercise_dates_select);
 
         $meal_dates_ymd = [];
 
-        foreach($exercise_dates_select as $exercise_date) {
+        // foreach($exercise_dates_select as $exercise_date) {
 
-            $exercise_time = date('H:i:s', strtotime($exercise_date->exercise_start));
-            $exercise_date = date('Y-m-d', strtotime($exercise_date->date));
-
-
-            $meal_dates_ymd[0][$exercise_date]['calories'] = 0;
+        //     $exercise_time = date('H:i:s', strtotime($exercise_date->exercise_start));
+        //     $exercise_date = date('Y-m-d', strtotime($exercise_date->date));
 
 
-            $meal_dates_ymd[0][$exercise_date]['times_planned'] = [];
+        //     $meal_dates_ymd[0][$exercise_date]['calories'] = 0;
 
-            array_push($meal_dates_ymd[0][$exercise_date]['times_planned'], $exercise_time);
+
+        //     $meal_dates_ymd[0][$exercise_date]['times_planned'] = [];
+
+        //     array_push($meal_dates_ymd[0][$exercise_date]['times_planned'], $exercise_time);
             
-            $meal_dates_ymd[0][$exercise_date][$exercise_time]['calories'] = 0;
-            // $meal_dates_ymd[0][$exercise_date]['fat'] = 0;
-            // $meal_dates_ymd[0][$exercise_date]['carbs'] = 0;
-            // $meal_dates_ymd[0][$exercise_date]['protein'] = 0;
+        //     $meal_dates_ymd[0][$exercise_date][$exercise_time]['calories'] = 0;
+        //     // $meal_dates_ymd[0][$exercise_date]['fat'] = 0;
+        //     // $meal_dates_ymd[0][$exercise_date]['carbs'] = 0;
+        //     // $meal_dates_ymd[0][$exercise_date]['protein'] = 0;
             
-            $exercise_select = Exercise::where('user_id', $user_id)
-                                    ->whereBetween('exercise_start', [$exercise_date . ' 00:00:00', $exercise_date . ' 23:59:59'])
-                                    ->orderByRaw('exercise_start ASC')
-                                    ->get();
+        //     $exercise_select = Exercise::where('user_id', $user_id)
+        //                             ->whereBetween('exercise_start', [$exercise_date . ' 00:00:00', $exercise_date . ' 23:59:59'])
+        //                             ->orderByRaw('exercise_start ASC')
+        //                             ->get();
 
-            foreach($exercise_select as $index=>$exercise) {
+        //     foreach($exercise_select as $index=>$exercise) {
         
 
-                $exercise_type_id = ExerciseType::where('id', $exercise->exercise_type_id)
-                                        ->first();
+        //         $exercise_type_id = ExerciseType::where('id', $exercise->exercise_type_id)
+        //                                 ->first();
                 
-                $exercise_name = $exercise_type_id->name;
+        //         $exercise_name = $exercise_type_id->name;
 
-                $exercise_distance = $exercise->distance;
+        //         $exercise_distance = $exercise->distance;
 
-                $exercise_duration = $exercise->duration;
+        //         $exercise_duration = $exercise->duration;
 
-                // $meal_dates_ymd[0][$exercise_date][$exercise_time]['fat'] = 0;
-                // $meal_dates_ymd[0][$exercise_date][$exercise_time]['carbs'] = 0;
-                // $meal_dates_ymd[0][$exercise_date][$exercise_time]['protein'] = 0;
+        //         // $meal_dates_ymd[0][$exercise_date][$exercise_time]['fat'] = 0;
+        //         // $meal_dates_ymd[0][$exercise_date][$exercise_time]['carbs'] = 0;
+        //         // $meal_dates_ymd[0][$exercise_date][$exercise_time]['protein'] = 0;
 
-                $meal_dates_ymd[0][$exercise_date]['calories'] -= $exercise->calories_total;
+        //         $meal_dates_ymd[0][$exercise_date]['calories'] -= $exercise->calories_total;
 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time]['calories'] -= $exercise->calories_total;
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time]['calories'] -= $exercise->calories_total;
 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time]['meal_name'] = "Exercise: $exercise_distance" . "km " . $exercise_name . ", $exercise_duration min.";
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time]['meal_name'] = "Exercise: $exercise_distance" . "km " . $exercise_name . ", $exercise_duration min.";
 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time]['food_name'] = "$exercise_distance" . "km" . " $exercise_name";
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time]['food_name'] = "$exercise_distance" . "km" . " $exercise_name";
                 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['food_name'] = "$exercise_distance" . "km" . " $exercise_name";
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['food_name'] = "$exercise_distance" . "km" . " $exercise_name";
 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['serving_size'] = 0;
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['serving_size'] = 0;
 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['fat'] = 0;
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['fat'] = 0;
 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['carbs']
-                = 0;
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['carbs']
+        //         = 0;
 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['protein']
-                = 0;
-
-
-                $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['calories'] = 0 - $exercise->calories_total;
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['protein']
+        //         = 0;
 
 
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['calories'] = 0 - $exercise->calories_total;
 
-            }
 
 
-        }
+        //     }
+
+
+        // }
 
         // dd($meal_dates_ymd);
 
@@ -970,9 +970,6 @@ class MealController extends Controller
         }
 
         // return $meal_dates_ymd;
-
-        // dd ($meal_dates_ymd);
-
 
         // dd($meal_dates_ymd);
 

@@ -1,7 +1,10 @@
 <div id="meal_number_{{$index}}" class="/inline-block">
-    <div class="p-6">
-    <h1 class="text-white text-2xl text-center md:text-left">1. Select Foods To Add</h1>
-    <p class="text-gray-500 italic mt-2 text-center md:text-left">Type in all three inputs, then press enter. ↩️</p>
+
+    <div class="p-6 text-center">
+    <p class="text-gray-500">You have two options to add meals.</p>
+
+    <h2 class="text-white text-2xl mt-2 text-center">1. Select Existing Foods To Add</h2>
+    <p class="text-gray-500 italic mt-2 text-center">Type in all three inputs, then press enter. ↩️</p>
     </div>
 
     <div class="mb-3 md:grid md:grid-cols-3 gap-1 /w-[50rem]">
@@ -34,6 +37,124 @@
             <input id="disable_servingsize_1" name="disable_servingsize_1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
             <label for="disable_servingsize_1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Ignore serving size</label>
         </div>
+
+    </div> 
+
+    <div class="flex gap-2 mx-6 text-white items-center opacity-60">
+
+        <div class="w-full border-b-4 border-white"></div>
+        <div>OR</div>
+        <div class="w-full border-b-4 border-white"></div>
+
+    </div>
+
+    <div class="p-6 text-center" >
+        <h2 class="text-white text-2xl text-center mb-6 rounded-lg">1b. Add Non-Database Food To Meal</h2>    
+        
+        <div class="flex justify-center bg-slate-900">
+            
+            <div id="meal_number_{{$index}}_altinput" class="flex flex-col md:flex-row gap-2 [&>div]:flex [&>div]:flex-col [&>div>input]:w-full md:[&>div>input]:w-[6.5rem] [&>div]:items-center">
+                
+                <div id="meal_number_{{$index}}_altinput_icon" class="my-2 opacity-50">
+                    
+                    <div id="" class="font-extrabold text-slate-500">
+                            ICON
+                    </div>
+                
+                    <div class="bg-transparent self-center flex justify-center items-center h-[42px] w-[42px] max-w-[42px] max-h-[42px] [&amp;>img]:hidden [&amp;>i]:scale-150 [&amp;>img]:justify-evenly [&amp;>img]:items-center rounded-full border-4 border-slate-500">
+                    
+                        <i class="fa-solid fa-plus text-white scale-150 /leading-[42px] /h-[42px] /w-[42px] /max-w-[42px] /max-h-[42px] text-center  text-lg"></i>
+                        
+                
+                    </div>
+                
+                </div>
+
+                <div id="meal_number_{{$index}}_altinput_name" class="my-2">
+                    
+                    <div id="" class="font-extrabold text-slate-500">
+                            NAME
+                    </div>
+                
+                    <input type="text" id="meal_quantity_{{$index}}" name="meal_name_alt_name_{{$index}}" class="block bg-slate-700 text-gray-200 mt-1 rounded-md" placeholder="Bread Roll" value="" required/>
+   
+                
+                </div>
+
+                <div id="meal_number_{{$index}}_altinput_size" class="my-2">
+                    
+                    <div id="" class="font-extrabold text-slate-500">
+                            SIZE
+                    </div>
+                
+                    <input type="text" id="meal_quantity_{{$index}}" name="meal_name_altinput_size_{{$index}}" class="block bg-slate-700 text-gray-200 mt-1 rounded-md" placeholder="172" value="" required/>
+   
+                
+                </div>
+
+                <div id="meal_number_{{$index}}_altinput_quantity" class="my-2">
+                    
+                    <div id="" class="font-extrabold text-slate-500">
+                            QUANTITY
+                    </div>
+                
+                    <input type="text" id="meal_quantity_{{$index}}" name="meal_name_altinput_quantity_{{$index}}" class="block bg-slate-700 text-gray-200 mt-1 rounded-md" placeholder="146" value="" required/>
+   
+                
+                </div>
+
+                <div id="meal_number_{{$index}}_altinput_kcal" class="my-2">
+                    
+                    <div id="" class="font-extrabold text-slate-500">
+                            KCAL
+                    </div>
+                
+                    <input type="text" id="meal_quantity_{{$index}}" name="meal_name_altinput_kcal_{{$index}}" class="block bg-slate-700 text-gray-200 mt-1 rounded-md" placeholder="3.9" value="" required/>
+   
+                
+                </div>
+
+                <div id="meal_number_{{$index}}_altinput_fat" class="my-2">
+                    
+                    <div id="" class="font-extrabold text-slate-500">
+                            FAT (g)
+                    </div>
+                
+                    <input type="text" id="meal_quantity_{{$index}}" name="meal_name_altinput_fat_{{$index}}" class="block bg-slate-700 text-gray-200 mt-1 rounded-md" placeholder="172" value="" required/>
+   
+                
+                </div>
+
+                <div id="meal_number_{{$index}}_altinput_carbs" class="my-2">
+                    
+                    <div id="" class="font-extrabold text-slate-500">
+                            CARBS (g)
+                    </div>
+                
+                    <input type="text" id="meal_quantity_{{$index}}" name="meal_name_altinput_carbs_{{$index}}" class="block bg-slate-700 text-gray-200 mt-1 rounded-md" placeholder="172" value="" required/>
+   
+                
+                </div>
+
+                <div id="meal_number_{{$index}}_altinput_protein" class="my-2">
+                    
+                    <div id="" class="font-extrabold text-slate-500">
+                            PROTEIN (g)
+                    </div>
+                
+                    <input type="text" id="meal_quantity_{{$index}}" name="meal_name_altinput_protein_{{$index}}" class="block bg-slate-700 text-gray-200 mt-1 rounded-md" placeholder="172" value="" required/>
+   
+                
+                </div>
+
+            </div>
+
+        </div>
+        
+    </div>
+
+    <div class="mb-3 md:grid md:grid-cols-3 gap-1 /w-[50rem]">
+        
 
     </div> 
 
