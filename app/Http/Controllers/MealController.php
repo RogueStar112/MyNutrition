@@ -663,7 +663,7 @@ class MealController extends Controller
         // dd(env('DB_CONNECTION'));
     
 
-        // if ($check_if_local) {
+        if ($check_if_local) {
             // Local Environment
 
             $meal_dates_select_filterstr = "strftime('%Y-%m-%d', time_planned) as date, time_planned";
@@ -680,20 +680,20 @@ class MealController extends Controller
                                             ->get();
 
 
-        // } else {
+        } else {
         //     // Deployment Environment
-        //     $meal_dates_select_filterstr = "DISTINCT DATE_FORMAT(time_planned, '%Y-%m-%d') as date, time_planned";
-        //     $exercise_dates_select_filterstr = "DISTINCT DATE_FORMAT(exercise_start, '%Y-%m-%d') as date, exercise_start";
+            $meal_dates_select_filterstr = "DISTINCT DATE_FORMAT(time_planned, '%Y-%m-%d') as date, time_planned";
+            $exercise_dates_select_filterstr = "DISTINCT DATE_FORMAT(exercise_start, '%Y-%m-%d') as date, exercise_start";
             
-        //     $meal_dates_select =        DB::table('meal')
-        //                                     ->selectRaw($meal_dates_select_filterstr)
-        //                                     ->where('user_id', 1)
-        //                                     ->where('is_eaten', 1)
-        //                                     ->orderBy('time_planned', 'desc')
-        //                                     ->limit(14)
-        //                                     ->get();
+            $meal_dates_select =        DB::table('meal')
+                                            ->selectRaw($meal_dates_select_filterstr)
+                                            ->where('user_id', 1)
+                                            ->where('is_eaten', 1)
+                                            ->orderBy('time_planned', 'desc')
+                                            ->limit(14)
+                                            ->get();
 
-        // }
+        }
 
 
 
