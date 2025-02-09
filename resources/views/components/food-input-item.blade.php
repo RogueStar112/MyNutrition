@@ -54,6 +54,7 @@
     <h2 class="text-white text-2xl">2. Nutritional Info</h2>
     <p class="text-gray-500 italic mt-2">According to serving size. All fields optional.</p>
     <p class="text-green-500 italic mt-2">New AI Autofill fills in nutritional info for food names with quantities!</p>
+    <p class="text-red-500 italic"><span class="font-black">Disclaimer:</span> Any information from the AI Auto Fill may be inaccurate. Use the data with caution.</p>
     </div>
 
     <div class="mb-3 md:grid md:grid-cols-4 gap-1 [&>*]:gap-4 [&>*]:items-center [&>*]:justify-between [&>*>input]:w-[189px] md:[&>*>input]:w-full">

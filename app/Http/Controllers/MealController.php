@@ -28,6 +28,8 @@ use App\Models\Exercise;
 use App\Models\ExerciseUnit;
 use App\Models\ExerciseType;
 
+use App\Models\User;
+
 use Illuminate\Support\Facades\DB;
 
 use Livewire\Livewire;
@@ -303,8 +305,10 @@ class MealController extends Controller
     }
 
     public function search_food(Request $request) {
+
+
         $user_id = Auth::user()->id;
-        $user_name = Auth::user()->name;
+        // $user_name = Auth::user()->name;
 
         $foods = $request->input('query');
         $servingSize = $request->input('servingSize');
@@ -379,6 +383,10 @@ class MealController extends Controller
             }
 
             $food_array[$meal_datendex]['food_id'] = $food->id;
+
+            // Username Hotfix 09022025
+            $user_name = User::find($food->user_id)->name;
+
             $food_array[$meal_datendex]['user_name'] = $user_name;
             $food_array[$meal_datendex]['img_url'] = $food->img_url;
             $food_array[$meal_datendex]['calories'] = $macronutrients_search->calories;
@@ -671,7 +679,7 @@ class MealController extends Controller
 
             $meal_dates_select =        DB::table('meal')
                                             ->selectRaw($meal_dates_select_filterstr)
-                                            ->where('user_id', 1)
+                                            ->where('user_id', $user_id)
                                             ->where('is_eaten', 1)
                                             ->groupBy('time_planned')
                                             ->orderBy('time_planned', 'desc')
@@ -687,7 +695,7 @@ class MealController extends Controller
             
             $meal_dates_select =        DB::table('meal')
                                             ->selectRaw($meal_dates_select_filterstr)
-                                            ->where('user_id', 1)
+                                            ->where('user_id', $user_id)
                                             ->where('is_eaten', 1)
                                             ->orderBy('time_planned', 'desc')
                                             ->limit(14)

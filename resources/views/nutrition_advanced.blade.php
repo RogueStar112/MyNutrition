@@ -38,6 +38,15 @@
                     <p class="text-white p-4">Make recipes out of existing meals/food!</p>
                 </a>
 
+                <a class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2 duration-300 hover:bg-blue-800 [&>*]:hover:text-black [&>*]:hover:border-b-black" href="{{route('advanced.suggester')}}">
+
+                    <div class="flex justify-between text-blue-500 border-b-4 border-blue-500 p-4 items-center">
+                        <h2 class="text-4xl uppercase font-black">Food Suggester</h2>
+                        <i class="fas fa-carrot fa-3x"></i>
+                    </div>
+                    <p class="text-white p-4">Add new food items through AI!</p>
+                </a>
+
               
               {{-- <x-dashboard-link colspan="3" heading="Overview" textalign="center">
                   {{ __(Auth::user()->name . "'s nutrition") }}

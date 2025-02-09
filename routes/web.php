@@ -14,7 +14,8 @@ use App\Http\Controllers\SuggesterController;
 use App\Http\Controllers\MacroController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\OpenAIController;
-
+use App\Http\Controllers\ProfanityController;
+use App\Http\Controllers\ChangelogController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -137,11 +138,16 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/nutrition/advanced/recipes', [RecipeController::class, 'recipe_form'])->name('advanced.suggester');
 
-    Route::get('/nutrition/ai/fake', [OpenAIController::class, 'fake_prompt'])->name('ai.fake_prompt');
+    // Route::get('/nutrition/ai/fake', [OpenAIController::class, 'fake_prompt'])->name('ai.fake_prompt');
 
-    Route::get('/nutrition/ai/real', [OpenAIController::class, 'real_prompt'])->name('ai.real_prompt');
+    // Route::get('/nutrition/ai/real', [OpenAIController::class, 'real_prompt'])->name('ai.real_prompt');
 
     Route::post('/nutrition/ai/food_prompt/{name}/{serving_size}', [OpenAIController::class, 'food_prompt'])->name('ai.food_prompt');
+
+    Route::get('/nutrition/testing/profanity', [ProfanityController::class, 'profanity_test']);
+    
+    Route::get('/changelog', [ChangelogController::class, 'changelog_view'])->name('changelog');
+
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])

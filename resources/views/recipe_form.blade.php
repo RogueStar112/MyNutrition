@@ -5,11 +5,20 @@
       </h1>
   </x-slot>
 
- 
+   
 
-  <div class="w-screen h-screen bg-slate-700 text-white flex items-center justify-center">
+  <div class="w-screen h-screen max-w-7xl mx-auto bg-slate-700 text-white">
+    
+    <div class="flex gap-6">
 
-    <h1>WIP 2025</h1>
+
+      <h2 class="pt-6 px-4 sm:px-6 lg:px-8">ADD Core Ingredients</h2>
+     
+      <input type="text" class="block bg-slate-800 text-gray-200 w-full mt-1 rounded-md" />
+
+
+    </div>
+
   </div>
 
 </x-app-layout>
