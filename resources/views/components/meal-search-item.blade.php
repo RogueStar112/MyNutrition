@@ -307,10 +307,10 @@
                     e.preventDefault();
 
                     if (meal_json[query]) {
-                        console.log('MEAL JSON QUERY ALREADY EXISTS. VAL RETAINED.');
+                        // console.log('MEAL JSON QUERY ALREADY EXISTS. VAL RETAINED.');
                         var no_of_foods = parseInt($("#no_of_foods").val());
                     } else {
-                        console.log('NO OF FOODS INCREASED BY 1.')
+                        // console.log('NO OF FOODS INCREASED BY 1.')
                         var no_of_foods = parseInt($("#no_of_foods").val()) + 1;
                     }
 
@@ -386,7 +386,7 @@
                         
                     }
                     
-                    console.log('FOOD ARRAY', food_array)
+                    // console.log('FOOD ARRAY', food_array)
 
                     // Object.keys(meal_json).foreach()
 
@@ -397,7 +397,7 @@
 
                     // meal_json = Object.assign({}, meal_json)
 
-                    console.log('SORTED MEAL JSON', meal_json);
+                    // console.log('SORTED MEAL JSON', meal_json);
 
                     // let i=1;
 
@@ -441,7 +441,7 @@
                             foods_pages = [];
                             $("#foods_pages").val(foods_pages);
                             
-                            console.log('RESPONSE HTML', Object.entries(response['html']));
+                            // console.log('RESPONSE HTML', Object.entries(response['html']));
                             
                             for (let i = 0; i < food_array.length; i++) {
 

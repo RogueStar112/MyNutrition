@@ -24,6 +24,8 @@ use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\Storage;
 
+use Blaspsoft\Blasp\Facades\Blasp;
+
 class FoodController extends Controller
 {
     public function food_form()
@@ -62,8 +64,8 @@ class FoodController extends Controller
 
             $validated = $request->validate([
 
-                "food_name_$array_index_x" => 'required|string|max:25',
-                "food_source_$array_index_x" => 'required|string|max:20',
+                "food_name_$array_index_x" => ['required', 'string', 'max:25', 'blasp_check'],
+                "food_source_$array_index_x" => ['required', 'string', 'max:20', 'blasp_check'],
                 "food_servingsize_$array_index_x" => 'required|numeric|max:1000',
                 "food_calories_$array_index_x" => 'nullable|numeric|max:15000',
                 "food_fat_$array_index_x" => 'nullable|numeric|max:1000',
@@ -300,7 +302,7 @@ class FoodController extends Controller
          }
 
         
-        return redirect()->route('food.create');
+        return redirect()->route('food.create')->with('success', 'Your food items have been submitted successfully!');
         
         // return view('nutrition_food_form', ['validated_data' => $added_items, 'food_form_options' => $food_form_options]);
         // return $added_items;

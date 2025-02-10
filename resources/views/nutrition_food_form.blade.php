@@ -5,8 +5,20 @@
         </h1>
     </x-slot>
 
+    @if(session('success'))
+        <div class="alert alert-success max-w-7xl rounded-lg mx-auto text-center bg-green-800 text-white p-6" id="success-message-received">
+            {{ session('success') }}
+        </div>
+
+        <script>
+            setTimeout(() => {
+                document.getElementById('success-message-received').style.display = 'none';
+            }, 6000); // Disappears after 6 seconds
+        </script>
+    @endif
+
     @if ($errors->any())
-    <div class="alert alert-danger max-w-7xl rounded-lg mx-auto text-center bg-red-800 text-white">
+    <div class="alert alert-danger max-w-7xl rounded-lg mx-auto text-center bg-red-800 text-white" id="error-message-received">
         <h2 class="text-2xl font-extrabold">Input Error</h2>
         <ul>
             @foreach ($errors->all() as $error)
@@ -14,6 +26,12 @@
             @endforeach
         </ul>
     </div>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById('error-message-received').style.display = 'none';
+        }, 6000); // Disappears after 6 seconds
+    </script>
     @endif
 
     @isset($validated_data)

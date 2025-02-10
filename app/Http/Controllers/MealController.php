@@ -34,6 +34,8 @@ use Illuminate\Support\Facades\DB;
 
 use Livewire\Livewire;
 
+use Blaspsoft\Blasp\Facades\Blasp;
+
 class MealController extends Controller
 {
     public function meal_form()
@@ -82,6 +84,7 @@ class MealController extends Controller
 
             $validated = $request->validate([
 
+                "meal_foodname_$food_pages_x" => ['required', 'string', 'max:25', 'blasp_check'],
                 "meal_foodid_$food_pages_x" => 'required|numeric|max:10000000',
 
                 // amount of food units is 11 for now.
@@ -233,7 +236,11 @@ class MealController extends Controller
 
         $newMeal->name = $request->input('MEAL_NAME');
 
-        
+        $validated = $request->validate([
+
+            "MEAL_NAME" => ['required', 'string', 'max:25', 'blasp_check'],
+
+        ]);
 
         // $date_time = strtotime($request->input('MEAL_TIME')) + 60*60;
 
@@ -301,7 +308,7 @@ class MealController extends Controller
 
 
         // return view('nutrition_meal_form');
-        return redirect()->route('meal.create');
+        return redirect()->route('meal.create')->with('success', 'Your meal items have been submitted successfully!');
     }
 
     public function search_food(Request $request) {
@@ -1323,6 +1330,7 @@ class MealController extends Controller
 
             $validated = $request->validate([
 
+                "meal_foodname_$food_pages_x" => ['required', 'string', 'max:25', 'blasp_check'],
                 "meal_foodid_$food_pages_x" => 'required|numeric|max:10000000',
 
                 // amount of food units is 11 for now.

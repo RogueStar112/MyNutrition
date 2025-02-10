@@ -9,7 +9,7 @@ class ProfanityController extends Controller
 {
     public function profanity_test() {
 
-        $sentence = 'You bi7ch';
+        $sentence = '';
         
         $check = Blasp::check($sentence);
 

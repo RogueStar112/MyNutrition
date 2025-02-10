@@ -11,7 +11,7 @@
     
     <div class="bg-slate-800 p-4 rounded-lg">
     <h2 class="text-2xl font-extrabold">Patch Notes 2025.02_01</h2>
-    <p class="text-gray-400">09/02/2025</p>
+    <p class="text-gray-400">09/02/2025 - Present</p>
     <br>
     
       <p class="text-green-500 text-2xl font-extrabold">ADDED: </p>
@@ -22,7 +22,7 @@
 
         </li>
 
-        <li class="text-xl ml-4">+ </li>
+        <li class="text-xl ml-4">+ Profanity Filter.</li>
         <li></li>
         <li></li>
       </ul>
@@ -34,6 +34,8 @@
       <p class="text-purple-500 text-2xl font-extrabold mt-4">WORKING ON: </p>
 
       <p>+ Fixing a decimal bug regarding serving sizes on the database.</p>
+
+      <p>+ Working on adding a profanity filter. (Added as of 10/02/2025.)</p>
     </div>
     
 
