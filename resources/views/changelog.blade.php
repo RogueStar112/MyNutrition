@@ -18,10 +18,12 @@
 
       <p>+ Fixed Food Item UI.</p>
       
-      <p>+ Can now use AI across multiple Food Pages. </p>
+      <p>+ Can now use AI Autofill across multiple Food Pages. </p>
 
-      <p>+ Can now take into consideration different unit types, not just grams.</p>
-      
+      <p>+ AI Autofill can now take into consideration different unit types, not just grams.</p>
+
+      <p>+ AI Autofill can now take into consideration food sources e.g. Pepperoni Pizza from Tesco</p>
+
       <p class="text-purple-500 text-2xl font-extrabold mt-4">WORKING ON: </p>
 
       <p>+ Advanced Recipe Form.</p>
