@@ -142,7 +142,7 @@ Route::middleware('auth')->group(function () {
 
     // Route::get('/nutrition/ai/real', [OpenAIController::class, 'real_prompt'])->name('ai.real_prompt');
 
-    Route::post('/nutrition/ai/food_prompt/{name}/{serving_size}', [OpenAIController::class, 'food_prompt'])->name('ai.food_prompt');
+    Route::post('/nutrition/ai/food_prompt/{name}/{serving_size}/{source}/{serving_unit}', [OpenAIController::class, 'food_prompt'])->name('ai.food_prompt');
 
     Route::get('/nutrition/testing/profanity', [ProfanityController::class, 'profanity_test']);
     

@@ -27,7 +27,7 @@
                 @if($option->id == $servingUnit)
                     <option value="{{$option->id}}" shortname="{{$option->short_name}}" selected>{{$option->name}} ({{$option->short_name}})</option>
                 @else
-                    <option value="{{$option->id}}" shortname="{{$option->short_name}}">{{$option->name}} ({{$option->short_name}})</option>
+                    <option value="{{$option->id}}" longname="{{$option->name}}s" shortname="{{$option->short_name}}">{{$option->name}}s ({{$option->short_name}})</option>
                 @endif
               @endforeach
             </select>
@@ -263,7 +263,68 @@
 
 <script>
 
-    
+    $(document).ready(function () {
+
+        $(".autofill_btn").on("click", function() {
+
+            let btnIndex = $(this).attr('index');
+
+            let foodField = $(`#food_name_${btnIndex}`);
+
+            let servingSizeField = $(`#food_servingsize_${btnIndex}`);
+
+            let servingUnitField = $(`#food_servingunit_${btnIndex} option:selected`).attr('longname');
+
+            let sourceField = $(`#food_source_${btnIndex}`);
+
+            // let sentence = `Responding with pure JSON, can you provide the nutritional content for ${foodField.val()} (per ${servingSizeField.val()} ${servingUnitField}, from ${sourceField.val()})? Return the following ONLY: Calories (kcal), Fat (g), Carbs (g), Protein (g), Sugars (g), Saturates (g), Fibre (g), Salt (g).`
+
+            // console.log(foodField.val(), servingSizeField.val(), servingUnitField, sourceField.val(), sentence)
+
+            if(foodField.val() && servingSizeField.val() && servingUnitField && sourceField.val()) {
+
+                $.ajax({
+                    url: `/nutrition/ai/food_prompt/${foodField.val()}/${servingSizeField.val()}/${sourceField.val()}/${servingUnitField}`,
+                    method: 'POST',
+                    headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                    },
+
+                    success: function(response) {
+
+                        // response = JSON.parse(response);
+                        
+                        // const fixedJsonString = rawJsonString.replace(/\\n/g, '\n');
+
+                        // const parsedData = JSON.parse(fixedJsonString);
+
+                        // console.log(response.result);
+                        // console.log(typeof response.result);
+
+                        response_JSON = JSON.parse(response.result);
+
+                        ($(`#food_calories_${btnIndex}`)).val(response_JSON['Calories (kcal)']);
+                        ($(`#food_fat_${btnIndex}`)).val(response_JSON['Fat (g)']);
+                        ($(`#food_carbs_${btnIndex}`)).val(response_JSON['Carbs (g)']);
+                        ($(`#food_protein_${btnIndex}`)).val(response_JSON['Protein (g)']);
+                        ($(`#food_sugars_${btnIndex}`)).val(response_JSON['Sugars (g)']);
+                        ($(`#food_saturates_${btnIndex}`)).val(response_JSON['Saturates (g)']);
+                        ($(`#food_fibre_${btnIndex}`)).val(response_JSON['Fibre (g)']);
+                        ($(`#food_salt_${btnIndex}`)).val(response_JSON['Salt (g)']);
+
+                        console.log('Input logged in')
+                        
+
+                    }
+
+
+                })
+
+            }
+
+        });
+
+    });
 
 
 </script>

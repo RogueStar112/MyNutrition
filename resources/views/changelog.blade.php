@@ -17,7 +17,11 @@
       <p class="text-yellow-500 text-2xl font-extrabold mt-4">BUG FIXES: </p>
 
       <p>+ Fixed Food Item UI.</p>
+      
+      <p>+ Can now use AI across multiple Food Pages. </p>
 
+      <p>+ Can now take into consideration different unit types, not just grams.</p>
+      
       <p class="text-purple-500 text-2xl font-extrabold mt-4">WORKING ON: </p>
 
       <p>+ Advanced Recipe Form.</p>

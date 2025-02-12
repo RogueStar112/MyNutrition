@@ -47,6 +47,9 @@
 
                 <x-recipe-food-item index="2" name="Spaghetti Bolognese" source="Tesco" servingSize="250" servingUnit="g" calories="254"
                 fat="10" carbs="35.7" protein="9.8" />
+
+                <x-recipe-food-item index="3" name="Spaghetti Hoops" source="Tesco" servingSize="250" servingUnit="g" calories="215"
+                fat="10" carbs="35.7" protein="9.8" />
             </div>
 
       </div>

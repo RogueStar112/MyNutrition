@@ -44,12 +44,12 @@ class OpenAIController extends Controller
 
     }
 
-    public function food_prompt(Request $request, $name, $serving_size) {
+    public function food_prompt(Request $request, $name, $serving_size, $source, $serving_unit) {
 
         $result = OpenAI::chat()->create([
             'model' => 'gpt-3.5-turbo',
             'messages' => [
-                ['role' => 'user', 'content' => "Responding with pure JSON, can you provide the nutritional content for $name (per $serving_size grams)? Return the following ONLY: Calories (kcal), Fat (g), Carbs (g), Protein (g), Sugars (g), Saturates (g), Fibre (g), Salt (g). "],
+                ['role' => 'user', 'content' => "Responding with pure JSON, can you provide the nutritional content for $name (per $serving_size $serving_unit, from $source)? Return the following ONLY: Calories (kcal), Fat (g), Carbs (g), Protein (g), Sugars (g), Saturates (g), Fibre (g), Salt (g). "],
             ],
         ]);
         
