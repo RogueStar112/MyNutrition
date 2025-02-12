@@ -230,19 +230,19 @@
 
             <div class="flex items-center">
                 <input id="food-icon-{{$index}}_21" type="radio" value="fa-solid fa-ice-cream" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="food-icon-{{$index}}_20" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-ice-cream"></i> </label>
+                <label for="food-icon-{{$index}}_21" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-ice-cream"></i> </label>
             </div>
 
 
             <div class="flex items-center">
                 <input id="food-icon-{{$index}}_22" type="radio" value="fa-solid fa-cake-candles" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="food-icon-{{$index}}_20" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-cake-candles"></i> </label>
+                <label for="food-icon-{{$index}}_22" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-cake-candles"></i> </label>
             </div>
 
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_24" type="radio" value="fa-solid fa-cookie" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="food-icon-{{$index}}_24" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-cookie"></i> </label>
+                <input id="food-icon-{{$index}}_23" type="radio" value="fa-solid fa-cookie" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="food-icon-{{$index}}_23" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-cookie"></i> </label>
             </div>
 
 

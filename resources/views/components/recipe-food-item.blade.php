@@ -1,7 +1,7 @@
-<div id="food_item_{{ $index }}" class="cursor-pointer min-h-[100px] active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg p-6 text-white overflow-hidden" onclick="goToPage({{$index}})">
+<div id="food_item_{{ $index }}" class="cursor-pointer min-h-[100px] active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg p-6 text-white overflow-hidden">
     <ul class="relative text-left">
-        <button id="item_revealbtn_{{ $index }}" index="{{ $index }}" class="item_revealbtn_{{$index}} food_revealbtn absolute right-0 bg-lime-800 text-white p-3 rounded-lg">
-            <i id="item_icon_{{ $index }}" class="fas fa-chevron-down"> </i>
+        <button id="item_revealbtn_{{ $index }}" index="{{ $index }}" class="item_revealbtn_{{$index}} food_revealbtn absolute right-0 bg-lime-800 text-white p-3 rounded-full w-[48px]">
+            <i id="item_icon_{{ $index }}" class="fas fa-plus"> </i>
         </button>
 
         <div class="" id="food_wrapper_{{ $index }}">

@@ -537,8 +537,8 @@
 
                                     // const parsedData = JSON.parse(fixedJsonString);
 
-                                    console.log(response.result);
-                                    console.log(typeof response.result);
+                                    // console.log(response.result);
+                                    // console.log(typeof response.result);
 
                                     response_JSON = JSON.parse(response.result);
 
