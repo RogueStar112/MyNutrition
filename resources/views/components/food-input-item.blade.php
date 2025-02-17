@@ -267,7 +267,14 @@
 
         $(".autofill_btn").on("click", function() {
 
+            let btn = $(this);
+
             let btnIndex = $(this).attr('index');
+
+            btn.addClass('animate-pulse');
+            btn.prop("disabled", true);
+
+            btn.text('Loading...')
 
             let foodField = $(`#food_name_${btnIndex}`);
 
@@ -313,9 +320,17 @@
                         ($(`#food_salt_${btnIndex}`)).val(response_JSON['Salt (g)']);
 
                         console.log('Input logged in')
-                        
 
+                    },
+
+                    complete: function () {
+                        // Hide loading indicator and re-enable submit button
+                        btn.removeClass('animate-pulse');
+                        btn.prop("disabled", false);
+                        btn.text('✨ AI Auto Fill ✨')
                     }
+
+                    
 
 
                 })

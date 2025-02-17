@@ -1141,7 +1141,14 @@ class MealController extends Controller
         
         // dd($meals_array);
         
-        return view('nutrition_meal_edit_form', ['meals' => $meal_select, 'meals_array' => $meals_array]);
+        return view('nutrition_meal_edit_form', ['meals' => $meal_select, 'id' => $id, 'meals_array' => $meals_array]);
+    }
+
+    public function meal_edit($id) {
+
+        
+
+
     }
 
     public function load_meal_notifications() {
