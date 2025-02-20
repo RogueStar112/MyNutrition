@@ -26,7 +26,7 @@
 
       <p>+ AI Auto Fill now disables the description box and replaces the text with 'Generated using AI Auto Fill.' This is critical to avoid confusion.</p>
 
-      <p>+ Made Desktop Notifications a little better looking.</p>
+      <p>+ Made Desktop Notifications a LOT better looking.</p>
 
       <p class="text-purple-500 text-2xl font-extrabold mt-4">WORKING ON: </p>
 

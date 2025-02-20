@@ -31,6 +31,7 @@ class MealNotificationLivewire extends Component
 
     public $mealName = '';
     public $mealTime = '';
+    public $mealItems = '';
 
     
     public function mount($id)
@@ -40,8 +41,30 @@ class MealNotificationLivewire extends Component
         $this->mealId = $this->result->meal_id;
         $this->message = $this->result->message;
         $this->mealName = Meal::findOrFail($this->mealId)->name;
-        $this->mealTime = date("d/m/y H:i", strtotime(Meal::findOrFail($this->mealId)->time_planned));
+        $this->mealTime = date("F jS, Y H:i", strtotime(Meal::findOrFail($this->mealId)->time_planned));
         $this->notificationType = $this->result->type;
+
+        $this->mealItems = $this->getMealItemsAndMacros();
+        
+    }
+
+    public function getMealItemsAndMacros() {
+
+       $mealItems = MealItems::where('meal_id', $this->mealId)
+                              ->get();
+
+    //    $mealItemsStr = "";
+
+    //    foreach($mealItems as $items) {
+
+    //         $mealItemsStr .= $items->name .= "\n";
+
+    //    }
+
+    //    dd($mealItems);
+
+       return $mealItems;
+                    
     }
 
     public function markAsEaten() {
