@@ -1,4 +1,4 @@
-<div id="notification-meal-{{$mealId}}" class="py-4 w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-center px-4 relative z-50 flex flex-col justify-left gap-4 items-start">
+<div id="notification-meal-{{$mealId}}" class="mt-4 border-t-2 border-t-white py-4 w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-center px-4 relative z-50 flex flex-col justify-left gap-4 items-start">
     <div class="grow text-justify">
         {{-- <span class="text-slate-400 grow">{{$key}})</span>  --}}
 
@@ -11,12 +11,24 @@
         @endif
 
 
-        {{$message}}
+        {{-- {{$message}} --}}
 
+        <p class="flex justify-between w-full gap-4 items-center">
+
+            <span class="text-orange-300">
+            <i class="fas fa-utensils text-white text-xl"></i>
+                {{$mealName}}
+            </span>
+
+            <span class="text-blue-300">
+                <i class="fas fa-clock text-white text-xl"></i>
+                {{$mealTime}}
+            </span>
+        </p>
 
     </div>
 
-    <div class="flex w-full px-4 justify-around gap-4 items-end [&amp;>*]:p-2 [&amp;>*]:rounded-lg [&amp;>*]:w-fit gap-6 [&amp;>*]:text-center [&amp;>*]:cursor-pointer mt-2 min-w-max [&>*]:grow [&>*]:rounded-lg">
+    <div class="flex w-full /px-4 justify-around gap-4 items-end [&amp;>*]:p-2 [&amp;>*]:rounded-lg [&amp;>*]:w-fit gap-6 [&amp;>*]:text-center [&amp;>*]:cursor-pointer /mt-2 min-w-max [&>*]:grow [&>*]:rounded-lg">
 
         @if($notificationType == 1)
 

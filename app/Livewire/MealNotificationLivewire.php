@@ -5,6 +5,8 @@ namespace App\Livewire;
 use Livewire\Component;
 
 use App\Models\Meal;
+use App\Models\MealItems;
+use App\Models\Macronutrients;
 use App\Models\MealNotifications;
 
 class MealNotificationLivewire extends Component
@@ -18,6 +20,7 @@ class MealNotificationLivewire extends Component
     public $mealId = '';
     public $message = '';
 
+
     // notification types;
     // 1 - meal prompts post time planned
     // 2 - reminded of meal.
@@ -27,6 +30,7 @@ class MealNotificationLivewire extends Component
 
 
     public $mealName = '';
+    public $mealTime = '';
 
     
     public function mount($id)
@@ -36,6 +40,7 @@ class MealNotificationLivewire extends Component
         $this->mealId = $this->result->meal_id;
         $this->message = $this->result->message;
         $this->mealName = Meal::findOrFail($this->mealId)->name;
+        $this->mealTime = date("d/m/y H:i", strtotime(Meal::findOrFail($this->mealId)->time_planned));
         $this->notificationType = $this->result->type;
     }
 

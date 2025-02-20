@@ -1144,9 +1144,179 @@ class MealController extends Controller
         return view('nutrition_meal_edit_form', ['meals' => $meal_select, 'id' => $id, 'meals_array' => $meals_array]);
     }
 
-    public function meal_edit($id) {
+    public function meal_edit_submission(Request $request, $id) {
 
+        $food_pages = $request->input('foods_pages');
+
+        $food_pages = explode(",", $food_pages);
+
+        $food_array = [];
+
+        $food_array_components = [];
+
+        $total_nutrients = ['calories' => 0,
+                            'fat' => 0,
+                            'carbohydrates' => 0,
+                            'protein' => 0];
         
+        for ($x=0; $x < count($food_pages); $x++) {
+            
+            // reset food array each time to prevent multiple rendering
+            $food_array = [];
+
+            $food_pages_x = $food_pages[$x];
+
+            // finds the specific food in the loop
+            $food_search = Food::find((int)$food_pages_x);
+
+            $food_imgurl = $food_search->img_url;
+
+            $food_source_search = FoodSource::where('id', $food_search->source_id)
+                                        ->first();
+
+            $macronutrients_search = Macronutrients::where('food_id', $food_search->id)
+                                        ->first();
+
+            $micronutrients_search = Micronutrients::where('food_id', $food_search->id)
+                                        ->first();
+
+            $food_unit = FoodUnit::where('id', $macronutrients_search->food_unit_id)
+                ->first();
+
+            $validated = $request->validate([
+
+                "meal_foodname_$food_pages_x" => ['required', 'string', 'max:25', 'blasp_check'],
+                "meal_foodid_$food_pages_x" => 'required|numeric|max:10000000',
+
+                // amount of food units is 11 for now.
+
+                "meal_foodunitid_$food_pages_x" => 'required|numeric|max:11',
+                
+                
+                
+                // "meal_source_$food_pages_x" => 'required|string|max:20',
+                "meal_servingsize_$food_pages_x" => 'required|numeric|max:5000',
+                "meal_calories_$food_pages_x" => 'nullable|numeric|max:15000',
+                "meal_fat_$food_pages_x" => 'nullable|numeric|max:5000',
+                "meal_carbs_$food_pages_x" => 'nullable|numeric|max:5000',
+                "meal_protein_$food_pages_x" => 'nullable|numeric|max:5000',
+                "meal_sugars_$food_pages_x" => 'nullable|numeric|max:1000',
+                "meal_saturates_$food_pages_x" => 'nullable|numeric|max:1000',
+                "meal_fibre_$food_pages_x" => 'nullable|numeric|max:1000',
+                "meal_salt_$food_pages_x" => 'nullable|numeric|max:1000',
+
+
+                
+            ]);
+
+            $food_name = $request->input("meal_foodname_$food_pages_x");
+            $food_calories = $macronutrients_search->calories;
+            $food_source = $food_source_search->name;
+            $food_servingsize = $request->input("meal_servingsize_$food_pages_x");
+            $food_servingunit = $request->input("meal_servingunit_$food_pages_x");
+            $food_quantity = $request->input("meal_quantity_$food_pages_x");
+            $food_fat = $macronutrients_search->fat;
+            $food_carbs = $macronutrients_search->carbohydrates;
+            $food_protein = $macronutrients_search->protein;
+        
+            // $food_sugars = $request->input("meal_sugars_$food_pages_x");
+            // $food_saturates = $request->input("meal_saturates_$food_pages_x");
+            // $food_fibre = $request->input("meal_fibre_$food_pages_x");
+            // $food_salt = $request->input("meal_salt_$food_pages_x");
+
+            $food_sugars = $micronutrients_search->sugars ?? 0;
+            $food_saturates = $micronutrients_search->saturates ?? 0;
+            $food_fibre = $micronutrients_search->fibre ?? 0;
+            $food_salt = $micronutrients_search->salt ?? 0;
+
+            
+            $food_array[$x]['name'] = $food_name;
+            $food_array[$x]['source'] = $food_source;
+            $food_array[$x]['serving_size_input'] = $food_servingsize;
+            $food_array[$x]['quantity'] = $food_quantity;
+            $food_array[$x]['serving_size'] = $macronutrients_search->serving_size;
+            $food_array[$x]['food_servingunit'] = $food_servingunit; 
+            $food_array[$x]['food_unit_id'] = $food_unit->id; 
+            $food_array[$x]['food_unit_short'] = $food_unit->short_name;
+            $food_array[$x]['calories'] = $food_calories;
+            $food_array[$x]['fat'] = $food_fat;
+            $food_array[$x]['carbohydrates'] =  $food_carbs;
+            $food_array[$x]['protein'] = $food_protein;
+            $food_array[$x]['img_url'] = $food_imgurl;
+
+            $food_array[$x]['sugars'] = $food_sugars;
+            $food_array[$x]['saturates'] = $food_saturates;
+            $food_array[$x]['fibre'] = $food_fibre;
+            $food_array[$x]['salt'] = $food_salt;
+
+            
+            if ($food_servingsize == NULL) {
+                $food_array[$x]['serving_size_input'] = $macronutrients_search->serving_size;
+                $food_servingsize = $macronutrients_search->serving_size;
+            }
+
+
+            $total_nutrients['calories'] += round(($food_calories/$macronutrients_search->serving_size)*$food_servingsize*$food_quantity, 0);
+            $total_nutrients['fat'] += round(($food_fat/$macronutrients_search->serving_size)*$food_servingsize*$food_quantity, 1);
+            $total_nutrients['carbohydrates'] += round(($food_carbs/$macronutrients_search->serving_size)*$food_servingsize*$food_quantity, 1);
+            $total_nutrients['protein'] += round(($food_protein/$macronutrients_search->serving_size)*$food_servingsize*$food_quantity, 1);
+
+            // $food_array[] = ['index' => $x, 
+            // 'food_name' => $food_name, 
+            // 'food_source' => $food_source,
+            // 'food_servingunit' => $food_servingunit, 
+            // 'food_unit_id' => $food_unit->id,
+            // 'food_unit_short' => $food_unit->short_name,
+            // 'food_servingsize' => $food_servingsize,
+            // 'food_quantity' => $food_quantity,
+            // 'food_calories' => $food_calories,
+            // 'food_fat' => $food_fat,
+            // 'food_carbs' => $food_carbs,
+            // 'food_protein' => $food_protein
+            // ];
+            
+            // (string)$food_array_component->render()->with($food_array_component->data());
+            $mealfooditem_component = '';
+
+
+            
+            $mealfooditem_component = new MealFoodItem($x+1, $food_array, $food_servingsize, $food_servingunit, $food_quantity, true, true, $food_imgurl);
+            
+
+            $food_array_components[$x] = $mealfooditem_component->render()->with($mealfooditem_component->data());
+
+            
+        }
+
+
+
+        // $food_array['total']['name'] = $food_name;
+        // $food_array['total']['source'] = $food_source;
+        // $food_array['total']['serving_size_input'] = $food_servingsize;
+        // $food_array['total']['quantity'] = $food_quantity;
+        // $food_array['total']['serving_size'] = $macronutrients_search->serving_size;
+        // $food_array['total']['food_servingunit'] = $food_servingunit; 
+        // $food_array['total']['food_unit_id'] = $food_unit->id; 
+        // $food_array['total']['food_unit_short'] = $food_unit->short_name;
+        // $food_array['total']['calories'] = $food_calories;
+        // $food_array['total']['fat'] = $food_fat;
+        // $food_array['total']['carbohydrates'] =  $food_carbs;
+        // $food_array['total']['protein'] = $food_protein;
+
+        // $food_array_components['total'] = $mealfooditem_component->render()->with($mealfooditem_component->data());
+
+        // $mealfooditem_component = new MealFoodItem($x+1, $food_array, $food_servingsize, $food_servingunit, $food_quantity, true);
+            
+        // $food_array_components[] = $mealfooditem_component->render()->with($mealfooditem_component->data());
+
+            
+        
+
+
+        // $food_array_component = new MealFoodItem($meal_datendex_no, $food_array, $servingSize, $quantity);
+            
+        
+        return view('nutrition_meal_form_summary', ['total_nutrients' => $total_nutrients, 'foods' => $food_array, 'food_array_components' => $food_array_components]);
 
 
     }
@@ -1171,9 +1341,14 @@ class MealController extends Controller
             $meal_notifications_array[$index+1] = DB::table('meal_notifications')->select('id', 'meal_id', 'message', 'type')->where('meal_id', $meal_id->id)->first();
 
 
+
+
+
+
         }
         
         // dd($meal_notifications_array);
+
         $meal_notifications_html = "";
         
         
