@@ -2,35 +2,61 @@
     <div class="grow text-justify">
         {{-- <span class="text-slate-400 grow">{{$key}})</span>  --}}
 
-        @if($notificationType == 1)
-            <p class="text-left w-full bg-gradient-to-b font-black text-xl from-red-600 via-green-500 to-orange-400 inline-block text-transparent bg-clip-text">MEAL PROMPT</p><br>
+        @if($isAccepted == 0)
+
+            @if($notificationType == 1)
+                <p class="text-left w-full bg-gradient-to-b font-black text-xl from-red-600 via-green-500 to-orange-400 inline-block text-transparent bg-clip-text">MEAL PROMPT</p><br>
+            @endif
+
+            @if($notificationType == 2)
+                <p class="text-left w-full bg-gradient-to-b font-black text-xl from-blue-600 via-orange-500 to-indigo-400 inline-block text-transparent bg-clip-text">MEAL REMINDER</p><br>
+            @endif
+
+
+            {{-- {{$message}} --}}
+
+            <p class="flex flex-col justify-between w-full gap-4 items-left">
+
+                <span class="text-orange-300">
+                <i class="fas fa-utensils text-white text-xl"></i>
+                    {{$mealName}}<br>
+
+                    @foreach($mealItems as $item)
+                        <span class="text-slate-500">{{$item->name}}</span><br>
+                    @endforeach
+
+                </span>
+
+                <span class="text-blue-300">
+                    <i class="fas fa-clock text-white text-xl"></i>
+                    <span class="text-white">You will be prompted by:</span><br>
+                    {{$mealTime}}
+                </span>
+
+                
+
+            </p>
+
+            @if($notificationType == 1)
+                    <p class="mt-4">Have you eaten this meal?</p>
+            @endif
+
+        @elseif($isAccepted == 1 && $notificationType == 1)
+
+            <p>Meal {{$mealName}} has been eaten. It has been added to meal logs.</p>
+
+
+        @elseif($isAccepted == 1 && $notificationType == 2)
+
+            <p>Notification dismissed.</p>
+
+        @elseif($isAccepted == 2 && $notificationType == 1)
+            
+            <p>Meal deleted.</p>
+
         @endif
 
-        @if($notificationType == 2)
-            <p class="text-left w-full bg-gradient-to-b font-black text-xl from-blue-600 via-orange-500 to-indigo-400 inline-block text-transparent bg-clip-text">MEAL REMINDER</p><br>
-        @endif
 
-
-        {{-- {{$message}} --}}
-
-        <p class="flex flex-col justify-between w-full gap-4 items-left">
-
-            <span class="text-orange-300">
-            <i class="fas fa-utensils text-white text-xl"></i>
-                {{$mealName}}<br>
-
-                @foreach($mealItems as $item)
-                    <span class="text-slate-500">{{$item->name}}</span><br>
-                @endforeach
-
-            </span>
-
-            <span class="text-blue-300">
-                <i class="fas fa-clock text-white text-xl"></i>
-                {{$mealTime}}
-            </span>
-
-        </p>
 
     </div>
 

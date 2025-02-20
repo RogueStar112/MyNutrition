@@ -33,6 +33,8 @@ class MealNotificationLivewire extends Component
     public $mealTime = '';
     public $mealItems = '';
 
+    public $isAccepted = 0;
+
     
     public function mount($id)
     {
@@ -40,6 +42,7 @@ class MealNotificationLivewire extends Component
         $this->key = $this->result->id;
         $this->mealId = $this->result->meal_id;
         $this->message = $this->result->message;
+        $this->isAccepted = $this->result->is_accepted;
         $this->mealName = Meal::findOrFail($this->mealId)->name;
         $this->mealTime = date("F jS, Y H:i", strtotime(Meal::findOrFail($this->mealId)->time_planned));
         $this->notificationType = $this->result->type;
@@ -127,7 +130,7 @@ class MealNotificationLivewire extends Component
         // $changeMeal->is_notified = 1;
         // $changeMeal->save();
 
-        $this->result->delete();
+        // $this->result->delete();
 
   
     }
