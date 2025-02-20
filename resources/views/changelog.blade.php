@@ -24,10 +24,15 @@
 
       <p>+ AI Auto Fill now has a custom loading animation when being used.</p>
 
+      <p>+ AI Auto Fill now disables the description box and replaces the text with 'Generated using AI Auto Fill.' This is critical to avoid confusion.</p>
+
+      <p>+ Made Desktop Notifications a little better looking.</p>
+
       <p class="text-purple-500 text-2xl font-extrabold mt-4">WORKING ON: </p>
 
       <p>+ Allowing Meal Editing.</p>
       <p>+ Profanity Filter Adjustments. Words like Mustard, Coke, and Assassin (spaghetti all'assassina) are considered inappropriate thus need to be made exceptions.</p>
+      <p>+ Adding meal deletion confirmation buttons.</p>
     </div>
     
     <div class="bg-slate-800 p-4 rounded-lg">

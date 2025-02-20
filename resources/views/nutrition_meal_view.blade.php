@@ -122,7 +122,16 @@
                                             
   
                                         @endphp
-                                        <td><a class="text-orange-500" href="{{-- route('food.view_item', f['user_id'=>$user_id ?? "", 'food_id'=>$meal_foodid ?? "", 'serving_size'=>$meal_servingsize ?? ""]) --}}">{{$meal_foodname_display}}</a></td>
+                                        <td>
+                                            <a class="text-orange-500" 
+                                               href="{{ route('food.view_item', [
+                                                    'user_id' => $user_id ?? '',
+                                                    'food_id' => $meal_foodid ?? '',
+                                                    'serving_size' => $meal_servingsize ?? ''
+                                                ]) }}">
+                                                {{$meal_foodname_display}}
+                                            </a>
+                                        </td>
                                         <td class="text-orange-700 pr-1 border-r-2 border-r-orange-800">{{$meal[$meal_time][$food_item]['serving_size'] ?? ""}}{{$meal[$meal_time][$food_item]['serving_unit_short'] ?? ""}}</td>
                                         <td>{{$meal[$meal_time][$food_item]['calories']}}kcal</td>
                                         <td class="hidden md:table-cell">{{$meal[$meal_time][$food_item]['fat'] ?? ""}}g</td>

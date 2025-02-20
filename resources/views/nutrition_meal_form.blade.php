@@ -76,7 +76,7 @@
                         <p class="text-center text-gray-400 opacity-40">An example of what adding these items look like!</p>
                         
                         <div id="meal_item_1" class="opacity-40 meal_248 meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg    pt-6 text-white shadow-md shadow-black overflow-hidden" index="1">
-                            <ul class="relative  relative ">
+                            <ul class="relative ">
                                 <button type="button" id="item_revealbtn_1" index="1" class="item_revealbtn_1 food_revealbtn absolute right-0 bg-lime-800 text-white p-3 mr-6 rounded-lg ">
                                     <i id="item_icon_1" class="item_icon_1 fas fa-chevron-up"> </i>
                                 </button>
@@ -836,6 +836,8 @@
 
             });
 
+            
+
             // $(document).ready(function() {
 
             //     function confirmToDelete(id) {
@@ -862,48 +864,50 @@
 
             // });
 
-            document.addEventListener('DOMContentLoaded', () => {
-                document.addEventListener('click', (e) => {
-                    if (e.target && e.target.id.startsWith('mealitem-delete-btn-')) {
-                        const food_id = e.target.dataset.id;       // Access data-id
-                        const food_index = e.target.dataset.index; // Access data-index
+            // document.addEventListener('DOMContentLoaded', () => {
+            //     document.addEventListener('click', (e) => {
+            //         if (e.target && e.target.id.startsWith('mealitem-delete-btn-')) {
+            //             const food_id = e.target.dataset.id;       // Access data-id
+            //             const food_index = e.target.dataset.index; // Access data-index
 
-                        console.log(`Food ID: ${food_id}, Food Index: ${food_index}`);
+            //             console.log(`Food ID: ${food_id}, Food Index: ${food_index}`);
 
-                        // Toggle the clicked button's hidden class
-                        $(e.target).toggleClass('hidden');
+            //             // Toggle the clicked button's hidden class
+            //             $(e.target).toggleClass('hidden');
 
-                        // Toggle the confirm container's hidden class
-                        const confirmContainer = document.getElementById(`mealitem-delete-btn-confirmcontainer-${food_index}`);
-                        console.log(confirmContainer); // Check if it exists
-                        if (confirmContainer) {
-                            $(confirmContainer).toggleClass('hidden');
-                        } else {
-                            console.error(`Element #mealitem-delete-btn-confirmcontainer-${food_index} not found.`);
-                        }
-                    }
-                });
-            });
+            //             // Toggle the confirm container's hidden class
+            //             const confirmContainer = document.getElementById(`mealitem-delete-btn-confirmcontainer-${food_index}`);
+
+            //             console.log(confirmContainer); // Check if it exists
+
+            //             if (confirmContainer) {
+            //                 $(confirmContainer).toggleClass('hidden');
+            //             } else {
+            //                 console.error(`Element #mealitem-delete-btn-confirmcontainer-${food_index} not found.`);
+            //             }
+            //         }
+            //     });
+            // });
 
 
 
             // Delete button click listener
-            $(document).on("click", `#mealitem-delete-btn-${food_index}`, function () {
-                $(`#mealitem-delete-btn-${food_index}`).addClass('hidden');
-                $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).removeClass('hidden');
-            });
+            // $(document).on("click", `#mealitem-delete-btn-${food_index}`, function () {
+            //     $(`#mealitem-delete-btn-${food_index}`).addClass('hidden');
+            //     $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).removeClass('hidden');
+            // });
 
             // Confirm delete button click listener
-            $(document).on("click", `#mealitem-delete-btn-yes-${food_index}`, function () {
-                $(`.meal_${food_id}`).remove();
-                reorderItems();
-            });
+            // $(document).on("click", `#mealitem-delete-btn-yes-${food_index}`, function () {
+            //     $(`.meal_${food_id}`).remove();
+            //     reorderItems();
+            // });
 
             // Cancel delete button click listener
-            $(document).on("click", `#mealitem-delete-btn-no-${food_index}`, function () {
-                $(`#mealitem-delete-btn-${food_index}`).removeClass('hidden');
-                $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).addClass('hidden');
-            });
+            // $(document).on("click", `#mealitem-delete-btn-no-${food_index}`, function () {
+            //     $(`#mealitem-delete-btn-${food_index}`).removeClass('hidden');
+            //     $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).addClass('hidden');
+            // });
 
             console.log(`FOOD ID: ${food_id} UPDATED`);
     

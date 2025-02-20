@@ -38,7 +38,7 @@
 
         </div>
 
-        <button type="button" index="{{$index}}" id="autofill_{{$index}}" class="autofill_btn font-extrabold text-2xl w-full  md:w-3/4 md:mx-auto p-6 border-4 border-yellow-500 md:border-0  md:rounded-full text-white bg-gradient-to-br from-slate-800 via-green-500 to-slate-800 ">✨ AI Auto Fill ✨</button>
+        <button type="button" index="{{$index}}" id="autofill_{{$index}}" class="autofill_btn font-extrabold text-2xl w-full  md:w-3/4 md:mx-auto p-6 border-4 border-yellow-500 md:border-0  md:rounded-full text-white bg-gradient-to-br from-slate-800 via-green-500 to-slate-800 /bg-[linear-gradient(to_right,theme(colors.green.500),theme(colors.green.400),theme(colors.green.400),theme(colors.green.400),theme(colors.green.400),theme(colors.green.400),theme(colors.green.500))] /bg-[length:200%_auto]  /animate-gradient">✨ AI Auto Fill ✨</button>
 
         {{-- <label class="hidden /md:block md:visible px-6 py-4 md:p-6 col-span-2" for="food_image_{{$index}}">
 
@@ -256,7 +256,7 @@
     <div class="mb-3">
         <label class="block px-6 py-4 md:p-6">
             <span class="text-white">Description (optional)</span>
-            <input type="text" name="food_description_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="Tastes good on pizza" />
+            <input type="text" id="food_description_{{$index}}" name="food_description_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="Tastes good on pizza" />
         </label>
     </div>
 </div>
@@ -271,10 +271,7 @@
 
             let btnIndex = $(this).attr('index');
 
-            btn.addClass('animate-pulse');
-            btn.prop("disabled", true);
-
-            btn.text('Loading...')
+            
 
             let foodField = $(`#food_name_${btnIndex}`);
 
@@ -289,6 +286,13 @@
             // console.log(foodField.val(), servingSizeField.val(), servingUnitField, sourceField.val(), sentence)
 
             if(foodField.val() && servingSizeField.val() && servingUnitField && sourceField.val()) {
+
+                btn.addClass('animate-pulse');
+                btn.removeClass('animate-gradient');
+                
+                btn.prop("disabled", true);
+
+                btn.text('Loading...')
 
                 $.ajax({
                     url: `/nutrition/ai/food_prompt/${foodField.val()}/${servingSizeField.val()}/${sourceField.val()}/${servingUnitField}`,
@@ -318,6 +322,13 @@
                         ($(`#food_saturates_${btnIndex}`)).val(response_JSON['Saturates (g)']);
                         ($(`#food_fibre_${btnIndex}`)).val(response_JSON['Fibre (g)']);
                         ($(`#food_salt_${btnIndex}`)).val(response_JSON['Salt (g)']);
+                        
+
+                        // disable and replace description.
+                        ($(`#food_description_${btnIndex}`)).val('Generated using AI Auto Fill.');
+                        ($(`#food_description_${btnIndex}`)).addClass('opacity-60');
+                        ($(`#food_description_${btnIndex}`)).prop("readonly", true);
+
 
                         console.log('Input logged in')
 
@@ -326,6 +337,9 @@
                     complete: function () {
                         // Hide loading indicator and re-enable submit button
                         btn.removeClass('animate-pulse');
+                        btn.addClass('animate-gradient');
+
+
                         btn.prop("disabled", false);
                         btn.text('✨ AI Auto Fill ✨')
                     }
