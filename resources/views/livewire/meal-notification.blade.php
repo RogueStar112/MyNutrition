@@ -29,9 +29,11 @@
 
                 <span class="text-blue-300">
                     <i class="fas fa-clock text-white text-xl"></i>
-                    <span class="text-white">You will be prompted by:</span><br>
+                    @if($notificationType == 2)<span class="text-white">You will be prompted by:</span><br>@endif
                     {{$mealTime}}
                 </span>
+
+  
 
                 
 
