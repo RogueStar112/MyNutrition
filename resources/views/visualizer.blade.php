@@ -80,7 +80,7 @@
 
             <div id="DAILY-VISUALIZER-VIEW">
 
-                <div class="mt-4 flex flex-col md:flex-row justify-between place-items-center  bg-slate-800 rounded-lg p-2">
+                <div id="DAILY-VISUALIZER-DATEPICKER" class="mt-4 flex flex-col md:flex-row justify-between place-items-center  bg-slate-800 rounded-lg p-2">
                     <h2 class="text-center mb-4 md:mb-0 md:text-left font-semibold italic uppercase dark:text-white text-2xl mx-auto text-gray-800 leading-tight">
                         {{ __('Daily View') }}
                     </h2>

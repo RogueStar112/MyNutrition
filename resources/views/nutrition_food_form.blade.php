@@ -5,8 +5,20 @@
         </h1>
     </x-slot>
 
+    @if(session('success'))
+        <div class="alert alert-success max-w-7xl rounded-lg mx-auto text-center bg-green-800 text-white p-6" id="success-message-received">
+            {{ session('success') }}
+        </div>
+
+        <script>
+            setTimeout(() => {
+                document.getElementById('success-message-received').style.display = 'none';
+            }, 6000); // Disappears after 6 seconds
+        </script>
+    @endif
+
     @if ($errors->any())
-    <div class="alert alert-danger max-w-7xl rounded-lg mx-auto text-center bg-red-800 text-white">
+    <div class="alert alert-danger max-w-7xl rounded-lg mx-auto text-center bg-red-800 text-white" id="error-message-received">
         <h2 class="text-2xl font-extrabold">Input Error</h2>
         <ul>
             @foreach ($errors->all() as $error)
@@ -14,6 +26,12 @@
             @endforeach
         </ul>
     </div>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById('error-message-received').style.display = 'none';
+        }, 6000); // Disappears after 6 seconds
+    </script>
     @endif
 
     @isset($validated_data)
@@ -84,7 +102,7 @@
             <div class="max-w-3xl mx-auto px-6 sm:px-6 lg:px-8">
                 <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="POST" enctype="multipart/form-data" action="{{ route('food.store')}}">
                     @csrf
-                    <div id="FOOD_FORM_INPUTS" class="relative /md:max-h-[682px] /md:max-h-[750px] /md:max-h-[935px] md:max-h-[1130px] overflow-hidden">
+                    <div id="FOOD_FORM_INPUTS" class="relative /md:max-h-[682px] /md:max-h-[750px] /md:max-h-[935px] md:max-h-[1380px] overflow-hidden">
 
 
                        <x-food-input-item index="1" :servingUnitOptions="$food_form_options"/>
@@ -487,6 +505,67 @@
                     $('#FOOD-ITEMS-CONTAINER-MOBILE').toggleClass('block');
                 } );
             });
+
+            
+
+            // $(document).ready(function () {
+
+            //         $(".autofill_btn").on("click", function() {
+
+            //             let btnIndex = $(this).attr('index');
+
+            //             let foodField = $(`#food_name_${btnIndex}`);
+
+            //             let servingSizeField = $(`#food_servingsize_${btnIndex}`);
+
+            //             console.log(`Autofill Test ${btnIndex}`);
+
+            //             if(foodField.val() && servingSizeField.val()) {
+
+            //                 $.ajax({
+            //                     url: `/nutrition/ai/food_prompt/${foodField.val()}/${servingSizeField.val()}`,
+            //                     method: 'POST',
+            //                     headers: {
+            //                     'X-CSRF-TOKEN': csrfToken
+            //                     },
+
+            //                     success: function(response) {
+
+            //                         // response = JSON.parse(response);
+                                    
+            //                         // const fixedJsonString = rawJsonString.replace(/\\n/g, '\n');
+
+            //                         // const parsedData = JSON.parse(fixedJsonString);
+
+            //                         // console.log(response.result);
+            //                         // console.log(typeof response.result);
+
+            //                         response_JSON = JSON.parse(response.result);
+
+            //                         ($(`#food_calories_${btnIndex}`)).val(response_JSON['Calories (kcal)']);
+            //                         ($(`#food_fat_${btnIndex}`)).val(response_JSON['Fat (g)']);
+            //                         ($(`#food_carbs_${btnIndex}`)).val(response_JSON['Carbs (g)']);
+            //                         ($(`#food_protein_${btnIndex}`)).val(response_JSON['Protein (g)']);
+            //                         ($(`#food_sugars_${btnIndex}`)).val(response_JSON['Sugars (g)']);
+            //                         ($(`#food_saturates_${btnIndex}`)).val(response_JSON['Saturates (g)']);
+            //                         ($(`#food_fibre_${btnIndex}`)).val(response_JSON['Fibre (g)']);
+            //                         ($(`#food_salt_${btnIndex}`)).val(response_JSON['Salt (g)']);
+
+            //                         console.log('Input logged in')
+                                    
+
+            //                     }
+
+
+            //                 })
+
+            //             }
+
+            //         });
+
+            //     });
+                
+
 
     </script>
 </x-app-layout>

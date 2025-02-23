@@ -12,6 +12,10 @@ use App\Http\Controllers\SleepController;
 use App\Http\Controllers\VisualizerController;
 use App\Http\Controllers\SuggesterController;
 use App\Http\Controllers\MacroController;
+use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\OpenAIController;
+use App\Http\Controllers\ProfanityController;
+use App\Http\Controllers\ChangelogController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -82,6 +86,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/nutrition/meal/summary/edit/{meal_id}', [MealController::class, 'meal_form_edit_submission'])->name('meal.edit_p2');
 
     Route::get('/nutrition/meal/view', [MealController::class, 'meal_view'])->name('meal.view');
+
+    
     Route::get('/nutrition/meal/view/statistics/{start_date}/{end_date}', [MealController::class, 'meal_view_stats'])->name('meal.view_stats');
 
     Route::get('/nutrition/body_stats', [BodyStatsController::class, 'body_stats_form'])->name('body_stats.form');
@@ -129,6 +135,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/nutrition/advanced', [DashboardController::class, 'advanced_menu'])->name('nutrition_advancedMenu');
 
     Route::get('/nutrition/advanced/suggester', [SuggesterController::class, 'suggester_form'])->name('advanced.suggester');
+
+    Route::get('/nutrition/advanced/recipes', [RecipeController::class, 'recipe_form'])->name('advanced.suggester');
+
+    // Route::get('/nutrition/ai/fake', [OpenAIController::class, 'fake_prompt'])->name('ai.fake_prompt');
+
+    // Route::get('/nutrition/ai/real', [OpenAIController::class, 'real_prompt'])->name('ai.real_prompt');
+
+    Route::post('/nutrition/ai/food_prompt/{name}/{serving_size}/{source}/{serving_unit}', [OpenAIController::class, 'food_prompt'])->name('ai.food_prompt');
+
+    Route::get('/nutrition/testing/profanity', [ProfanityController::class, 'profanity_test']);
+    
+    Route::get('/changelog', [ChangelogController::class, 'changelog_view'])->name('changelog');
+
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])

@@ -19,6 +19,20 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
 
+            animation: {
+                'gradient': 'gradient 10s linear infinite',
+                'loadingai': 'gradient 1s linear infinite',
+            },
+
+            keyframes: {
+                'gradient': {
+                  to: { 'background-position': '200% center' },
+                },
+                'loadingai': {
+                  to: { 'background-position': '200% center' },
+                },
+              },  
+
 
             dropShadow: {
                 glow: [

@@ -28,9 +28,13 @@ use App\Models\Exercise;
 use App\Models\ExerciseUnit;
 use App\Models\ExerciseType;
 
+use App\Models\User;
+
 use Illuminate\Support\Facades\DB;
 
 use Livewire\Livewire;
+
+use Blaspsoft\Blasp\Facades\Blasp;
 
 class MealController extends Controller
 {
@@ -80,6 +84,7 @@ class MealController extends Controller
 
             $validated = $request->validate([
 
+                "meal_foodname_$food_pages_x" => ['required', 'string', 'max:25', 'blasp_check'],
                 "meal_foodid_$food_pages_x" => 'required|numeric|max:10000000',
 
                 // amount of food units is 11 for now.
@@ -231,7 +236,11 @@ class MealController extends Controller
 
         $newMeal->name = $request->input('MEAL_NAME');
 
-        
+        $validated = $request->validate([
+
+            "MEAL_NAME" => ['required', 'string', 'max:25', 'blasp_check'],
+
+        ]);
 
         // $date_time = strtotime($request->input('MEAL_TIME')) + 60*60;
 
@@ -299,12 +308,14 @@ class MealController extends Controller
 
 
         // return view('nutrition_meal_form');
-        return redirect()->route('meal.create');
+        return redirect()->route('meal.create')->with('success', 'Your meal items have been submitted successfully!');
     }
 
     public function search_food(Request $request) {
+
+
         $user_id = Auth::user()->id;
-        $user_name = Auth::user()->name;
+        // $user_name = Auth::user()->name;
 
         $foods = $request->input('query');
         $servingSize = $request->input('servingSize');
@@ -379,6 +390,10 @@ class MealController extends Controller
             }
 
             $food_array[$meal_datendex]['food_id'] = $food->id;
+
+            // Username Hotfix 09022025
+            $user_name = User::find($food->user_id)->name;
+
             $food_array[$meal_datendex]['user_name'] = $user_name;
             $food_array[$meal_datendex]['img_url'] = $food->img_url;
             $food_array[$meal_datendex]['calories'] = $macronutrients_search->calories;
@@ -671,7 +686,7 @@ class MealController extends Controller
 
             $meal_dates_select =        DB::table('meal')
                                             ->selectRaw($meal_dates_select_filterstr)
-                                            ->where('user_id', 1)
+                                            ->where('user_id', $user_id)
                                             ->where('is_eaten', 1)
                                             ->groupBy('time_planned')
                                             ->orderBy('time_planned', 'desc')
@@ -681,13 +696,13 @@ class MealController extends Controller
 
 
         } else {
-            // Deployment Environment
+        //     // Deployment Environment
             $meal_dates_select_filterstr = "DISTINCT DATE_FORMAT(time_planned, '%Y-%m-%d') as date, time_planned";
             $exercise_dates_select_filterstr = "DISTINCT DATE_FORMAT(exercise_start, '%Y-%m-%d') as date, exercise_start";
             
             $meal_dates_select =        DB::table('meal')
                                             ->selectRaw($meal_dates_select_filterstr)
-                                            ->where('user_id', 1)
+                                            ->where('user_id', $user_id)
                                             ->where('is_eaten', 1)
                                             ->orderBy('time_planned', 'desc')
                                             ->limit(14)
@@ -705,86 +720,86 @@ class MealController extends Controller
         //         ->limit(14)
         //         ->get();
 
-        $exercise_dates_select = DB::table('exercise')
-                ->selectRaw("$exercise_dates_select_filterstr")
-                ->where('user_id', $user_id)
-                ->orderBy("exercise_start", "desc")
-                ->distinct()
-                ->limit(14)
-                ->get();
+        // $exercise_dates_select = DB::table('exercise')
+        //         ->selectRaw("$exercise_dates_select_filterstr")
+        //         ->where('user_id', $user_id)
+        //         ->orderBy("exercise_start", "desc")
+        //         ->distinct()
+        //         ->limit(14)
+        //         ->get();
 
         // dd($exercise_dates_select);
 
         $meal_dates_ymd = [];
 
-        foreach($exercise_dates_select as $exercise_date) {
+        // foreach($exercise_dates_select as $exercise_date) {
 
-            $exercise_time = date('H:i:s', strtotime($exercise_date->exercise_start));
-            $exercise_date = date('Y-m-d', strtotime($exercise_date->date));
-
-
-            $meal_dates_ymd[0][$exercise_date]['calories'] = 0;
+        //     $exercise_time = date('H:i:s', strtotime($exercise_date->exercise_start));
+        //     $exercise_date = date('Y-m-d', strtotime($exercise_date->date));
 
 
-            $meal_dates_ymd[0][$exercise_date]['times_planned'] = [];
+        //     $meal_dates_ymd[0][$exercise_date]['calories'] = 0;
 
-            array_push($meal_dates_ymd[0][$exercise_date]['times_planned'], $exercise_time);
+
+        //     $meal_dates_ymd[0][$exercise_date]['times_planned'] = [];
+
+        //     array_push($meal_dates_ymd[0][$exercise_date]['times_planned'], $exercise_time);
             
-            $meal_dates_ymd[0][$exercise_date][$exercise_time]['calories'] = 0;
-            // $meal_dates_ymd[0][$exercise_date]['fat'] = 0;
-            // $meal_dates_ymd[0][$exercise_date]['carbs'] = 0;
-            // $meal_dates_ymd[0][$exercise_date]['protein'] = 0;
+        //     $meal_dates_ymd[0][$exercise_date][$exercise_time]['calories'] = 0;
+        //     // $meal_dates_ymd[0][$exercise_date]['fat'] = 0;
+        //     // $meal_dates_ymd[0][$exercise_date]['carbs'] = 0;
+        //     // $meal_dates_ymd[0][$exercise_date]['protein'] = 0;
             
-            $exercise_select = Exercise::where('user_id', $user_id)
-                                    ->whereBetween('exercise_start', [$exercise_date . ' 00:00:00', $exercise_date . ' 23:59:59'])
-                                    ->orderByRaw('exercise_start ASC')
-                                    ->get();
+        //     $exercise_select = Exercise::where('user_id', $user_id)
+        //                             ->whereBetween('exercise_start', [$exercise_date . ' 00:00:00', $exercise_date . ' 23:59:59'])
+        //                             ->orderByRaw('exercise_start ASC')
+        //                             ->get();
 
-            foreach($exercise_select as $index=>$exercise) {
+        //     foreach($exercise_select as $index=>$exercise) {
         
 
-                $exercise_type_id = ExerciseType::where('id', $exercise->exercise_type_id)
-                                        ->first();
+        //         $exercise_type_id = ExerciseType::where('id', $exercise->exercise_type_id)
+        //                                 ->first();
                 
-                $exercise_name = $exercise_type_id->name;
+        //         $exercise_name = $exercise_type_id->name;
 
-                $exercise_distance = $exercise->distance;
+        //         $exercise_distance = $exercise->distance;
 
-                $exercise_duration = $exercise->duration;
+        //         $exercise_duration = $exercise->duration;
 
-                // $meal_dates_ymd[0][$exercise_date][$exercise_time]['fat'] = 0;
-                // $meal_dates_ymd[0][$exercise_date][$exercise_time]['carbs'] = 0;
-                // $meal_dates_ymd[0][$exercise_date][$exercise_time]['protein'] = 0;
+        //         // $meal_dates_ymd[0][$exercise_date][$exercise_time]['fat'] = 0;
+        //         // $meal_dates_ymd[0][$exercise_date][$exercise_time]['carbs'] = 0;
+        //         // $meal_dates_ymd[0][$exercise_date][$exercise_time]['protein'] = 0;
 
-                $meal_dates_ymd[0][$exercise_date]['calories'] -= $exercise->calories_total;
+        //         $meal_dates_ymd[0][$exercise_date]['calories'] -= $exercise->calories_total;
 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time]['calories'] -= $exercise->calories_total;
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time]['calories'] -= $exercise->calories_total;
 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time]['meal_name'] = "Exercise: $exercise_distance" . "km " . $exercise_name . ", $exercise_duration min.";
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time]['meal_name'] = "Exercise: $exercise_distance" . "km " . $exercise_name . ", $exercise_duration min.";
 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time]['food_name'] = "$exercise_distance" . "km" . " $exercise_name";
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time]['food_name'] = "$exercise_distance" . "km" . " $exercise_name";
                 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['food_name'] = "$exercise_distance" . "km" . " $exercise_name";
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['food_name'] = "$exercise_distance" . "km" . " $exercise_name";
 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['serving_size'] = 0;
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['serving_size'] = 0;
 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['fat'] = 0;
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['fat'] = 0;
 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['carbs']
-                = 0;
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['carbs']
+        //         = 0;
 
-                $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['protein']
-                = 0;
-
-
-                $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['calories'] = 0 - $exercise->calories_total;
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['protein']
+        //         = 0;
 
 
+        //         $meal_dates_ymd[0][$exercise_date][$exercise_time][$index]['calories'] = 0 - $exercise->calories_total;
 
-            }
 
 
-        }
+        //     }
+
+
+        // }
 
         // dd($meal_dates_ymd);
 
@@ -971,9 +986,6 @@ class MealController extends Controller
 
         // return $meal_dates_ymd;
 
-        // dd ($meal_dates_ymd);
-
-
         // dd($meal_dates_ymd);
 
         return view('nutrition_meal_view', ['meals' => $meal_dates_ymd, 'calendar' => $calendar, 'user_id' => $user_id]);
@@ -1129,7 +1141,184 @@ class MealController extends Controller
         
         // dd($meals_array);
         
-        return view('nutrition_meal_edit_form', ['meals' => $meal_select, 'meals_array' => $meals_array]);
+        return view('nutrition_meal_edit_form', ['meals' => $meal_select, 'id' => $id, 'meals_array' => $meals_array]);
+    }
+
+    public function meal_edit_submission(Request $request, $id) {
+
+        $food_pages = $request->input('foods_pages');
+
+        $food_pages = explode(",", $food_pages);
+
+        $food_array = [];
+
+        $food_array_components = [];
+
+        $total_nutrients = ['calories' => 0,
+                            'fat' => 0,
+                            'carbohydrates' => 0,
+                            'protein' => 0];
+        
+        for ($x=0; $x < count($food_pages); $x++) {
+            
+            // reset food array each time to prevent multiple rendering
+            $food_array = [];
+
+            $food_pages_x = $food_pages[$x];
+
+            // finds the specific food in the loop
+            $food_search = Food::find((int)$food_pages_x);
+
+            $food_imgurl = $food_search->img_url;
+
+            $food_source_search = FoodSource::where('id', $food_search->source_id)
+                                        ->first();
+
+            $macronutrients_search = Macronutrients::where('food_id', $food_search->id)
+                                        ->first();
+
+            $micronutrients_search = Micronutrients::where('food_id', $food_search->id)
+                                        ->first();
+
+            $food_unit = FoodUnit::where('id', $macronutrients_search->food_unit_id)
+                ->first();
+
+            $validated = $request->validate([
+
+                "meal_foodname_$food_pages_x" => ['required', 'string', 'max:25', 'blasp_check'],
+                "meal_foodid_$food_pages_x" => 'required|numeric|max:10000000',
+
+                // amount of food units is 11 for now.
+
+                "meal_foodunitid_$food_pages_x" => 'required|numeric|max:11',
+                
+                
+                
+                // "meal_source_$food_pages_x" => 'required|string|max:20',
+                "meal_servingsize_$food_pages_x" => 'required|numeric|max:5000',
+                "meal_calories_$food_pages_x" => 'nullable|numeric|max:15000',
+                "meal_fat_$food_pages_x" => 'nullable|numeric|max:5000',
+                "meal_carbs_$food_pages_x" => 'nullable|numeric|max:5000',
+                "meal_protein_$food_pages_x" => 'nullable|numeric|max:5000',
+                "meal_sugars_$food_pages_x" => 'nullable|numeric|max:1000',
+                "meal_saturates_$food_pages_x" => 'nullable|numeric|max:1000',
+                "meal_fibre_$food_pages_x" => 'nullable|numeric|max:1000',
+                "meal_salt_$food_pages_x" => 'nullable|numeric|max:1000',
+
+
+                
+            ]);
+
+            $food_name = $request->input("meal_foodname_$food_pages_x");
+            $food_calories = $macronutrients_search->calories;
+            $food_source = $food_source_search->name;
+            $food_servingsize = $request->input("meal_servingsize_$food_pages_x");
+            $food_servingunit = $request->input("meal_servingunit_$food_pages_x");
+            $food_quantity = $request->input("meal_quantity_$food_pages_x");
+            $food_fat = $macronutrients_search->fat;
+            $food_carbs = $macronutrients_search->carbohydrates;
+            $food_protein = $macronutrients_search->protein;
+        
+            // $food_sugars = $request->input("meal_sugars_$food_pages_x");
+            // $food_saturates = $request->input("meal_saturates_$food_pages_x");
+            // $food_fibre = $request->input("meal_fibre_$food_pages_x");
+            // $food_salt = $request->input("meal_salt_$food_pages_x");
+
+            $food_sugars = $micronutrients_search->sugars ?? 0;
+            $food_saturates = $micronutrients_search->saturates ?? 0;
+            $food_fibre = $micronutrients_search->fibre ?? 0;
+            $food_salt = $micronutrients_search->salt ?? 0;
+
+            
+            $food_array[$x]['name'] = $food_name;
+            $food_array[$x]['source'] = $food_source;
+            $food_array[$x]['serving_size_input'] = $food_servingsize;
+            $food_array[$x]['quantity'] = $food_quantity;
+            $food_array[$x]['serving_size'] = $macronutrients_search->serving_size;
+            $food_array[$x]['food_servingunit'] = $food_servingunit; 
+            $food_array[$x]['food_unit_id'] = $food_unit->id; 
+            $food_array[$x]['food_unit_short'] = $food_unit->short_name;
+            $food_array[$x]['calories'] = $food_calories;
+            $food_array[$x]['fat'] = $food_fat;
+            $food_array[$x]['carbohydrates'] =  $food_carbs;
+            $food_array[$x]['protein'] = $food_protein;
+            $food_array[$x]['img_url'] = $food_imgurl;
+
+            $food_array[$x]['sugars'] = $food_sugars;
+            $food_array[$x]['saturates'] = $food_saturates;
+            $food_array[$x]['fibre'] = $food_fibre;
+            $food_array[$x]['salt'] = $food_salt;
+
+            
+            if ($food_servingsize == NULL) {
+                $food_array[$x]['serving_size_input'] = $macronutrients_search->serving_size;
+                $food_servingsize = $macronutrients_search->serving_size;
+            }
+
+
+            $total_nutrients['calories'] += round(($food_calories/$macronutrients_search->serving_size)*$food_servingsize*$food_quantity, 0);
+            $total_nutrients['fat'] += round(($food_fat/$macronutrients_search->serving_size)*$food_servingsize*$food_quantity, 1);
+            $total_nutrients['carbohydrates'] += round(($food_carbs/$macronutrients_search->serving_size)*$food_servingsize*$food_quantity, 1);
+            $total_nutrients['protein'] += round(($food_protein/$macronutrients_search->serving_size)*$food_servingsize*$food_quantity, 1);
+
+            // $food_array[] = ['index' => $x, 
+            // 'food_name' => $food_name, 
+            // 'food_source' => $food_source,
+            // 'food_servingunit' => $food_servingunit, 
+            // 'food_unit_id' => $food_unit->id,
+            // 'food_unit_short' => $food_unit->short_name,
+            // 'food_servingsize' => $food_servingsize,
+            // 'food_quantity' => $food_quantity,
+            // 'food_calories' => $food_calories,
+            // 'food_fat' => $food_fat,
+            // 'food_carbs' => $food_carbs,
+            // 'food_protein' => $food_protein
+            // ];
+            
+            // (string)$food_array_component->render()->with($food_array_component->data());
+            $mealfooditem_component = '';
+
+
+            
+            $mealfooditem_component = new MealFoodItem($x+1, $food_array, $food_servingsize, $food_servingunit, $food_quantity, true, true, $food_imgurl);
+            
+
+            $food_array_components[$x] = $mealfooditem_component->render()->with($mealfooditem_component->data());
+
+            
+        }
+
+
+
+        // $food_array['total']['name'] = $food_name;
+        // $food_array['total']['source'] = $food_source;
+        // $food_array['total']['serving_size_input'] = $food_servingsize;
+        // $food_array['total']['quantity'] = $food_quantity;
+        // $food_array['total']['serving_size'] = $macronutrients_search->serving_size;
+        // $food_array['total']['food_servingunit'] = $food_servingunit; 
+        // $food_array['total']['food_unit_id'] = $food_unit->id; 
+        // $food_array['total']['food_unit_short'] = $food_unit->short_name;
+        // $food_array['total']['calories'] = $food_calories;
+        // $food_array['total']['fat'] = $food_fat;
+        // $food_array['total']['carbohydrates'] =  $food_carbs;
+        // $food_array['total']['protein'] = $food_protein;
+
+        // $food_array_components['total'] = $mealfooditem_component->render()->with($mealfooditem_component->data());
+
+        // $mealfooditem_component = new MealFoodItem($x+1, $food_array, $food_servingsize, $food_servingunit, $food_quantity, true);
+            
+        // $food_array_components[] = $mealfooditem_component->render()->with($mealfooditem_component->data());
+
+            
+        
+
+
+        // $food_array_component = new MealFoodItem($meal_datendex_no, $food_array, $servingSize, $quantity);
+            
+        
+        return view('nutrition_meal_form_summary', ['total_nutrients' => $total_nutrients, 'foods' => $food_array, 'food_array_components' => $food_array_components]);
+
+
     }
 
     public function load_meal_notifications() {
@@ -1152,9 +1341,14 @@ class MealController extends Controller
             $meal_notifications_array[$index+1] = DB::table('meal_notifications')->select('id', 'meal_id', 'message', 'type')->where('meal_id', $meal_id->id)->first();
 
 
+
+
+
+
         }
         
         // dd($meal_notifications_array);
+
         $meal_notifications_html = "";
         
         
@@ -1318,6 +1512,7 @@ class MealController extends Controller
 
             $validated = $request->validate([
 
+                "meal_foodname_$food_pages_x" => ['required', 'string', 'max:25', 'blasp_check'],
                 "meal_foodid_$food_pages_x" => 'required|numeric|max:10000000',
 
                 // amount of food units is 11 for now.

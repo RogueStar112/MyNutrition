@@ -132,7 +132,7 @@
                 <img class="/p-6 object-cover {{ empty($food['img_url']) ? "hidden" : "" }} rounded-full {{  $food_class ? "hidden" : "" }} text-center leading-[128px] text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="{{empty($food_class) ? $food_name_initials : ""}}  " />
             </div>
 
-            <div class="desc-box m-6 self-center">
+            <div class="desc-box m-4 md:m-0 md:pl-6 self-center">
 
                 <div class="h-full">
                     <div class="h-1/2">
@@ -307,10 +307,10 @@
                     e.preventDefault();
 
                     if (meal_json[query]) {
-                        console.log('MEAL JSON QUERY ALREADY EXISTS. VAL RETAINED.');
+                        // console.log('MEAL JSON QUERY ALREADY EXISTS. VAL RETAINED.');
                         var no_of_foods = parseInt($("#no_of_foods").val());
                     } else {
-                        console.log('NO OF FOODS INCREASED BY 1.')
+                        // console.log('NO OF FOODS INCREASED BY 1.')
                         var no_of_foods = parseInt($("#no_of_foods").val()) + 1;
                     }
 
@@ -386,7 +386,7 @@
                         
                     }
                     
-                    console.log('FOOD ARRAY', food_array)
+                    // console.log('FOOD ARRAY', food_array)
 
                     // Object.keys(meal_json).foreach()
 
@@ -397,7 +397,7 @@
 
                     // meal_json = Object.assign({}, meal_json)
 
-                    console.log('SORTED MEAL JSON', meal_json);
+                    // console.log('SORTED MEAL JSON', meal_json);
 
                     // let i=1;
 
@@ -441,7 +441,7 @@
                             foods_pages = [];
                             $("#foods_pages").val(foods_pages);
                             
-                            console.log('RESPONSE HTML', Object.entries(response['html']));
+                            // console.log('RESPONSE HTML', Object.entries(response['html']));
                             
                             for (let i = 0; i < food_array.length; i++) {
 
@@ -541,8 +541,6 @@
                 
 
                 $(`.meal_${query_delete}`).remove();
-
-                console.log('MEAL_JSON Kilimanjaro', meal_json);
 
                 $("#FOOD-ITEMS-CONTAINER").trigger("change");
 

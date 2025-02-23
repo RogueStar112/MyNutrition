@@ -20,9 +20,15 @@
                         {{ __('Nutrition') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('changelog')" :active="request()->routeIs(['changelog'])">
+                        {{ __('Changelog') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('nutrition_advancedMenu')" :active="request()->routeIs(['nutrition_advancedMenu', 'suggester'])">
                         {{ __('Advanced') }}
                     </x-nav-link>
+
+                
                 </div>
 
                 <!-- Links Before User -->
@@ -92,6 +98,8 @@
                     @endforeach --}}
 
                     <div id="notifications-base" class="rounded-lg absolute top-[100%] bg-slate-900 max-h-[440px] overflow-y-scroll w-[256px] right-0"  x-show="expand_notifications">
+
+                        <h2 class="text-2xl italic font-extrabold m-4 text-center">NOTIFICATIONS</h2>
 
                         @foreach ($mealNotifications as $mealNotification)
                             @foreach($mealNotification as $notification)
