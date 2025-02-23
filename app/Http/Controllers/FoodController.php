@@ -76,6 +76,7 @@ class FoodController extends Controller
                 "food_saturates_$array_index_x" => 'nullable|numeric|max:1000',
                 "food_fibre_$array_index_x" => 'nullable|numeric|max:1000',
                 "food_salt_$array_index_x" => 'nullable|numeric|max:1000',
+                "food_description_$array_index_x" => ['nullable', 'string', 'max:100', 'blasp_check'],
 
 
             ]);
