@@ -10,10 +10,31 @@
   <div class="w-screen h-screen max-w-7xl mx-auto text-white mt-8 pt-6 px-4 sm:px-6 lg:px-8 bg-slate-700 flex flex-col gap-4">
 
     <div class="bg-slate-800 p-4 rounded-lg">
+      <h2 class="text-2xl font-extrabold">Patch Notes 2025.03</h2>
+
+      
+      <p class="text-gray-400">01/03/2025 - Present</p>
+      
+      <p class="text-green-500 text-2xl font-extrabold mt-4">ADDED:  
+        
+      </p>
+      
+      <p>+ Added ChartJS stats on Dashboard. WIP.</p>
+
+      <p class="text-fuchsia-500 text-2xl font-extrabold mt-4">QUALITY OF LIFE:</p>
+
+      <p>+ Working on Dashboard Stats.</p>
+
+      <p class="text-purple-500 text-2xl font-extrabold mt-4">WORKING ON: </p>
+
+      <p>+ Aforementioned on 2025.02_02.</p>
+    </div>
+
+    <div class="bg-slate-800 p-4 rounded-lg">
       <h2 class="text-2xl font-extrabold">Patch Notes 2025.02_02</h2>
 
       
-      <p class="text-gray-400">17/02/2025 - Present</p>
+      <p class="text-gray-400">17/02/2025 - 01/03/2025</p>
       
       <p class="text-green-500 text-2xl font-extrabold mt-4">ADDED: 
 

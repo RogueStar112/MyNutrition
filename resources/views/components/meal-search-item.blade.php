@@ -253,13 +253,13 @@
 
             <div id="food-add-{{$food['food_id']}}" class="absolute top-0 md:top-auto flex flex-col gap-8 md:gap-0 justify-center items-center h-min md:h-full md:rounded-r-lg right-0 cursor-pointer md:max-w-[44px] p-4 md:p-0">
                     
-                    <div class="grow flex justify-center items-center add_food_icon bg-green-500 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-tr-lg text-md" value="{{$food['id']}}">
+                    <button type="button" class="grow flex justify-center items-center add_food_icon bg-green-500 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-tr-lg text-md" value="{{$food['id']}}">
                     <i id="food-add-icon-{{$food['food_id']}}" class="flex fas fa-plus fa-2x text-white self-center cursor-pointer py-auto px-2 rounded-tr-lg"></i>
-                    </div>
+                    </button>
 
-                    <div class="grow bg-red-800 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-br-lg flex justify-center items-center delete_food_icon text-md" value="{{$food['id']}}" value="{{$food['food_id']}}">
+                    <button type="button" class="grow bg-red-800 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-br-lg flex justify-center items-center delete_food_icon text-md" value="{{$food['id']}}" value="{{$food['food_id']}}">
                     <i id="food-del-icon-{{$food['food_id']}}" class="flex fas fa-trash fa-2x text-white self-center cursor-pointer py-auto px-2"></i>
-                    </div>
+                    </button>
                     
             </div>
         </div>

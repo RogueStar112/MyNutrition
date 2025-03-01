@@ -46,7 +46,11 @@
 
                     <input type="hidden" id="no_of_foods" value="0" autocomplete="off">
                     <input type="hidden" id="foods_pages" name="foods_pages" value="" autocomplete="off">
-                    <div id="form-meal-foods"></div>
+                    <div id="form-meal-foods">
+
+
+
+                    </div>
             
 
                     
@@ -204,7 +208,76 @@
 
             var config = { childList: true, subtree: true };
             observer.observe(targetElement, config);
+
+            // Function to update index attributes
+            // function updateIndexes() {
+            //     let currentIndex = 1; // Start index at 1
+    
+            //     // Select all inputs with a class pattern like meal_250, meal_251, etc.
+            //     $('#form-meal-foods input[type="hidden"]').each(function() {
+            //         const mealClass = $(this).attr('class').match(/meal_\d+/);
+                    
+            //         if (mealClass) {
+            //             $(`.${mealClass[0]}`).attr('index', currentIndex);
+            //             currentIndex++;
+            //         }
+            //     });
+            // }
+
+            // // Initialize index on page load
+            // updateIndexes();
+
+            // // Set up a MutationObserver to watch for changes in the #form-meal-foods div
+            // const indexObserver = new MutationObserver(function(mutationsList) {
+            //     mutationsList.forEach(function(mutation) {
+            //         if (mutation.type === 'childList') {
+            //             updateIndexes();
+            //         }
+            //     });
+            // });
+
+            // // Start observing
+            // indexObserver.observe(document.getElementById('form-meal-foods'), { 
+            //     childList: true, 
+            //     subtree: true 
+            // });
         });
+
+        
+
+        $(document).ready(function () {
+
+            // Use event delegation for dynamically loaded elements
+            $(document).on("click", `[id^=mealitem-delete-btn-]`, function () {
+                let food_index = $(this).data("index"); 
+                $(`#mealitem-delete-btn-${food_index}`).addClass("hidden");
+                $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).removeClass("hidden");
+            });
+
+            $(document).on("click", `[id^=mealitem-delete-btn-yes-]`, function () {
+                let food_id = $(this).data("id"); 
+                $(`.meal_${food_id}`).remove();
+                
+                // foreach(meals_array as meal) {
+
+                //     if (meal['food_id'] == food_id) {
+
+                //         meals_array.splice(meals_array.indexOf(meal));
+
+                //     }
+                // }
+
+                // console.log('MEALS ARRAY COMPLETION?', meals_array);
+
+            });
+
+            $(document).on("click", `[id^=mealitem-delete-btn-no-]`, function () {
+                let food_index = $(this).data("index");
+                $(`#mealitem-delete-btn-${food_index}`).removeClass("hidden");
+                $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).addClass("hidden");
+            });
+        });
+
 
         var meals_array = <?php echo json_encode($meals_array, JSON_HEX_TAG); ?>
 
@@ -349,6 +422,9 @@
                         }
                     });
             }
+
+
+            console.log('MEALS ARRAY IN COMPLETION', meals_array);
  
         });
 

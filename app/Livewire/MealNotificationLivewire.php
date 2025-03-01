@@ -117,7 +117,7 @@ class MealNotificationLivewire extends Component
 
         $mealName = $this->mealName ?? "for meal";
 
-        $this->message = "Notification $mealName dismissed.";
+        $this->message = "Notification dismissed.";
 
         $changeMessage = $this->result;
 
@@ -130,7 +130,7 @@ class MealNotificationLivewire extends Component
         // $changeMeal->is_notified = 1;
         // $changeMeal->save();
 
-        // $this->result->delete();
+        $this->result->delete();
 
   
     }

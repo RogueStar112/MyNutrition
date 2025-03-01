@@ -707,6 +707,42 @@
         let food_index = 0;
         let food_id = 0;
 
+        $(document).ready(function () {
+            
+            $(document).trigger('on_update', [food_index, food_id]);
+
+            // Use event delegation for dynamically loaded elements
+            $("#FOOD-ITEMS-CONTAINER").on("click", `[id^=mealitem-delete-btn-]`, function () {
+                let food_index = $(this).data("index"); 
+                $(`#mealitem-delete-btn-${food_index}`).addClass("hidden");
+                $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).removeClass("hidden");
+            });
+
+            $("#FOOD-ITEMS-CONTAINER").on("click", `[id^=mealitem-delete-btn-yes-]`, function () {
+                let food_id = $(this).data("id"); 
+                $(`.meal_${food_id}`).remove();
+                
+                // foreach(meals_array as meal) {
+
+                //     if (meal['food_id'] == food_id) {
+
+                //         meals_array.splice(meals_array.indexOf(meal));
+
+                //     }
+                // }
+
+                // console.log('MEALS ARRAY COMPLETION?', meals_array);
+
+            });
+
+            $("#FOOD-ITEMS-CONTAINER").on("click", `[id^=mealitem-delete-btn-no-]`, function () {
+                let food_index = $(this).data("index");
+                $(`#mealitem-delete-btn-${food_index}`).removeClass("hidden");
+                $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).addClass("hidden");
+            });
+        });
+
+
         $(document).ready(function() {
             
             // var no_of_foods = parseInt($("#no_of_foods").val());
@@ -737,6 +773,39 @@
                     $(`.food_revealbtn`).unbind();
 
                     $(`.food_revealbtn`).click(function() {
+                    // get index of button
+                        var index_selector = $(this).attr('index');
+                        
+                        // open/close nutritional info
+                        $(`.nutritional_wrapper_${index_selector}`).toggleClass('slide-down');
+                        // $(`#nutritional_wrapper_${index_selector}`).toggleClass('collapse');
+                        // $(`#nutritional_wrapper_${index_selector}`).toggleClass('hidden');
+                        
+
+                        // adjust height to accomodate for nutritional info
+                        // $(`#food_item_${index_selector}`).toggleClass('h-24');
+                        $(`.nutritional-media-buttons-${index_selector}`).toggleClass('hidden');
+
+                        // change direction of icon arrow
+                        $(`.item_icon_${index_selector}`).toggleClass('fas fa-chevron-down');
+                        $(`.item_icon_${index_selector}`).toggleClass('fas fa-chevron-up');
+                    });
+                }
+                });
+            });
+
+            var config = { childList: true, subtree: true };
+            observer.observe(targetElement, config);
+
+            var deleteObserver = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList' && mutation.target === targetElement) {
+                    // Additional code to handle the change
+                    
+                    // unbind any previous binding events to prevent overbinding
+                    $(`nutritional-delete-btn`).unbind();
+
+                    $(`nutritional-delete-btn`).click(function() {
                     // get index of button
                         var index_selector = $(this).attr('index');
                         
