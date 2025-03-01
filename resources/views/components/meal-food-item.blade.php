@@ -93,12 +93,12 @@ $food_id = $food['food_id'] ?? "";
 
         <div id="nutritional-media-buttons-{{$foodIndex}}" class="nutritional-media-buttons-{{$foodIndex}} nutritional-media-buttons w-full flex text-center mt-3 [&>*]:my-auto absolute left-0 bottom-0 hidden duration-200 [&>*]:cursor-pointer [&>*>*]:cursor-pointer">
 
-            <button type="button" id="mealitem-edit-btn-{{$foodIndex}}" class="w-full bg-yellow-500 hover:bg-yellow-600 duration-150 text-black">EDIT</button>
-            <button type="button" id="mealitem-delete-btn-{{$foodIndex}}" class="w-full bg-red-500 hover:bg-red-600 duration-150 text-white" data-id="{{$food_id}}" data-index="{{$foodIndex}}">DELETE</button>
+            <button type="button" id="mealitem-edit-btn-{{$foodIndex}}" class="w-full nutritional-edit-btn bg-yellow-500 hover:bg-yellow-600 duration-150 text-black">EDIT</button>
+            <button type="button" id="mealitem-delete-btn-{{$foodIndex}}" class="w-full nutritional-delete-btn bg-red-500 hover:bg-red-600 duration-150 text-white" data-id="{{$food_id}}" data-index="{{$foodIndex}}">DELETE</button>
 
             <div id="mealitem-delete-btn-confirmcontainer-{{$foodIndex}}" class="w-full flex p-0 hidden" data-id="{{$food_id}}" >
-                <button type="button" id="mealitem-delete-btn-no-{{$foodIndex}}" class="w-full bg-red-500" data-index="{{$foodIndex}}">X</button>
-                <button type="button" id="mealitem-delete-btn-yes-{{$foodIndex}}" data-id="{{$food_id}}" class="w-full bg-green-500" data-index="{{$foodIndex}}" >🗑️</button>
+                <button type="button" id="mealitem-delete-btn-no-{{$foodIndex}}" class="nutritional-delete-btn-confirm-yes w-full bg-red-500" data-index="{{$foodIndex}}">X</button>
+                <button type="button" id="mealitem-delete-btn-yes-{{$foodIndex}}" data-id="{{$food_id}}" class="nutritional-delete-btn-confirm-no w-full bg-green-500" data-index="{{$foodIndex}}" >🗑️</button>
             </div>
 
         </div>
@@ -108,32 +108,44 @@ $food_id = $food['food_id'] ?? "";
 
 <script>
 
-        food_index = <?php echo json_encode($foodIndex, JSON_HEX_TAG); ?>;
-        food_id = <?php echo json_encode($food_id, JSON_HEX_TAG); ?>;
-
+        // food_index = <?php echo json_encode($foodIndex, JSON_HEX_TAG); ?>;
+        // food_id = <?php echo json_encode($food_id, JSON_HEX_TAG); ?>;
+    
         // console.log('FOOD INDEX NEBRASKA', food_index)
     
-        $(document).ready(function () {
-            $(document).trigger('on_update', [food_index, food_id]);
+        // $(document).ready(function () {
+        //     $(document).trigger('on_update', [food_index, food_id]);
 
-            // Use event delegation for dynamically loaded elements
-            $(document).on("click", `[id^=mealitem-delete-btn-]`, function () {
-                food_index = $(this).data("index"); 
-                $(`#mealitem-delete-btn-${food_index}`).addClass("hidden");
-                $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).removeClass("hidden");
-            });
+        //     // Use event delegation for dynamically loaded elements
+        //     $(document).on("click", `[id^=mealitem-delete-btn-]`, function () {
+        //         let food_index = $(this).data("index"); 
+        //         $(`#mealitem-delete-btn-${food_index}`).addClass("hidden");
+        //         $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).removeClass("hidden");
+        //     });
 
-            $(document).on("click", `[id^=mealitem-delete-btn-yes-]`, function () {
-                food_id = $(this).data("id"); 
-                $(`.meal_${food_id}`).remove();
-            });
+        //     $(document).on("click", `[id^=mealitem-delete-btn-yes-]`, function () {
+        //         let food_id = $(this).data("id"); 
+        //         $(`.meal_${food_id}`).remove();
+                
+        //         // foreach(meals_array as meal) {
 
-            $(document).on("click", `[id^=mealitem-delete-btn-no-]`, function () {
-                food_index = $(this).data("index");
-                $(`#mealitem-delete-btn-${food_index}`).removeClass("hidden");
-                $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).addClass("hidden");
-            });
-        });
+        //         //     if (meal['food_id'] == food_id) {
+
+        //         //         meals_array.splice(meals_array.indexOf(meal));
+
+        //         //     }
+        //         // }
+
+        //         // console.log('MEALS ARRAY COMPLETION?', meals_array);
+
+        //     });
+
+        //     $(document).on("click", `[id^=mealitem-delete-btn-no-]`, function () {
+        //         let food_index = $(this).data("index");
+        //         $(`#mealitem-delete-btn-${food_index}`).removeClass("hidden");
+        //         $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).addClass("hidden");
+        //     });
+        // });
         // console.log(`FOOD ID: ${food_id} LOADED IN`);
         
 

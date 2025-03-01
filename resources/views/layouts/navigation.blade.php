@@ -97,9 +97,19 @@
                         <livewire:meal-notification-livewire :id="$mealNotification->id" />
                     @endforeach --}}
 
-                    <div id="notifications-base" class="rounded-lg absolute top-[100%] bg-slate-900 max-h-[440px] overflow-y-scroll w-[256px] right-0"  x-show="expand_notifications">
+                    <div id="notifications-base" class="rounded-lg absolute top-[100%] bg-slate-900 max-h-[440px] overflow-y-scroll w-[256px] right-0"  x-show="expand_notifications ">
 
                         <h2 class="text-2xl italic font-extrabold m-4 text-center">NOTIFICATIONS</h2>
+
+                        @if(count($mealNotifications) == 0)
+
+                            <p class="text-center text-white">No notifications.</p>
+
+                        @else
+
+                            <p class="text-slate-500 text-center"><i class="fas fa-bell gap-4"></i> {{count($mealNotifications)}}</p>
+
+                        @endif
 
                         @foreach ($mealNotifications as $mealNotification)
                             @foreach($mealNotification as $notification)

@@ -37,7 +37,10 @@ use Livewire\Livewire;
 use Blaspsoft\Blasp\Facades\Blasp;
 
 class MealController extends Controller
-{
+{   
+
+    // VIEWS
+
     public function meal_form()
     {   
         return view('nutrition_meal_form');
@@ -298,7 +301,7 @@ class MealController extends Controller
         $newMeal_name = $newMeal_search->name;
         $newMeal_notification_prompt_time = date("d/m/Y H:i", $date_time);
 
-        $newMeal_notification_prompt->message = "You have planned a meal named '$newMeal_name' for $newMeal_notification_prompt_time. Don't forget about it!";
+        $newMeal_notification_prompt->message = "Have you eaten this meal?";
 
         $newMeal_notification_prompt->is_accepted = 0;
         $newMeal_notification_prompt->type = 2;
@@ -1646,4 +1649,123 @@ class MealController extends Controller
         return view('nutrition_meal_form_edit_summary', ['total_nutrients' => $total_nutrients, 'foods' => $food_array, 'food_array_components' => $food_array_components]);
 
     }
+
+    // IMPORTANT FUNCTIONS
+
+
+
+    public function get_nutrients_of_meal($meal_id) {
+
+        $meal_items = MealItems::where('meal_id', $meal_id)
+                                ->get();
+
+        $meal = Meal::where('id', $meal_id)
+                            ->first();
+
+        $meal_name = $meal?->name;
+        $meal_time = $meal?->time_planned;
+
+
+        $meal_array = [];
+
+        $macros = [];
+        $micros = [];
+
+        foreach($meal_items as $meal_item) {
+
+            $macros[$meal_item->name] = Macronutrients::where('food_id', $meal_item->food_id)?->first();
+
+            $micros[$meal_item->name] = Micronutrients::where('food_id', $meal_item->food_id)?->first();
+
+        }
+
+        $macro_totals = [];
+        $micro_totals = [];
+
+        foreach($macros as $macro) {
+            if(isset($macro)) {
+                $macro_totals['calories'] = ($macro_totals['calories'] ?? 0) + $macro['calories'];
+                $macro_totals['carbohydrates'] = ($macro_totals['carbohydrates'] ?? 0) + $macro['carbohydrates'];
+                $macro_totals['fat'] = ($macro_totals['fat'] ?? 0) + $macro['fat'];
+                $macro_totals['protein'] = ($macro_totals['protein'] ?? 0) + $macro['protein'];
+            }
+        }
+
+        foreach($micros as $micro) {
+            if(isset($micro)) {
+                $micro_totals['sugars'] = ($micro_totals['sugars'] ?? 0) + $micro['sugars'];
+                $micro_totals['saturates'] = ($micro_totals['saturates'] ?? 0) + $micro['saturates'];
+                $micro_totals['fibre'] = ($micro_totals['fibre'] ?? 0) + $micro['fibre'];
+                $micro_totals['salt'] = ($micro_totals['salt'] ?? 0) + $micro['salt'];
+            }
+        }
+
+        $nutrients = array_merge($macro_totals, $micro_totals);
+
+        $nutrients['meal_name'] = $meal_name;
+        $nutrients['meal_time'] = $meal_time;
+
+        return $nutrients;
+ 
+    }
+    
+    /**
+     * Safely sums multiple associative arrays, handling numeric and string values appropriately.
+     *
+     * @param array ...$arrays An array of associative arrays to be merged and summed.
+     * @return array The summed array with appropriate handling for numeric and string values.
+     */
+    function sum_meals(array ...$arrays): array
+    {
+        if (count($arrays) < 2) {
+            throw new InvalidArgumentException('At least two arrays are required.');
+        }
+
+        // Get all unique keys from all input arrays
+        $allKeys = array_unique(array_merge(...array_map('array_keys', $arrays)));
+
+        // Sum the arrays while applying logic to handle numeric and string values
+        return array_combine($allKeys, array_map(function($key) use ($arrays) {
+            $numericSum = 0;
+            $stringValues = [];
+            $hasNumeric = false;
+
+            foreach ($arrays as $array) {
+                $value = $array[$key] ?? 0;
+
+                if (is_numeric($value)) {
+                    $numericSum += $value;
+                    $hasNumeric = true;
+                } elseif (is_string($value)) {
+                    $stringValues[] = $value;
+                }
+            }
+
+            // If numeric values were found, return their sum
+            if ($hasNumeric) {
+                return $numericSum;
+            }
+
+            // If string values exist, return them as an array
+            if (!empty($stringValues)) {
+                return $stringValues;
+            }
+
+            // Default fallback
+            return 0;
+        }, $allKeys));
+    }
+
+    public function combine_two_meals($meal_id, $meal_id_two) {
+
+        $meal_one = $this->get_nutrients_of_meal($meal_id);
+        $meal_two = $this->get_nutrients_of_meal($meal_id_two);
+
+        $summedArray =  $this->sum_meals($this->get_nutrients_of_meal($meal_id), $this->get_nutrients_of_meal($meal_id_two));
+
+        return $summedArray;
+
+    }
+
+    
 }

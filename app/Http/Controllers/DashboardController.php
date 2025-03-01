@@ -11,6 +11,8 @@ use Carbon\CarbonPeriod;
 
 use Auth;
 
+use App\Models\User;
+
 
 
 use App\Models\Food;
@@ -18,6 +20,7 @@ use App\Models\FoodSource;
 use App\Models\FoodUnit;
 
 use App\Models\Macronutrients;
+use App\Models\Micronutrients;
 
 use App\Models\Meal;
 use App\Models\MealItems;
@@ -26,11 +29,11 @@ use App\Models\UserHealthLogs;
 
 use App\Http\Traits\CalendarGenerator;
 
+use App\Http\Controllers\MealController;
+
 use Illuminate\Support\Collection;
 
-// use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
-
-use Chartjs;
+use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 
 
 class DashboardController extends Controller
@@ -38,11 +41,291 @@ class DashboardController extends Controller
     
     use CalendarGenerator;
 
+    public function get_nutrients_of_meal($meal_id) {
+
+        $meal_items = MealItems::where('meal_id', $meal_id)
+                                ->get();
+
+        $meal = Meal::where('id', $meal_id)
+                            ->first();
+
+        $meal_name = $meal?->name;
+        $meal_time = $meal?->time_planned;
+
+
+        $meal_array = [];
+
+        $macros = [];
+        $micros = [];
+
+        foreach($meal_items as $meal_item) {
+
+            $macros[$meal_item->name] = Macronutrients::where('food_id', $meal_item->food_id)?->first();
+
+            $micros[$meal_item->name] = Micronutrients::where('food_id', $meal_item->food_id)?->first();
+
+        }
+
+        $macro_totals = [];
+        $micro_totals = [];
+
+        foreach($macros as $macro) {
+            if(isset($macro)) {
+                $macro_totals['calories'] = ($macro_totals['calories'] ?? 0) + $macro['calories'];
+                $macro_totals['carbohydrates'] = ($macro_totals['carbohydrates'] ?? 0) + $macro['carbohydrates'];
+                $macro_totals['fat'] = ($macro_totals['fat'] ?? 0) + $macro['fat'];
+                $macro_totals['protein'] = ($macro_totals['protein'] ?? 0) + $macro['protein'];
+            }
+        }
+
+        foreach($micros as $micro) {
+            if(isset($micro)) {
+                $micro_totals['sugars'] = ($micro_totals['sugars'] ?? 0) + $micro['sugars'];
+                $micro_totals['saturates'] = ($micro_totals['saturates'] ?? 0) + $micro['saturates'];
+                $micro_totals['fibre'] = ($micro_totals['fibre'] ?? 0) + $micro['fibre'];
+                $micro_totals['salt'] = ($micro_totals['salt'] ?? 0) + $micro['salt'];
+            }
+        }
+
+        $nutrients = array_merge($macro_totals, $micro_totals);
+
+        $nutrients['meal_name'] = $meal_name;
+        $nutrients['meal_time'] = $meal_time;
+
+        return $nutrients;
+ 
+    }
+
+    public function renderDailyMacroIntakeChart() {
+
+        $user_id = Auth::user()->id;
+
+        $start = Carbon::now()->subWeeks(3);
+        $end = Carbon::now();
+
+        $period = CarbonPeriod::create($start, "1 month", $end);
+
+        $meals_calories = [];
+
+        $meals_dates = [];
+
+        
+
+        // $meal_select = Meal::where('time_planned', '<=', $date)
+        // ->where('user_id', '=', $user_id)
+        // ->get();
+
+        $meal_select = Meal::where('time_planned', '<=', $end)
+                        ->where('time_planned', '>=', $start)
+                        ->where('user_id', '=', $user_id)
+                        ->where('is_eaten', '=', 1)
+                        ->orderBy('time_planned', 'asc')
+                        ->get();
+
+        foreach($meal_select as $meal) {    
+
+            $key = date('Y-m-d', strtotime($meal->time_planned));
+            $meals_calories[$key] = ($meals_calories[$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['calories'] ?? 0);
+
+        }
+
+        foreach($meal_select as $meal) {    
+
+            $key = date('Y-m-d', strtotime($meal->time_planned));
+            $meals_dates[$key] = $key ?? "";
+
+        }
+
+        // dd(array_values($meals_calories), array_values($meals_dates));
+
+        $meals_calories = array_values($meals_calories);
+        $meals_dates = array_values($meals_dates);
+
+        // dd($meals_dates);
+        
+        $chart = Chartjs::build()
+            ->name("MacroIntakeChart")
+            ->size(["width" => 600, "height" => 300])
+            ->labels($meals_dates)
+            ->datasets([
+                [
+                    "label" => "Calories (kcal)",
+                    "type" => "bar",
+                    "backgroundColor" => "rgba(255, 200, 0, 1)",
+                    "borderColor" => "rgba(255, 200, 0, 1)",
+                    "data" => $meals_calories
+                ],
+            ])
+            ->options([
+                'labels' => [
+                    'color' => 'white',
+                    'style' => 'Montserrat'
+                ],
+
+                'scales' => [
+                    'x' => [
+                        'type' => 'time',
+                        'time' => [
+                            'unit' => 'month'
+                        ],
+                        'ticks' => [
+                            'color' => 'white'
+                        ],
+
+                        'grid' => [
+                            'color' => 'grey'
+                        ],
+                        'min' => $start->format("Y-m-d"),
+                    ],
+
+                    'y' => [
+                        'min' => min($meals_calories),
+                        'max' => max($meals_calories) + 100,
+                        'ticks' => [
+                            'color' => 'white'
+                        ],
+
+                        'grid' => [
+                            'color' => 'grey'
+                        ],
+                    ]
+                ],
+                'plugins' => [
+                    'title' => [
+                        'display' => true,
+                        'text' => 'Body Stats'
+                    ],
+
+                    'legend' => [
+                        'labels' => [
+                            'color' => 'white'
+                        ]
+                    ],
+                ]
+            ]);
+
+        return view("dashboard", compact("chart"));
+
+
+
+    }
+
+    public function dashboard_view() {
+        $user_id = Auth::user()->id;
+
+        $start = Carbon::now()->subWeeks(6);
+        $end = Carbon::now();
+
+        $period = CarbonPeriod::create($start, "1 month", $end);
+
+        $meals_calories = [];
+
+        $meals_dates = [];
+
+        
+
+        // $meal_select = Meal::where('time_planned', '<=', $date)
+        // ->where('user_id', '=', $user_id)
+        // ->get();
+
+        $meal_select = Meal::where('time_planned', '<=', $end)
+                        ->where('time_planned', '>=', $start)
+                        ->where('user_id', '=', $user_id)
+                        ->where('is_eaten', '=', 1)
+                        ->orderBy('time_planned', 'asc')
+                        ->get();
+
+        foreach($meal_select as $meal) {    
+
+            $key = date('Y-m-d', strtotime($meal->time_planned));
+            $meals_calories[$key] = ($meals_calories[$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['calories'] ?? 0);
+
+        }
+
+        foreach($meal_select as $meal) {    
+
+            $key = date('Y-m-d', strtotime($meal->time_planned));
+            $meals_dates[$key] = $key ?? "";
+
+        }
+
+        // dd(array_values($meals_calories), array_values($meals_dates));
+
+        $meals_calories = array_values($meals_calories);
+        $meals_dates = array_values($meals_dates);
+
+        // dd($meals_dates);
+        
+        $chart = Chartjs::build()
+            ->name("MacroIntakeChart")
+            ->size(["width" => 600, "height" => 300])
+            ->labels($meals_dates)
+            ->datasets([
+                [
+                    "label" => "Calories (kcal)",
+                    "type" => "bar",
+                    "backgroundColor" => "rgba(255, 200, 0, 1)",
+                    "borderColor" => "rgba(255, 200, 0, 1)",
+                    "data" => $meals_calories
+                ],
+            ])
+            ->options([
+                'labels' => [
+                    'color' => 'white',
+                    'style' => 'Montserrat'
+                ],
+
+                'scales' => [
+                    'x' => [
+                        'type' => 'time',
+                        'time' => [
+                            'unit' => 'month'
+                        ],
+                        'ticks' => [
+                            'color' => 'white'
+                        ],
+
+                        'grid' => [
+                            'color' => 'grey'
+                        ],
+                        'min' => $start->format("Y-m-d"),
+                    ],
+
+                    'y' => [
+                        'min' => 0,
+                        'max' => max($meals_calories) + 100,
+                        'ticks' => [
+                            'color' => 'white'
+                        ],
+
+                        'grid' => [
+                            'color' => 'grey'
+                        ],
+                    ]
+                ],
+                'plugins' => [
+                    'title' => [
+                        'display' => true,
+                        'text' => 'Body Stats'
+                    ],
+
+                    'legend' => [
+                        'labels' => [
+                            'color' => 'white'
+                        ]
+                    ],
+                ]
+            ]);
+
+        return view("dashboard", compact("chart"));
+    }
+
     public function renderBodyStatsChart() {
 
         $user_id = Auth::user()->id;
 
-        $start = Carbon::parse();
+        // $start = Carbon::parse(User::min("created_at"));
+        $start = Carbon::now()->subYear();
         $end = Carbon::now();
 
         $period = CarbonPeriod::create($start, "1 month", $end);
@@ -54,33 +337,59 @@ class DashboardController extends Controller
             return [
                 "weight" => UserHealthLogs::where('time_updated', '<=', $endDate)
                                           ->where('user_id', '=', $user_id)
-                                          ->get(),
+                                          ->average('weight'),
 
-                "day" => $endDate->format("Y-m-d")
+                "bmi" => UserHealthLogs::where('time_updated', '<=', $endDate)
+                                          ->where('user_id', '=', $user_id)
+                                          ->average('bmi'),
+
+                "month" => $endDate->format("Y-m-d")
             ];
         });
 
 
-        $data_weight = $bodyStats->pluck('weight')->toArray();
+        $data = $bodyStats->pluck('weight')->toArray();
         $data_bmi = $bodyStats->pluck('bmi')->toArray();
-        $data_bodyfat = $bodyStats->pluck('body_fat')->toArray();
+        $labels = $bodyStats->pluck('month')->toArray();
 
-        $labels = $bodyStats->pluck('weight')->toArray();
+        // return [$data, $labels];
 
-        // return $data_weight;
+        
+        // $data_bmi = $bodyStats->pluck('bmi')->toArray();
+        // $data_bodyfat = $bodyStats->pluck('body_fat')->toArray();
+
+        // $labels = $bodyStats->pluck('weight')->toArray();
+
+        // return $data_weight[0];
+
+
+        // $data_weight_array = [];
+        // $data_weight_bmi = [];
+
+        // $labels = [];
+
+
+        // foreach($data_weight[0] as $data) {
+
+        //     array_push($data_weight_array, $data['weight'] ?? 0);
+        //     array_push($data_weight_bmi, $data['bmi'] ?? 0);
+        //     array_push($labels, $data['time_updated'] ?? "");
+        // }
+
+        // dd($data_weight_array, $data_weight_bmi, $labels);
 
         $chart = Chartjs::build()
             ->name("BodyStatsChart")
-            ->type("line")
-            ->size(["width" => 400, "height" => 200])
+            ->size(["width" => 800, "height" => 400])
             ->labels($labels)
             ->datasets([
                 [
                     "label" => "Weight (kg)",
+                    "type" => "line",
                     "backgroundColor" => "rgba(38, 185, 154, 0.31)",
                     "borderColor" => "rgba(38, 185, 154, 0.7)",
-                    "data" => $data_weight
-                ]
+                    "data" => $data
+                ],
             ])
             ->options([
                 'scales' => [
@@ -90,6 +399,11 @@ class DashboardController extends Controller
                             'unit' => 'month'
                         ],
                         'min' => $start->format("Y-m-d"),
+                    ],
+
+                    'y' => [
+                        'min' => 135,
+                        'max' => 145
                     ]
                 ],
                 'plugins' => [
@@ -100,7 +414,9 @@ class DashboardController extends Controller
                 ]
             ]);
 
-        return view("user.chart", compact("chart"));
+        // dd($labels, $data);
+
+        return view("nutrition_body_stats_chart", compact("chart"));
 
     }
 
@@ -108,6 +424,7 @@ class DashboardController extends Controller
     public function showMealCalendar() {
         $calendarData = $this->calendar();
     }
+
 
     public function dashboard_stats($start_date, $end_date) {
         
@@ -270,4 +587,17 @@ class DashboardController extends Controller
 
         return view('nutrition_advanced');
     }
+
+    public function get_calorie_info() {
+
+        
+    }
+
+    // public function calorie_intake_per_day() {
+
+
+    //     MealController::class->get_nutrients_of_meal()
+
+
+    // }
 }

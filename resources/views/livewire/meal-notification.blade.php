@@ -13,7 +13,7 @@
             @endif
 
 
-            {{-- {{$message}} --}}
+            
 
             <p class="flex flex-col justify-between w-full gap-4 items-left">
 
@@ -39,22 +39,22 @@
 
             </p>
 
-            @if($notificationType == 1)
-                    <p class="mt-4">Have you eaten this meal?</p>
-            @endif
+            {{-- @if($notificationType == 1) --}}
+            <p class="mt-4">{{$message}}</p>
+            {{-- @endif --}}
 
         @elseif($isAccepted == 1 && $notificationType == 1)
 
-            <p>Meal {{$mealName}} has been eaten. It has been added to meal logs.</p>
+            {{-- <p>Meal {{$mealName}} has been eaten. It has been added to meal logs.</p> --}}
 
 
         @elseif($isAccepted == 1 && $notificationType == 2)
 
-            <p>Notification dismissed.</p>
+            {{-- <p>Notification dismissed.</p> --}}
 
         @elseif($isAccepted == 2 && $notificationType == 1)
             
-            <p>Meal deleted.</p>
+            {{-- <p>Meal deleted.</p> --}}
 
         @endif
 

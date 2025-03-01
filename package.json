@@ -17,7 +17,7 @@
     },
     "dependencies": {
         "@alpinejs/collapse": "^3.14.1",
-        "chart.js": "^4.4.4",
+        "chart.js": "^4.4.8",
         "components-font-awesome": "^5.9.0",
         "flowbite": "^2.4.1"
     }

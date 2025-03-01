@@ -38,9 +38,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+
+
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/nutrition', function () {
     return view('nutrition');
@@ -48,7 +50,10 @@ Route::get('/nutrition', function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard/render/body_stats_chart', [DashboardController::class, 'renderBodyStatsChart']);
+
+    Route::get('/dashboard', [DashboardController::class, 'dashboard_view'])->name('dashboard');
+
+    Route::get('/dashboard/render/body_stats_chart', [DashboardController::class, 'renderBodyStatsChart'])->name('dashboard.bodychart');
 
 
     Route::get('/dashboard/{start_date}/{end_date}', [DashboardController::class, 'dashboard_stats'])->name('dashboard.stats');
@@ -147,6 +152,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/nutrition/testing/profanity', [ProfanityController::class, 'profanity_test']);
     
     Route::get('/changelog', [ChangelogController::class, 'changelog_view'])->name('changelog');
+
+    Route::get('/function_test/{meal_id}', [MealController::class, 'get_nutrients_of_meal']);
+
+    Route::get('/function_test/{meal_id}/{meal_id_two}', [MealController::class, 'combine_two_meals']);
+
+    Route::get('/function_test_v2', [DashboardController::class, 'renderDailyMacroIntakeChart']);
 
 });
 

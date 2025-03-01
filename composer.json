@@ -9,7 +9,7 @@
         "blaspsoft/blasp": "^1.2",
         "components/font-awesome": "^6.2",
         "guzzlehttp/guzzle": "^7.2",
-        "icehouse-ventures/laravel-chartjs": "^4.1",
+        "icehouse-ventures/laravel-chartjs": "^4.2",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.8",

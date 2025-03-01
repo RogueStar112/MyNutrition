@@ -3,57 +3,35 @@
         <h2 class="font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
+        <span class="text-white">Last 14 Days of Activity</span>
     </x-slot>
 
-    <div class="py-4">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="grid grid-flow-row-dense mx-4 grid-cols-1 md:grid-cols-3 md:grid-rows-3 gap-3">
-                {{-- <x-dashboard-item colspan="3" heading="Overview" textalign="center">
-                    {{ __(Auth::user()->name . "'s statistics") }}
-                </x-dashboard-item> --}}
-
-                <x-dashboard-item colspan="1" heading="Calories Burnt" icon="fas fa-fire fa-3x text-orange-300">
-                    {{ __('1,265kcal') }}
-                </x-dashboard-item>
-    
-                <x-dashboard-item colspan="1" heading="Calories Eaten" icon="fas fa-utensils fa-3x text-lime-300">
-                    {{ __('2,164kcal') }}
-                </x-dashboard-item>
-
-                <x-dashboard-item colspan="1" heading="Calorie Deficit/Gain" icon="fas fa-balance-scale-right fa-3x pr-4 text-yellow-300">
-                    {{ __('-899kcal') }}
-                </x-dashboard-item>
-
-                <x-dashboard-item colspan="1" heading="Number of Steps" icon="fas fa-shoe-prints fa-3x -rotate-90 text-grey-300">
-                    {{ __('11,460 steps / 8.3km') }}
-                </x-dashboard-item>
-
-                <x-dashboard-item colspan="1" heading="Exercise Duration" icon="far fa-clock fa-3x text-grey-300">
-                    {{ __('140 minutes') }}
-                </x-dashboard-item>
-
-                <x-dashboard-item colspan="1" heading="Today's Meals" icon="fas fa-hotdog fa-3x text-grey-300">
-                    {{ __('Meal Deal, Chicken & Rice') }}
-                </x-dashboard-item>
-
-                <x-dashboard-item colspan="1" heading="Glasses of Water" icon="fas fa-tint fa-3x text-blue-300">
-                    {{ __('12 glasses') }}
-                </x-dashboard-item>
-
-
-
-
-
+    <div class="min-h-screen py-4 pt-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-5 grid-rows-5 w-full h-full gap-2 h-[calc(100vh-8rem)] max-h-[900px] [&>*]:flex [&>*]:items-center [&>*]:justify-center [&>*]:text-center [&>*]:text-white">
+            <div class="col-start-1 col-end-4 row-start-1 row-end-4 rounded-lg border-4 border-red-300">
                 
                 
-                {{-- <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg col-span-3">
-                    
-                </div> --}}
+                <x-chartjs-component :chart="$chart" />
+            
+
+            
+
+
             </div>
             
-        
-            
+            <div class="col-start-4 col-end-6 row-start-1 row-end-3 border-4 border-blue-300">
+                
+                Meal Highlights
+                
+            </div>
 
-        </div>
+            
+            <div class="col-start-4 col-end-6 row-start-3 row-end-6 border-4 border-green-300">Latest Day Summary</div>
+            <div class="col-start-1 col-end-4 row-start-4 row-end-5 border-4 border-yellow-300">Last Meal Tracked</div>
+            <div class="col-start-1 col-end-2 row-start-5 row-end-6 border-4 border-purple-300">Slot 1</div>
+            <div class="col-start-2 col-end-3 row-start-5 row-end-6 border-4 border-pink-300">Slot 2</div>
+            <div class="col-start-3 col-end-4 row-start-5 row-end-6 border-4 border-orange-300">Slot 3</div>
+          </div>
+          
     </div>
 </x-app-layout>
