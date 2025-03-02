@@ -100,7 +100,7 @@ class DashboardController extends Controller
 
         $user_id = Auth::user()->id;
 
-        $start = Carbon::now()->subWeeks(3);
+        $start = Carbon::now()->subWeeks(2);
         $end = Carbon::now();
 
         $period = CarbonPeriod::create($start, "1 month", $end);
@@ -150,7 +150,7 @@ class DashboardController extends Controller
             ->datasets([
                 [
                     "label" => "Calories (kcal)",
-                    "type" => "bar",
+                    "type" => "line",
                     "backgroundColor" => "rgba(255, 200, 0, 1)",
                     "borderColor" => "rgba(255, 200, 0, 1)",
                     "data" => $meals_calories
@@ -175,7 +175,7 @@ class DashboardController extends Controller
                         'grid' => [
                             'color' => 'grey'
                         ],
-                        'min' => $start->format("Y-m-d"),
+                        'min' => min($meals_calories),
                     ],
 
                     'y' => [
@@ -254,6 +254,12 @@ class DashboardController extends Controller
         $meals_calories = array_values($meals_calories);
         $meals_dates = array_values($meals_dates);
 
+        $avg_calories = array_sum($meals_calories) / count($meals_dates);
+
+        $highest_calories = max($meals_calories);
+
+        $lowest_calories = min($meals_calories);
+
         // dd($meals_dates);
         
         $chart = Chartjs::build()
@@ -263,10 +269,11 @@ class DashboardController extends Controller
             ->datasets([
                 [
                     "label" => "Calories (kcal)",
-                    "type" => "bar",
+                    "type" => "line",
                     "backgroundColor" => "rgba(255, 200, 0, 1)",
                     "borderColor" => "rgba(255, 200, 0, 1)",
-                    "data" => $meals_calories
+                    "data" => $meals_calories,
+                    "lineTension" => 0.6
                 ],
             ])
             ->options([
@@ -281,43 +288,60 @@ class DashboardController extends Controller
                         'time' => [
                             'unit' => 'month'
                         ],
+                        
+                        'drawTicks' => 'false',
+
                         'ticks' => [
-                            'color' => 'white'
+                            'color' => 'orange'
                         ],
 
                         'grid' => [
-                            'color' => 'grey'
+                            'color' => 'transparent',
+                            'display' => 'false',
+                            'drawborder' => 'false',
                         ],
-                        'min' => $start->format("Y-m-d"),
+                        'min' => min($meals_dates),
                     ],
 
                     'y' => [
                         'min' => 0,
                         'max' => max($meals_calories) + 100,
+
+                        
                         'ticks' => [
                             'color' => 'white'
                         ],
 
                         'grid' => [
-                            'color' => 'grey'
+                            'color' => 'transparent',
+                            'display' => 'false',
+                            'drawBorder' => 'false',
                         ],
                     ]
                 ],
+
+                'tooltips' => [
+                    'enabled' => 'false',
+                ],
+
                 'plugins' => [
                     'title' => [
-                        'display' => true,
+                        'display' => false,
                         'text' => 'Body Stats'
                     ],
 
                     'legend' => [
                         'labels' => [
-                            'color' => 'white'
-                        ]
+                            'color' => 'transparent',
+                            'display' => false,
+                        ],
+
+                        'display' => false,
                     ],
                 ]
             ]);
 
-        return view("dashboard", compact("chart"));
+            return view("dashboard", compact("chart", "avg_calories", "highest_calories", "lowest_calories"));
     }
 
     public function renderBodyStatsChart() {

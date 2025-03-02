@@ -7,9 +7,46 @@
     </x-slot>
 
     <div class="min-h-screen py-4 pt-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="grid grid-cols-5 grid-rows-5 w-full h-full gap-2 h-[calc(100vh-8rem)] max-h-[900px] [&>*]:flex [&>*]:items-center [&>*]:justify-center [&>*]:text-center [&>*]:text-white">
-            <div class="col-start-1 col-end-4 row-start-1 row-end-4 rounded-lg border-4 border-red-300">
+        <div class="grid grid-cols-5 grid-rows-5 w-full h-full gap-2 /h-[calc(100vh-8rem)] max-h-[900px] [&>*]:flex  [&>*]:text-white">
+            <div class="col-start-1 col-end-4 row-start-1 row-end-4 rounded-lg border-4 border-red-300 flex flex-col">
                 
+                <p class="text-left mx-4 mt-2">Calorie Intake</p>
+                    
+
+                <div class="flex justify-between">
+
+                    <div>
+                    <p class="text-orange-200 mx-4">Average:</p>
+
+
+                    <span class="text-orange-300 text-4xl font-black mx-4">{{round($avg_calories, 0)}}kcal</span>
+                    </div>
+
+
+                    <div>
+                    <p class="text-red-200 mx-4">Highest</p>
+
+
+                    <span class="text-red-300 text-4xl font-black mx-4">{{round($highest_calories, 0)}}kcal</span>
+
+                    </div>
+
+
+                    <div>
+                    
+                        <p class="text-green-200 mx-4">Lowest</p>
+
+
+                        <span class="text-green-300 text-4xl font-black mx-4">{{round($lowest_calories, 0)}}kcal</span>
+
+
+                    </div>
+                </div>
+
+                {{-- <p class="">You have averaged...</p>
+                <p class="mx-4 mt-2 text-2xl font-black text-orange-300">{{round($avg_calories, 0)}}</p>
+
+                <p></p> --}}
                 
                 <x-chartjs-component :chart="$chart" />
             
