@@ -27,6 +27,8 @@ use App\Models\MealItems;
 
 use App\Models\UserHealthLogs;
 
+use App\Models\Water;
+
 use App\Http\Traits\CalendarGenerator;
 
 use App\Http\Controllers\MealController;
@@ -213,7 +215,7 @@ class DashboardController extends Controller
     public function dashboard_view() {
         $user_id = Auth::user()->id;
 
-        $start = Carbon::now()->subWeeks(6);
+        $start = Carbon::now()->subWeeks(5);
         $end = Carbon::now();
 
         $period = CarbonPeriod::create($start, "1 month", $end);
@@ -222,7 +224,9 @@ class DashboardController extends Controller
 
         $meals_dates = [];
 
-        
+    
+
+
 
         // $meal_select = Meal::where('time_planned', '<=', $date)
         // ->where('user_id', '=', $user_id)
@@ -234,6 +238,29 @@ class DashboardController extends Controller
                         ->where('is_eaten', '=', 1)
                         ->orderBy('time_planned', 'asc')
                         ->get();
+
+        if(count($meal_select) == 0) {
+
+            return view("dashboard_placeholder");
+
+        }
+            
+        $last_meal_selected = $meal_select->reverse()->first();
+
+        
+        $last_meal_nutrients = $this->get_nutrients_of_meal($last_meal_selected?->id);
+
+      
+
+        $last_fluids_taken = Water::where('time_taken', '<=', $end)
+                                ->where('time_taken', '>=', $start)
+                                ->where('user_id', '=', $user_id)
+                                ->orderBy('time_taken', 'desc')
+                                ->get();
+
+        $last_fluids_selected = $last_fluids_taken->reverse()->first();
+
+
 
         foreach($meal_select as $meal) {    
 
@@ -253,6 +280,7 @@ class DashboardController extends Controller
 
         $meals_calories = array_values($meals_calories);
         $meals_dates = array_values($meals_dates);
+
 
         $avg_calories = array_sum($meals_calories) / count($meals_dates);
 
@@ -341,106 +369,106 @@ class DashboardController extends Controller
                 ]
             ]);
 
-            return view("dashboard", compact("chart", "avg_calories", "highest_calories", "lowest_calories"));
+            return view("dashboard", compact("chart", "avg_calories", "highest_calories", "lowest_calories", "last_meal_nutrients", "last_fluids_selected"));
     }
 
     public function renderBodyStatsChart() {
 
-        $user_id = Auth::user()->id;
+        // $user_id = Auth::user()->id;
 
-        // $start = Carbon::parse(User::min("created_at"));
-        $start = Carbon::now()->subYear();
-        $end = Carbon::now();
+        // // $start = Carbon::parse(User::min("created_at"));
+        // $start = Carbon::now()->subYear();
+        // $end = Carbon::now();
 
-        $period = CarbonPeriod::create($start, "1 month", $end);
+        // $period = CarbonPeriod::create($start, "1 month", $end);
 
-        $bodyStats = collect($period)->map(function ($date) {
-            $endDate = $date->copy()->endOfMonth();
-            $user_id = Auth::user()->id;
+        // $bodyStats = collect($period)->map(function ($date) {
+        //     $endDate = $date->copy()->endOfMonth();
+        //     $user_id = Auth::user()->id;
 
-            return [
-                "weight" => UserHealthLogs::where('time_updated', '<=', $endDate)
-                                          ->where('user_id', '=', $user_id)
-                                          ->average('weight'),
+        //     return [
+        //         "weight" => UserHealthLogs::where('time_updated', '<=', $endDate)
+        //                                   ->where('user_id', '=', $user_id)
+        //                                   ->average('weight'),
 
-                "bmi" => UserHealthLogs::where('time_updated', '<=', $endDate)
-                                          ->where('user_id', '=', $user_id)
-                                          ->average('bmi'),
+        //         "bmi" => UserHealthLogs::where('time_updated', '<=', $endDate)
+        //                                   ->where('user_id', '=', $user_id)
+        //                                   ->average('bmi'),
 
-                "month" => $endDate->format("Y-m-d")
-            ];
-        });
+        //         "month" => $endDate->format("Y-m-d")
+        //     ];
+        // });
 
 
-        $data = $bodyStats->pluck('weight')->toArray();
-        $data_bmi = $bodyStats->pluck('bmi')->toArray();
-        $labels = $bodyStats->pluck('month')->toArray();
+        // $data = $bodyStats->pluck('weight')->toArray();
+        // $data_bmi = $bodyStats->pluck('bmi')->toArray();
+        // $labels = $bodyStats->pluck('month')->toArray();
 
-        // return [$data, $labels];
+        // // return [$data, $labels];
 
         
-        // $data_bmi = $bodyStats->pluck('bmi')->toArray();
-        // $data_bodyfat = $bodyStats->pluck('body_fat')->toArray();
+        // // $data_bmi = $bodyStats->pluck('bmi')->toArray();
+        // // $data_bodyfat = $bodyStats->pluck('body_fat')->toArray();
 
-        // $labels = $bodyStats->pluck('weight')->toArray();
+        // // $labels = $bodyStats->pluck('weight')->toArray();
 
-        // return $data_weight[0];
-
-
-        // $data_weight_array = [];
-        // $data_weight_bmi = [];
-
-        // $labels = [];
+        // // return $data_weight[0];
 
 
-        // foreach($data_weight[0] as $data) {
+        // // $data_weight_array = [];
+        // // $data_weight_bmi = [];
 
-        //     array_push($data_weight_array, $data['weight'] ?? 0);
-        //     array_push($data_weight_bmi, $data['bmi'] ?? 0);
-        //     array_push($labels, $data['time_updated'] ?? "");
-        // }
+        // // $labels = [];
 
-        // dd($data_weight_array, $data_weight_bmi, $labels);
 
-        $chart = Chartjs::build()
-            ->name("BodyStatsChart")
-            ->size(["width" => 800, "height" => 400])
-            ->labels($labels)
-            ->datasets([
-                [
-                    "label" => "Weight (kg)",
-                    "type" => "line",
-                    "backgroundColor" => "rgba(38, 185, 154, 0.31)",
-                    "borderColor" => "rgba(38, 185, 154, 0.7)",
-                    "data" => $data
-                ],
-            ])
-            ->options([
-                'scales' => [
-                    'x' => [
-                        'type' => 'time',
-                        'time' => [
-                            'unit' => 'month'
-                        ],
-                        'min' => $start->format("Y-m-d"),
-                    ],
+        // // foreach($data_weight[0] as $data) {
 
-                    'y' => [
-                        'min' => 135,
-                        'max' => 145
-                    ]
-                ],
-                'plugins' => [
-                    'title' => [
-                        'display' => true,
-                        'text' => 'Body Stats'
-                    ]
-                ]
-            ]);
+        // //     array_push($data_weight_array, $data['weight'] ?? 0);
+        // //     array_push($data_weight_bmi, $data['bmi'] ?? 0);
+        // //     array_push($labels, $data['time_updated'] ?? "");
+        // // }
 
-        // dd($labels, $data);
+        // // dd($data_weight_array, $data_weight_bmi, $labels);
 
-        return view("nutrition_body_stats_chart", compact("chart"));
+        // $chart = Chartjs::build()
+        //     ->name("BodyStatsChart")
+        //     ->size(["width" => 800, "height" => 400])
+        //     ->labels($labels)
+        //     ->datasets([
+        //         [
+        //             "label" => "Weight (kg)",
+        //             "type" => "line",
+        //             "backgroundColor" => "rgba(38, 185, 154, 0.31)",
+        //             "borderColor" => "rgba(38, 185, 154, 0.7)",
+        //             "data" => $data
+        //         ],
+        //     ])
+        //     ->options([
+        //         'scales' => [
+        //             'x' => [
+        //                 'type' => 'time',
+        //                 'time' => [
+        //                     'unit' => 'month'
+        //                 ],
+        //                 'min' => $start->format("Y-m-d"),
+        //             ],
+
+        //             'y' => [
+        //                 'min' => 135,
+        //                 'max' => 145
+        //             ]
+        //         ],
+        //         'plugins' => [
+        //             'title' => [
+        //                 'display' => true,
+        //                 'text' => 'Body Stats'
+        //             ]
+        //         ]
+        //     ]);
+
+        // // dd($labels, $data);
+
+        // return view("nutrition_body_stats_chart", compact("chart"));
 
     }
 
