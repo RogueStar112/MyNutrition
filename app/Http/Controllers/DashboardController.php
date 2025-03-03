@@ -34,6 +34,7 @@ use App\Http\Traits\CalendarGenerator;
 use App\Http\Controllers\MealController;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 
@@ -48,6 +49,8 @@ class DashboardController extends Controller
         $meal_items = MealItems::where('meal_id', $meal_id)
                                 ->get();
 
+        // dd($meal_items);
+
         $meal = Meal::where('id', $meal_id)
                             ->first();
 
@@ -60,32 +63,89 @@ class DashboardController extends Controller
         $macros = [];
         $micros = [];
 
+        // dd($meal_items);
+
         foreach($meal_items as $meal_item) {
 
-            $macros[$meal_item->name] = Macronutrients::where('food_id', $meal_item->food_id)?->first();
+            // $macros[$meal_item->name] = Macronutrients::where('food_id', $meal_item->food_id)?->first();
+                                        
+            
+            // $micros[$meal_item->name] = Micronutrients::where('food_id', $meal_item->food_id)?->first();
+            
 
-            $micros[$meal_item->name] = Micronutrients::where('food_id', $meal_item->food_id)?->first();
+            // $macros[] = DB::table('macronutrients')
+            //                 ->join('meal_items', 'macronutrients.food_id', '=', 'meal_items.food_id')
+            //                 ->select('*', DB::raw('(meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity as true_serving_size'))
+            //                 ->where('macronutrients.food_id', '=', $meal_item->food_id)
+            //                 ->first();
 
+            // $macros[] = DB::table('macronutrients')
+            //             ->join('meal_items', 'macronutrients.food_id', '=', 'meal_items.food_id')
+            //             ->select(
+            //                 'macronutrients.food_id', // Keep non-numeric columns as-is
+            //                 DB::raw('(meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity AS true_serving_size'),
+            //                 DB::raw('(macronutrients.calories * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)) AS adjusted_calories'),
+            //                 DB::raw('(macronutrients.protein * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)) AS adjusted_protein'),
+            //                 DB::raw('(macronutrients.carbohydrates * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)) AS adjusted_carbs'),
+            //                 DB::raw('(macronutrients.fat * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)) AS adjusted_fat')
+            //             )
+            //             ->where('macronutrients.food_id', '=', $meal_item->food_id)
+            //             ->first();
+
+            $macros[] = DB::table('macronutrients')
+            ->join('meal_items', 'macronutrients.food_id', '=', 'meal_items.food_id')
+            ->select(
+                'macronutrients.food_id',
+                'meal_items.name', // Keep non-numeric columns as-is
+                // DB::raw('ROUND((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity, 1) AS true_serving_size'),
+                DB::raw('ROUND((macronutrients.calories * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 0) AS calories'),
+                DB::raw('ROUND((macronutrients.protein * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS protein'),
+                DB::raw('ROUND((macronutrients.carbohydrates * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS carbohydrates'),
+                DB::raw('ROUND((macronutrients.fat * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS fat')
+            )
+            ->where('macronutrients.food_id', '=', $meal_item->food_id)
+            ->first();
+
+            $micros[] = DB::table('macronutrients')
+            ->join('meal_items', 'macronutrients.food_id', '=', 'meal_items.food_id')
+            ->join('micronutrients', 'micronutrients.food_id', '=', 'meal_items.food_id')
+            ->select(
+                'macronutrients.food_id',
+                'meal_items.name', // Keep non-numeric columns as-is
+                // DB::raw('ROUND((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity, 1) AS true_serving_size'),
+                DB::raw('ROUND((micronutrients.sugars * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS sugars'),
+                DB::raw('ROUND((micronutrients.saturates * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS saturates'),
+                DB::raw('ROUND((micronutrients.fibre * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS fibre'),
+                DB::raw('ROUND((micronutrients.salt * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 2) AS salt')
+            )
+            ->where('macronutrients.food_id', '=', $meal_item->food_id)
+            ->first();
+            
+            // $micros[$meal_item->name] = Micronutrients::where('food_id', $meal_item->food_id)?->first();
         }
+        
+        // return [$macros, $micros];
 
         $macro_totals = [];
         $micro_totals = [];
 
         foreach($macros as $macro) {
+
+
             if(isset($macro)) {
-                $macro_totals['calories'] = ($macro_totals['calories'] ?? 0) + $macro['calories'];
-                $macro_totals['carbohydrates'] = ($macro_totals['carbohydrates'] ?? 0) + $macro['carbohydrates'];
-                $macro_totals['fat'] = ($macro_totals['fat'] ?? 0) + $macro['fat'];
-                $macro_totals['protein'] = ($macro_totals['protein'] ?? 0) + $macro['protein'];
+                $macro_totals['calories'] = ($macro_totals['calories'] ?? 0) + $macro->calories;
+                $macro_totals['carbohydrates'] = ($macro_totals['carbohydrates'] ?? 0) + $macro->carbohydrates;
+                $macro_totals['fat'] = ($macro_totals['fat'] ?? 0) + $macro->fat;
+                $macro_totals['protein'] = ($macro_totals['protein'] ?? 0) + $macro->protein;
             }
         }
 
         foreach($micros as $micro) {
             if(isset($micro)) {
-                $micro_totals['sugars'] = ($micro_totals['sugars'] ?? 0) + $micro['sugars'];
-                $micro_totals['saturates'] = ($micro_totals['saturates'] ?? 0) + $micro['saturates'];
-                $micro_totals['fibre'] = ($micro_totals['fibre'] ?? 0) + $micro['fibre'];
-                $micro_totals['salt'] = ($micro_totals['salt'] ?? 0) + $micro['salt'];
+                $micro_totals['sugars'] = ($micro_totals['sugars'] ?? 0) + $micro->sugars;
+                $micro_totals['saturates'] = ($micro_totals['saturates'] ?? 0) + $micro->saturates;
+                $micro_totals['fibre'] = ($micro_totals['fibre'] ?? 0) + $micro->fibre;
+                $micro_totals['salt'] = ($micro_totals['salt'] ?? 0) + $micro->salt;
             }
         }
 

@@ -153,7 +153,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/changelog', [ChangelogController::class, 'changelog_view'])->name('changelog');
 
-    Route::get('/function_test/{meal_id}', [MealController::class, 'get_nutrients_of_meal']);
+    Route::get('/function_test/{meal_id}', [DashboardController::class, 'get_nutrients_of_meal']);
 
     Route::get('/function_test/{meal_id}/{meal_id_two}', [MealController::class, 'combine_two_meals']);
 
