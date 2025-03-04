@@ -223,7 +223,7 @@ class DashboardController extends Controller
             ->datasets([
                 [
                     "label" => "Calories (kcal)",
-                    "type" => "line",
+                    "type" => "bar",
                     "backgroundColor" => "rgba(255, 200, 0, 1)",
                     "borderColor" => "rgba(255, 200, 0, 1)",
                     "data" => $meals_calories
@@ -368,7 +368,7 @@ class DashboardController extends Controller
             ->datasets([
                 [
                     "label" => "Calories (kcal)",
-                    "type" => "line",
+                    "type" => "bar",
                     "backgroundColor" => "rgba(255, 200, 0, 1)",
                     "borderColor" => "rgba(255, 200, 0, 1)",
                     "data" => $meals_calories,
