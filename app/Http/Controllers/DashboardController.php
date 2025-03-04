@@ -65,6 +65,8 @@ class DashboardController extends Controller
 
         // dd($meal_items);
 
+        // dd($meal_items);
+
         foreach($meal_items as $meal_item) {
 
             // $macros[$meal_item->name] = Macronutrients::where('food_id', $meal_item->food_id)?->first();
@@ -97,6 +99,8 @@ class DashboardController extends Controller
             ->select(
                 'macronutrients.food_id',
                 'meal_items.name', // Keep non-numeric columns as-is
+                'meal_items.serving_size',
+                // 'macronutrients.serving_size as mss',
                 // DB::raw('ROUND((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity, 1) AS true_serving_size'),
                 DB::raw('ROUND((macronutrients.calories * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 0) AS calories'),
                 DB::raw('ROUND((macronutrients.protein * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS protein'),
@@ -104,6 +108,7 @@ class DashboardController extends Controller
                 DB::raw('ROUND((macronutrients.fat * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS fat')
             )
             ->where('macronutrients.food_id', '=', $meal_item->food_id)
+            ->where('meal_items.meal_id', '=', $meal_item->meal_id)
             ->first();
 
             $micros[] = DB::table('macronutrients')
@@ -112,6 +117,9 @@ class DashboardController extends Controller
             ->select(
                 'macronutrients.food_id',
                 'meal_items.name', // Keep non-numeric columns as-is
+                // 'meal_items.serving_size',
+                // 'macronutrients.serving_size',
+                // 'macronutrients.serving_size as micro_mss',
                 // DB::raw('ROUND((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity, 1) AS true_serving_size'),
                 DB::raw('ROUND((micronutrients.sugars * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS sugars'),
                 DB::raw('ROUND((micronutrients.saturates * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS saturates'),
@@ -119,6 +127,7 @@ class DashboardController extends Controller
                 DB::raw('ROUND((micronutrients.salt * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 2) AS salt')
             )
             ->where('macronutrients.food_id', '=', $meal_item->food_id)
+            ->where('meal_items.meal_id', '=', $meal_item->meal_id)
             ->first();
             
             // $micros[$meal_item->name] = Micronutrients::where('food_id', $meal_item->food_id)?->first();
@@ -139,6 +148,8 @@ class DashboardController extends Controller
                 $macro_totals['protein'] = ($macro_totals['protein'] ?? 0) + $macro->protein;
             }
         }
+
+        // return($macros);
 
         foreach($micros as $micro) {
             if(isset($micro)) {

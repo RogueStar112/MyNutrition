@@ -860,7 +860,7 @@ class MealController extends Controller
                 array_push($meal_dates_ymd[0][$meal_date]['times_planned'], $meal_time);
                 
                 
-                $meal_dates_ymd[0][$meal_date][$meal_time]['serving_size'] = round($meal->serving_size ?? 1 * $meal->quantity ?? 1, 2);
+                $meal_dates_ymd[0][$meal_date][$meal_time]['serving_size'] = round(($meal->serving_size ?? 1) * $meal->quantity ?? 1, 2);
             
                 
 
@@ -990,6 +990,8 @@ class MealController extends Controller
         // return $meal_dates_ymd;
 
         // dd($meal_dates_ymd);
+
+        // return $meal_dates_ymd;
 
         return view('nutrition_meal_view', ['meals' => $meal_dates_ymd, 'calendar' => $calendar, 'user_id' => $user_id]);
 
