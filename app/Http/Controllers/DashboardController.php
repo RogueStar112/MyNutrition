@@ -286,12 +286,15 @@ class DashboardController extends Controller
     public function dashboard_view() {
         $user_id = Auth::user()->id;
 
-        $start = Carbon::now()->subWeeks(5);
+        $start = Carbon::now()->subWeeks(2);
         $end = Carbon::now();
 
         $period = CarbonPeriod::create($start, "1 month", $end);
 
         $meals_calories = [];
+        $meals_fat = [];
+        $meals_carbs = [];
+        $meals_protein = [];
 
         $meals_dates = [];
 
@@ -337,6 +340,10 @@ class DashboardController extends Controller
 
             $key = date('Y-m-d', strtotime($meal->time_planned));
             $meals_calories[$key] = ($meals_calories[$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['calories'] ?? 0);
+            $meals_fat[$key] = ($meals_fat[$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['fat'] ?? 0);
+            $meals_carbs[$key] = ($meals_carbs[$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['carbohydrates'] ?? 0);
+            $meals_protein[$key] = ($meals_protein[$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['protein'] ?? 0);
+            
 
         }
 
@@ -347,10 +354,16 @@ class DashboardController extends Controller
 
         }
 
+     
+
         // dd(array_values($meals_calories), array_values($meals_dates));
 
         $meals_calories = array_values($meals_calories);
         $meals_dates = array_values($meals_dates);
+
+        $meals_fat = array_values($meals_fat);
+        $meals_carbs = array_values($meals_carbs);
+        $meals_protein = array_values($meals_protein);
 
 
         $avg_calories = array_sum($meals_calories) / count($meals_dates);
@@ -440,7 +453,249 @@ class DashboardController extends Controller
                 ]
             ]);
 
-            return view("dashboard", compact("chart", "avg_calories", "highest_calories", "lowest_calories", "last_meal_nutrients", "last_fluids_selected"));
+            
+        $fat_chart = Chartjs::build()
+        ->name("FatIntakeChart")
+        ->size(["width" => 150, "height" => 300])
+        ->labels($meals_dates)
+        ->datasets([
+            [
+                "label" => "Fat (g)",
+                "type" => "bar",
+                "backgroundColor" => "rgba(185, 0, 0, 1)",
+                "borderColor" => "rgba(185, 0, 0, 1)",
+                "data" => $meals_fat,
+                "lineTension" => 0.6
+            ],
+        ])
+        ->options([
+            'labels' => [
+                'color' => 'white',
+                'style' => 'Montserrat'
+            ],
+
+            'scales' => [
+                'x' => [
+                    'type' => 'time',
+                    'time' => [
+                        'unit' => 'month'
+                    ],
+                    
+                    'drawTicks' => 'false',
+
+                    'ticks' => [
+                        'color' => 'orange'
+                    ],
+
+                    'grid' => [
+                        'color' => 'transparent',
+                        'display' => 'false',
+                        'drawborder' => 'false',
+                    ],
+                    'min' => min($meals_dates),
+                ],
+
+                'y' => [
+                    'min' => 0,
+                    'max' => max($meals_fat),
+
+                    
+                    'ticks' => [
+                        'color' => 'white'
+                    ],
+
+                    'grid' => [
+                        'color' => 'transparent',
+                        'display' => 'false',
+                        'drawBorder' => 'false',
+                    ],
+                ]
+            ],
+
+            'tooltips' => [
+                'enabled' => 'false',
+            ],
+
+            'plugins' => [
+                'title' => [
+                    'display' => true,
+                    'text' => 'Fat (g)',
+                    'color' => 'white',
+                ],
+
+                'legend' => [
+                    'labels' => [
+                        'color' => 'transparent',
+                        'display' => false,
+                    ],
+
+                    'display' => false,
+                ],
+            ]
+        ]);
+
+        $carbs_chart = Chartjs::build()
+        ->name("CarbsIntakeChart")
+        ->size(["width" => 150, "height" => 300])
+        ->labels($meals_dates)
+        ->datasets([
+            [
+                "label" => "Carbs (g)",
+                "type" => "bar",
+                "backgroundColor" => "rgba(0, 185, 0, 1)",
+                "borderColor" => "rgba(0, 185, 0, 1)",
+                "data" => $meals_carbs,
+                "lineTension" => 0.6
+            ],
+        ])
+        ->options([
+            'labels' => [
+                'color' => 'white',
+                'style' => 'Montserrat'
+            ],
+
+            'scales' => [
+                'x' => [
+                    'type' => 'time',
+                    'time' => [
+                        'unit' => 'month'
+                    ],
+                    
+                    'drawTicks' => 'false',
+
+                    'ticks' => [
+                        'color' => 'orange'
+                    ],
+
+                    'grid' => [
+                        'color' => 'transparent',
+                        'display' => 'false',
+                        'drawborder' => 'false',
+                    ],
+                    'min' => min($meals_dates),
+                ],
+
+                'y' => [
+                    'min' => 0,
+                    'max' => max($meals_carbs),
+
+                    
+                    'ticks' => [
+                        'color' => 'white'
+                    ],
+
+                    'grid' => [
+                        'color' => 'transparent',
+                        'display' => 'false',
+                        'drawBorder' => 'false',
+                    ],
+                ]
+            ],
+
+            'tooltips' => [
+                'enabled' => 'false',
+            ],
+
+            'plugins' => [
+                'title' => [
+                    'display' => true,
+                    'text' => 'Carbs (g)',
+                    'color' => 'white',
+                ],
+
+                'legend' => [
+                    'labels' => [
+                        'color' => 'transparent',
+                        'display' => false,
+                    ],
+
+                    'display' => false,
+                ],
+            ]
+        ]);
+
+        $protein_chart = Chartjs::build()
+        ->name("ProteinIntakeChart")
+        ->size(["width" => 150, "height" => 300])
+        ->labels($meals_dates)
+        ->datasets([
+            [
+                "label" => "Protein (g)",
+                "type" => "bar",
+                "backgroundColor" => "rgba(0, 0, 185, 1)",
+                "borderColor" => "rgba(0, 0, 185, 1)",
+                "data" => $meals_protein,
+                "lineTension" => 0.6
+            ],
+        ])
+        ->options([
+            'labels' => [
+                'color' => 'white',
+                'style' => 'Montserrat'
+            ],
+
+            'scales' => [
+                'x' => [
+                    'type' => 'time',
+                    'time' => [
+                        'unit' => 'month'
+                    ],
+                    
+                    'drawTicks' => 'false',
+
+                    'ticks' => [
+                        'color' => 'orange'
+                    ],
+
+                    'grid' => [
+                        'color' => 'transparent',
+                        'display' => 'false',
+                        'drawborder' => 'false',
+                    ],
+                    'min' => min($meals_dates),
+                ],
+
+                'y' => [
+                    'min' => 0,
+                    'max' => max($meals_protein),
+
+                    
+                    'ticks' => [
+                        'color' => 'white'
+                    ],
+
+                    'grid' => [
+                        'color' => 'transparent',
+                        'display' => 'false',
+                        'drawBorder' => 'false',
+                    ],
+                ]
+            ],
+
+            'tooltips' => [
+                'enabled' => 'false',
+            ],
+
+            'plugins' => [
+                'title' => [
+                    'display' => true,
+                    'text' => 'Protein (g)',
+                    'color' => 'white',
+                ],
+
+                'legend' => [
+                    'labels' => [
+                        'color' => 'transparent',
+                        'display' => false,
+                    ],
+
+                    'display' => false,
+                ],
+            ]
+        ]);
+            
+
+            return view("dashboard", compact("chart", "fat_chart", "carbs_chart", "protein_chart", "avg_calories", "highest_calories", "lowest_calories", "last_meal_nutrients", "last_fluids_selected"));
     }
 
     public function renderBodyStatsChart() {

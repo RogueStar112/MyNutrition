@@ -3,7 +3,7 @@
         <h2 class="font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
-        <span class="text-white">Last 5 Weeks of Activity</span>
+        <span class="text-white">Last 2 Weeks of Activity</span>
     </x-slot>
 
     <div class="min-h-screen py-4 pt-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -57,9 +57,17 @@
 
             </div>
             
-            <div class="col-start-4 col-end-6 row-start-1 row-end-3 border-4 border-blue-300">
+            <div class="col-start-4 col-end-6 row-start-1 row-end-3 border-4 border-blue-300 grid grid-cols-3 [&>*]:w-[33%] [&>*]:h-full p-4">
                 
-                Meal Highlights
+                <div class="">
+                    <x-chartjs-component :chart="$fat_chart" />
+                </div>
+                <div class="">
+                    <x-chartjs-component :chart="$carbs_chart" />
+                </div>
+                <div class="">
+                    <x-chartjs-component :chart="$protein_chart" />
+                </div>
                 
             </div>
 
