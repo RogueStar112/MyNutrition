@@ -67,8 +67,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Image Credits:
 
+Front Facing Web Page
 
-Sleep Form
-Photo by Andrea Piacquadio: https://www.pexels.com/photo/woman-in-gray-tank-top-lying-on-bed-3807760/
+[Women Running on Gray Concrete Stairs](https://www.pexels.com/photo/women-running-on-gray-concrete-stairs-4348629/)
+
 
 Images for Food Items taken from numerous websites. I do not own them.
