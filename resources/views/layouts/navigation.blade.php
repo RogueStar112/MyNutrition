@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current dark:fill-white text-gray-800" />
+                        <img src="{{ asset('img/mynutritionlogo_scales_upscaled.png')}}" width="64" height="64" alt="">
                     </a>
                 </div>
 
