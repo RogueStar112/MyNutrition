@@ -69,22 +69,23 @@
 
                 Conquer your 
                 
-                <div class="flex gap-4 items-center justify-center sm:justify-start relative">
+                <div class="flex gap-4 items-center justify-center sm:justify-start relative p-4 overflow-hidden max-w-[179.5px] sm:max-w-[327.017px] h-[128px]">
                 
-                    <div id="slideshow-text" class="flex items-center /gap-4 relative overflow-hidden max-w-[179.5px] sm:max-w-[327.017px] /[&>*]:flex-1"  style="right: 0px;">
+                    <div id="slideshow-text" style="right: 0px;" class="flex items-center /gap-4 relative  /[&amp;>*]:flex-1">
 
-                        <div id="slideshow-wrapper" class="slideshow-wrapper flex overflow-hidden" style="right: 20px; border-radius:
-                            30% 70% 58% 42% / 70% 58% 42% 30%">
-                            <div class="bg-orange-500 text-white p-4 rounded-lg">fitness</div>
-                            <div class="bg-orange-500 text-white p-4 rounded-lg">fitness</div>
-                            <div class="bg-orange-500 text-white p-4 rounded-lg">fitness</div>                    
-                            <div class="bg-orange-500 text-white p-4 rounded-lg">fitness</div>
-                            <div class="bg-orange-500 text-white p-4 rounded-lg">fitness</div>
+                        <div id="slideshow-wrapper" class="slideshow-wrapper absolute flex max-w-[179.5px] sm:max-w-[327.017px]" style="left: -1rem;">
+                            <div class="bg-orange-500 text-white p-4 rounded-lg" style="">fitness</div>
+                            <div class="bg-orange-500 text-white p-4 rounded-lg" style="">fitness</div>
+                            <div class="bg-orange-500 text-white p-4 rounded-lg" style="">fitness</div>                    
+                            <div class="bg-orange-500 text-white p-4 rounded-lg" style="">fitness</div>
+                            <div class="bg-orange-500 text-white p-4 rounded-lg" style="">fitness</div>
                         </div>
-                    </div> 
+                    </div>
                     
-                    <div>goals</div>
-                </div>         
+
+                </div>      
+
+                <div class="flex-row">goals</div>
                 
                 <div class="md:absolute md:-right-[24.33%] bg-orange-800 md:text-white md:p-4 z-40 rounded-lg select-none"><span>to</span><span class="md:text-white">day</span></div>
 
@@ -121,8 +122,16 @@
         </main>
 
         
-        <div class="grid grid-cols-1 px-12 md:px-0 md:grid-cols-3 mt-32 mx-auto text-orange-600 max-w-[1600px] [&>*]:text-center gap-4 [&>*>img]:h-[421px] [&>*>img]:object-cover" id="features">
-            
+        <div id="features" class="relative grid grid-cols-1 px-12 md:px-0 md:grid-cols-3 mt-32 mx-auto text-orange-600 max-w-[1600px] [&>*]:text-center gap-4 [&>*>img]:h-[421px] [&>*>img]:object-cover">
+
+            <div class="absolute  left-[-10rem]">
+                <img class="" src="{{ asset('img/Fork.png')}}" alt="">
+            </div>
+
+            <div class="absolute  right-[-16rem] bottom-0">
+                <img class="" src="{{ asset('img/Knife.png')}}" alt="">
+            </div>
+
             <div class="md:col-span-3 inline-block bg-gradient-to-r from-orange-400 via-red-500 to-orange-400 bg-clip-text text-7xl text-transparent font-black">FEATURES</div>
             <div class="text-center text-4xl font-extrabold mt-8">
                 <p>Nutrition Tracking</p>
