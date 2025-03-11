@@ -328,3 +328,11 @@ label {
 /* .bg-radial-orange {
 background-image: radial-gradient(446.50% 301.92% at 50.09% 3.49%, #241e05 13.21%, #a2a074 27.92%, #d3a933 34.17%);
 } */
+
+#carousel-wrapper {
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slides {
+    transition: transform 0.5s ease-in-out;
+}

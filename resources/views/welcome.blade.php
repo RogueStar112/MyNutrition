@@ -69,16 +69,19 @@
 
                 Conquer your 
                 
-                <div class="flex gap-4 items-center justify-center sm:justify-start relative p-4 overflow-hidden max-w-[179.5px] sm:max-w-[327.017px] h-[128px]">
+                <div id="carousel-container" class="flex gap-4 items-center justify-center sm:justify-start relative p-4 overflow-hidden max-w-[179.5px] sm:max-w-[327.017px] h-[128px]">
                 
-                    <div id="slideshow-text" style="right: 0px;" class="flex items-center /gap-4 relative  /[&amp;>*]:flex-1">
+                    <div id="carousel-text" style="right: 0px;" class="flex items-center /gap-4 relative  /[&amp;>*]:flex-1">
 
-                        <div id="slideshow-wrapper" class="slideshow-wrapper absolute flex max-w-[179.5px] sm:max-w-[327.017px]" style="left: -1rem;">
-                            <div class="bg-orange-500 text-white p-4 rounded-lg" style="">fitness</div>
-                            <div class="bg-orange-500 text-white p-4 rounded-lg" style="">fitness</div>
-                            <div class="bg-orange-500 text-white p-4 rounded-lg" style="">fitness</div>                    
-                            <div class="bg-orange-500 text-white p-4 rounded-lg" style="">fitness</div>
-                            <div class="bg-orange-500 text-white p-4 rounded-lg" style="">fitness</div>
+                        <div id="carousel-wrapper" class="carousel-wrapper absolute flex max-w-[179.5px] sm:max-w-[600px] scroll-smooth" style="left: -1rem;">
+
+                            <div class="carousel-slides flex w-[400%] justify-evenly">
+                                <div class="slide bg-orange-500 text-white p-4 rounded-lg" style="">fitness</div>
+                                <div class="slide bg-orange-500 text-white p-4 rounded-lg" style="">nutrition</div>          
+                                <div class="slide bg-orange-500 text-white p-4 rounded-lg" style="">hydration</div>
+                                <div class="slide bg-orange-500 text-white p-4 rounded-lg" style="">health</div>
+                            </div>
+
                         </div>
                     </div>
                     
@@ -180,7 +183,7 @@
 
         {{-- <div class="bg-orange-600 w-full sm:h-[50vh] /[&>*]:px-16 [&>*]:text-white [&>*]:text-center flex place-items-center rounded-tr-lg  mx-auto items-center relative overflow-x-scroll text-center">
 
-                <div id="slideshow-container" class="flex h-full place-items-center justify-start gap-4 text-center [&>*]:shrink-0 relative">
+                <div id="carousel-container" class="flex h-full place-items-center justify-start gap-4 text-center [&>*]:shrink-0 relative">
 
                     <div class="flex items-center justify-center selected absolute -left-2 text-2xl top-1/2 prev-slide w-12 h-12 bg-blue-500 rounded-full">
 
@@ -290,7 +293,57 @@
 
     </body>
 
+    {{-- <script>
+        let index = 0;
+        const slides = document.querySelector('.carousel-slides');
+        const totalSlides = document.querySelectorAll('.carousel-slides div').length;
+
+        const slides_List = document.querySelectorAll('.carousel-slides div');
+
+        function showSlide(n) {
+            // index = (n + totalSlides) % totalSlides;
+            slides.style.transform = `translateX(${-slides_List * 100 / totalSlides}%)`;
+        }
+
+        function nextSlide() { showSlide(index + 1); }
+        function prevSlide() { showSlide(index - 1); }
+
+        setInterval(nextSlide, 3000); // Auto-slide every 3 seconds
+    </script> --}}
+
     <script>
-        
+        let index = 0;
+        const carousel = document.querySelector('.carousel-slides');
+        const images = document.querySelectorAll('.carousel-slides div');
+
+        const carousel_container = document.getElementById('carousel-container');
+        let offsets = [];
+
+        // Calculate dynamic widths and offsets
+        function calculateOffsets() {
+            offsets = [];
+            let totalOffset = 0;
+            images.forEach((img) => {
+                offsets.push(totalOffset);
+                totalOffset += img.clientWidth; // Add margin-right spacing
+            });
+        }
+
+        function showSlide(n) {
+            index = (n + images.length) % images.length;
+            carousel.style.transform = `translateX(-${offsets[index]}px)`;
+            carousel_container.style.maxWidth = `${images[index].clientWidth}px`;
+        }
+
+        function nextSlide() { showSlide(index + 1); }
+        function prevSlide() { showSlide(index - 1); }
+
+        // Recalculate offsets after images load
+        window.onload = () => {
+            calculateOffsets();
+            window.addEventListener('resize', calculateOffsets); // Adjust on resize
+        };
+
+        setInterval(nextSlide, 3000); // Auto-slide every 3 seconds
     </script>
 </html>
