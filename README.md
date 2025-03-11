@@ -69,7 +69,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 Front Facing Web Page
 
+All taken from Pexels.
 [Women Running on Gray Concrete Stairs](https://www.pexels.com/photo/women-running-on-gray-concrete-stairs-4348629/)
-
+[Healthy Food Photo by Ella Olsson:](https://www.pexels.com/photo/fruit-salads-in-plate-1640774/)
 
 Images for Food Items taken from numerous websites. I do not own them.
