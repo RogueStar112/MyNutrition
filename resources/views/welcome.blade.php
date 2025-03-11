@@ -13,7 +13,9 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        {{-- <link rel="stylesheet" href="dist/fontawesome-5.11.2/css/all.min.css" /> --}}
         <!-- Styles --> 
     
 
@@ -248,9 +250,9 @@
             <div class="grid grid-cols-1 sm:grid-cols-2">
                 <ul class="flex flex-col gap-4 ml-16 justify-center">
                     <li class="font-black">Socials</li>
-                    <li>LinkedIn</li>
-                    <li>GitHub</li>
-                    <li>Discord</li>
+                    <li><i class="fab fa-linkedin  w-[45px] text-center"></i>  LinkedIn</li>
+                    <li><i class="fab fa-github w-[45px] text-center"></i>  GitHub</li>
+                    <li><i class="fab fa-discord"></i>  Discord</li>
                 </ul>
                 
 
