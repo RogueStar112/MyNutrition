@@ -336,3 +336,91 @@ background-image: radial-gradient(446.50% 301.92% at 50.09% 3.49%, #241e05 13.21
 .carousel-slides {
     transition: transform 0.5s ease-in-out;
 }
+
+/* @keyframes morph {
+    0% {
+        border-radius: 83% 17% 90% 10% / 23% 84% 16% 77%;
+    }
+    50% {
+        border-radius: 30% 70% 20% 80% / 60% 30% 70% 40%;
+    }
+    100% {
+        border-radius: 83% 17% 90% 10% / 23% 84% 16% 77%;
+    }
+}
+
+.animate-border {
+    animation: morph 5s infinite alternate ease-in-out;
+    animation-delay: 3s;
+} */
+
+/* @keyframes morph {
+    0%, 22% { 
+        border-radius: 83% 17% 90% 10% / 23% 84% 16% 77%; 
+    }
+    25%, 47% { 
+        border-radius: 30% 70% 20% 80% / 60% 30% 70% 40%; 
+    }
+    50%, 72% { 
+        border-radius: 50% 50% 70% 30% / 40% 60% 50% 50%; 
+    }
+    75%, 100% { 
+        border-radius: 20% 80% 30% 70% / 50% 20% 80% 30%; 
+    }
+} */
+
+@keyframes morph {
+    0%, 20% { 
+        border-radius: 83% 17% 90% 10% / 23% 84% 16% 77%; 
+    }
+    25%, 45% { 
+        border-radius: 30% 70% 20% 80% / 60% 30% 70% 40%; 
+    }
+    50%, 70% { 
+        border-radius: 50% 50% 70% 30% / 40% 60% 50% 50%; 
+    }
+    75%, 95% { 
+        border-radius: 20% 80% 30% 70% / 50% 20% 80% 30%; 
+    }
+    100% { 
+        border-radius: 83% 17% 90% 10% / 23% 84% 16% 77%; /* Back to original */
+    }
+}
+
+/* @keyframes opacity {
+    0%, 22% { 
+        opacity: 1; 
+    }
+    25%, 47% { 
+        opacity: 0; 
+    }
+    50%, 72% { 
+        border-radius: 50% 50% 70% 30% / 40% 60% 50% 50%; 
+    }
+    75%, 100% { 
+        border-radius: 20% 80% 30% 70% / 50% 20% 80% 30%; 
+    }
+} */
+
+@keyframes fade {
+    0% { opacity: 0; }
+    8.33% { opacity: 1; }   /* Fade in */
+    25% { opacity: 1; }     /* Stay fully visible */
+    33.33% { opacity: 0; }  /* Fade out */
+    100% { opacity: 0; }    /* Stay hidden */
+}
+
+/* Apply different delays so images appear sequentially */
+.img-1 { animation-delay: 0s !important; }
+.img-2 { animation-delay: 3s !important; }
+.img-3 { animation-delay: 6s !important; }
+.img-4 { animation-delay: 9s !important; }
+
+.animate-border {
+    animation: morph 18s infinite ease-in-out;
+}
+
+#hero-images img {
+    
+        animation: fade 12s infinite both;
+}

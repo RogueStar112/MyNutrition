@@ -72,5 +72,7 @@ Front Facing Web Page
 All taken from Pexels.
 [Women Running on Gray Concrete Stairs](https://www.pexels.com/photo/women-running-on-gray-concrete-stairs-4348629/)
 [Healthy Food Photo by Ella Olsson:](https://www.pexels.com/photo/fruit-salads-in-plate-1640774/)
+[Man in Black Crew Neck Shirt Drinking Water](https://www.pexels.com/photo/man-in-black-crew-neck-shirt-drinking-water-3776811/)
+[Blue Tape Measuring on Clear Glass Square Weighing Scale](https://www.pexels.com/photo/blue-tape-measuring-on-clear-glass-square-weighing-scale-53404/)
 
 Images for Food Items taken from numerous websites. I do not own them.

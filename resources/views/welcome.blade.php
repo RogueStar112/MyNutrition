@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,7 +45,7 @@
 
                 <a href="{{ route('register') }}">Register</a>
             
-                <p>Contact</p>
+                <a href="#contacts-footer">Contact</a>
             </div>
         </nav>
 
@@ -63,19 +63,19 @@
       </header> --}}
 
       <main class="container mx-auto">
-        <div id="hero" class="md:grid md:grid-cols-[2fr_3fr] items-center relative  h-full mx-auto">
+        <div id="desktop-hero" class="hidden md:grid md:grid-cols-[2fr_3fr] items-center relative  h-full mx-auto">
 
             <div class="hero-text text-5xl md:text-8xl font-extrabold relative text-center md:text-left md:my-24 text-white md:text-[#CF1909] py-12 z-50">
 
                 Conquer your 
                 
-                <div id="carousel-container" class="flex gap-4 items-center justify-center sm:justify-start relative p-4 overflow-hidden max-w-[179.5px] sm:max-w-[327.017px] h-[128px]">
+                <div id="carousel-container" class="flex gap-4 items-center justify-center sm:justify-start relative p-4 overflow-hidden max-w-[179.5px] max-w-[450.767px] h-[128px]">
                 
                     <div id="carousel-text" style="right: 0px;" class="flex items-center /gap-4 relative  /[&amp;>*]:flex-1">
 
                         <div id="carousel-wrapper" class="carousel-wrapper absolute flex max-w-[179.5px] sm:max-w-[600px] scroll-smooth" style="left: -1rem;">
 
-                            <div class="carousel-slides flex w-[400%] justify-evenly">
+                            <div class="carousel-slides flex w-[400%] justify-evenly text-center [&>*]:w-[450.767px]">
                                 <div class="slide bg-orange-500 text-white p-4 rounded-lg" style="">fitness</div>
                                 <div class="slide bg-orange-500 text-white p-4 rounded-lg" style="">nutrition</div>          
                                 <div class="slide bg-orange-500 text-white p-4 rounded-lg" style="">hydration</div>
@@ -94,13 +94,18 @@
 
             </div>
             
-            <div class="absolute top-0 md:relative z-0">
+            <div id="hero-images" class="absolute top-0 md:relative z-0">
 
-                <div class="relative overflow-hidden h-full [&>img]:object-cover z-30" style="border-radius:
+                <div class="relative overflow-hidden h-full [&>img]:object-cover z-30 transition duration-300 ease-in-out animate-border" style="border-radius:
     83% 17% 90% 10% / 23% 84% 16% 77%;">
-                    <img src="{{ asset('img/pexels-maksgelatin-4348629.jpg') }}" class="top-0 rounded-lg /opacity-70 z-50"  alt="">
+                    <img id="img-1" src="{{ asset('img/pexels-maksgelatin-4348629.jpg') }}" class="img-1 top-0 rounded-lg /opacity-70 z-50"  alt="">
 
-                    <img class="absolute top-0 bg-gradient-to-r from-transparent to-orange-500 z-0 left-0 hidden /opacity-60" src="{{ asset('img/pexels-ella-olsson-572949-1640774.jpg')}}" alt="">
+                    <img id="img-2" src="{{ asset('img/pexels-ella-olsson-572949-1640774.jpg') }}" class="absolute img-2 top-0 bg-gradient-to-r from-transparent to-orange-500 z-0 left-0 /opacity-60" alt="">
+
+                    <img id="img-3" src="{{ asset('img/pexels-olly-3776811.jpg') }}" class="absolute img-3 top-0 bg-gradient-to-r from-transparent to-orange-500 z-0 left-0 /opacity-60" alt="">
+
+                    <img id="img-4" src="{{ asset('img/pexels-pixabay-53404.jpg') }}" class="absolute img-4 top-0 bg-gradient-to-r from-transparent to-orange-500 z-0 left-0  /opacity-60" alt="">
+
 
                     <div class="absolute sm:-bottom-8 -bottom-0 -right-8 bg-orange-600 rounded-full sm:w-48 sm:h-48 w-16 h-16"></div>
 
@@ -125,17 +130,17 @@
         </main>
 
         
-        <div id="features" class="relative grid grid-cols-1 px-12 md:px-0 md:grid-cols-3 mt-32 mx-auto text-orange-600 max-w-[1600px] [&>*]:text-center gap-4 [&>*>img]:h-[421px] [&>*>img]:object-cover">
+        <div id="features" class="relative grid grid-cols-1 px-12 md:px-0 md:grid-cols-3 mt-32 mx-auto text-orange-600 max-w-[1600px] [&>*]:text-center gap-12 [&>*>img]:h-[421px] [&>*>img]:object-cover">
 
-            <div class="absolute  left-[-10rem]">
+            <div class="absolute  left-[-10rem] hidden sm:block">
                 <img class="" src="{{ asset('img/Fork.png')}}" alt="">
             </div>
 
-            <div class="absolute  right-[-16rem] bottom-0">
+            <div class="absolute  right-[-16rem] bottom-0 hidden sm:block">
                 <img class="" src="{{ asset('img/Knife.png')}}" alt="">
             </div>
 
-            <div class="md:col-span-3 inline-block bg-gradient-to-r from-orange-400 via-red-500 to-orange-400 bg-clip-text text-7xl text-transparent font-black">FEATURES</div>
+            <div class="md:col-span-3 inline-block bg-gradient-to-r from-orange-400 via-red-500 to-orange-400 bg-clip-text text-5xl md:text-7xl text-transparent font-black">FEATURES</div>
             <div class="text-center text-4xl font-extrabold mt-8">
                 <p>Nutrition Tracking</p>
                 
@@ -175,7 +180,7 @@
                 <p class="hidden sm:flex">,</p>
             </div>
 
-            <div class="flex justify-center items-center [&>p]:text-orange-600 [&>p]:text-7xl gap-6">
+            <div class="flex justify-center items-center [&>p]:text-orange-600 [&>p]:text-5xl [&>p]:mt-8 sm:[&>p]:text-7xl gap-6 text-center">
                 <p>MyNutrition's got you covered.</p>
             </div>
 
@@ -251,7 +256,7 @@
         
       </div>
 
-      <footer class="/sticky bottom-0 bg-gradient-to-b from-orange-500 to-orange-800 text-white text-4xl flex flex-col items-center justify-center border-t-4 border-t-orange-500">
+      <footer id="contacts-footer" class="/sticky bottom-0 bg-gradient-to-b from-orange-500 to-orange-800 text-white text-4xl flex flex-col items-center justify-center border-t-4 border-t-orange-500">
 
         <div class="grid grid-cols-1 sm:grid-cols-[1fr_3fr] w-full max-w-[1600px]">
           
