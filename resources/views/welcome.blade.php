@@ -37,7 +37,7 @@
     <body class="antialiased mx-auto overflow-x-hidden bg-white dark:bg-gray-800 min-h-screen">
 
       <header>
-        <nav class="flex justify-between items-center mx-auto text-3xl font-extrabold / /sticky top-0 z-50 bg-transparent max-w-[1600px]">
+        <nav class="flex justify-around items-center mx-auto text-3xl font-extrabold / /sticky top-0 z-50 bg-transparent max-w-[1600px]">
             <img class="mx-auto md:mx-0" src="{{ asset('img/mynutritionlogo_upscaled.png')}}" width="128" height="128" alt="">
 
             <div class="flex hidden sm:flex sm:flex-row justify-around text-[#CF1909] gap-8">
@@ -63,7 +63,7 @@
       </header> --}}
 
       <main class="container mx-auto">
-        <div id="desktop-hero" class="hidden md:grid md:grid-cols-[2fr_3fr] items-center relative  h-full mx-auto">
+        <div id="desktop-hero" class="hidden xl:grid xl:grid-cols-[2fr_3fr] items-center relative  h-full mx-auto">
 
             <div class="hero-text text-5xl md:text-8xl font-extrabold relative text-center md:text-left md:my-24 text-white md:text-[#CF1909] py-12 z-50">
 
@@ -172,12 +172,12 @@
         </div>
 
         <div class="flex flex-col mt-16" id="slogan">
-            <div class="flex flex-col sm:flex-row justify-center items-center [&>p]:text-orange-600 [&>p]:text-7xl gap-4 h-fit">
-                <p class="text-orange-600 font-black hidden sm:flex">Whether</p>
+            <div class="flex flex-col xl:flex-row justify-center items-center [&>p]:text-orange-600 [&>p]:text-7xl gap-4 h-fit">
+                <p class="text-orange-600 font-black">Whether</p>
                 <img class="w-[250px] md:w-[350px]" src="{{ asset('img/dietimage_cropped.png')}}" width="350" alt="">        
                 <p class="font-black">OR</p>
                 <img  class="w-[350px] md:w-[450px]" src="{{ asset('img/exerciseimage_cropped.png')}}" width="400" alt="">
-                <p class="hidden sm:flex">,</p>
+                <p class="hidden xl:flex">,</p>
             </div>
 
             <div class="flex justify-center items-center [&>p]:text-orange-600 [&>p]:text-5xl [&>p]:mt-8 sm:[&>p]:text-7xl gap-6 text-center">
@@ -261,21 +261,21 @@
         <div class="grid grid-cols-1 sm:grid-cols-[1fr_3fr] w-full max-w-[1600px]">
           
             <div>
-                <img src="{{ asset('img/MyNutrition_white.png')}}" alt="" class="pr-8 border-r-4 border-r-white/50">
+                <img src="{{ asset('img/MyNutrition_white.png')}}" alt="" class="p-16 xl:pr-8 border-r-4 border-r-white/50">
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2">
-                <ul class="flex flex-col gap-4 ml-16 justify-center">
-                    <li class="font-black">Socials</li>
-                    <li><a href="https://www.linkedin.com/in/demie-mistica-049779296/"><i class="fab fa-linkedin  w-[45px] text-center"></i>  LinkedIn</a></li>
-                    <li><a href="https://github.com/RogueStar112"><i class="fab fa-github w-[45px] text-center"></i>  GitHub</a></li>
+            <div class="grid grid-cols-2 [&>*>*]:text-lg xl:[&>*>*]:text-2xl xl:[&>*>*>h2]:text-4xl">
+                <ul class="flex flex-col gap-4 ml-8 sm:ml-16 justify-center">
+                    <li class="font-black"><h2>Socials</h2></li>
+                    <li><a href="https://www.linkedin.com/in/demie-mistica-049779296/"><i class="fab fa-linkedin  /xl:w-[45px] text-center"></i>  LinkedIn</a></li>
+                    <li><a href="https://github.com/RogueStar112"><i class="fab fa-github /xl:w-[45px] text-center"></i>  GitHub</a></li>
                     <li><i class="fab fa-discord"></i>  Discord</li>
                 </ul>
                 
 
-                <ul class="flex flex-col gap-4 ml-16 justify-center">
-                    <li class="font-black">Other Projects</li>
-                    <li>MyBudget</li>
+                <ul class="flex flex-col gap-4 ml-8 sm:ml-16 justify-center">
+                    <li class="font-black"><h2>Other Projects</h2></li>
+                    <li><a href="https://roguestar112.github.io/mybudget-oct-2023-frontend/">MyBudget</a></li>
                     <li>MyHabits</li>
                     <li><a href="https://www.demie-mistica.com">Portfolio</a></li>
                 </ul>
