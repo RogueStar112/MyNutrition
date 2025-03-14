@@ -3,7 +3,12 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta property="og:title" content="MyNutrition">
+        <meta property="og:description" content="Powered by Laravel">
+        <meta property="og:image" content="{{ asset('img/mynutritionlogo_upscaled.jpg') }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:type" content="website">
+        
         <title>MyNutrition</title>
 
         
@@ -30,6 +35,7 @@
                 integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
                 crossorigin="anonymous"></script>
         <!--         -->
+
 
 
 

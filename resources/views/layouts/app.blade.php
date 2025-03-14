@@ -4,7 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
+        <meta property="og:title" content="MyNutrition">
+        <meta property="og:description" content="Powered by Laravel">
+        <meta property="og:image" content="{{ asset('img/mynutritionlogo_upscaled.jpg') }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:type" content="website">
 
         <title>MyNutrition</title>
 
@@ -34,6 +38,7 @@
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+        
         @livewireStyles
 
     </head>
