@@ -53,6 +53,8 @@
             <a href="{{ route('login') }}">Login</a>
 
             <a href="{{ route('register') }}">Register</a>
+
+            <a href="#contacts-footer">Contact</a>
         </div>
       </header>
 
@@ -62,20 +64,24 @@
 
       </header> --}}
 
-      <main class="container mx-auto">
-        <div id="desktop-hero" class="hidden xl:grid xl:grid-cols-[2fr_3fr] items-center relative  h-full mx-auto">
+      <main class="container mx-auto sm:p-0">
+        <div id="desktop-hero" class="xl:grid xl:grid-cols-[2fr_3fr] items-center relative  h-full mx-auto">
 
-            <div class="hero-text text-5xl md:text-8xl font-extrabold relative text-center md:text-left md:my-24 text-white md:text-[#CF1909] py-12 z-50">
+            <div class="hero-text text-5xl md:text-8xl font-extrabold relative text-center md:text-left md:my-24 text-white md:text-[#CF1909] py-12 z-50 relative">
 
-                Conquer your 
+                {{-- <div class="bg-black sm:hidden z-0 absolute top-0 w-full h-full opacity-80"></div> --}}
+
+                <div class="mx-auto w-max">Conquer your</div> 
                 
-                <div id="carousel-container" class="flex gap-4 items-center justify-center sm:justify-start relative p-4 overflow-hidden max-w-[179.5px] max-w-[450.767px] h-[128px]">
-                
-                    <div id="carousel-text" style="right: 0px;" class="flex items-center /gap-4 relative  /[&amp;>*]:flex-1">
+                <div id="carousel-container" class="flex gap-4 items-center /justify-start relative p-4 mx-auto /xl:mx-0 overflow-hidden max-w-[241px] xl:max-w-[450.767px] h-[128px]">
+                    
 
-                        <div id="carousel-wrapper" class="carousel-wrapper absolute flex max-w-[179.5px] sm:max-w-[600px] scroll-smooth" style="left: -1rem;">
 
-                            <div class="carousel-slides flex w-[400%] justify-evenly text-center [&>*]:w-[450.767px]">
+                    <div id="carousel-text" style="" class="flex items-center /gap-4 relative  /[&amp;>*]:flex-1">
+
+                        <div id="carousel-wrapper" class="carousel-wrapper absolute flex mx-auto max-w-[241.367px] overflow-hidden sm:max-w-[600px] scroll-smooth" style="left: -1rem;">
+
+                            <div class="carousel-slides flex xl:w-[400%] xl:justify-evenly text-center [&>*]:w-[241.367px] md:[&>*]:w-max xl:[&>*]:w-[450.767px]">
                                 <div class="slide bg-orange-500 text-white p-4 rounded-lg" style="">fitness</div>
                                 <div class="slide bg-orange-500 text-white p-4 rounded-lg" style="">nutrition</div>          
                                 <div class="slide bg-orange-500 text-white p-4 rounded-lg" style="">hydration</div>
@@ -88,15 +94,16 @@
 
                 </div>      
 
-                <div class="flex-row">goals</div>
+
+                <div class="mx-auto text-center">goals</div>
                 
-                <div class="md:absolute md:-right-[24.33%] bg-orange-800 md:text-white md:p-4 z-40 rounded-lg select-none"><span>to</span><span class="md:text-white">day</span></div>
+                <div class="md:absolute md:right-[31.33%] xl:-right-[24.33%] bg-orange-800 md:text-white md:p-4 z-40 rounded-lg select-none mt-4 w-1/2 sm:w-initial mx-auto w-fit p-8 md:p-0"><span>to</span><span class="md:text-white">day</span></div>
 
             </div>
             
-            <div id="hero-images" class="absolute top-0 md:relative z-0">
+            <div id="hero-images" class="absolute top-0 md:relative z-0  brightness-50 sm:brightness-100 ">
 
-                <div class="relative overflow-hidden h-full [&>img]:object-cover z-30 transition duration-300 ease-in-out animate-border" style="border-radius:
+                <div class="relative overflow-hidden h-full [&>img]:object-cover z-30 transition duration-300 ease-in-out animate-border h-[125%] w-[125%] sm:h-initial sm:w-initial" style="border-radius:
     83% 17% 90% 10% / 23% 84% 16% 77%;">
                     <img id="img-1" src="{{ asset('img/pexels-maksgelatin-4348629.jpg') }}" class="img-1 top-0 rounded-lg /opacity-70 z-50"  alt="">
 
@@ -267,8 +274,8 @@
             <div class="grid grid-cols-2 [&>*>*]:text-lg xl:[&>*>*]:text-2xl xl:[&>*>*>h2]:text-4xl">
                 <ul class="flex flex-col gap-4 ml-8 sm:ml-16 justify-center">
                     <li class="font-black"><h2>Socials</h2></li>
-                    <li><a href="https://www.linkedin.com/in/demie-mistica-049779296/"><i class="fab fa-linkedin  /xl:w-[45px] text-center"></i>  LinkedIn</a></li>
-                    <li><a href="https://github.com/RogueStar112"><i class="fab fa-github /xl:w-[45px] text-center"></i>  GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/demie-mistica-049779296/"><i class="fab fa-linkedin w-[22.5px] xl:w-[30px] text-center"></i>  LinkedIn</a></li>
+                    <li><a href="https://github.com/RogueStar112"><i class="fab fa-github w-[22.5px] xl:w-[30px] text-center"></i> GitHub</a></li>
                     <li><i class="fab fa-discord"></i>  Discord</li>
                 </ul>
                 
