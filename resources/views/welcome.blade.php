@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth overflow-x-hidden">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +8,7 @@
         <meta property="og:image" content="{{ asset('img/mynutritionlogo_upscaled.jpg') }}">
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="og:type" content="website">
-        
+
         <title>MyNutrition</title>
 
         
@@ -40,10 +40,10 @@
 
 
     </head>
-    <body class="antialiased mx-auto overflow-x-hidden bg-white dark:bg-gray-800 min-h-screen">
+    <body class="antialiased mx-auto  overflow-x-hidden bg-white dark:bg-gray-800 min-h-screen">
 
       <header>
-        <nav class="flex justify-around items-center mx-auto text-3xl font-extrabold / /sticky top-0 z-50 bg-transparent max-w-[1600px]">
+        <nav id="navbar" class="flex justify-around items-center mx-auto text-3xl font-extrabold / /sticky top-0 z-50 bg-transparent max-w-[1600px]">
             <img class="mx-auto md:mx-0" src="{{ asset('img/mynutritionlogo_upscaled.png')}}" width="128" height="128" alt="">
 
             <div class="flex hidden sm:flex sm:flex-row justify-around text-[#CF1909] gap-8">
@@ -70,7 +70,7 @@
 
       </header> --}}
 
-      <main class="container mx-auto sm:p-0">
+      <main class="container mx-auto sm:p-0 overflow-hidden sm:overflow-visible">
         <div id="desktop-hero" class="xl:grid xl:grid-cols-[2fr_3fr] items-center relative  h-full mx-auto">
 
             <div class="hero-text text-5xl md:text-8xl font-extrabold relative text-center md:text-left md:my-24 text-white md:text-[#CF1909] py-12 z-50 relative">
@@ -163,7 +163,7 @@
             </div>
             <div class="text-center text-4xl font-extrabold mt-8">
                 
-                <p>Track your fluids</p>
+                <p>Water Reminders</p>
 
                 <img class="mt-8 rounded-lg" src="{{ asset( 'img/mynutrition_water.png' ) }}">
 
@@ -278,7 +278,7 @@
             </div>
 
             <div class="grid grid-cols-2 [&>*>*]:text-lg xl:[&>*>*]:text-2xl xl:[&>*>*>h2]:text-4xl">
-                <ul class="flex flex-col gap-4 ml-8 sm:ml-16 justify-center">
+                <ul class="flex flex-col gap-4 ml-8 sm:ml-16 justify-center h-max">
                     <li class="font-black"><h2>Socials</h2></li>
                     <li><a href="https://www.linkedin.com/in/demie-mistica-049779296/"><i class="fab fa-linkedin w-[22.5px] xl:w-[30px] text-center"></i>  LinkedIn</a></li>
                     <li><a href="https://github.com/RogueStar112"><i class="fab fa-github w-[22.5px] xl:w-[30px] text-center"></i> GitHub</a></li>
@@ -289,8 +289,9 @@
                 <ul class="flex flex-col gap-4 ml-8 sm:ml-16 justify-center">
                     <li class="font-black"><h2>Other Projects</h2></li>
                     <li><a href="https://roguestar112.github.io/mybudget-oct-2023-frontend/">MyBudget</a></li>
-                    <li>MyHabits</li>
                     <li><a href="https://www.demie-mistica.com">Portfolio</a></li>
+                    <li class="border-t-2 border-white pt-4"><a href="#navbar">Back to top</a></li>
+
                 </ul>
             </div>
 
