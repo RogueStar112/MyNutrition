@@ -43,8 +43,8 @@
     <body class="antialiased mx-auto  overflow-x-hidden bg-white dark:bg-gray-800 min-h-screen">
 
       <header>
-        <nav id="navbar" class="flex justify-around items-center mx-auto text-3xl font-extrabold / /sticky top-0 z-50 bg-transparent max-w-[1600px]">
-            <img class="mx-auto md:mx-0" src="{{ asset('img/mynutritionlogo_upscaled.png')}}" width="128" height="128" alt="">
+        <nav id="navbar" class="flex px-4 justify-between sm:justify-around items-center sm:mx-auto text-3xl font-extrabold / /sticky top-0 z-50 bg-transparent max-w-[1600px]">
+            <img class="sm:mx-auto md:mx-0" src="{{ asset('img/mynutritionlogo_upscaled.png')}}" width="128" height="128" alt="">
 
             <div class="flex hidden sm:flex sm:flex-row justify-around text-[#CF1909] gap-8">
                 <a href="{{ route('login') }}">Login</a>
@@ -53,15 +53,17 @@
             
                 <a href="#contacts-footer">Contact</a>
             </div>
+
+            <i class="mobile-hamburger-btn sm:hidden fa-solid fa-bars"></i>
+
+            <div class="login-mobile hidden sm:hidden justify-around text-[#CF1909] gap-8 text-2xl">
+                <a href="{{ route('login') }}">Login</a>
+    
+                <a href="{{ route('register') }}">Register</a>
+    
+                <a href="#contacts-footer">Contact</a>
+            </div>
         </nav>
-
-        <div class="login-mobile flex sm:hidden justify-around text-[#CF1909] gap-8 text-2xl">
-            <a href="{{ route('login') }}">Login</a>
-
-            <a href="{{ route('register') }}">Register</a>
-
-            <a href="#contacts-footer">Contact</a>
-        </div>
       </header>
 
       {{-- <header class="bg-orange-500 h-32 w-full my-4 flex items-center justify-center opacity-60 hidden">
@@ -71,7 +73,7 @@
       </header> --}}
 
       <main class="container mx-auto sm:p-0 overflow-hidden sm:overflow-visible">
-        <div id="desktop-hero" class="xl:grid xl:grid-cols-[2fr_3fr] items-center relative  h-full mx-auto">
+        <div id="desktop-hero" class="mt-16 sm:mt-0 xl:grid xl:grid-cols-[2fr_3fr] items-center relative  h-full mx-auto">
 
             <div class="hero-text text-5xl md:text-8xl font-extrabold relative text-center md:text-left md:my-24 text-white md:text-[#CF1909] py-12 z-50 relative">
 
@@ -143,14 +145,14 @@
         </main>
 
         
-        <div id="features" class="relative grid grid-cols-1 px-12 md:px-0 md:grid-cols-3 mt-32 mx-auto text-orange-600 max-w-[1600px] [&>*]:text-center gap-12 [&>*>img]:h-[421px] [&>*>img]:object-cover">
+        <div id="features" class="relative grid grid-cols-1 px-12 md:px-0 md:grid-cols-3 mt-32 mx-auto text-orange-600 max-w-[1400px] [&>*]:text-center gap-12 /[&>*>img]:h-[421px] /[&>*>img]:h-[421px] [&>*>img]:object-cover">
 
-            <div class="absolute  left-[-10rem] hidden sm:block">
-                <img class="" src="{{ asset('img/Fork.png')}}" alt="">
+            <div class="absolute top-[-55px] sm:left-[-10rem] sm:block">
+                <img class="h-[120px] sm:h-[421px]" src="{{ asset('img/Fork.png')}}" alt="">
             </div>
 
-            <div class="absolute  right-[-16rem] bottom-0 hidden sm:block">
-                <img class="" src="{{ asset('img/Knife.png')}}" alt="">
+            <div class="absolute top-[-55px] sm:top-[450px] right-[-20px] sm:right-[-16rem] sm:bottom-0 sm:block">
+                <img class="h-[120px] sm:h-[421px]" src="{{ asset('img/Knife.png')}}" alt="">
             </div>
 
             <div class="md:col-span-3 inline-block bg-gradient-to-r from-orange-400 via-red-500 to-orange-400 bg-clip-text text-5xl md:text-7xl text-transparent font-black">FEATURES</div>
