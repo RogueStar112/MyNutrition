@@ -278,7 +278,7 @@
             </div>
 
             <div class="grid grid-cols-2 [&>*>*]:text-lg xl:[&>*>*]:text-2xl xl:[&>*>*>h2]:text-4xl">
-                <ul class="flex flex-col gap-4 ml-8 sm:ml-16 justify-center h-max">
+                <ul class="flex flex-col gap-4 ml-8 sm:ml-16 justify-center h-max sm:h-full">
                     <li class="font-black"><h2>Socials</h2></li>
                     <li><a href="https://www.linkedin.com/in/demie-mistica-049779296/"><i class="fab fa-linkedin w-[22.5px] xl:w-[30px] text-center"></i>  LinkedIn</a></li>
                     <li><a href="https://github.com/RogueStar112"><i class="fab fa-github w-[22.5px] xl:w-[30px] text-center"></i> GitHub</a></li>
