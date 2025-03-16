@@ -43,7 +43,7 @@
     <body class="antialiased mx-auto  overflow-x-hidden bg-white dark:bg-gray-800 min-h-screen">
 
       <header>
-        <nav id="navbar" class="flex px-4 justify-between sm:justify-around items-center sm:mx-auto text-3xl font-extrabold / /sticky top-0 z-50 bg-transparent max-w-[1600px]">
+        <nav id="navbar" class="grid grid-cols-[1fr_1fr] sm:flex px-6 sm:px-0 justify-between sm:justify-around items-center sm:mx-auto text-3xl font-extrabold / /sticky top-0 z-50 bg-transparent max-w-[1600px]">
             <img class="sm:mx-auto md:mx-0" src="{{ asset('img/mynutritionlogo_upscaled.png')}}" width="128" height="128" alt="">
 
             <div class="flex hidden sm:flex sm:flex-row justify-around text-[#CF1909] gap-8">
@@ -54,16 +54,23 @@
                 <a href="#contacts-footer">Contact</a>
             </div>
 
-            <i class="mobile-hamburger-btn sm:hidden fa-solid fa-bars"></i>
+            <i id="mobile-hamburger-btn" class="mobile-hamburger-btn cursor-pointer justify-self-end sm:hidden fa-solid fa-bars "></i>
 
-            <div class="login-mobile hidden sm:hidden justify-around text-[#CF1909] gap-8 text-2xl">
-                <a href="{{ route('login') }}">Login</a>
-    
-                <a href="{{ route('register') }}">Register</a>
-    
-                <a href="#contacts-footer">Contact</a>
+            <i id="mobile-hamburger-btn-exit" class="fa-solid fa-xmark cursor-pointer justify-self-end hidden sm:hidden fa-solid fa-bars "></i>
+
+            <div id="login-mobile" class="col-span-2 login-mobile /hidden sm:hidden justify-around text-[#CF1909] gap-8 text-2xl">
+
+                <div class="flex flex-col gap-6 text-4xl justify-center [&>*]:grid [&>*]:grid-cols-[1fr_6fr] ">
+                    <a href="{{ route('login') }}"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+        
+                    <a href="{{ route('register') }}"><i class="fa-solid fa-user-plus"></i></i> Register</a>
+        
+                    <a href="#contacts-footer"><i class="fa-solid fa-address-book"></i>Contact</a>
+                </div>
             </div>
         </nav>
+
+        
       </header>
 
       {{-- <header class="bg-orange-500 h-32 w-full my-4 flex items-center justify-center opacity-60 hidden">
@@ -111,7 +118,7 @@
             
             <div id="hero-images" class="absolute top-0 md:relative z-0  brightness-50 sm:brightness-100 ">
 
-                <div class="relative overflow-hidden h-full [&>img]:object-cover z-30 transition duration-300 ease-in-out animate-border h-[125%] w-[125%] sm:h-initial sm:w-initial" style="border-radius:
+                <div class="relative ml-0 sm:ml-4 overflow-hidden h-full [&>img]:object-cover z-30 transition duration-300 ease-in-out animate-border h-[125%] w-[125%] sm:h-initial sm:w-initial" style="border-radius:
     83% 17% 90% 10% / 23% 84% 16% 77%;">
                     <img id="img-1" src="{{ asset('img/pexels-maksgelatin-4348629.jpg') }}" class="img-1 top-0 rounded-lg /opacity-70 z-50"  alt="">
 
@@ -366,5 +373,27 @@
         };
 
         setInterval(nextSlide, 3000); // Auto-slide every 3 seconds
+
+        const mobile_hamburger_btn = document.getElementById('mobile-hamburger-btn');
+        const mobile_hamburger_btn_exit = document.getElementById('mobile-hamburger-btn-exit');
+        const login_mobile = document.getElementById('login-mobile');
+
+        
+        mobile_hamburger_btn.addEventListener('click', function(){
+
+            mobile_hamburger_btn.classList.toggle('hidden');
+            mobile_hamburger_btn_exit.classList.toggle('hidden');
+            login_mobile.classList.toggle('hidden');
+    
+        })
+
+        mobile_hamburger_btn_exit.addEventListener('click', function(){
+
+        mobile_hamburger_btn.classList.toggle('hidden');
+        mobile_hamburger_btn_exit.classList.toggle('hidden');
+        login_mobile.classList.toggle('hidden');
+
+        })
+
     </script>
 </html>
