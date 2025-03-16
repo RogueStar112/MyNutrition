@@ -56,9 +56,9 @@
 
             <i id="mobile-hamburger-btn" class="mobile-hamburger-btn cursor-pointer justify-self-end sm:hidden fa-solid fa-bars "></i>
 
-            <i id="mobile-hamburger-btn-exit" class="fa-solid fa-xmark cursor-pointer justify-self-end hidden sm:hidden fa-solid fa-bars "></i>
+            <i id="mobile-hamburger-btn-exit" class="fa-solid fa-xmark cursor-pointer hidden justify-self-end sm:hidden fa-solid fa-bars "></i>
 
-            <div id="login-mobile" class="col-span-2 login-mobile /hidden sm:hidden justify-around text-[#CF1909] gap-8 text-2xl">
+            <div id="login-mobile" class="col-span-2 login-mobile hidden sm:hidden justify-around text-[#CF1909] gap-8 text-2xl">
 
                 <div class="flex flex-col gap-6 text-4xl justify-center [&>*]:grid [&>*]:grid-cols-[1fr_6fr] ">
                     <a href="{{ route('login') }}"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
