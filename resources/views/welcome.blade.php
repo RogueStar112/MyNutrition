@@ -20,9 +20,10 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        
         {{-- <link rel="stylesheet" href="dist/fontawesome-5.11.2/css/all.min.css" /> --}}
         <!-- Styles --> 
-    
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -35,6 +36,7 @@
                 integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
                 crossorigin="anonymous"></script>
         <!--         -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 
 
@@ -52,6 +54,8 @@
                 <a href="{{ route('register') }}">Register</a>
             
                 <a href="#contacts-footer">Contact</a>
+
+                {{-- <a href="#contacts-footer">Premium</a> --}}
             </div>
 
             <i id="mobile-hamburger-btn" class="mobile-hamburger-btn cursor-pointer justify-self-end sm:hidden fa-solid fa-bars "></i>
@@ -86,7 +90,7 @@
 
                 {{-- <div class="bg-black sm:hidden z-0 absolute top-0 w-full h-full opacity-80"></div> --}}
 
-                <div class="mx-auto w-max">Conquer your</div> 
+                <div class="mx-auto w-max" data-aos="fade-left">Conquer your</div> 
                 
                 <div id="carousel-container" class="flex gap-4 items-center /justify-start relative p-4 mx-auto /xl:mx-0 overflow-hidden max-w-[241px] xl:max-w-[450.767px] h-[128px]">
                     
@@ -110,7 +114,7 @@
                 </div>      
 
 
-                <div class="mx-auto text-center">goals</div>
+                <div class="mx-auto text-center" data-aos="fade-right">goals</div>
                 
                 <div class="md:absolute md:right-[31.33%] xl:-right-[24.33%] bg-orange-800 md:text-white md:p-4 z-40 rounded-lg select-none mt-4 w-1/2 sm:w-initial mx-auto w-fit p-8 md:p-0"><span>to</span><span class="md:text-white">day</span></div>
 
@@ -152,25 +156,25 @@
         </main>
 
         
-        <div id="features" class="relative grid grid-cols-1 px-12 md:px-0 md:grid-cols-3 mt-32 mx-auto text-orange-600 max-w-[1400px] [&>*]:text-center gap-12 /[&>*>img]:h-[421px] /[&>*>img]:h-[421px] [&>*>img]:object-cover">
+        <div id="features" data-aos="fade-up" class="relative grid grid-cols-1 px-12 md:px-0 md:grid-cols-3 mt-32 mx-auto text-orange-600 max-w-[1400px] [&>*]:text-center gap-12 /[&>*>img]:h-[421px] /[&>*>img]:h-[421px] [&>*>img]:object-cover">
 
             <div class="absolute top-[-55px] sm:left-[-10rem] sm:block">
-                <img class="h-[120px] sm:h-[421px]" src="{{ asset('img/Fork.png')}}" alt="">
+                <img class="h-[120px] sm:h-[421px]" src="{{ asset('img/Fork.png')}}" alt="" data-aos="fade-right">
             </div>
 
             <div class="absolute top-[-55px] sm:top-[450px] right-[-20px] sm:right-[-16rem] sm:bottom-0 sm:block">
-                <img class="h-[120px] sm:h-[421px]" src="{{ asset('img/Knife.png')}}" alt="">
+                <img class="h-[120px] sm:h-[421px]" src="{{ asset('img/Knife.png')}}" alt="" data-aos="fade-left">
             </div>
 
             <div class="md:col-span-3 inline-block bg-gradient-to-r from-orange-400 via-red-500 to-orange-400 bg-clip-text text-5xl md:text-7xl text-transparent font-black">FEATURES</div>
-            <div class="text-center text-4xl font-extrabold mt-8">
+            <div class="text-center text-4xl font-extrabold mt-8" data-aos="fade-up" data-aos-duration="500">
                 <p>Nutrition Tracking</p>
                 
                 <img class="mt-8 rounded-lg" src="{{ asset('img/mynutrition_nutritiontracking.png')}}" alt="">
 
                 <p class="mt-8">Calories, Fat, Carbs and Protein are all tracked.</p>
             </div>
-            <div class="text-center text-4xl font-extrabold mt-8">
+            <div class="text-center text-4xl font-extrabold mt-8"  data-aos="fade-up" data-aos-duration="750">
                 
                 <p>Water Reminders</p>
 
@@ -180,7 +184,7 @@
                     Hydration is important, and you can track that down too!
                 </p>
             </div>
-            <div class="text-center text-4xl font-extrabold mt-8">
+            <div class="text-center text-4xl font-extrabold mt-8"  data-aos="fade-up" data-aos-duration="1250">
                 <p>Meal Logging</p>
 
                 <img class="mt-8 rounded-lg" src="{{ asset( 'img/mynutrition_meallog.png') }}">
@@ -196,9 +200,9 @@
         <div class="flex flex-col mt-16" id="slogan">
             <div class="flex flex-col xl:flex-row justify-center items-center [&>p]:text-orange-600 [&>p]:text-7xl gap-4 h-fit">
                 <p class="text-orange-600 font-black">Whether</p>
-                <img class="w-[250px] md:w-[350px]" src="{{ asset('img/dietimage_cropped.png')}}" width="350" alt="">        
+                <img class="w-[250px] md:w-[350px]" src="{{ asset('img/dietimage_cropped.png')}}" width="350" alt="" data-aos="fade-up">        
                 <p class="font-black">OR</p>
-                <img  class="w-[350px] md:w-[450px]" src="{{ asset('img/exerciseimage_cropped.png')}}" width="400" alt="">
+                <img  class="w-[350px] md:w-[450px]" src="{{ asset('img/exerciseimage_cropped.png')}}" width="400" alt=""  data-aos="fade-down">
                 <p class="hidden xl:flex">,</p>
             </div>
 
@@ -395,5 +399,9 @@
 
         })
 
+    </script>
+
+    <script>
+    AOS.init();
     </script>
 </html>
