@@ -22,16 +22,16 @@ return new class extends Migration
         // });
 
 
-        Schema::table('fluid_type', function (Blueprint $table) {
-            $table->string('name');
-        });
+        // Schema::table('fluid_type', function (Blueprint $table) {
+        //     $table->string('name');
+        // });
 
-        DB::table('fluid_type')->insert([
-            ['name' => 'water'],
-            ['name' => 'coke'],
-            ['name' => 'milk'],
-            ['name' => 'fruit']
-        ]);
+        // DB::table('fluid_type')->insert([
+        //     ['name' => 'water'],
+        //     ['name' => 'coke'],
+        //     ['name' => 'milk'],
+        //     ['name' => 'fruit']
+        // ]);
     }
 
     /**

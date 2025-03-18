@@ -123,37 +123,37 @@
 
         @endphp
 
-        <div class="md:grid md:grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6" id="food-item-{{$food['food_id']}}" x-data="{ serving_size: {{$servingSize}}, quantity: {{$quantity}} }">
+        <div class="md:grid md:grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-slate-300 dark:bg-[#111827] rounded-lg relative p-6" id="food-item-{{$food['food_id']}}" x-data="{ serving_size: {{$servingSize}}, quantity: {{$quantity}} }">
 
             <div class="bg-transparent self-center flex justify-center items-center h-[128px] w-[128px] max-w-[128px] max-h-[128px] {{ $food_class ? "[&>img]:hidden [&>i]:scale-150" : "[&>img]:flex" }} [&>img]:justify-evenly [&>img]:items-center rounded-full border-4 border-slate-500">
 
-                <i class="{{ empty($food_class) ? "hidden" : "$food_class text-white scale-150 /leading-[128px] /h-[128px] /w-[128px] /max-w-[128px] /max-h-[128px] text-center " }} text-2xl sm:text-3xl md:text-4xl"></i>
+                <i class="{{ empty($food_class) ? "hidden" : "$food_class bg-gray dark:text-white scale-150 /leading-[128px] /h-[128px] /w-[128px] /max-w-[128px] /max-h-[128px] text-center " }} text-2xl sm:text-3xl md:text-4xl"></i>
                 
-                <img class="/p-6 object-cover {{ empty($food['img_url']) ? "hidden" : "" }} rounded-full {{  $food_class ? "hidden" : "" }} text-center leading-[128px] text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="{{empty($food_class) ? $food_name_initials : ""}}  " />
+                <img class="/p-6 object-cover {{ empty($food['img_url']) ? "hidden" : "" }} rounded-full {{  $food_class ? "hidden" : "" }} text-center leading-[128px] bg-gray dark:text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="{{empty($food_class) ? $food_name_initials : ""}}  " />
             </div>
 
             <div class="desc-box m-4 md:m-0 md:pl-6 self-center">
 
                 <div class="h-full">
                     <div class="h-1/2">
-                        <p class="text-white font-extrabold text-xl">{{$food['name']}}</p>
+                        <p class="dark:text-white font-extrabold text-xl">{{$food['name']}}</p>
                         <p class="text-gray-500 text-lg">{{$food['source_name']}}</p>
 
                         <div class="flex items-center">
                             {{-- <img src="{{url('/img/blankpfp.png')}}" width="24" height="24"> --}}
-                            <i class="fa-solid fa-user text-center text-md text-white"></i>
+                            <i class="fa-solid fa-user text-center text-md bg-gray dark:text-white"></i>
                             <p class="mx-3 text-gray-500">{{$food['user_name']}}</p>
                         </div>
                     </div>
 
                     {{-- <div class="h-1/2 block md:hidden">
-                        <p class="text-white font-extrabold text-xl">{{$food['name']}}</p>
+                        <p class="bg-gray dark:text-white font-extrabold text-xl">{{$food['name']}}</p>
                         
                         <div class="flex justify-between mb-3 border-b-2 border-b-orange-400 border-opacity-40" >
                             <p class="text-gray-500 text-lg grow">{{$food['source_name']}}</p>
 
                             <div class="flex grow flex-row-reverse text-lg">
-                            <i class="fa-solid fa-user text-center text-white"></i>
+                            <i class="fa-solid fa-user text-center bg-gray dark:text-white"></i>
                             <p class="mx-3 text-gray-500">by {{$food['user_name']}}</p>
                             </div>
                         </div>
@@ -164,7 +164,7 @@
             </div>
 
                 
-            <div class="text-white h-full text-center mr-2 self-center" aria-label="food-macros">
+            <div class="bg-gray dark:text-white h-full text-center mr-2 self-center" aria-label="food-macros">
                 <div class="flex justify-center gap-6 [&>button]:w-[16px] [&>button]:h-[16px]">
 
                     {{-- <div class="flex gap-3 justify-center">
@@ -197,7 +197,7 @@
 
                     <section>
                         <p>{{ ($food['calories'] > 1000) ? round($food['calories']/1000) . 'k ' : $food['calories'] . 'kcal' }}</p>
-                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-blue-900">
+                        <div class="w-full mt-1 bg-gray-100 /dark:bg-gray-200 rounded-full h-2.5 bg-blue-100 dark:bg-blue-900">
                             <div id="food_progressbar_calories_{{$index}}" class="bg-blue-600 h-2.5 rounded-full {{$calorieExceedGlow ? "drop-shadow-glow animate-pulse" : ""}}" style="width: {{ $caloriePerc }}%"></div>
                         </div>
                         <p class="mt-1 text-blue-600">Calories</p>
@@ -207,7 +207,7 @@
 
                     <section>
                         <p>{{($food['fat'] > 1000) ? round($food['fat']/1000) . 'kg ' : $food['fat'] . 'g'}}</p>
-                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-orange-900">
+                        <div class="w-full mt-1 bg-gray-100 dark:bg-gray-200 rounded-full h-2.5 bg-orange-100 dark:bg-orange-900">
                             <div id="food_progressbar_fat_{{$index}}" class="bg-orange-600 h-2.5 rounded-full {{$fatExceedGlow ? "drop-shadow-glow animate-pulse" : ""}}" style="width: {{ $fatPerc }}%"></div>
                         </div>
                         <p class="mt-1 text-orange-600">Fat</p>
@@ -220,7 +220,7 @@
                         <p>{{($food['carbohydrates'] > 1000) ? round($food['carbohydrates']/1000) . 'kg ' : $food['carbohydrates'] . 'g'}}
                         </p>
 
-                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-yellow-900">
+                        <div class="w-full mt-1 bg-gray-100 dark:bg-gray-200 rounded-full h-2.5 bg-yellow-100 dark:bg-yellow-900">
                             <div id="food_progressbar_carbs_{{$index}}" class="bg-yellow-500 h-2.5 rounded-full {{$carbsExceedGlow ? "drop-shadow-glow animate-pulse" : ""}}" style="width: {{ $carbsPerc }}%"></div>
                         </div>
 
@@ -234,7 +234,7 @@
                         <p>{{($food['protein'] > 1000) ? round($food['protein']/1000) . 'kg ' : $food['protein'] . 'g'}}
                         </p>
 
-                        <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-green-900">
+                        <div class="w-full mt-1 bg-gray-100 dark:bg-gray-200 rounded-full h-2.5 dark:bg-green-900">
                             <div id="food_progressbar_protein_{{$index}}" class="bg-green-600 h-2.5 rounded-full {{$proteinExceedGlow ? "drop-shadow-glow animate-pulse w-[110%] max-w-full overflow-hidden" : ""}}" style="width: {{ $proteinPerc }}%"></div>
                         </div>
 
@@ -254,11 +254,11 @@
             <div id="food-add-{{$food['food_id']}}" class="absolute top-0 md:top-auto flex flex-col gap-8 md:gap-0 justify-center items-center h-min md:h-full md:rounded-r-lg right-0 cursor-pointer md:max-w-[44px] p-4 md:p-0">
                     
                     <button type="button" class="grow flex justify-center items-center add_food_icon bg-green-500 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-tr-lg text-md" value="{{$food['id']}}">
-                    <i id="food-add-icon-{{$food['food_id']}}" class="flex fas fa-plus fa-2x text-white self-center cursor-pointer py-auto px-2 rounded-tr-lg"></i>
+                    <i id="food-add-icon-{{$food['food_id']}}" class="flex fas fa-plus fa-2x bg-gray dark:text-white self-center cursor-pointer py-auto px-2 rounded-tr-lg"></i>
                     </button>
 
                     <button type="button" class="grow bg-red-800 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-br-lg flex justify-center items-center delete_food_icon text-md" value="{{$food['id']}}" value="{{$food['food_id']}}">
-                    <i id="food-del-icon-{{$food['food_id']}}" class="flex fas fa-trash fa-2x text-white self-center cursor-pointer py-auto px-2"></i>
+                    <i id="food-del-icon-{{$food['food_id']}}" class="flex fas fa-trash fa-2x bg-gray dark:text-white self-center cursor-pointer py-auto px-2"></i>
                     </button>
                     
             </div>

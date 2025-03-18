@@ -6,7 +6,7 @@
     </x-slot>
 
     @if(session('success'))
-    <div class="alert alert-success max-w-7xl rounded-lg mx-auto text-center bg-green-800 text-white p-6" id="success-message-received">
+    <div class="alert alert-success max-w-7xl rounded-lg mx-auto text-center bg-green-800 dark:text-white p-6" id="success-message-received">
         {{ session('success') }}
     </div>
 
@@ -18,7 +18,7 @@
     @endif
 
     @if ($errors->any())
-    <div class="alert alert-danger max-w-7xl rounded-lg mx-auto text-center bg-red-800 text-white" id="error-message-received">
+    <div class="alert alert-danger max-w-7xl rounded-lg mx-auto text-center bg-red-800 dark:text-white" id="error-message-received">
         <h2 class="text-2xl font-extrabold">Input Error</h2>
         <ul>
             @foreach ($errors->all() as $error)
@@ -39,20 +39,20 @@
         <div class="flex max-w-7xl flex-col-reverse md:flex-row relative mx-auto">
 
             <div class="max-w-7xl /w-[768px] mx-auto sm:px-6 lg:px-8">
-                <form id="FOOD_FORM" class="bg-gray-800 max-w-[65rem] /h-32 rounded-lg mx-4" method="GET" action="{{ route('meal.create_p2')}}">
+                <form id="FOOD_FORM" class="dark:bg-gray-800 max-w-[65rem] /h-32 rounded-lg mx-4" method="GET" action="{{ route('meal.create_p2')}}">
                     @csrf
 
                     
-                    <div id="FOOD_FORM_INPUTS" class="relative w-full max-w-[400px] md:max-w-full md:max-h-[682px] overflow-hidden">
+                    <div id="FOOD_FORM_INPUTS" class="relative bg-gray-50 dark:bg-gray-800 w-full max-w-[400px] md:max-w-full md:max-h-[682px] overflow-hidden">
                        <x-meal-input-item index="1"/>
 
                     </div>
 
-                    <div id="food-media-controls" class="sticky top-0 z-0 md:z-50 bg-gray-800 hidden md:block">
+                    <div id="food-media-controls" class="sticky top-0 z-0 md:z-50 bg-gray-50 dark:bg-gray-800 hidden md:block">
                         {{-- <div class="flex justify-center">
-                            <button id="PREV-PAGE-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-arrow-left"></i></button>
-                            <button id="ADD-FOOD-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-plus"></i></button>
-                            <button id="NEXT-PAGE-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-arrow-right"></i></button>
+                            <button id="PREV-PAGE-BTN" type="button" class="bg-lime-800 dark:text-white p-4 m-4 rounded-lg"><i class="fas fa-arrow-left"></i></button>
+                            <button id="ADD-FOOD-BTN" type="button" class="bg-lime-800 dark:text-white p-4 m-4 rounded-lg"><i class="fas fa-plus"></i></button>
+                            <button id="NEXT-PAGE-BTN" type="button" class="bg-lime-800 dark:text-white p-4 m-4 rounded-lg"><i class="fas fa-arrow-right"></i></button>
                         </div>
 
                         <div class="flex justify-center">
@@ -61,9 +61,9 @@
 
                         <div class="flex justify-center z-[9999]">
                             <input type="hidden" id="pages" name="food_pages" value="1"/>
-                            <button type="button" class="bg-red-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-trash"></i>  DELETE</button>
-                            <button type="button" class="bg-blue-600 text-white p-4 m-4 rounded-lg"><a href="{{ route('meal.view') }}"><i class="fas fa-eye"></i> VIEW</a></button>
-                            <button type="submit" class="bg-lime-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-check"></i>  SUBMIT</button>
+                            <button type="button" class="bg-red-600 dark:text-white p-4 m-4 rounded-lg"><i class="fas fa-trash"></i>  DELETE</button>
+                            <button type="button" class="bg-blue-600 dark:text-white p-4 m-4 rounded-lg"><a href="{{ route('meal.view') }}"><i class="fas fa-eye"></i> VIEW</a></button>
+                            <button type="submit" class="bg-lime-600 dark:text-white p-4 m-4 rounded-lg"><i class="fas fa-check"></i>  SUBMIT</button>
                         </div>
                     </div>
 
@@ -71,13 +71,13 @@
             
                     <div id="FOOD-ITEMS-CONTAINER-MOBILE" class="hidden sm:hidden max-w-sm mx-auto max-h-screen pb-4 /sm:px-6 /lg:px-8 [&>*]:my-3 [&>*]:mx-auto [&>div]:bg-slate-900">
                 
-                        <h2 class="text-center text-white text-2xl italic mt-4 font-extrabold opacity-40">FOOD LIST</h2>
+                        <h2 class="text-center dark:text-white text-2xl italic mt-4 font-extrabold opacity-40">FOOD LIST</h2>
 
                         <p class="text-center text-gray-400 opacity-40">An example of what adding these items look like!</p>
                         
-                        <div id="meal_item_1" class="opacity-40 meal_248 meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg    pt-6 text-white shadow-md shadow-black overflow-hidden" index="1">
+                        <div id="meal_item_1" class="opacity-40 meal_248 bg-gray-50 meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg    pt-6 dark:text-white shadow-md shadow-black overflow-hidden" index="1">
                             <ul class="relative ">
-                                <button type="button" id="item_revealbtn_1" index="1" class="item_revealbtn_1 food_revealbtn absolute right-0 bg-lime-800 text-white p-3 mr-6 rounded-lg ">
+                                <button type="button" id="item_revealbtn_1" index="1" class="item_revealbtn_1 food_revealbtn absolute right-0 bg-lime-800 dark:text-white p-3 mr-6 rounded-lg ">
                                     <i id="item_icon_1" class="item_icon_1 fas fa-chevron-up"> </i>
                                 </button>
                         
@@ -146,7 +146,7 @@
                                 <div id="nutritional-media-buttons-1" class="nutritional-media-buttons-1 nutritional-media-buttons w-full flex text-center mt-3 [&amp;>*]:my-auto absolute left-0 bottom-0 duration-200 [&amp;>*]:cursor-pointer [&amp;>*>*]:cursor-pointer">
                         
                                     <div id="mealitem-edit-btn-1" class="w-full bg-yellow-500 hover:bg-yellow-600 duration-150 text-black">EDIT</div>
-                                    <div id="mealitem-delete-btn-1" class="w-full bg-red-500 hover:bg-red-600 duration-150 text-white" data-id="248" data-index="1">DELETE</div>
+                                    <div id="mealitem-delete-btn-1" class="w-full bg-red-500 hover:bg-red-600 duration-150 dark:text-white" data-id="248" data-index="1">DELETE</div>
                         
                                     <div id="mealitem-delete-btn-confirmcontainer-1" class="w-full flex p-0 hidden" data-id="248">
                                         <div id="mealitem-delete-btn-no-1" class="w-full bg-red-500">X</div>
@@ -157,9 +157,9 @@
                             </ul>
                         </div>
 
-                        <div id="meal_item_2" class="opacity-40 meal_97 meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg    pt-6 text-white shadow-md shadow-black overflow-hidden" index="2">
+                        <div id="meal_item_2" class="opacity-40 meal_97 meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg    pt-6 dark:text-white shadow-md shadow-black overflow-hidden" index="2">
                             <ul class="relative  ">
-                                <button type="button" id="item_revealbtn_2" index="2" class="item_revealbtn_2 food_revealbtn absolute right-0 bg-lime-800 text-white p-3 mr-6 rounded-lg ">
+                                <button type="button" id="item_revealbtn_2" index="2" class="item_revealbtn_2 food_revealbtn absolute right-0 bg-lime-800 dark:text-white p-3 mr-6 rounded-lg ">
                                     <i id="item_icon_2" class="item_icon_2 fa-chevron-down fas"> </i>
                                 </button>
                         
@@ -230,7 +230,7 @@
                                 <div id="nutritional-media-buttons-2" class="nutritional-media-buttons-2 nutritional-media-buttons w-full flex text-center mt-3 [&amp;>*]:my-auto absolute left-0 bottom-0 duration-200 [&amp;>*]:cursor-pointer [&amp;>*>*]:cursor-pointer hidden">
                         
                                     <div id="mealitem-edit-btn-2" class="w-full bg-yellow-500 hover:bg-yellow-600 duration-150 text-black">EDIT</div>
-                                    <div id="mealitem-delete-btn-2" class="w-full bg-red-500 hover:bg-red-600 duration-150 text-white" data-id="97" data-index="2">DELETE</div>
+                                    <div id="mealitem-delete-btn-2" class="w-full bg-red-500 hover:bg-red-600 duration-150 dark:text-white" data-id="97" data-index="2">DELETE</div>
                         
                                     <div id="mealitem-delete-btn-confirmcontainer-2" class="w-full flex p-0 hidden" data-id="97">
                                         <div id="mealitem-delete-btn-no-2" class="w-full bg-red-500">X</div>
@@ -244,39 +244,39 @@
                          
                             <div class="flex justify-center">
                                 <input type="hidden" id="pages" name="food_pages" value="1"/>
-                                <button type="button" class="bg-red-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-trash"></i>  DELETE</button>
-                                <button type="button" class="bg-blue-600 text-white p-4 m-4 rounded-lg"><a href="{{ route('meal.view') }}"><i class="fas fa-eye"></i> VIEW</a></button>
-                                <button type="submit" class="bg-lime-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-check"></i>  SUBMIT</button>
+                                <button type="button" class="bg-red-600 dark:text-white p-4 m-4 rounded-lg"><i class="fas fa-trash"></i>  DELETE</button>
+                                <button type="button" class="bg-blue-600 dark:text-white p-4 m-4 rounded-lg"><a href="{{ route('meal.view') }}"><i class="fas fa-eye"></i> VIEW</a></button>
+                                <button type="submit" class="bg-lime-600 dark:text-white p-4 m-4 rounded-lg"><i class="fas fa-check"></i>  SUBMIT</button>
                             </div>
                         </div> --}}
                     </div>
 
                     
 
-                    <div id="FOOD-SEARCH-CONTAINER" class="[&>*]:m-4 pb-4">
+                    <div id="FOOD-SEARCH-CONTAINER" class="[&>div]:m-4 pb-4 bg-gray-50 dark:bg-gray-800">
                         <!-- x-meal-search-items -->
 
                         <p class="text-center text-gray-400 opacity-40">An example of what searching looks like...</p>
 
-                        <div class="md:grid md:grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6 opacity-40 select-none" id="" x-data="{ serving_size: 100, quantity: 1 }">
+                        <div class="md:grid md:grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-slate-300 dark:bg-[#111827] rounded-lg relative p-6 opacity-40 select-none" id="" x-data="{ serving_size: 100, quantity: 1 }">
 
                             <div class="bg-transparent self-center flex justify-center items-center h-[128px] w-[128px] max-w-[128px] max-h-[128px] [&amp;>img]:hidden [&amp;>i]:scale-150 [&amp;>img]:justify-evenly [&amp;>img]:items-center rounded-full border-4 border-slate-500">
                 
-                                <i class="fa-solid fa-carrot text-white scale-150 /leading-[128px] /h-[128px] /w-[128px] /max-w-[128px] /max-h-[128px] text-center  text-2xl sm:text-3xl md:text-4xl"></i>
+                                <i class="fa-solid fa-carrot dark:text-white scale-150 /leading-[128px] /h-[128px] /w-[128px] /max-w-[128px] /max-h-[128px] text-center  text-2xl sm:text-3xl md:text-4xl"></i>
                                 
-                                <img class="/p-6 object-cover hidden rounded-full hidden text-center leading-[128px] text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]" src="http://localhost:8000/" alt="  ">
+                                <img class="/p-6 object-cover hidden rounded-full hidden text-center leading-[128px] dark:text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]" src="http://localhost:8000/" alt="  ">
                             </div>
                 
                             <div class="desc-box m-6 self-center">
                 
                                 <div class="h-full">
                                     <div class="h-1/2">
-                                        <p class="text-white font-extrabold text-xl">Sweet Potato Fries</p>
+                                        <p class="dark:text-white font-extrabold text-xl">Sweet Potato Fries</p>
                                         <p class="text-gray-500 text-lg">Lidl</p>
                 
                                         <div class="flex items-center">
                                             
-                                            <i class="fa-solid fa-user text-center text-md text-white"></i>
+                                            <i class="fa-solid fa-user text-center text-md dark:text-white"></i>
                                             <p class="mx-3 text-gray-500">FitnessAnon123</p>
                                         </div>
                                     </div>
@@ -287,7 +287,7 @@
                             </div>
                 
                                 
-                            <div class="text-white h-full text-center mr-2 self-center" aria-label="food-macros">
+                            <div class="dark:text-white h-full text-center mr-2 self-center" aria-label="food-macros">
                                 <div class="flex justify-center gap-6 [&amp;>button]:w-[16px] [&amp;>button]:h-[16px]">
                 
                                     
@@ -361,11 +361,11 @@
                             <div id="food-add-248" class="absolute top-0 md:top-auto flex flex-col gap-8 md:gap-0 justify-center items-center h-min md:h-full md:rounded-r-lg right-0 md:max-w-[44px] p-4 md:p-0">
                                     
                                     <div class="grow flex justify-center items-center add_food_icon bg-green-500 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-tr-lg text-md" value="248">
-                                    <i id="food-add-icon-248" class="flex fas fa-plus fa-2x text-white self-center py-auto px-2 rounded-tr-lg"></i>
+                                    <i id="food-add-icon-248" class="flex fas fa-plus fa-2x dark:text-white self-center py-auto px-2 rounded-tr-lg"></i>
                                     </div>
                 
                                     <div class="grow bg-red-800 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-br-lg flex justify-center items-center delete_food_icon text-md" value="248">
-                                    <i id="food-del-icon-248" class="flex fas fa-trash fa-2x text-white self-center py-auto px-2"></i>
+                                    <i id="food-del-icon-248" class="flex fas fa-trash fa-2x dark:text-white self-center py-auto px-2"></i>
                                     </div>
                                     
                             </div>
@@ -373,25 +373,25 @@
                             
                         </div>
 
-                        <div class="md:grid md:grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-[#111827] rounded-lg relative p-6 opacity-40 select-none" id="" x-data="{ serving_size: 100, quantity: 1 }">
+                        <div class="md:grid md:grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-slate-300 dark:bg-[#111827] rounded-lg relative p-6 opacity-40 select-none" id="" x-data="{ serving_size: 100, quantity: 1 }">
 
                             <div class="bg-transparent self-center flex justify-center items-center h-[128px] w-[128px] max-w-[128px] max-h-[128px] [&amp;>img]:flex [&amp;>img]:justify-evenly [&amp;>img]:items-center rounded-full border-4 border-slate-500">
                 
                                 <i class="hidden text-2xl sm:text-3xl md:text-4xl"></i>
                                 
-                                <img class="/p-6 object-cover  rounded-full  text-center leading-[128px] text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]" src="http://localhost:8000/storage/images/food/Kutas6UEoBMSUNyHdkLef94umTrlev24v3cgDK0p.jpg" alt="HACF  ">
+                                <img class="/p-6 object-cover  rounded-full  text-center leading-[128px] dark:text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]" src="http://localhost:8000/storage/images/food/Kutas6UEoBMSUNyHdkLef94umTrlev24v3cgDK0p.jpg" alt="HACF  ">
                             </div>
                 
                             <div class="desc-box m-6 self-center">
                 
                                 <div class="h-full">
                                     <div class="h-1/2">
-                                        <p class="text-white font-extrabold text-xl">Hummus and Carrot Fries</p>
+                                        <p class="dark:text-white font-extrabold text-xl">Hummus and Carrot Fries</p>
                                         <p class="text-gray-500 text-lg">Homemade</p>
                 
                                         <div class="flex items-center">
                                             
-                                            <i class="fa-solid fa-user text-center text-md text-white"></i>
+                                            <i class="fa-solid fa-user text-center text-md dark:text-white"></i>
                                             <p class="mx-3 text-gray-500">FitnessAnon123</p>
                                         </div>
                                     </div>
@@ -402,7 +402,7 @@
                             </div>
                 
                                 
-                            <div class="text-white h-full text-center mr-2 self-center" aria-label="food-macros">
+                            <div class="dark:text-white h-full text-center mr-2 self-center" aria-label="food-macros">
                                 <div class="flex justify-center gap-6 [&amp;>button]:w-[16px] [&amp;>button]:h-[16px]">
                 
                                     
@@ -476,11 +476,11 @@
                             <div id="food-add-97" class="absolute top-0 md:top-auto flex flex-col gap-8 md:gap-0 justify-center items-center h-min md:h-full md:rounded-r-lg right-0 md:max-w-[44px] p-4 md:p-0">
                                     
                                     <div class="grow flex justify-center items-center add_food_icon bg-green-500 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-tr-lg text-md" value="97">
-                                    <i id="food-add-icon-97" class="flex fas fa-plus fa-2x text-white self-center  py-auto px-2 rounded-tr-lg"></i>
+                                    <i id="food-add-icon-97" class="flex fas fa-plus fa-2x dark:text-white self-center  py-auto px-2 rounded-tr-lg"></i>
                                     </div>
                 
                                     <div class="grow bg-red-800 rounded-full md:rounded-none py-[6px] md:py-0 md:rounded-br-lg flex justify-center items-center delete_food_icon text-md" value="97">
-                                    <i id="food-del-icon-97" class="flex fas fa-trash fa-2x text-white self-center py-auto px-2"></i>
+                                    <i id="food-del-icon-97" class="flex fas fa-trash fa-2x dark:text-white self-center py-auto px-2"></i>
                                     </div>
                                     
                             </div>
@@ -503,9 +503,9 @@
                 
                 <p class="text-center text-gray-300 opacity-40 italic m-4">What adding items looks like!</p>
 
-                <div id="meal_item_1" class="opacity-40 meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg    pt-6 text-white shadow-md shadow-black overflow-hidden" index="1">
+                <div id="meal_item_1" class="opacity-40 meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg    pt-6 dark:text-white shadow-md shadow-black overflow-hidden" index="1">
                     <ul class="relative  relative ">
-                        <button type="button" id="item_revealbtn_1" index="1" class="item_revealbtn_1 food_revealbtn absolute right-0 bg-lime-800 text-white p-3 mr-6 rounded-lg ">
+                        <button type="button" id="item_revealbtn_1" index="1" class="item_revealbtn_1 food_revealbtn absolute right-0 bg-lime-800 dark:text-white p-3 mr-6 rounded-lg ">
                             <i id="item_icon_1" class="item_icon_1 fas fa-chevron-up"> </i>
                         </button>
                 
@@ -574,7 +574,7 @@
                         <div id="nutritional-media-buttons-1" class="nutritional-media-buttons-1 nutritional-media-buttons w-full flex text-center mt-3 [&amp;>*]:my-auto absolute left-0 bottom-0 duration-200 [&amp;>*]:cursor-pointer [&amp;>*>*]:cursor-pointer">
                 
                             <div id="mealitem-edit-btn-1" class="w-full bg-yellow-500 hover:bg-yellow-600 duration-150 text-black">EDIT</div>
-                            <div id="mealitem-delete-btn-1" class="w-full bg-red-500 hover:bg-red-600 duration-150 text-white" data-id="248" data-index="1">DELETE</div>
+                            <div id="mealitem-delete-btn-1" class="w-full bg-red-500 hover:bg-red-600 duration-150 dark:text-white" data-id="248" data-index="1">DELETE</div>
                 
                             <div id="mealitem-delete-btn-confirmcontainer-1" class="w-full flex p-0 hidden" data-id="248">
                                 <div id="mealitem-delete-btn-no-1" class="w-full bg-red-500">X</div>
@@ -585,9 +585,9 @@
                     </ul>
                 </div>
 
-                <div id="meal_item_2" class="opacity-40 meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg    pt-6 text-white shadow-md shadow-black overflow-hidden" index="2">
+                <div id="meal_item_2" class="opacity-40 meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg    pt-6 dark:text-white shadow-md shadow-black overflow-hidden" index="2">
                     <ul class="relative  ">
-                        <button type="button" id="item_revealbtn_2" index="2" class="item_revealbtn_2 food_revealbtn absolute right-0 bg-lime-800 text-white p-3 mr-6 rounded-lg ">
+                        <button type="button" id="item_revealbtn_2" index="2" class="item_revealbtn_2 food_revealbtn absolute right-0 bg-lime-800 dark:text-white p-3 mr-6 rounded-lg ">
                             <i id="item_icon_2" class="fas fa-chevron-down item_icon_2"> </i>
                         </button>
                 
@@ -658,7 +658,7 @@
                         <div id="nutritional-media-buttons-2" class="nutritional-media-buttons-2 nutritional-media-buttons w-full flex text-center mt-3 [&amp;>*]:my-auto absolute left-0 bottom-0 hidden duration-200 [&amp;>*]:cursor-pointer [&amp;>*>*]:cursor-pointer">
                 
                             <div id="mealitem-edit-btn-2" class="w-full bg-yellow-500 hover:bg-yellow-600 duration-150 text-black">EDIT</div>
-                            <div id="mealitem-delete-btn-2" class="w-full bg-red-500 hover:bg-red-600 duration-150 text-white" data-id="97" data-index="2">DELETE</div>
+                            <div id="mealitem-delete-btn-2" class="w-full bg-red-500 hover:bg-red-600 duration-150 dark:text-white" data-id="97" data-index="2">DELETE</div>
                 
                             <div id="mealitem-delete-btn-confirmcontainer-2" class="w-full flex p-0 hidden" data-id="97">
                                 <div id="mealitem-delete-btn-no-2" class="w-full bg-red-500">X</div>

@@ -1,35 +1,37 @@
-<div id="meal_number_{{$index}}" class="/inline-block">
+
+
+<div id="meal_number_{{$index}}" class="/inline-block bg-slate-50 dark:bg-slate-800">
 
     <div class="p-6 text-center">
-    <p class="text-gray-500">You have two options to add meals.</p>
+    <p class="dark:text-gray-500">You have two options to add meals.</p>
 
-    <h2 class="text-white text-2xl mt-2 text-center">1. Select Existing Foods To Add</h2>
-    <p class="text-gray-500 italic mt-2 text-center">Type in all three inputs, then press enter. ↩️</p>
+    <h2 class="dark:text-white text-2xl mt-2 text-center">1. Select Existing Foods To Add</h2>
+    <p class="dark:text-gray-500 italic mt-2 text-center">Type in all three inputs, then press enter. ↩️</p>
     </div>
 
     <div class="mb-3 md:grid md:grid-cols-3 gap-1 /w-[50rem]">
         
         <label class="block p-6">
-            <span class="text-white w-full text-center block">Search Existing Foods</span>
+            <span class="dark:text-white w-full text-center block">Search Existing Foods</span>
             <div class="flex place-items-center w-full">
-                <i class="fas fa-magnifying-glass mx-3 text-white"></i>
-                <input type="text" id="meal_name_{{$index}}" name="meal_name_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="Fries" value="" required/>
+                <i class="fas fa-magnifying-glass mx-3 dark:text-white"></i>
+                <input type="text" id="meal_name_{{$index}}" name="meal_name_{{$index}}" class="block dark:bg-slate-700 dark:text-gray-200 w-full mt-1 rounded-md" placeholder="Fries" value="" required/>
             </div>
         </label>
 
         <label class="block p-6">
-            <span class="text-white w-full text-center block">Enter Serving Size</span>
+            <span class="dark:text-white w-full text-center block">Enter Serving Size</span>
             <div class="flex place-items-center">
-                <i class="fas fa-balance-scale mx-3 text-white"></i>
-                <input type="text" id="meal_servingsize_{{$index}}" name="meal_name_servingsize_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="100" value="" required/>
+                <i class="fas fa-balance-scale mx-3 dark:text-white"></i>
+                <input type="text" id="meal_servingsize_{{$index}}" name="meal_name_servingsize_{{$index}}" class="block dark:bg-slate-700 dark:text-gray-200 w-full mt-1 rounded-md" placeholder="100" value="" required/>
             </div>
         </label>
 
         <label class="block p-6">
-            <span class="text-white w-full text-center block">Enter Quantity</span>
+            <span class="dark:text-white w-full text-center block">Enter Quantity</span>
             <div class="flex place-items-center">
-                <i class="fas fa-times mx-3 text-white"></i>
-                <input type="text" id="meal_quantity_{{$index}}" name="meal_name_quantity_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="1" value="" required/>
+                <i class="fas fa-times mx-3 dark:text-white"></i>
+                <input type="text" id="meal_quantity_{{$index}}" name="meal_name_quantity_{{$index}}" class="block dark:bg-slate-700 dark:text-gray-200 w-full mt-1 rounded-md" placeholder="1" value="" required/>
             </div>
         </label>
 

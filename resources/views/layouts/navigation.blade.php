@@ -1,4 +1,4 @@
-<nav class="bg-white dark:bg-slate-800 dark:text-white border-b border-gray-800" x-data="{ open : true }">
+<nav class="bg-slate-100 dark:bg-slate-800 dark:text-white border-b border-gray-800" x-data="{ open : true }">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -44,7 +44,7 @@
 
                 <form id="NOTIFICATION-FORM" class="relative" method="GET"  x-data="{ expand_notifications: false }">
                     @csrf
-                    <button type="submit" id="notification-bell" class="flex relative justify-end fill-white text-3xl has-notifications cursor-pointer"" x-on:click="expand_notifications = ! expand_notifications" >
+                    <button type="button" id="notification-bell" class="flex relative justify-end fill-black dark:fill-white text-2xl has-notifications cursor-pointer" x-on:click="expand_notifications = ! expand_notifications" >
             
                         <div id="notifications-found" class="absolute bottom-0 right-0 bg-red-500 w-3 h-3 z-50 animate-ping rounded-full select-none hidden">
                         
@@ -76,14 +76,16 @@
                             
                         </div>   --}}
 
-                        <svg class="invert" width="24px" height="24px" viewBox="0 0 32 32" id="Lager_95" data-name="Lager 95" xmlns="http://www.w3.org/2000/svg">
+                        {{-- <svg class="invert [&>*]:fill-black dark:fill-white" width="24px" height="24px" viewBox="0 0 32 32" id="Lager_95" data-name="Lager 95" xmlns="http://www.w3.org/2000/svg">
                             <g id="Rectangle_1" data-name="Rectangle 1" transform="translate(4)" fill="none" stroke="#040505" stroke-miterlimit="10" stroke-width="4">
                             <path d="M12,0h0A12,12,0,0,1,24,12V24a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V12A12,12,0,0,1,12,0Z" stroke="none"/>
                             <path d="M12,2h0A10,10,0,0,1,22,12v8a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V12A10,10,0,0,1,12,2Z" fill="none"/>
                             </g>
                             <rect id="Rectangle_2" data-name="Rectangle 2" width="32" height="4" rx="2" transform="translate(0 20)" fill="#040505"/>
                             <path id="Path_9" data-name="Path 9" d="M16,32h0a4,4,0,0,1-4-4V26h8v2A4,4,0,0,1,16,32Z" fill="#040505"/>
-                        </svg>
+                        </svg> --}}
+
+                        🔔
 
                         <span class="hidden relative /flex mr-3 h-3 w-3">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -97,9 +99,9 @@
                         <livewire:meal-notification-livewire :id="$mealNotification->id" />
                     @endforeach --}}
 
-                    <div id="notifications-base" class="rounded-lg absolute top-[100%] bg-slate-900 max-h-[440px] overflow-y-scroll w-[256px] right-0"  x-show="expand_notifications ">
+                    <div id="notifications-base" class="rounded-lg absolute top-[100%] bg-slate-900 max-h-[440px] overflow-y-scroll w-[256px] right-0"  x-show="expand_notifications">
 
-                        <h2 class="text-2xl italic font-extrabold m-4 text-center">NOTIFICATIONS</h2>
+                        <h2 class="text-2xl italic font-extrabold m-4 text-center text-white">NOTIFICATIONS</h2>
 
                         @if(count($mealNotifications) == 0)
 
@@ -152,7 +154,10 @@
                     </script> --}}
                 </form>
 
-                
+                <button id="theme-toggle" class="p-2 rounded text-gray-500 text-2xl dark:text-gray-200">
+                    <span id="theme-toggle-light" class="hidden">🌞</span>
+                    <span id="theme-toggle-dark">🌙</span>
+                </button>
 
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -184,6 +189,7 @@
                         </form>
                     </x-slot>
                 </x-dropdown>
+                
             </div>
 
             <!-- Hamburger -->
@@ -213,7 +219,7 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                <div class="font-medium text-base text-gray-800 dark:text-gray-400">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
 
@@ -221,6 +227,11 @@
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
+
+                <button id="theme-toggle-mobile" class="p-2 pl-4 rounded text-gray-500 dark:text-gray-200">
+                    <span id="theme-toggle-light-mobile" >Toggle Light Mode</span>
+                    <span id="theme-toggle-dark-mobile" class="hidden">Toggle Dark Mode</span>
+                </button>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
@@ -308,7 +319,48 @@
             });
          })
 
-         
+         document.addEventListener('DOMContentLoaded', function () {
+            const themeToggle = document.getElementById('theme-toggle');
+            const lightIcon = document.getElementById('theme-toggle-light');
+            const darkIcon = document.getElementById('theme-toggle-dark');
+
+            const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+            const lightTextMobile = document.getElementById('theme-toggle-light-mobile');
+            const darkTextMobile = document.getElementById('theme-toggle-dark-mobile');
+
+
+            function setTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    darkIcon.classList.add('hidden');
+                    lightIcon.classList.remove('hidden');
+                    lightTextMobile.classList.remove('hidden');
+                    darkTextMobile.classList.add('hidden');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    lightIcon.classList.add('hidden');
+                    darkIcon.classList.remove('hidden');
+                    lightTextMobile.classList.add('hidden');
+                    darkTextMobile.classList.remove('hidden');
+                }
+            }
+
+            themeToggle.addEventListener('click', () => {
+                let currentTheme = localStorage.getItem('theme');
+                setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+            });
+
+            themeToggleMobile.addEventListener('click', () => {
+                let currentTheme = localStorage.getItem('theme');
+                setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+            });
+
+            // Load saved theme or system preference
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            setTheme(savedTheme);
+        });
     </script>
 
 </nav>

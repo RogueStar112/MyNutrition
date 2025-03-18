@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {   
-         Schema::table('meal_notifications', function($table) {
-            $table->dropColumn('type');
-        });
+        //  Schema::table('meal_notifications', function($table) {
+        //     $table->dropColumn('type');
+        // });
 
-        Schema::table('meal_notifications', function (Blueprint $table) {
-            $table->integer('type')->default(1);
-        });
+        // Schema::table('meal_notifications', function (Blueprint $table) {
+        //     $table->integer('type')->default(1);
+        // });
 
-        Schema::table('exercise', function (Blueprint $table) {
-            $table->integer('calories_active')->nullable();
-            $table->integer('calories_total')->nullable();
-            $table->integer('average_bpm')->nullable();
-        });
+        // Schema::table('exercise', function (Blueprint $table) {
+        //     $table->integer('calories_active')->nullable();
+        //     $table->integer('calories_total')->nullable();
+        //     $table->integer('average_bpm')->nullable();
+        // });
     }
 
     /**
