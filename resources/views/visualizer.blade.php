@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h1 class="font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight">
+        <h1 class="font-semibold italic uppercase dark:dark:text-white text-black text-3xl text-gray-800 leading-tight">
             {{ __('Visualizer - Beta') }}
         </h1>
     </x-slot>
@@ -14,13 +14,13 @@
 
     <div class="py-4 relative mx-auto max-w-7xl overflow-hidden">
 
-        <div id="viewmodes-container" class="flex justify-end bg-slate-700">
-            <div class="tri-state-toggle flex gap-4 p-6 w-fit list-none">
-              <input class="radio-button" type="radio" name="toggle" id="view-monthly" />
+        <div id="viewmodes-container" class="flex justify-end bg-slate-200 text-black dark:dark:text-white text-black dark:dark:bg-slate-900 bg-slate-300">
+            <div class="tri-state-toggle flex gap-4 p-6 w-fit list-none appearance-none [&>input]:hidden [&>*]:p-4 [&>*]:cursor-pointer">
+              <input class="radio-button-invis" type="radio" name="toggle" id="view-monthly" />
               <label for="view-monthly">Monthly</label>
-              <input class="radio-button" type="radio" name="toggle" id="view-weekly" />
+              <input class="radio-button-invis" type="radio" name="toggle" id="view-weekly" />
               <label for="view-weekly">Weekly</label>
-              <input class="radio-button" type="radio" name="toggle" id="view-daily" selected/>
+              <input class="radio-button-invis" type="radio" name="toggle" id="view-daily" selected/>
               <label for="view-daily">Daily</label>
             </div>
           </div>
@@ -31,11 +31,11 @@
 
             <div></div>
 
-            <h2 class="font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight m-4">
+            <h2 class="font-semibold italic uppercase dark:dark:text-white text-black text-3xl text-gray-800 leading-tight m-4">
                 {{ __('Daily View') }}
             </h2>
 
-                <div id="TASK-VISUALIZER-WEEKLY" class="/overflow-x-scroll overflow-hidden max-w-7xl mx-auto /sm:px-6 /lg:px-8 even:bg-slate-800 flex [&>*]:grow h-[50vh] max-h-[300px] border-4 relative">
+                <div id="TASK-VISUALIZER-WEEKLY" class="/overflow-x-scroll overflow-hidden max-w-7xl mx-auto /sm:px-6 /lg:px-8 dark:evenbg-slate-300:dark:bg-slate-800 even:bg-slate-200 flex [&>*]:grow h-[50vh] max-h-[300px] border-4 relative">
 
                     <div id="TASKS-WEEKLY" class=" w-full h-full absolute left-0 flex justify-center items-center /w-1/3 /h-1/5 /border-4 /border-orange-500 rounded-lg z-50">
                         
@@ -44,16 +44,16 @@
                     </div>
                     
                     @for ($i=0; $i<$hrs; $i++)
-                        <div id="hr-{{$i}}" class="even:bg-slate-800 odd:shadow-2xl odd:bg-transparent relative">
+                        <div id="hr-{{$i}}" class="dark:evenbg-slate-300:dark:bg-slate-800 even:bg-slate-200 odd:shadow-2xl odd:bg-transparent relative">
 
                             @if($i == 0)
-                            <p class="absolute top-0 left-1 text-white opacity-60 font-extrabold">TIME</p>
+                            <p class="absolute top-0 left-1 dark:text-white text-black opacity-60 font-extrabold">TIME</p>
                             @endif
 
                             @if($i < 10)
-                            <p class="absolute bottom-0 left-1 text-white opacity-60 font-extrabold">0{{$i}}</p>
+                            <p class="absolute bottom-0 left-1 dark:text-white text-black opacity-60 font-extrabold">0{{$i}}</p>
                             @else
-                            <p class="absolute bottom-0 left-1 text-white opacity-60 font-extrabold">{{$i}}</p> 
+                            <p class="absolute bottom-0 left-1 dark:text-white text-black opacity-60 font-extrabold">{{$i}}</p> 
                             @endif
                         </div>
                     @endfor
@@ -65,14 +65,14 @@
 
 
                 <div class="flex justify-between items-center">
-                <div class="w-fit rounded-lg my-4 bg-slate-900 text-white p-4 flex items-center gap-6">Legend
+                <div class="w-fit rounded-lg my-4 dark:bg-slate-900 bg-slate-300 dark:text-white text-black p-4 flex items-center gap-6">Legend
 
                     <div class="bg-orange-500 h-[12px] w-[12px] rounded-full"></div>Meal
                     <div class="bg-green-500 h-[12px] w-[12px] rounded-full"></div>Exercise
                     <div class="bg-blue-500 h-[12px] w-[12px] rounded-full"></div>Sleep
 
                 </div>
-                <div class="w-fit bg-slate-900 p-4 rounded-lg text-right text-white sm:px-6 lg:px-8">Calorie Target: 2500kcal</div>
+                <div class="w-fit dark:bg-slate-900 bg-slate-300 p-4 rounded-lg text-right dark:text-white text-black sm:px-6 lg:px-8">Calorie Target: 2500kcal</div>
                 </div>
             </div> --}}
         
@@ -80,8 +80,8 @@
 
             <div id="DAILY-VISUALIZER-VIEW">
 
-                <div id="DAILY-VISUALIZER-DATEPICKER" class="mt-4 flex flex-col md:flex-row justify-between place-items-center  bg-slate-800 rounded-lg p-2">
-                    <h2 class="text-center mb-4 md:mb-0 md:text-left font-semibold italic uppercase dark:text-white text-2xl mx-auto text-gray-800 leading-tight">
+                <div id="DAILY-VISUALIZER-DATEPICKER" class="mt-4 flex flex-col md:flex-row justify-between place-items-center bg-slate-300 dark:bg-slate-800 rounded-lg p-2">
+                    <h2 class="text-center mb-4 md:mb-0 md:text-left font-semibold italic uppercase dark:dark:text-white text-black text-2xl mx-auto text-gray-800 leading-tight">
                         {{ __('Daily View') }}
                     </h2>
                     
@@ -93,7 +93,7 @@
                                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                                 </svg>
                             </div>
-                            <input id="datepicker-range-start" name="dailypicker-start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+                            <input id="datepicker-range-start" name="dailypicker-start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:dark:text-white text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
                             </div>
                             <span class="mx-4 text-gray-500">to</span>
                             <div class="relative">
@@ -102,29 +102,29 @@
                                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                                 </svg>
                             </div>
-                            <input id="datepicker-range-end" name="dailypicker-end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+                            <input id="datepicker-range-end" name="dailypicker-end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:dark:text-white text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
                         </div>
                         </div>
 
-                        <button type="button" id="update-dailyview-btn" class="btn bg-green-500 p-2 rounded-lg ml-2 text-white hover:bg-green-600">Update</button>
+                        <button type="button" id="update-dailyview-btn" class="btn bg-green-500 p-2 rounded-lg ml-2 dark:text-white text-black hover:bg-green-600">Update</button>
                     </div>
             </div>
             
             {{-- Empty divs to keep the time visuals visible --}}
             <div></div>
 
-            <div id="TASK-DATES" class="flex justify-around bg-slate-800 h-8 justify-center items-center my-2 rounded-lg">
+            <div id="TASK-DATES" class="flex justify-aroundbg-slate-300 dark:bg-slate-800 h-8 justify-center items-center my-2 rounded-lg">
 
             </div>
 
             <div></div>
 
 
-                <div id="TASK-VISUALIZER" class="/max-w-[66.7%] overflow-x-scroll md:overflow-hidden /max-w-7xl /sm:px-6 /lg:px-8 even:bg-slate-800 flex [&>*]:grow h-[50vh] max-h-[400px] border-4 relative [&>button]:opacity-0 [&>button]:duration-200 [&>button]:hover:opacity-50 rounded-lg">
+                <div id="TASK-VISUALIZER" class="/max-w-[66.7%] overflow-x-scroll md:overflow-hidden /max-w-7xl /sm:px-6 /lg:px-8 dark:evenbg-slate-300:dark:bg-slate-800 even:bg-slate-200 flex [&>*]:grow h-[50vh] max-h-[400px] border-4 relative [&>button]:opacity-0 [&>button]:duration-200 [&>button]:hover:opacity-50 rounded-lg">
                     
-                    <button id="PREV-DAY" class="absolute top-1/4 left-0 text-9xl text-white opacity-50 z-50 cursor-pointer"> < </button>
+                    <button id="PREV-DAY" class="absolute top-1/4 left-0 text-9xl dark:text-white text-black opacity-50 z-50 cursor-pointer"> < </button>
 
-                    <button id="NEXT-DAY" class="absolute top-1/4 right-0 text-9xl text-white opacity-50 z-50 cursor-pointer"> > </button>
+                    <button id="NEXT-DAY" class="absolute top-1/4 right-0 text-9xl dark:text-white text-black opacity-50 z-50 cursor-pointer"> > </button>
 
                     <div id="TASKS" class=" w-full h-full absolute left-0 flex justify-center items-center /w-1/3 /h-1/5 /border-4 /border-orange-500 rounded-lg z-40">
                         
@@ -135,16 +135,16 @@
                     </div>
                     
                     @for ($i=0; $i<$hrs; $i++)
-                        <div id="hr-{{$i}}" class="even:bg-slate-800 odd:shadow-2xl odd:bg-transparent relative">
+                        <div id="hr-{{$i}}" class="dark:even:bg-slate-700 dark:bg-slate-800 even:bg-slate-200 odd:shadow-2xl odd:bg-transparent relative">
 
                             @if($i == 0)
-                            <p class="absolute top-0 left-1 text-white opacity-60 font-extrabold pt-4 z-50 ">TIME</p>
+                            <p class="absolute top-0 left-1 dark:text-white text-black opacity-60 font-extrabold pt-4 z-50 ">TIME</p>
                             @endif
 
                             @if($i < 10)
-                            <p class="absolute bottom-0 left-1 text-white opacity-60 font-extrabold">0{{$i}}</p>
+                            <p class="absolute bottom-0 left-1 dark:text-white text-black opacity-60 font-extrabold">0{{$i}}</p>
                             @else
-                            <p class="absolute bottom-0 left-1 text-white opacity-60 font-extrabold">{{$i}}</p> 
+                            <p class="absolute bottom-0 left-1 dark:text-white text-black opacity-60 font-extrabold">{{$i}}</p> 
                             @endif
                         </div>
                     @endfor
@@ -156,24 +156,24 @@
 
 
                 <div id="MEAL-LEGEND" class="flex justify-between items-center /max-w-[66.7%]">
-                    <div class="w-fit rounded-lg my-4 bg-slate-900 text-white p-4 flex items-center gap-6">Legend
+                    <div class="w-fit rounded-lg my-4 dark:bg-slate-800 bg-slate-300 dark:text-white text-black p-4 flex items-center gap-6">Legend
 
                         <div class="bg-orange-500 h-[12px] w-[12px] rounded-full"></div>Meal
                         <div class="bg-green-500 h-[12px] w-[12px] rounded-full"></div>Exercise
                         <div class="bg-blue-500 h-[12px] w-[12px] rounded-full"></div>Sleep
 
                     </div>
-                    <div class="w-fit bg-slate-900 p-4 rounded-lg text-right text-white sm:px-6 lg:px-8">Calorie Target: 2500kcal</div>
+                    <div class="w-fit dark:bg-slate-800 bg-slate-300 p-4 rounded-lg text-right dark:text-white text-black sm:px-6 lg:px-8">Calorie Target: 2500kcal</div>
                 </div>
 
-                <div id="WIDGET-MANAGER" class="grid grid-cols-2 grid-rows-3  [&>*]:bg-slate-900 [&>*]:w-full [&>*]:h-full [&>*]:rounded-lg h-[640px] gap-3">
+                <div id="WIDGET-MANAGER" class="grid grid-cols-2 grid-rows-3  [&>*]:dark:bg-slate-800 [&>*]:bg-slate-300 [&>*]:w-full [&>*]:h-full [&>*]:rounded-lg h-[640px] gap-3">
                     
                     <!-- Please note these are placeholders for the time being -->
                     
                     <div id="TOTAL-NUTRIENTS" class="grid grid-cols-2 grid-rows-2  w-full h-full relative overflow-hidden">
-                        <div id="TN-MAIN-SECTION" class="row-span-2 text-center text-2xl text-white my-auto [&>div]:flex p-4">
+                        <div id="TN-MAIN-SECTION" class="row-span-2 text-center text-2xl dark:text-white text-black my-auto [&>div]:flex p-4">
                             {{-- <span class="font-extrabold">982</span><br>Calories --}}
-                            <div class="text-white font-extrabold text-center justify-center">Chicken Meal</div>
+                            <div class="dark:text-white text-black font-extrabold text-center justify-center">Chicken Meal</div>
                             <div class="text-blue-500 flex justify-between"><span class="font-extrabold">982</span> kcal</div>
                             
                             <div class="text-orange-500 flex justify-between">11.2g <span>Fat</span></div>
@@ -183,7 +183,7 @@
 
                         </div>
 
-                        <div id="TN-TOP-SECTION" class="row-span-2 text-center text-white text-3xl grid grid-cols-3 grid-rows-3 gap-2 p-2 [&>div>img]:opacity-60 [&>div>img]:w-16 [&>div>img]:h-16 [&>div>img]:rounded-full [&>div>img]:w-[64px]  /absolute /-right-1/2 /[&>div]:absolute /overflow-hidden /rounded-full">
+                        <div id="TN-TOP-SECTION" class="row-span-2 text-center dark:text-white text-black text-3xl grid grid-cols-3 grid-rows-3 gap-2 p-2 [&>div>img]:opacity-60 [&>div>img]:w-16 [&>div>img]:h-16 [&>div>img]:rounded-full [&>div>img]:w-[64px]  /absolute /-right-1/2 /[&>div]:absolute /overflow-hidden /rounded-full">
                             <div class="/top-img /right-1/2 h-full object-cover opacity-60">
                                 <img class="h-full object-cover" src="{{asset('storage/images/food/1724519175.jpg')}}">
                             </div>
@@ -196,10 +196,10 @@
 
                     </div>
 
-                    <div id="ITEM-LIST" class="text-white flex flex-col justify-center items-center overflow-y-scroll">
+                    <div id="ITEM-LIST" class="dark:text-white text-black flex flex-col justify-center items-center overflow-y-scroll">
                         <div class="text-center text-2xl font-extrabold">Meal Breakdown</div>
 
-                        {{-- flex flex-col [&>*]:flex [&>*]:justify-between [&>*]:text-white [&>*>img]:h-[48px] [&>*>img]:w-[48px] [&>*>img]:rounded-full [&>*]:items-center [&*]:mx-4 gap-4 --}}
+                        {{-- flex flex-col [&>*]:flex [&>*]:justify-between [&>*]:dark:text-white text-black [&>*>img]:h-[48px] [&>*>img]:w-[48px] [&>*>img]:rounded-full [&>*]:items-center [&*]:mx-4 gap-4 --}}
                         <table class="text-center mx-auto w-full overflow-y-scroll">
                             <thead>
                                 <tr class="uppercase text-gray-500 [&>th]:p-1">
@@ -254,8 +254,8 @@
             <div id="TASK-VISUALIZER-DAILY-LIST" class="grid grid-rows-[106px_1fr] grid-flow-col gap-3">
 
                 <div id="TASK-VISUALIZER-DAILY-LIST-DAYHEADER" class="h-full">
-                    <div class="my-4 flex flex-col md:flex-row justify-between place-items-center  bg-slate-800 rounded-lg p-2 h-full">
-                        <h2 id="DAILY-DATE-SELECTED" class="text-center mx-auto my-4 md:text-left font-semibold italic uppercase dark:text-white text-3xl text-gray-800 leading-tight">
+                    <div class="my-4 flex flex-col md:flex-row justify-between place-items-center bg-slate-300 dark:bg-slate-800 rounded-lg p-2 h-full">
+                        <h2 id="DAILY-DATE-SELECTED" class="text-center mx-auto my-4 md:text-left font-semibold italic uppercase dark:dark:text-white text-black text-3xl text-gray-800 leading-tight">
                             {{ date("d/m/Y") }}
                         </h2>
                     </div>
@@ -378,7 +378,7 @@
 
                             let responseHTML_TNMainSection = `
                             
-                            <div class="text-white font-extrabold text-center justify-center">${response.name}</div>
+                            <div class="dark:text-white text-black font-extrabold text-center justify-center">${response.name}</div>
                             <div class="text-blue-500 flex justify-between"><span class="font-extrabold">${responseTotal['calories']}</span> kcal</div>
                             
                             <div class="text-orange-500 flex justify-between">${responseTotal['fat']}g <span>Fat</span></div>
@@ -427,7 +427,7 @@
  
         function createNewTask(caption, color, x_start, x_end, y_index) {
 
-            tasks.append(`<div class="bg-green-500 rounded-lg text-white absolute flex justify-center items-center h-8" style="background-color: #${color}; left: ${x_start}px; width:${x_end-x_start}px; top:${y_index}px;">${caption}</div>`);
+            tasks.append(`<div class="bg-green-500 rounded-lg dark:text-white text-black absolute flex justify-center items-center h-8" style="background-color: #${color}; left: ${x_start}px; width:${x_end-x_start}px; top:${y_index}px;">${caption}</div>`);
 
 
 
@@ -441,7 +441,7 @@
            // For ID
    
 
-            tasks.append(`<div id='task-${noOfTasks}' class="new-task bg-green-500 rounded-lg text-white absolute flex justify-center items-center h-8 z-0" style="background-color: #${color}; left: ${(x_time_start/tv_width)*100}%; width:${(x_time_end-x_time_start)/tv_width*100}%; top:${y_index}px;"><p class='select-none'>${caption}</p></div>`);
+            tasks.append(`<div id='task-${noOfTasks}' class="new-task bg-green-500 rounded-lg dark:text-white text-black absolute flex justify-center items-center h-8 z-0" style="background-color: #${color}; left: ${(x_time_start/tv_width)*100}%; width:${(x_time_end-x_time_start)/tv_width*100}%; top:${y_index}px;"><p class='select-none'>${caption}</p></div>`);
 
             noOfTasks += 1;
         }
@@ -579,7 +579,7 @@
                     const taskElement = $(`
                         <div 
                             id='task-${dayIndex}-${taskIndex}' 
-                            class="new-task bg-green-500 rounded-lg text-white absolute flex justify-center items-center h-8 z-0 opacity-0 cursor-pointer hover:bg-green-500 duration-100" 
+                            class="new-task bg-green-500 rounded-lg dark:text-white text-black absolute flex justify-center items-center h-8 z-0 opacity-0 cursor-pointer hover:bg-green-500 duration-100" 
                             style="
                                 background-color: #${task.bg_color}; 
                                 left: ${leftPercent}%; 
@@ -673,7 +673,7 @@
             //             const taskElement = $(`
             //                 <div 
             //                     id='task-${dayIndex}-${taskIndex}' 
-            //                     class="new-task bg-green-500 rounded-lg text-white absolute flex justify-center items-center h-8 z-0 opacity-0 cursor-pointer hover:bg-green-500 duration-100" 
+            //                     class="new-task bg-green-500 rounded-lg dark:text-white text-black absolute flex justify-center items-center h-8 z-0 opacity-0 cursor-pointer hover:bg-green-500 duration-100" 
             //                     style="
             //                         background-color: #${task.bg_color}; 
             //                         left: ${leftPercent}%; 
@@ -741,7 +741,7 @@
                         const taskElement = $(`
                             <div 
                                 id='taskList-${dayIndex}-${taskIndex}' 
-                                class="new-task w-full h-full rounded-lg text-white flex justify-between px-12 h-[53px] items-center bg-slate-800 h-8 z-0 opacity-0 cursor-pointer" 
+                                class="new-task w-full h-full rounded-lg dark:text-white text-black flex justify-between px-12 h-[53px] items-centerbg-slate-300 dark:bg-slate-800 h-8 z-0 opacity-0 cursor-pointer" 
                                 style="
                                     background-color: #${task.bg_color}; 
                                     transition: opacity 0.3s ease; /* Add transition property */
@@ -790,7 +790,7 @@
                         const taskElement = task.date_short ? $(`
                             <div 
                                 id='taskDate-${dayIndex}-${taskIndex}' 
-                                class="new-taskdate w-min rounded-lg text-white flex justify-between  h-[53px] items-center bg-slate-800 h-4 z-0 opacity-0 cursor-pointer focus:bg-green-500" 
+                                class="new-taskdate w-min rounded-lg dark:text-white text-black flex justify-between  h-[53px] items-centerbg-slate-300 dark:bg-slate-800 h-4 z-0 opacity-0 cursor-pointer focus:bg-green-500" 
                                 style="
                                     background-color: #${task.bg_color}; 
                                     transition: opacity 0.3s ease; /* Add transition property */

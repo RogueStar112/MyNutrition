@@ -130,7 +130,7 @@
         
                     </div>
 
-                    <div id="food-media-controls">
+                    <div id="food-media-controls" class="bg-white dark:bg-slate-800">
                         <div class="flex justify-center">
                             <button id="PREV-PAGE-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-arrow-left"></i></button>
                             <button id="ADD-FOOD-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-plus"></i></button>

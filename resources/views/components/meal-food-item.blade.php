@@ -10,7 +10,7 @@ $food['protein'] = round(($food['protein']/($food['serving_size']))*$servingSize
 $food_id = $food['food_id'] ?? "";
 
 @endphp
-<div id="meal_item_{{ $foodIndex }}" class="meal_{{$food_id}} meal_item relative min-h-[100px] mb-3 active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-gray-800 w-64 rounded-lg @if($showNutrients == true) py-6 @else @endif  pt-6 text-white shadow-md shadow-black overflow-hidden" index="{{$foodIndex}}">
+<div id="meal_item_{{ $foodIndex }}" class="meal_{{$food_id}} meal_item relative min-h-[100px] mb-3 active:bg-slate-300 dark:active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-slate-200 text-black dark:bg-gray-800 w-64 rounded-lg @if($showNutrients == true) py-6 @else @endif  pt-6 dark:text-white shadow-md shadow-black overflow-hidden" index="{{$foodIndex}}">
     <ul class="relative @isset($food['img_url']) @else relative @endisset">
         <button type="button" id="item_revealbtn_{{ $foodIndex }}" index="{{ $foodIndex }}" class="item_revealbtn_{{ $foodIndex }} food_revealbtn absolute right-0 bg-lime-800 text-white p-3 mr-6 rounded-lg @if($showNutrients == true)hidden @endif">
             <i id="item_icon_{{ $foodIndex }}" class="fas fa-chevron-down item_icon_{{ $foodIndex }}"> </i>
@@ -55,7 +55,7 @@ $food_id = $food['food_id'] ?? "";
                     <p class="absolute right-0 top-0 text-gray-500">Calories</p>
 
 
-                    <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div class="w-full mt-1 bg-gray-100 rounded-full h-2.5 dark:bg-gray-700">
                         <div id="food_progressbar_calories_{{$foodIndex}}" class="bg-blue-600 h-2.5 rounded-full" style="width: {{ ((float)$food['calories'] / 1500) * 100 }}%"></div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ $food_id = $food['food_id'] ?? "";
                     <li id="food_text_fat_{{$foodIndex}}" class="italic">{{$food['fat']}}g</li>
                     <p class="absolute right-0 top-0 text-gray-500">Fat</p>
 
-                    <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div class="w-full mt-1 bg-gray-100 rounded-full h-2.5 dark:bg-gray-700">
                         <div id="food_progressbar_fat_{{$foodIndex}}" class="bg-orange-600 h-2.5 rounded-full" style="width: {{ ((float)$food['fat'] / 97) * 100 }}%"></div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@ $food_id = $food['food_id'] ?? "";
                     <li id="food_text_carbs_{{$foodIndex}}" class="italic">{{ $food['carbohydrates'] }}g</li>
                     <p class="absolute right-0 top-0 text-gray-500">Carbs</p>
 
-                    <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div class="w-full mt-1 bg-gray-100 rounded-full h-2.5 dark:bg-gray-700">
                         <div id="food_progressbar_carbs_{{$foodIndex}}" class="bg-yellow-600 h-2.5 rounded-full" style="width: {{ ((float)$food['carbohydrates'] / 97) * 100 }}%"></div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@ $food_id = $food['food_id'] ?? "";
                     <li id="food_text_protein_{{$foodIndex}}" class="italic">{{ $food['protein'] }}g</li>
                     <p class="absolute right-0 top-0 text-gray-500">Protein</p>
 
-                    <div class="w-full mt-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div class="w-full mt-1 bg-gray-100 rounded-full h-2.5 dark:bg-gray-700">
                         <div id="food_progressbar_protein_{{$foodIndex}}" class="bg-green-600 h-2.5 rounded-full" style="width: {{ ((float)$food['protein'] / 80) * 100 }}%"></div>
                     </div>
                 </div>

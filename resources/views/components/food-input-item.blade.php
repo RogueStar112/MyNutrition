@@ -1,10 +1,10 @@
-<div id="food_number_{{$index}}" class="inline-block {{$active}}">
-    <div class="p-6">
+<div id="food_number_{{$index}}" class="rounded-t-lg inline-block {{$active}} [&>div]:bg-white dark:[&>div]:bg-slate-800 dark:[&>*>*]:text-white [&>*>*>*]:text-black dark:[&>*>*>*]:text-white [&>*>*]:text-black [&>div>label>input]:bg-slate-300 dark:[&>div>label>select]:text-black [&>div>label>select]:bg-slate-300">
+    <div class="p-6 rounded-t-lg">
     <h2 class="text-white text-2xl">1. Food Name and Source</h2>
     <p class="text-gray-500 italic mt-2">The basic information. <span class="font-black text-red-400">Fields required.</span></p>
     </div>
 
-    <div class="mb-3 md:grid md:grid-cols-2 gap-1 [&>*]:gap-4 [&>*]:items-center [&>*]:justify-between md:[&>*]:justify-start md:[&>*>input]:w-full [&>*>input]:w-[191px] [&>*>select]:w-[191px] md:[&>*>select]:w-full">
+    <div class="md:grid md:grid-cols-2 gap-1 [&>*]:gap-4 [&>*]:items-center [&>*]:justify-between md:[&>*]:justify-start md:[&>*>input]:w-full [&>*>input]:w-[191px] [&>*>select]:w-[191px] md:[&>*>select]:w-full">
         <label class="flex whitespace-nowrap sm:block px-6 py-4 md:p-6">
             <span class="text-white">Food Name</span>
             <input type="text" id="food_name_{{$index}}" name="food_name_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="Ricotta Cheese" value="{{$name}}" required/>
@@ -53,11 +53,11 @@
     <div class="p-6">
     <h2 class="text-white text-2xl">2. Nutritional Info</h2>
     <p class="text-gray-500 italic mt-2">According to serving size. All fields optional.</p>
-    <p class="text-green-500 italic mt-2">New AI Autofill fills in nutritional info for food names with quantities!</p>
-    <p class="text-red-500 italic"><span class="font-black">Disclaimer:</span> Any information from the AI Auto Fill may be inaccurate. Use the data with caution.</p>
+    <p class="text-green-500 italic mt-2">AI Autofill fills in nutritional info for food names with quantities!</p>
+    <p class="text-red-500 italic [&>*]:text-red-500"><span class="font-black">Disclaimer:</span> Any information from the AI Auto Fill may be inaccurate. Use the data with caution.</p>
     </div>
 
-    <div class="mb-3 md:grid md:grid-cols-4 gap-1 [&>*]:gap-4 [&>*]:items-center [&>*]:justify-between [&>*>input]:w-[189px] md:[&>*>input]:w-full">
+    <div class="md:grid md:grid-cols-4 gap-1 [&>*]:gap-4 [&>*]:items-center [&>*]:justify-between [&>*>input]:w-[189px] md:[&>*>input]:w-full">
         
         <label class="flex whitespace-nowrap sm:block px-6 py-4 md:p-6">
             <span class="text-white">Calories (kcal)</span>
@@ -112,7 +112,7 @@
         <h1 class="text-white text-2xl">3. Extra Info</h1>
     </div>
 
-    <div class="mb-3">
+    <div class="">
         <label class="block px-6 py-4 md:p-6">
             <span class="text-white">Food Icon (optional)</span>
             {{-- <input type="text" name="food_icon_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="" /> --}}
@@ -127,7 +127,7 @@
               </label> --}}
         </label>
 
-        <div class="flex gap-4 ml-4 flex-wrap [&>*>label>*]:scale-[1.5] justify-evenly [&>*>input]:hidden">
+        <div class="flex gap-4 ml-4 flex-wrap [&>*>label>*]:scale-[1.5] justify-evenly [&>*>input]:hidden [&>*>label>*]:text-black dark:[&>*>label>*]:text-slate-500">
             <div class="flex items-center">
                 <input id="food-icon-{{$index}}_1" type="radio" value="fa-solid fa-lemon" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_1" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-lemon"></i> </label>
@@ -253,7 +253,7 @@
 
     </div>
 
-    <div class="mb-3">
+    <div class="">
         <label class="block px-6 py-4 md:p-6">
             <span class="text-white">Description (optional)</span>
             <input type="text" id="food_description_{{$index}}" name="food_description_{{$index}}" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="Tastes good on pizza" />

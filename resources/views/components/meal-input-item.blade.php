@@ -1,6 +1,6 @@
 
 
-<div id="meal_number_{{$index}}" class="/inline-block bg-slate-50 dark:bg-slate-800">
+<div id="meal_number_{{$index}}" class="/inline-block bg-slate-50 dark:bg-slate-800 rounded-t-lg">
 
     <div class="p-6 text-center">
     <p class="dark:text-gray-500">You have two options to add meals.</p>

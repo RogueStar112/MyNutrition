@@ -364,7 +364,7 @@
         function showSlide(n) {
             index = (n + images.length) % images.length;
             carousel.style.transform = `translateX(-${offsets[index]}px)`;
-            carousel_container.style.maxWidth = `${images[index].clientWidth}px`;
+            // carousel_container.style.maxWidth = `${images[index].clientWidth}px`;
         }
 
         function nextSlide() { showSlide(index + 1); }

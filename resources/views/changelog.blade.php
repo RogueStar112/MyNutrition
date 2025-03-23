@@ -9,7 +9,7 @@
 
   <div class="w-screen h-full max-w-7xl mx-auto text-black dark:text-white mt-8 pt-6 px-4 sm:px-6 lg:px-8 flex flex-col gap-4">
 
-    <div class=" bg-slate-300 dark:bg-slate-800 p-4 rounded-lg">
+    <div class=" bg-slate-200 dark:bg-slate-800 p-4 rounded-lg">
       <h2 class="text-2xl font-extrabold">Patch Notes 2025.04</h2>
 
       
@@ -25,10 +25,11 @@
 
       <p>+ Adding fluid notifications.</p>
       <p>+ The ability to dynamically delete food items</p>
+      <p>+ Food Recipes.</p>
     </div>
 
 
-    <div class=" bg-slate-300 dark:bg-slate-800 p-4 rounded-lg">
+    <div class=" bg-slate-200 dark:bg-slate-800 p-4 rounded-lg">
       <h2 class="text-2xl font-extrabold">Patch Notes 2025.03_01</h2>
 
       
@@ -43,7 +44,7 @@
     </div>
 
 
-    <div class=" bg-slate-300 dark:bg-slate-800 p-4 rounded-lg">
+    <div class=" bg-slate-200 dark:bg-slate-800 p-4 rounded-lg">
       <h2 class="text-2xl font-extrabold">Patch Notes 2025.03</h2>
 
       
@@ -64,7 +65,7 @@
       <p>+ Aforementioned on 2025.02_02.</p>
     </div>
 
-    <div class=" bg-slate-300 dark:bg-slate-800 p-4 rounded-lg">
+    <div class=" bg-slate-200 dark:bg-slate-800 p-4 rounded-lg">
       <h2 class="text-2xl font-extrabold">Patch Notes 2025.02_02</h2>
 
       
@@ -90,7 +91,7 @@
       <p>+ Adding meal deletion confirmation buttons.</p>
     </div>
     
-    <div class=" bg-slate-300 dark:bg-slate-800 p-4 rounded-lg">
+    <div class=" bg-slate-200 dark:bg-slate-800 p-4 rounded-lg">
       <h2 class="text-2xl font-extrabold">Patch Notes 2025.02_01a</h2>
       <p class="text-gray-800 dark:text-gray-400">12/02/2025 - 16/02/2025</p>
       
@@ -111,7 +112,7 @@
     </div>
 
 
-    <div class=" bg-slate-300 dark:bg-slate-800 p-4 rounded-lg">
+    <div class=" bg-slate-200 dark:bg-slate-800 p-4 rounded-lg">
     <h2 class="text-2xl font-extrabold">Patch Notes 2025.02_01</h2>
     <p class="text-gray-800 dark:text-gray-400">09/02/2025 - 11/02/2025</p>
     <br>
