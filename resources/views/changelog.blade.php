@@ -20,6 +20,7 @@
       </p>
       
       <p>+ Light and Dark Mode Accessibility Features.</p>
+      <p>+ Persistent Light and Dark mode.</p>
 
       <p class="text-purple-500 text-2xl font-extrabold mt-4">WORKING ON: </p>
 
