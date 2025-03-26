@@ -1,9 +1,4 @@
 /* @import "../.././node_modules/components-font-awesome/css/fontawesome.css"; */
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import "tailwindcss";
 
 .sb-selected {
@@ -193,16 +188,6 @@ input[type=number]::-webkit-inner-spin-button {
     background-color: #0f766e;
 }
 
-/* Base radio button styles */
-.radio-button {
-    @apply appearance-none w-4 h-4 border rounded-full border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200; /* Existing styles */
-    
-  }
-  
-  /* Focused radio button style */
-  .radio-button:focus {
-    @apply ring-2 ring-green-500; 
-  }
 
   /* input[type=radio] {
     display:none;
