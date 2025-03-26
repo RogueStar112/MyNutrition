@@ -1,6 +1,7 @@
 <!DOCTYPE html>
  
-<html class="bg-slate-100 dark:bg-slate-700 min-h-screen" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+    class="{{ session('theme', 'light') }}"">
  
     <head>
  
@@ -52,7 +53,15 @@
  
 
  
-
+        <script>
+            // Get saved theme from localStorage
+            const savedTheme = localStorage.getItem('theme') || '{{ session('theme', 'light') }}';
+    
+            // Apply theme *before* rendering
+            if (savedTheme !== 'light') {
+                document.documentElement.classList.add(`theme-${savedTheme}`);
+            }
+        </script>
  
         <!-- Scripts -->
  

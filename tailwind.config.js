@@ -39,8 +39,24 @@ export default {
                 "0 0px 20px rgba(255,255, 255, 0.35)",
                 "0 0px 65px rgba(255, 255,255, 0.2)"
                 ]
-            }
+            },
 
+            colors: {
+                // Pink Theme Shades
+                'pink-dark': '#9b174d',  // Dark Pink
+                'pink': '#be185d',       // Base Pink
+                'pink-light': '#f472b6', // Light Pink
+        
+                // Red Theme Shades
+                'red-dark': '#5f0d0d',   // Darker Red
+                'red': '#7f1d1d',        // Base Red
+                'red-light': '#f87171',  // Light Red
+        
+                // Navy Theme Shades
+                'blue-dark': '#1a2b5f',  // Dark Navy Blue
+                'blue': '#1e3a8a',       // Base Navy
+                'blue-light': '#60a5fa', // Light Blue
+            }
         },
 
         

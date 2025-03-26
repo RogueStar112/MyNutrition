@@ -16,6 +16,7 @@ use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\ProfanityController;
 use App\Http\Controllers\ChangelogController;
+use App\Http\Controllers\ThemeController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -155,10 +156,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/function_test/{meal_id}', [DashboardController::class, 'get_nutrients_of_meal']);
 
-    Route::get('/function_test/{meal_id}/{meal_id_two}', [MealController::class, 'combine_two_meals']);
+    // Route::get('/function_test/{meal_id}/{meal_id_two}', [MealController::class, 'combine_two_meals']);
 
-    Route::get('/function_test_v2', [DashboardController::class, 'renderDailyMacroIntakeChart']);
+    // Route::get('/function_test_v2', [DashboardController::class, 'renderDailyMacroIntakeChart']);
 
+    Route::post('/theme', [ThemeController::class, 'update'])->middleware('auth');
 });
 
 // Route::get('/nutrition/food', [FoodController::class, 'food_form'])

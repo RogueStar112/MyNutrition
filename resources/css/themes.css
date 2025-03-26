@@ -1,0 +1,39 @@
+/* Default Light Mode */
+:root {
+    --primary-bg: white;
+    --primary-text: black;
+}
+
+/* Pink Theme */
+.theme-pink {
+    --primary-bg: #be185d;
+    --primary-text: #f472b6;  /* Light pink text */
+    --secondary-bg: #9b174d;  /* Darker pink */
+}
+
+/* Red Theme */
+.theme-red {
+    --primary-bg: #7f1d1d;
+    --primary-text: #f87171;  /* Light red text */
+    --secondary-bg: #5f0d0d;  /* Dark red */
+}
+
+/* Navy Theme */
+.theme-blue {
+    --primary-bg: #1e3a8a;
+    --primary-text: #60a5fa;  /* Light blue text */
+    --secondary-bg: #1a2b5f;  /* Dark navy */
+}
+
+/* Apply Colors */
+body {
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+}
+
+.theme-box {
+    background-color: var(--secondary-bg);
+    padding: 20px;
+    border-radius: 8px;
+    color: var(--primary-text);
+}

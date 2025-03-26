@@ -319,15 +319,56 @@
             });
          })
 
-         document.addEventListener('DOMContentLoaded', function () {
-            const themeToggle = document.getElementById('theme-toggle');
+        //  document.addEventListener('DOMContentLoaded', function () {
+        //     const themeToggle = document.getElementById('theme-toggle');
+        //     const lightIcon = document.getElementById('theme-toggle-light');
+        //     const darkIcon = document.getElementById('theme-toggle-dark');
+
+        //     const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        //     const lightTextMobile = document.getElementById('theme-toggle-light-mobile');
+        //     const darkTextMobile = document.getElementById('theme-toggle-dark-mobile');
+
+
+        //     function setTheme(theme) {
+        //         if (theme === 'dark') {
+        //             document.documentElement.classList.add('dark');
+        //             localStorage.setItem('theme', 'dark');
+        //             darkIcon.classList.add('hidden');
+        //             lightIcon.classList.remove('hidden');
+        //             lightTextMobile.classList.remove('hidden');
+        //             darkTextMobile.classList.add('hidden');
+        //         } else {
+        //             document.documentElement.classList.remove('dark');
+        //             localStorage.setItem('theme', 'light');
+        //             lightIcon.classList.add('hidden');
+        //             darkIcon.classList.remove('hidden');
+        //             lightTextMobile.classList.add('hidden');
+        //             darkTextMobile.classList.remove('hidden');
+        //         }
+        //     }
+
+        //     themeToggle.addEventListener('click', () => {
+        //         let currentTheme = localStorage.getItem('theme');
+        //         setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        //     });
+
+        //     themeToggleMobile.addEventListener('click', () => {
+        //         let currentTheme = localStorage.getItem('theme');
+        //         setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        //     });
+
+        //     // Load saved theme or system preference
+        //     const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        //     setTheme(savedTheme);
+        // });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggles = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile'); // Select both toggles
             const lightIcon = document.getElementById('theme-toggle-light');
             const darkIcon = document.getElementById('theme-toggle-dark');
 
-            const themeToggleMobile = document.getElementById('theme-toggle-mobile');
             const lightTextMobile = document.getElementById('theme-toggle-light-mobile');
             const darkTextMobile = document.getElementById('theme-toggle-dark-mobile');
-
 
             function setTheme(theme) {
                 if (theme === 'dark') {
@@ -347,17 +388,25 @@
                 }
             }
 
-            themeToggle.addEventListener('click', () => {
-                let currentTheme = localStorage.getItem('theme');
-                setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+            themeToggles.forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    let currentTheme = localStorage.getItem('theme');
+                    let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    setTheme(newTheme);
+
+                    // Send AJAX request to store user preference
+                    fetch('/theme', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ theme: newTheme })
+                    });
+                });
             });
 
-            themeToggleMobile.addEventListener('click', () => {
-                let currentTheme = localStorage.getItem('theme');
-                setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-            });
-
-            // Load saved theme or system preference
+            // Load saved theme
             const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
             setTheme(savedTheme);
         });
