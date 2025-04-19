@@ -441,6 +441,8 @@ class MealController extends Controller
     public function add_food_to_meal(Request $request) {
         $user_id = Auth::user()->id;
 
+        // VALIDATION PHASE 
+
         $food_array_html = [];
 
         // $data_input_to_render = "";
@@ -448,7 +450,20 @@ class MealController extends Controller
 
         $meal_datendex_array = [];
 
+        $food_number = $request->input('food_id');
+
+        $validate_food = Food::find($food_number);
+
+        if (!$validate_food) {
+            return response()->json([
+                'error' => '404: Food item not found.'
+            ], 404);
+        }
+
+
         $meals = $request->input('meals');
+
+
 
         foreach($meals as $meal_datendex=>$meal) {
 

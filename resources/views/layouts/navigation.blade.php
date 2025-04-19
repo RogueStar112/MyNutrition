@@ -154,14 +154,14 @@
                     </script> --}}
                 </form>
 
-                <button id="theme-toggle" class="p-2 rounded text-gray-500 text-2xl dark:text-gray-200">
+                <button id="theme-toggle" class="p-2 rounded text-gray-500 text-2xl dark:text-gray-200 cursor-pointer">
                     <span id="theme-toggle-light" class="hidden">🌞</span>
                     <span id="theme-toggle-dark">🌙</span>
                 </button>
 
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:fill-white dark:text-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:fill-white dark:text-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150 cursor-pointer dark:hover:text-yellow-500">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">
@@ -373,6 +373,7 @@
             function setTheme(theme) {
                 if (theme === 'dark') {
                     document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
                     localStorage.setItem('theme', 'dark');
                     darkIcon.classList.add('hidden');
                     lightIcon.classList.remove('hidden');
@@ -380,6 +381,7 @@
                     darkTextMobile.classList.add('hidden');
                 } else {
                     document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
                     localStorage.setItem('theme', 'light');
                     lightIcon.classList.add('hidden');
                     darkIcon.classList.remove('hidden');

@@ -1,10 +1,18 @@
-/* @import "../.././node_modules/components-font-awesome/css/fontawesome.css"; */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+@custom-variant dark (&:where(.dark, .dark *));
+
 @import "tailwindcss";
+
+html {
+
+  font-family:Figtree,ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
+
+
+}
 
 .sb-selected {
     --tw-ring-opacity: 1;
@@ -82,6 +90,23 @@
     color: #9A3412;
 }
 
+.datepicker-controls > button {
+    @apply cursor-pointer;
+    @apply dark:hover:text-black;
+}
+
+.datepicker-controls > button > svg {
+    @apply cursor-pointer;
+    @apply dark:hover:text-black;
+}
+
+.datepicker-cell {
+    @apply p-2;
+    @apply text-black!;
+    @apply hover:text-white!;
+    @apply dark:text-white;
+}
+
 /* .days {
     display: flex;
     flex-wrap: wrap;
@@ -147,10 +172,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.content-day {
-    
 }
 
 .active-mode {
@@ -412,4 +433,12 @@ background-image: radial-gradient(446.50% 301.92% at 50.09% 3.49%, #241e05 13.21
 #hero-images img {
     
         animation: fade 12s infinite both;
+}
+
+input {
+    @apply p-4;
+}
+
+select {
+    @apply p-4;
 }

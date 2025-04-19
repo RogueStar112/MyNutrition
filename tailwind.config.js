@@ -8,8 +8,9 @@ export default {
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
-        "./node_modules/flowbite/**/*.js",
+        // "./node_modules/flowbite/**/*.js",
         './resources/views/**/*.blade.php',
+        
     ],
 
 
@@ -41,28 +42,37 @@ export default {
                 ]
             },
 
-            colors: {
-                // Pink Theme Shades
-                'pink-dark': '#9b174d',  // Dark Pink
-                'pink': '#be185d',       // Base Pink
-                'pink-light': '#f472b6', // Light Pink
+            // colors: {
+            //     // Pink Theme Shades
+            //     'pink-dark': '#9b174d',  // Dark Pink
+            //     'pink': '#be185d',       // Base Pink
+            //     'pink-light': '#f472b6', // Light Pink
         
-                // Red Theme Shades
-                'red-dark': '#5f0d0d',   // Darker Red
-                'red': '#7f1d1d',        // Base Red
-                'red-light': '#f87171',  // Light Red
+            //     // Red Theme Shades
+            //     'red-dark': '#5f0d0d',   // Darker Red
+            //     'red': '#7f1d1d',        // Base Red
+            //     'red-light': '#f87171',  // Light Red
         
-                // Navy Theme Shades
-                'blue-dark': '#1a2b5f',  // Dark Navy Blue
-                'blue': '#1e3a8a',       // Base Navy
-                'blue-light': '#60a5fa', // Light Blue
-            }
+            //     // Navy Theme Shades
+            //     'blue-dark': '#1a2b5f',  // Dark Navy Blue
+            //     'blue': '#1e3a8a',       // Base Navy
+            //     'blue-light': '#60a5fa', // Light Blue
+            // }
+
+
+            },
         },
 
-        
-    },
+        plugins: [forms],
+
+        resolve: {
+            alias: {
+              '~font' : path.resolve(__dirname,'resources/fonts')
+            }
+          }
+    };
 
 
 
-    plugins: [forms, require('flowbite/plugin')],
-};
+
+

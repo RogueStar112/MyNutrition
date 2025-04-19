@@ -7,7 +7,7 @@
     </x-slot>
 
     <div class="min-h-screen py-4 pt-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="grid grid-cols-5 grid-rows-5 w-full h-full gap-2 /h-[calc(100vh-8rem)] max-h-[900px] [&>*]:flex  [&>*]:text-black dark:text-white">
+        <div class="grid grid-cols-5 grid-rows-5 w-full h-full gap-2 /h-[calc(100vh-8rem)] max-h-[900px] [&>*]:flex  [&>*]:text-black dark:[&>*]:text-white">
             <div class="col-start-1 col-end-4 row-start-1 row-end-4 rounded-lg bg-slate-800 flex flex-col border-2 border-green-500">
                 
                 <p class="text-left mx-4 mt-2 text-center">Calorie Intake</p>

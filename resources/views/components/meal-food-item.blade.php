@@ -30,11 +30,11 @@ $food_id = $food['food_id'] ?? "";
                 --}}
                 {{-- <img src="{{ asset($food['img_url']) }}" aria-label="index_number" class="rounded-full w-[96px] h-[96px] m-2 right-0 top-0 /-right-12 /-top-12  shadow-xl shadow-black absolute @if($showNutrients==true)/left-[75%] /top-[0%]@else /left-[50%] @endif text-8xl font-black /opacity-10 select-none" />
                 --}}
-                <p aria-label="index_number" class="absolute @if($showNutrients==true)left-[80%] top-[0%]@else left-[50%] @endif text-8xl font-black opacity-10 select-none">{{ $foodIndex }}</p>
+                <p aria-label="index_number" class="absolute @if($showNutrients==true)left-[80%] left-4/5 top-[0%]@else left-[50%] @endif text-8xl font-black opacity-10 select-none">{{ $foodIndex }}</p>
                 
                 @endif
                 @else
-                    <p aria-label="index_number" class="absolute @if($showNutrients==true)left-[80%] top-[0%]@else left-[50%] @endif text-8xl font-black opacity-10 select-none">{{ $foodIndex }}</p>
+                    <p aria-label="index_number" class="absolute @if($showNutrients==true)left-[80%] left-4/5 top-[0%]@else left-[50%] @endif text-8xl font-black opacity-10 select-none">{{ $foodIndex }}</p>
                 
                 @endisset
             

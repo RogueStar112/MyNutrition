@@ -43,12 +43,12 @@
                     @csrf
 
                     
-                    <div id="FOOD_FORM_INPUTS" class="relative bg-gray-50 dark:bg-gray-800 w-full max-w-[400px] md:max-w-full md:max-h-[682px] overflow-hidden">
+                    <div id="FOOD_FORM_INPUTS" class="relative bg-slate-200 dark:bg-gray-800 w-full max-w-[400px] md:max-w-full md:max-h-[682px] overflow-hidden">
                        <x-meal-input-item index="1"/>
 
                     </div>
 
-                    <div id="food-media-controls" class="sticky top-0 z-0 md:z-50 bg-gray-50 dark:bg-gray-800 hidden md:block">
+                    <div id="food-media-controls" class="sticky top-0 z-0 md:z-50 bg-slate-200 dark:bg-gray-800 hidden md:block">
                         {{-- <div class="flex justify-center">
                             <button id="PREV-PAGE-BTN" type="button" class="bg-lime-800 dark:text-white p-4 m-4 rounded-lg"><i class="fas fa-arrow-left"></i></button>
                             <button id="ADD-FOOD-BTN" type="button" class="bg-lime-800 dark:text-white p-4 m-4 rounded-lg"><i class="fas fa-plus"></i></button>
@@ -59,7 +59,7 @@
                             <p id="page-number-text" class="text-gray-500 italic mt-2">Food 1 out of 1.</p>
                         </div> --}}
 
-                        <div class="flex justify-center z-[9999]">
+                        <div class="flex justify-center z-[9999] [&>*]:cursor-pointer">
                             <input type="hidden" id="pages" name="food_pages" value="1"/>
                             <button type="button" class="bg-red-600 dark:text-white p-4 m-4 rounded-lg"><i class="fas fa-trash"></i>  DELETE</button>
                             <button type="button" class="bg-blue-600 dark:text-white p-4 m-4 rounded-lg"><a href="{{ route('meal.view') }}"><i class="fas fa-eye"></i> VIEW</a></button>
@@ -253,7 +253,7 @@
 
                     
 
-                    <div id="FOOD-SEARCH-CONTAINER" class="[&>div]:m-4 pb-4 bg-gray-50 dark:bg-gray-800">
+                    <div id="FOOD-SEARCH-CONTAINER" class="[&>div]:m-4 pb-4 bg-gray-50 bg-slate-200 dark:bg-gray-800">
                         <!-- x-meal-search-items -->
 
                         <p class="text-center text-gray-400 opacity-40">An example of what searching looks like...</p>

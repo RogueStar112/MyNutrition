@@ -4,7 +4,7 @@
             {{ __('Nutrition - View Meals') }}
         </h2>
   
-        <p class="text-white text-center">Loading last 14 recorded days...</p>
+        <p class="text-black dark:text-white text-center">Loading last 14 recorded days...</p>
     </x-slot>
   
     {{-- <div class="flex py-4 justify-center">
@@ -47,8 +47,8 @@
                    
                         @foreach($meals[0] as $index=>$meal)
                         
-                        <div class="max-w-7xl bg-gray-800 p-6 text-white rounded-lg mb-4">
-                            <table class="border-separate border-spacing-y-1.5 bg-gray-900 p-6 m-2 w-full md:w-[600px] place-items-center text-center">
+                        <div class="max-w-7xl bg-slate-400 dark:bg-gray-800 p-6 text-white rounded-lg mb-4">
+                            <table class="border-separate border-spacing-y-1.5 bg-slate-500 dark:bg-gray-900 p-6 m-2 w-full md:w-[600px] place-items-center text-center">
   
                                 @php
                                     $dayOfWeekNumber = date("w", strtotime($index));
@@ -67,11 +67,11 @@
                                 @endphp
   
                                 <div class="w-full text-center">
-                                <h1 class="text-md font-black text-orange-500">{{ "$dayOfWeek " .  date('jS F Y', strtotime($index)) }}</h1>
+                                <h1 class="text-md font-black text-orange-300 dark:text-orange-500">{{ "$dayOfWeek " .  date('jS F Y', strtotime($index)) }}</h1>
                                 </div>
   
                                 <thead>
-                                    <tr class="uppercase text-gray-500">
+                                    <tr class="uppercase text-black dark:text-gray-500">
                                         <th>Time</th>
                                         <th>Size</th>
                                         <th>Calories</th>
@@ -87,9 +87,9 @@
                                 @foreach($meal['times_planned'] as $meal_time)
                                 
                                 <tr class="m-4">
-                                    <td class="bg-orange-800 text-xl w-[170px]">{{ date('H:i', strtotime($meal_time)) }}</td>
-                                    <td class="bg-orange-800 text-xl"></td>
-                                    <td class="bg-orange-900 relative" colspan="4">{{ $meal[$meal_time]['meal_name'] ?? "" }}
+                                    <td class="bg-orange-600 dark:bg-orange-800 text-xl w-[170px]">{{ date('H:i', strtotime($meal_time)) }}</td>
+                                    <td class="bg-orange-600 dark:bg-orange-800 text-xl"></td>
+                                    <td class="bg-orange-700 dark:bg-orange-900 relative" colspan="4">{{ $meal[$meal_time]['meal_name'] ?? "" }}
   
                                         <span class="hidden sm:inline-block sm:absolute right-4 bg-orange-950 rounded-full px-4"><a href="{{ route('meal.edit_form', $meal[$meal_time]['meal_id'] ?? "") }}"><i class="fas fa-pencil-alt"></i></a></span>
                                     </td>
@@ -103,7 +103,7 @@
   
                          
                                     @if(gettype($food_item) == 'integer') 
-                                    <tr class="text-gray-500">
+                                    <tr class="text-orange-300 dark:text-gray-500">
                                         @php
                                             $meal_foodid = $meal[$meal_time][$food_item]['food_id'] ?? "";
                                             
@@ -123,7 +123,7 @@
   
                                         @endphp
                                         <td>
-                                            <a class="text-orange-500" 
+                                            <a class="text-orange-200 dark:text-orange-500" 
                                                href="{{ route('food.view_item', [
                                                     'user_id' => $user_id ?? '',
                                                     'food_id' => $meal_foodid ?? '',
@@ -132,7 +132,7 @@
                                                 {{$meal_foodname_display}}
                                             </a>
                                         </td>
-                                        <td class="text-orange-700 pr-1 border-r-2 border-r-orange-800">{{$meal[$meal_time][$food_item]['serving_size'] ?? ""}}{{$meal[$meal_time][$food_item]['serving_unit_short'] ?? ""}}</td>
+                                        <td class="text-orange-300 dark:text-orange-700 pr-1 border-r-2 border-r-white dark:border-r-orange-800">{{$meal[$meal_time][$food_item]['serving_size'] ?? ""}}{{$meal[$meal_time][$food_item]['serving_unit_short'] ?? ""}}</td>
                                         <td>{{$meal[$meal_time][$food_item]['calories']}}kcal</td>
                                         <td class="hidden md:table-cell">{{$meal[$meal_time][$food_item]['fat'] ?? ""}}g</td>
                                         <td class="hidden md:table-cell">{{$meal[$meal_time][$food_item]['carbs'] ?? ""}}g</td>

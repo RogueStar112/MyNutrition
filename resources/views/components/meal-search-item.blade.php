@@ -415,7 +415,8 @@
                             'X-CSRF-TOKEN': csrfToken
                         },
                         data: {
-                            meals: meal_json
+                            meals: meal_json,
+                            food_id: query
                             // no_of_foods: no_of_foods,
                             // balancer: replacement_balancer,
                             // query: query,

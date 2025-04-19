@@ -17,7 +17,6 @@
         
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         
@@ -27,6 +26,9 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <link href="resources/css/app.css" rel="stylesheet">
+
         <script
                 src="https://code.jquery.com/jquery-3.7.0.min.js"
                 integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
@@ -42,8 +44,12 @@
 
 
     </head>
-    <body class="antialiased mx-auto  overflow-x-hidden bg-white dark:bg-gray-800 min-h-screen">
 
+    <!-- credit to: https://ibelick.com/blog/create-grid-and-dot-backgrounds-with-css-tailwind-css -->
+
+    <body class="antialiased mx-auto  overflow-x-hidden bg-white min-h-screen l bg-gradient-to-r from-white via-orange-200/50 to-white to-90%">
+     
+      <div class="bg-[radial-gradient(#FFFFFF_3px,transparent_3px)] [background-size:64px_64px]">
       <header>
         <nav id="navbar" class="grid grid-cols-[1fr_1fr] sm:flex px-6 sm:px-0 justify-between sm:justify-around items-center sm:mx-auto text-3xl font-extrabold / /sticky top-0 z-50 bg-transparent max-w-[1600px]">
             <img class="sm:mx-auto md:mx-0" src="{{ asset('img/mynutritionlogo_upscaled.png')}}" width="128" height="128" alt="">
@@ -83,7 +89,7 @@
 
       </header> --}}
 
-      <main class="container mx-auto sm:p-0 overflow-hidden sm:overflow-visible">
+      <main class="container mx-auto overflow-hidden sm:overflow-visible sm:p-0">
         <div id="desktop-hero" class="mt-16 sm:mt-0 xl:grid xl:grid-cols-[2fr_3fr] items-center relative  h-full mx-auto">
 
             <div class="hero-text text-5xl md:text-8xl font-extrabold relative text-center md:text-left md:my-24 text-white md:text-[#CF1909] py-12 z-50 relative">
@@ -92,7 +98,7 @@
 
                 <div class="mx-auto w-max" data-aos="fade-left">Conquer your</div> 
                 
-                <div id="carousel-container" class="flex gap-4 items-center /justify-start relative p-4 mx-auto /xl:mx-0 overflow-hidden max-w-[241px] xl:max-w-[450.767px] h-[128px]">
+                <div id="carousel-container" class="flex gap-4 items-center /justify-start relative p-4 mx-auto /xl:mx-0 overflow-hidden max-w-[241px] md:max-w-[327.017px] xl:max-w-[450.767px] h-[128px]">
                     
 
 
@@ -276,7 +282,7 @@
 
         <div style="position:relative;flex:none" class="">
             <div id="wave-container" class="">
-                <svg class="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ff5a1f" fill-opacity="1" d="M0,192L120,176C240,160,480,128,720,138.7C960,149,1200,203,1320,229.3L1440,256L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
+                <svg class="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#FC6400" class="bg-gradient-to-t from-orange-500 to-orange-800" fill-opacity="1" d="M0,192L120,176C240,160,480,128,720,138.7C960,149,1200,203,1320,229.3L1440,256L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
             </div>
         </div>
         
@@ -323,6 +329,8 @@
       {{-- <svg class="fixed bottom-0 z-0 opacity-80" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#d03801" fill-opacity="1" d="M0,256L30,250.7C60,245,120,235,180,234.7C240,235,300,245,360,245.3C420,245,480,235,540,218.7C600,203,660,181,720,144C780,107,840,53,900,26.7C960,0,1020,0,1080,48C1140,96,1200,192,1260,218.7C1320,245,1380,203,1410,181.3L1440,160L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg> --}}
       </div>
 
+    </div>
+
     </body>
 
     {{-- <script>
@@ -364,7 +372,7 @@
         function showSlide(n) {
             index = (n + images.length) % images.length;
             carousel.style.transform = `translateX(-${offsets[index]}px)`;
-            // carousel_container.style.maxWidth = `${images[index].clientWidth}px`;
+            carousel_container.style.maxWidth = `${images[index].clientWidth}px`;
         }
 
         function nextSlide() { showSlide(index + 1); }
@@ -401,6 +409,7 @@
 
     </script>
 
+    
     <script>
     AOS.init();
     </script>

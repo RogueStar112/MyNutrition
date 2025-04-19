@@ -135,7 +135,7 @@
                     </div>
                     
                     @for ($i=0; $i<$hrs; $i++)
-                        <div id="hr-{{$i}}" class="dark:even:bg-slate-700 dark:bg-slate-800 even:bg-slate-200 odd:shadow-2xl odd:bg-transparent relative">
+                        <div id="hr-{{$i}}" class="dark:even:bg-slate-600 dark:bg-slate-800 even:bg-slate-200 odd:shadow-2xl odd:bg-transparent relative">
 
                             @if($i == 0)
                             <p class="absolute top-0 left-1 dark:text-white text-black opacity-60 font-extrabold pt-4 z-50 ">TIME</p>
