@@ -90,7 +90,7 @@
                     </a>
 
                     
-                    <a class="text-2xl italic bg-slate-200 dark:bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-2 hover:bg-blue-700  dark:hover:bg-blue-700  [&>*]:hover:text-black [&>*]:hover:border-b-black duration-300" href="{{route('compare.form')}}">
+                    {{-- <a class="text-2xl italic bg-slate-200 dark:bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-2 hover:bg-blue-700  dark:hover:bg-blue-700  [&>*]:hover:text-black [&>*]:hover:border-b-black duration-300" href="{{route('compare.form')}}">
 
                         <div class="flex justify-between text-purple-800 dark:text-purple-300 border-b-4 border-b-purple-800 dark:border-b-blue-300 items-center">
                             <h2 class="text-4xl uppercase p-4 font-black">Compare</h2>
@@ -98,7 +98,8 @@
                         </div>
 
                         <p class="text-black dark:text-white p-4">Compare nutrition between certain foods! (Beta)</p>
-                    </a>
+                    </a> --}}
+
                     {{-- <a href="col-span-3 slot-for-later"></a> --}}
 
                     <a class="text-2xl italic bg-slate-200 dark:bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-2 hover:bg-orange-800  dark:hover:bg-orange-800 [&>*]:hover:text-black [&>*]:hover:border-b-black duration-300" href="{{route('visualizer.show')}}">
@@ -110,6 +111,19 @@
 
                         <p class="text-black dark:text-white p-4">See how each day goes! (Beta)</p>
                     </a>
+
+                    <a class="text-2xl italic bg-slate-200 dark:bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-2 hover:bg-blue-700  dark:hover:bg-blue-700  [&>*]:hover:text-black [&>*]:hover:border-b-black duration-300 [&>div]:opacity-60 [&>*]:select-none relative">
+
+                        <p class="-rotate-12 text-4xl absolute left-1/2 top-1/4 text-black dark:text-white opacity-100 font-black -translate-x-1/2 translate-y-1/2  text-center w-full z-50">Temporarily Disabled</p>
+
+                        <div class="flex justify-between text-purple-800 blur-sm dark:text-purple-300 border-b-4 border-b-purple-800 dark:border-b-blue-300 items-center">
+                            <h2 class="text-4xl uppercase p-4 font-black">Compare</h2>
+                            <i class="fas fa-balance-scale fa-3x p-4"></i>
+                        </div>
+
+                        <p class="text-black dark:text-white blur-sm p-4">Compare nutrition between certain foods! (Beta)</p>
+                    </a>
+
 
                     <a class="text-2xl italic bg-slate-200 dark:bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 /md:col-span-3  relative">
 

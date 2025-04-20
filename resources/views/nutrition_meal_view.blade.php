@@ -13,12 +13,51 @@
     </div> --}}
   
     <div class="flex py-4 justify-center items-center">
-        <div class="flex flex-col max-w-sm md:flex-row md:max-w-7xl justify-center">
+        <div class="flex flex-col max-w-sm /md:flex-row md:max-w-7xl justify-center">
+
+            <div class="text-black dark:text-white text-center mx-8 p-8 bg-slate-800">Nutrition Meals</div>
+
             <div class="flex flex-col mx-auto [&>div]:mb-6">
                 {{-- <div class="text-center text-white">Start Date</div> --}}
                 {{-- {!! $calendar !!} --}}
                 {{-- <div class="text-center text-white">End Date</div>
                 {!! $calendar !!} --}}
+                
+
+                <div id="DAILY-VISUALIZER-VIEW" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+                    <div id="DAILY-VISUALIZER-DATEPICKER" class="mt-4 flex flex-col md:flex-row justify-between place-items-center bg-slate-300 dark:bg-slate-800 rounded-lg p-2 dark:text-white text-black">
+                        {{-- <h2 class="text-center mb-4 md:mb-0 md:text-left font-semibold italic uppercase dark:dark:text-white text-black text-2xl mx-auto text-gray-800 leading-tight">
+                            {{ __('Daily View') }}
+                        </h2> --}}
+                        
+                        
+                        <div id="daterange-controls" class="flex justify-between p-4 dark:[&>*]:text-white [&>*]:text-black">
+                            <div id="date-range-picker" date-rangepicker class="flex justify-end items-center ">
+                                <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none [&>div]:flex-col">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                    </svg>
+                                </div>
+                                <input id="datepicker-range-start" name="dailypicker-start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:dark:text-white text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+                                </div>
+                                <span class="mx-4 text-gray-500">to</span>
+                                <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                    </svg>
+                                </div>
+                                <input id="datepicker-range-end" name="dailypicker-end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:dark:text-white text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+                            </div>
+                            </div>
+    
+                            <button type="button" id="update-dailyview-btn" class="btn bg-green-500 p-2 rounded-lg ml-2 dark:text-white text-black hover:bg-green-600">Update</button>
+                        </div>
+                </div>
+  
+  
             </div>
   
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -242,5 +281,8 @@
         </div>
         
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+
   </x-app-layout>
   

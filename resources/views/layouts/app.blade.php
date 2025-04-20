@@ -114,18 +114,35 @@
     </head>
  
     <body class="antialiased bg-slate-700">
- 
+        
         <div class="min-h-screen bg-slate-100 dark:bg-slate-700 min-h-screen">
- 
+            
             @include('layouts.navigation')
  
 
  
             <!-- Page Heading -->
- 
+            
+            <div id="HEADER-MAIN-WRAPPER" class="relative">
+
+            <div id="MOBILE-NOTIFICATIONS-CONTAINER" class="hidden fixed top-[calc(0px+6rem)] /top-[calc(50%-8rem)] top-1/2 left-1/2 blur-none! text-white z-[9999] translate-y-0 -translate-x-1/2 bg-slate-800 w-[calc(100%-2rem)] h-[calc(100%-2rem)] rounded-lg text-left p-6 text-2xl font-black italic">
+                NOTIFICATIONS
+
+                <div class="flex flex-col" id="MOBILE-NOTIFICATIONS-INNER">
+                    @foreach ($mealNotifications as $mealNotification)
+                            @foreach($mealNotification as $notification)
+                                @isset($notification->id)
+                                  <livewire:meal-notification-livewire :id="$notification->id" />
+                                @endisset
+                            @endforeach
+                         @endforeach
+                </div>
+            </div>
+
+
             @if (isset($header))
  
-                <header class="dark:bg-slate-700 bg-slate-100">
+                <header class="dark:bg-slate-700 bg-slate-100 " id="HEADER">
  
                     <div class="max-w-7xl mx-auto pt-6 px-4 sm:px-6 lg:px-8">
  
@@ -141,7 +158,7 @@
  
             <!-- Page Content -->
  
-            <main class="dark:bg-slate-700 h-full relative overflow-hidden">
+            <main class="dark:bg-slate-700 h-full relative overflow-hidden" id="MAIN">
  
 
  
@@ -149,9 +166,6 @@
  
 
  
-                @if(Route::currentRouteName() === 'meal.create' || Route::currentRouteName() === 'food.create')
- 
-
  
                     <!-- Page Heading -->
  
@@ -161,20 +175,31 @@
  
                     <div class="fixed sm:hidden bottom-4 right-4 flex flex-col gap-6 z-[9999]">
                         <!-- Notification Button -->
-                        <div class="relative">
+                        <div class="relative" id="NOTIFICATIONS-BTN-MOBILE">
+
+                            <div id="NOTIFICATIONS-COUNT-DOT" class="absolute -top-2 -right-2 w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center text-center" value="0"></div>
+
                             <div id="NOTIFICATIONS-COUNT-MOBILE" class="absolute -top-2 -right-2 w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center text-center" value="0">0</div>
+
                             <button id="SHOW-NOTIFICATIONS-BTN-MOBILE" class="bg-orange-500 text-white rounded-full cursor-pointer w-[3rem] h-[3rem] flex items-center justify-center"> 
                                 <i id="SHOW-NOTIFICATIONS-ICON-MOBILE" class="fa-solid fa-bell text-2xl select-none"></i>
                             </button>
                         </div>
-                    
-                        <!-- Cart Button -->
-                        <div class="relative">
-                            <div id="ITEMS-COUNT-MOBILE" class="absolute -top-2 -right-2 w-6 h-6 bg-orange-700 text-white rounded-full flex items-center justify-center text-center" value="0">0</div>
-                            <button id="SHOW-ITEMS-BTN-MOBILE" class="bg-orange-600 text-white flex justify-center items-center rounded-full cursor-pointer w-[3rem] h-[3rem]"> 
-                                <i id="SHOW-ITEMS-ICON" class="fa-solid fa-cart-shopping text-2xl select-none"></i>
-                            </button>
-                        </div>
+                        
+                        
+                        @if(Route::currentRouteName() === 'meal.create' || Route::currentRouteName() === 'food.create')
+ 
+
+                            <!-- Cart Button -->
+                            <div class="relative">
+                                <div id="ITEMS-COUNT-MOBILE" class="absolute -top-2 -right-2 w-6 h-6 bg-orange-700 text-white rounded-full flex items-center justify-center text-center" value="0">0</div>
+                                <button id="SHOW-ITEMS-BTN-MOBILE" class="bg-orange-600 text-white flex justify-center items-center rounded-full cursor-pointer w-[3rem] h-[3rem]"> 
+                                    <i id="SHOW-ITEMS-ICON" class="fa-solid fa-cart-shopping text-2xl select-none"></i>
+                                </button>
+                            </div>
+
+                        
+                        @endif
                     </div>
 
  
@@ -188,13 +213,13 @@
  
 
  
-                @endif
  
 
  
 
  
             </main>
+            </div>
  
         </div>
  
@@ -239,6 +264,66 @@
         </script>
  
         @livewireScripts
- 
+        
+
+        <script>
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+   
+            $( document ).ready(function() {
+               $.ajax({
+                               url: `/nutrition/notifications/load_count`,
+                               method: 'GET',
+                               headers: {
+                                   'X-CSRF-TOKEN': csrfToken
+   
+                               },
+                               data: {
+                                   
+                                   // no_of_foods: no_of_foods,
+                                   // balancer: replacement_balancer,
+                                   // query: query,
+                                   // servingSize: servingSize,
+                                   // quantity: quantity
+                                   // ignoreServingSize: ignoreServingSize
+                               },
+                               success: function(response) {
+                                   console.log(response)
+
+                                   $('#NOTIFICATIONS-COUNT-MOBILE').html(response)
+   
+                                   if(response > 0) {
+                                       $('#notifications-found').removeClass('hidden')
+                                       $('#notifications-found-base').removeClass('hidden')
+                                       $('#NOTIFICATIONS-COUNT-DOT').addClass('animate-ping')
+                                   }
+                               }
+   
+               });
+           });
+
+           $('#SHOW-NOTIFICATIONS-BTN-MOBILE').on("click", function(e) {
+
+
+                               let notificationsContainer_div = $('#MOBILE-NOTIFICATIONS-CONTAINER');
+                                   notificationsContainer_div.toggleClass('hidden');
+
+                               let notificationsIcon = $('#SHOW-NOTIFICATIONS-ICON-MOBILE');
+                                   notificationsIcon.toggleClass('fa-bell');
+                                   notificationsIcon.toggleClass('fa-x');
+                                
+                            //    let notificationsContainer = $('#MOBILE-NOTIFICATIONS-INNER'); // Or any other suitable container
+                            //     notificationsContainer.empty(); // Clear previous notifications if needed
+                                
+
+
+                            //     $.each(response.components, function(index, componentHtml) {
+                            //         notificationsContainer.append(componentHtml);
+                            //     });
+                            }
+
+                        
+         )
+
+        </script>
     </body>
 </html>

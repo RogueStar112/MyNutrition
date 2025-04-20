@@ -14,7 +14,7 @@
 
     <div class="py-4 relative mx-auto max-w-7xl overflow-hidden">
 
-        <div id="viewmodes-container" class="flex justify-end bg-slate-200 text-black dark:dark:text-white text-black dark:dark:bg-slate-900 bg-slate-300">
+        <div id="viewmodes-container" class="flex mx-4 rounded-lg justify-end bg-slate-200 text-black dark:dark:text-white text-black dark:dark:bg-slate-900 bg-slate-300">
             <div class="tri-state-toggle flex gap-4 p-6 w-fit list-none appearance-none [&>input]:hidden [&>*]:p-4 [&>*]:cursor-pointer">
               <input class="radio-button-invis" type="radio" name="toggle" id="view-monthly" />
               <label for="view-monthly">Monthly</label>

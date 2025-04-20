@@ -55,7 +55,7 @@ html {
     display: flex;
     position: relative;
     padding: 16px;
-    /* margin: 0 auto; */
+    margin: 0 auto;
     flex-direction: row-reverse;
     max-height: 512px;
     height: 512px;
@@ -441,4 +441,16 @@ input {
 
 select {
     @apply p-4;
+}
+
+.dark .datepicker-cell {
+    color: white !important;
+  }
+  
+.light .datepicker-cell {
+    color: black !important;
+}
+
+.light .datepicker-cell:hover {
+    color: white !important;
 }

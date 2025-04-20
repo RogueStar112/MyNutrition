@@ -1,6 +1,13 @@
+{{-- @isset($isAccepted) --}}
 <div id="notification-meal-{{$mealId}}" class="border-t-2 border-t-white py-4 w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-center px-4 relative z-[9999] flex flex-col justify-left gap-4 items-start">
+    
+
+
     <div class="grow text-justify">
         {{-- <span class="text-slate-400 grow">{{$key}})</span>  --}}
+
+
+        @isset($isAccepted)
 
         @if($isAccepted == 0)
 
@@ -56,14 +63,20 @@
             
             {{-- <p>Meal deleted.</p> --}}
 
-        @endif
+        @else
 
+            <div>error</div>
+
+        @endif
+        
+        @endisset
 
 
     </div>
 
     <div class="flex w-full /px-4 justify-around gap-4 items-end [&amp;>*]:p-2 [&amp;>*]:rounded-lg [&amp;>*]:w-fit gap-6 [&amp;>*]:text-center [&amp;>*]:cursor-pointer /mt-2 min-w-max [&>*]:grow [&>*]:rounded-lg">
 
+        @isset($notificationType)
         @if($notificationType == 1)
 
         <button type="button" class="bg-blue-600 hover:bg-blue-700 text-white" wire:click="markAsEaten">Yes</button>
@@ -75,10 +88,18 @@
         @if($notificationType == 2)
         <button type="button" class="bg-blue-600 hover:bg-blue-700 text-white" wire:click="dismissNotification">Dismiss</button>
         @endif
+        @endisset
 
     </div>
-    
+
 
 
 </div>
+
+{{-- @else
+
+    
+
+@endisset --}}
+
 
