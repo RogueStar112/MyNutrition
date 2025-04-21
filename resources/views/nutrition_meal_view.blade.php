@@ -15,7 +15,7 @@
     <div class="flex py-4 justify-center items-center">
         <div class="flex flex-col max-w-sm /md:flex-row md:max-w-7xl justify-center">
 
-            <div class="text-black dark:text-white text-center mx-8 p-8 bg-slate-800">Nutrition Meals</div>
+            <div class="text-black dark:text-white text-center mx-8 p-8 bg-slate-800">Nutrition Meals<br>(date filter does not work yet!)</div>
 
             <div class="flex flex-col mx-auto [&>div]:mb-6">
                 {{-- <div class="text-center text-white">Start Date</div> --}}

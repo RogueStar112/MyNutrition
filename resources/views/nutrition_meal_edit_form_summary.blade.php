@@ -19,22 +19,23 @@
                 
 
                 <div class="bg-gray-800 p-6 rounded-lg">
-                <form id="form-ptii-submission" method="POST" action="{{ route('meal.store')}}">
+                <form id="form-ptii-submission" method="POST" action="{{ route('meal.edit', ['id' => $id]) }}">
                         @csrf
+                        <input type="hidden" name="_method" value="PUT" />
 
                         <div class="grid grid-cols-2 gap-3 justify-center">
 
                             <div class="w-full">
                             <label for="MEAL_NAME" class="text-white"><p class="font-bold text-xl text-center">Give the meal a name.</p>
 
-                            <input type="text" name="MEAL_NAME" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="Big Breakfast, Spaghetti Carbonara, BLT Sandwich" value="" required/>
+                            <input type="text" name="MEAL_NAME" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="Big Breakfast, Spaghetti Carbonara, BLT Sandwich" value="" />
                             </label>
                             </div>
 
                             <div class="w-full">
                             <label for="MEAL_TIME" class="text-white"><p class="font-bold text-xl text-center">When are you going to have this meal?</p>
 
-                                <input type="datetime-local" name="MEAL_TIME" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="Big Breakfast, Spaghetti Carbonara, BLT Sandwich" value="" required/>
+                                <input type="datetime-local" name="MEAL_TIME" class="block bg-slate-700 text-gray-200 w-full mt-1 rounded-md" placeholder="Big Breakfast, Spaghetti Carbonara, BLT Sandwich" value="" />
                             </label>
                             </div>
                         </div>
@@ -67,7 +68,7 @@
                     <div class="flex justify-center">
                         <input type="hidden" id="foods_pages" name="foods_pages" value="1"/>
                         
-                        <button type="submit" class="w-full bg-lime-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-check"></i>  Click here to submit.</button>
+                        <button type="submit" class="w-full bg-lime-600 text-white p-4 rounded-lg cursor-pointer"><i class="fas fa-check"></i>  Click here to submit.</button>
                     </div>
                 
                     <div class="mt-4 border-4 border-transparent border-t-white text-white text-2xl text-center">

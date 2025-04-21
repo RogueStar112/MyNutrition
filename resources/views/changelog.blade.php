@@ -8,12 +8,28 @@
    
 
   <div class="w-screen h-full max-w-7xl mx-auto text-black dark:text-white mt-8 pt-6 px-4 sm:px-6 lg:px-8 flex flex-col gap-4">
+    
+    <div class=" bg-slate-200 dark:bg-slate-800 p-4 rounded-lg">
+      <h2 class="text-2xl font-extrabold">Patch Notes 2025.04_01</h2>
+
+      
+      <p class="text-gray-800 dark:text-gray-400">21/04/2025 - Present</p>
+      
+      <p class="text-green-500 text-2xl font-extrabold mt-4">ADDED:  
+        
+      </p>
+      
+      <p>+ Meal Editing!</p>
+      <p>+ Dark and Light mode UI tweaks still a WIP.</p>
+
+    </div>
+
 
     <div class=" bg-slate-200 dark:bg-slate-800 p-4 rounded-lg">
       <h2 class="text-2xl font-extrabold">Patch Notes 2025.04</h2>
 
       
-      <p class="text-gray-800 dark:text-gray-400">18/03/2025 - Present</p>
+      <p class="text-gray-800 dark:text-gray-400">19/03/2025 - 20/04/2025</p>
       
       <p class="text-green-500 text-2xl font-extrabold mt-4">ADDED:  
         

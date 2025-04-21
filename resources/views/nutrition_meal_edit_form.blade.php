@@ -35,7 +35,7 @@
                             <p id="page-number-text" class="text-gray-500 italic mt-2">Food 1 out of 1.</p>
                         </div> --}}
 
-                        <div class="flex justify-center">
+                        <div class="flex justify-center [&>*]:cursor-pointer">
                             <input type="hidden" id="pages" name="food_pages" value="1"/>
                             <button type="button" class="bg-red-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-trash"></i>  DELETE</button>
                             <button type="button" class="bg-blue-600 text-white p-4 m-4 rounded-lg"><a href="{{ route('meal.view') }}"><i class="fas fa-eye"></i> VIEW</a></button>

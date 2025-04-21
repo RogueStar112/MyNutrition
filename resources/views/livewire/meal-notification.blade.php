@@ -81,7 +81,7 @@
 
         <button type="button" class="bg-blue-600 hover:bg-blue-700 text-white" wire:click="markAsEaten">Yes</button>
         <button type="button" class="bg-red-600 hover:bg-red-700 text-white" wire:click="markAsDeleted">No</button>
-        <a href class="bg-yellow-600 hover:bg-yellow-700">Edit</button> 
+        <a href="{{ route('meal.edit_form', ['id' => $mealId]) }}" class="bg-yellow-600 hover:bg-yellow-700">Edit</a> 
 
         @endif
 

@@ -82,6 +82,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/nutrition/meal', [MealController::class, 'meal_form'])->name('meal.create');
     Route::post('/nutrition/meal', [MealController::class, 'meal_form_store'])->name('meal.store');
+    Route::put('/nutrition/meal/{id}', [MealController::class, 'meal_edit'])->name('meal.edit');
+
 
     Route::post('/nutrition/meal/create_meal/{food_id}', [MealController::class, 'add_food_to_meal'])->name('meal.add_food');
 
@@ -104,7 +106,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/nutrition/meal/edit/{id}', [MealController::class, 'meal_edit_form'])->name('meal.edit_form');
 
-    Route::put('/nutrition/meal/edit/{id}', [MealController::class, 'meal_edit'])->name('meal.edit');
+    // Route::put('/nutrition/meal/edit/{id}', [MealController::class, 'meal_edit'])->name('meal.edit');
 
     Route::post('/nutrition/body_stats', [BodyStatsController::class, 'body_stats_store'])->name('body_stats.store');
 

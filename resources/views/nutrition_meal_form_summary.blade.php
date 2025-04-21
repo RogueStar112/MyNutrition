@@ -96,7 +96,7 @@
                     <div class="flex justify-center">
                         <input type="hidden" id="foods_pages" name="foods_pages" value="1"/>
                         
-                        <button type="submit" class="w-full bg-lime-600 text-white p-4 m-4 rounded-lg"><i class="fas fa-check"></i>  Click here to submit.</button>
+                        <button type="submit" class="w-full bg-lime-600 text-white p-4 m-4 rounded-lg cursor-pointer"><i class="fas fa-check"></i>  Click here to submit.</button>
                     </div>
                 
                     <div class="mt-4 border-4 border-transparent border-t-white text-white text-2xl text-center">
