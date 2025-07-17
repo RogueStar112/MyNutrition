@@ -99,13 +99,13 @@
         let food_id = 0;
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-        $( "#FOOD-ITEMS-CONTAINER" ).on( "change", function() {
+        $( "#FOOD-ITEMS-CONTAINER" ).change(function() {
                 
                 // console.log('food_items_container_change: Tanzania')
                 
                 // load deletion scripts
 
-                loadMealSelfDeletionScripts();
+                // loadMealSelfDeletionScripts();
 
                 // Reorder remaining items
                 reorderItems();
@@ -115,42 +115,89 @@
              } );
 
 
-             function reorderItems() {
-                // Get all meal items
+            //  function reorderItems() {
+            //     // Get all meal items
+            //     $("#FOOD-ITEMS-CONTAINER .meal_item").each(function (index) {
+            //         let newIndex = index + 1; // Start at 1
+
+
+            //         if ($("#FOOD-ITEMS-CONTAINER .meal_item").length === 1) {
+            //             newIndex = 1;
+            //             index = 2;
+
+            //             console.log('COUNT IS ONE, I REPEAT, COUNT IS ONE')
+            //         } else {
+            //           // do nothing
+            //         }
+
+            //         // Update attributes and inner content
+
+            //         console.log('THIS', $(this));
+
+                    
+            //         $(this).attr("id", `meal_item_${newIndex}`).attr("index", newIndex);
+            //         // $(this).attr("class", `meal_item_${newIndex}`);
+            //         $(this).find("[aria-label='index_number']").text(newIndex);
+            //         $(this).find("button").attr("id", `item_revealbtn_${newIndex}`).attr("index", newIndex);
+            //         $(this).find("i").attr("id", `item_icon_${newIndex}`);
+            //         $(this).find(`#food_wrapper_${index}`).attr("id", `food_wrapper_${newIndex}`);
+            //         $(this).find(`#food_text_name_${index}`).attr("id", `food_text_name_${newIndex}`);
+            //         $(this).find(`#food_servingsize_${index}`).attr("id", `food_servingsize_${newIndex}`);
+            //         $(this).find(`#food_text_source_${index}`).attr("id", `food_text_source_${newIndex}`);
+            //         $(this).find(`#nutritional_wrapper_${index}`).attr("id", `nutritional_wrapper_${newIndex}`);
+            //         $(this).find(`#food_text_calories_${index}`).attr("id", `food_text_calories_${newIndex}`);
+            //         $(this).find(`#food_progressbar_calories_${index}`).attr("id", `food_progressbar_calories_${newIndex}`);
+            //         $(this).find(`#food_text_fat_${index}`).attr("id", `food_text_fat_${newIndex}`);
+            //         $(this).find(`#food_progressbar_fat_${index}`).attr("id", `food_progressbar_fat_${newIndex}`);
+            //         $(this).find(`#food_text_carbs_${index}`).attr("id", `food_text_carbs_${newIndex}`);
+            //         $(this).find(`#food_progressbar_carbs_${index}`).attr("id", `food_progressbar_carbs_${newIndex}`);
+            //         $(this).find(`#food_text_protein_${index}`).attr("id", `food_text_protein_${newIndex}`);
+            //         $(this).find(`#food_progressbar_protein_${index}`).attr("id", `food_progressbar_protein_${newIndex}`);
+            //         $(this).find(`#mealitem-edit-btn-${index}`).attr("id", `mealitem-edit-btn-${newIndex}`);
+            //     });
+
+            //     console.log('Items reordered.')
+            // }                 
+
+            function reorderItems() {
                 $("#FOOD-ITEMS-CONTAINER .meal_item").each(function (index) {
-                    let newIndex = index + 1; // Start at 1
+                    const newIndex = index + 1;
+                    const $item = $(this);
 
+                    $item.attr("id", `meal_item_${newIndex}`).attr("index", newIndex);
+                    $item.find("[aria-label='index_number']").text(newIndex);
+                    $item.find("button").attr("id", `item_revealbtn_${newIndex}`).attr("index", newIndex);
+                    $item.find("i").attr("id", `item_icon_${newIndex}`);
 
-                    if ($("#FOOD-ITEMS-CONTAINER .meal_item").length === 1) {
-                        newIndex = 1;
-                        index = 2;
+                    // Update all inner IDs based on class prefixes
+                    $item.find("[id^='food_wrapper_']").attr("id", `food_wrapper_${newIndex}`);
+                    $item.find("[id^='food_text_name_']").attr("id", `food_text_name_${newIndex}`);
+                    $item.find("[id^='food_servingsize_']").attr("id", `food_servingsize_${newIndex}`);
+                    $item.find("[id^='food_text_source_']").attr("id", `food_text_source_${newIndex}`);
+                    
+                    $item.find("[id^='nutritional_wrapper_']").attr("id", `nutritional_wrapper_${newIndex}`);
+                    // $item.find("[class^='nutritional_wrapper_']").attr("class", `nutritional_wrapper_${newIndex}`);
+                     
+                    $item.find("[id^='nutritional-media-']").attr("id", `nutritional-media-buttons-${newIndex}`);
 
-                        console.log('COUNT IS ONE, I REPEAT, COUNT IS ONE')
-                    } else {
-                      // do nothing
-                    }
+                    // $item.find("[class^='nutritional-media-']").attr("class", `nutritional-media-buttons-${newIndex}`);
+                    // $item.find("[class^='nutritional-media-']").attr("class", `nutritional-media-buttons-${newIndex}`);
 
-                    // Update attributes and inner content
-                    $(this).attr("id", `meal_item_${newIndex}`).attr("index", newIndex);
-                    $(this).find("[aria-label='index_number']").text(newIndex);
-                    $(this).find("button").attr("id", `item_revealbtn_${newIndex}`).attr("index", newIndex);
-                    $(this).find("i").attr("id", `item_icon_${newIndex}`);
-                    $(this).find(`#food_wrapper_${index}`).attr("id", `food_wrapper_${newIndex}`);
-                    $(this).find(`#food_text_name_${index}`).attr("id", `food_text_name_${newIndex}`);
-                    $(this).find(`#food_servingsize_${index}`).attr("id", `food_servingsize_${newIndex}`);
-                    $(this).find(`#food_text_source_${index}`).attr("id", `food_text_source_${newIndex}`);
-                    $(this).find(`#nutritional_wrapper_${index}`).attr("id", `nutritional_wrapper_${newIndex}`);
-                    $(this).find(`#food_text_calories_${index}`).attr("id", `food_text_calories_${newIndex}`);
-                    $(this).find(`#food_progressbar_calories_${index}`).attr("id", `food_progressbar_calories_${newIndex}`);
-                    $(this).find(`#food_text_fat_${index}`).attr("id", `food_text_fat_${newIndex}`);
-                    $(this).find(`#food_progressbar_fat_${index}`).attr("id", `food_progressbar_fat_${newIndex}`);
-                    $(this).find(`#food_text_carbs_${index}`).attr("id", `food_text_carbs_${newIndex}`);
-                    $(this).find(`#food_progressbar_carbs_${index}`).attr("id", `food_progressbar_carbs_${newIndex}`);
-                    $(this).find(`#food_text_protein_${index}`).attr("id", `food_text_protein_${newIndex}`);
-                    $(this).find(`#food_progressbar_protein_${index}`).attr("id", `food_progressbar_protein_${newIndex}`);
-                    $(this).find(`#mealitem-edit-btn-${index}`).attr("id", `mealitem-edit-btn-${newIndex}`);
+                    $item.find("[id^='mealitem-delete-btn-']").attr("id", `mealitem-delete-btn-confirmcontainer-${newIndex}`);
+
+                    $item.find("[id^='food_text_calories_']").attr("id", `food_text_calories_${newIndex}`);
+                    $item.find("[id^='food_progressbar_calories_']").attr("id", `food_progressbar_calories_${newIndex}`);
+                    $item.find("[id^='food_text_fat_']").attr("id", `food_text_fat_${newIndex}`);
+                    $item.find("[id^='food_progressbar_fat_']").attr("id", `food_progressbar_fat_${newIndex}`);
+                    $item.find("[id^='food_text_carbs_']").attr("id", `food_text_carbs_${newIndex}`);
+                    $item.find("[id^='food_progressbar_carbs_']").attr("id", `food_progressbar_carbs_${newIndex}`);
+                    $item.find("[id^='food_text_protein_']").attr("id", `food_text_protein_${newIndex}`);
+                    $item.find("[id^='food_progressbar_protein_']").attr("id", `food_progressbar_protein_${newIndex}`);
+                    $item.find("[id^='mealitem-edit-btn-']").attr("id", `mealitem-edit-btn-${newIndex}`);
                 });
-            }                 
+
+                console.log("Items reordered.");
+            }
 
         $(document).ready(function() {
             
@@ -254,10 +301,33 @@
                 $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).removeClass("hidden");
             });
 
+            // function to delete an item
             $(document).on("click", `[id^=mealitem-delete-btn-yes-]`, function () {
                 let food_id = $(this).data("id"); 
-                $(`.meal_${food_id}`).remove();
                 
+                // remove the inputs preemptively
+                $(`.meal_${food_id}`).remove();
+
+                delete meal_json[food_id];
+
+                
+
+                console.log('MEAL JSON AFTER REMOVAL', meal_json);
+
+                let page_index_to_remove = foods_pages.indexOf(food_id);
+
+                if (page_index_to_remove > -1) {
+                    foods_pages.splice(page_index_to_remove, 1)
+                
+                }
+
+                $(`#no_of_foods`).val(foods_pages.length);
+
+                
+
+                $(`#foods_pages`).val(foods_pages);
+
+                reorderItems();
                 // foreach(meals_array as meal) {
 
                 //     if (meal['food_id'] == food_id) {

@@ -720,8 +720,24 @@
 
             $("#FOOD-ITEMS-CONTAINER").on("click", `[id^=mealitem-delete-btn-yes-]`, function () {
                 let food_id = $(this).data("id"); 
-                $(`.meal_${food_id}`).remove();
                 
+                // remove the inputs preemptively
+                $(`.meal_${food_id}`).remove();
+
+
+                // remove specific food page in question
+                let page_index_to_remove = foods_pages.indexOf(food_id);
+
+                if (page_index_to_remove > -1) {
+                    foods_pages.splice(page_index_to_remove, 1)
+                
+                }
+
+                $(`#foods_pages`).val(foods_pages);
+
+
+                console.log('MEAL JSON AFTER REMOVAL', meal_json);
+
                 // foreach(meals_array as meal) {
 
                 //     if (meal['food_id'] == food_id) {

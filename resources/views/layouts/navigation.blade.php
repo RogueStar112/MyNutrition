@@ -109,7 +109,7 @@
 
                         @else
 
-                            <p class="text-slate-500 text-center"><i class="fas fa-bell gap-4"></i> {{count($mealNotifications)+1}}</p>
+                            <p class="text-slate-500 text-center"><i class="fas fa-bell gap-4"></i> {{count($mealNotifications)}}</p>
 
                         @endif
 

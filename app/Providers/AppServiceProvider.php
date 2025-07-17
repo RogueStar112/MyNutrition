@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use Auth;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 
 use App\Models\MealNotifications;
 
@@ -28,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Model::unguard();
+        
         View::composer('layouts.navigation', function ($view) {
             
             $now = Carbon::now()->format('Y-m-d H:i:s');

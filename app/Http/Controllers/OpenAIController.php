@@ -49,6 +49,7 @@ class OpenAIController extends Controller
         $result = OpenAI::chat()->create([
             'model' => 'gpt-3.5-turbo',
             'messages' => [
+                // can use 'system' in role alternatively.
                 ['role' => 'user', 'content' => "Responding with pure JSON, can you provide the nutritional content for $name (per $serving_size $serving_unit, from $source)? Return the following ONLY: Calories (kcal), Fat (g), Carbs (g), Protein (g), Sugars (g), Saturates (g), Fibre (g), Salt (g). "],
             ],
         ]);
