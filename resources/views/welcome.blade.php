@@ -202,7 +202,7 @@
                 </p>
             </div>
 
-            <div class="md:col-span-6 inline-block bg-gradient-to-r from-orange-400 via-red-500 to-orange-400 text-white p-4 md:p-12 rounded-full /bg-clip-text text-3xl md:text-7xl text-transparent font-black relative" data-aos="fade-up" data-aos-duration="1250">
+            <div class="md:col-span-6 mt-24 sm:mt-0 inline-block bg-gradient-to-r from-orange-400 via-red-500 to-orange-400 text-white p-4 md:p-12 rounded-full /bg-clip-text text-3xl md:text-7xl text-transparent font-black relative" data-aos="fade-up" data-aos-duration="1250">
                 Premium FEATURES
                 
                 <div class="absolute right-0 -top-[120%] md:-top-[47%]">    <img class="rounded-lg mx-auto /faded-x-mask w-[9rem] h-[9rem]" src="{{ asset( 'img/premium_crown.png') }}" data-aos="fade-up" data-aos-duration="1500">
@@ -212,7 +212,7 @@
             <div class="text-center text-4xl font-semibold mt-8 md:col-span-3 [&>*>img]:h-[421px]"  data-aos="fade-up" data-aos-duration="1250">
                 <p>Planning Meals</p>
 
-                <img class="mt-8 rounded-lg mx-auto /faded-x-mask max-w-[400px]" src="{{ asset( 'img/clock_transparent.png') }}" data-aos="fade-up" data-aos-duration="1500">
+                <img class="mt-8 rounded-lg mx-auto /faded-x-mask max-w-[256px] sm:max-w-[400px]" src="{{ asset( 'img/clock_transparent.png') }}" data-aos="fade-up" data-aos-duration="1500">
 
                 <p class="mt-8">
                     Plan meals in advance, with the ability to change and edit at any time.
@@ -222,7 +222,7 @@
             <div class="text-center text-4xl font-semibold mt-8 md:col-span-3 [&>*>img]:h-[421px]"  data-aos="fade-up" data-aos-duration="1500">
                 <p>✨AI Auto Fill ✨</p>
 
-                <img  class="mt-8 rounded-lg mx-auto /faded-x-mask rounded-lg max-w-[400px]" src="{{ asset( 'img/aiautofill_transparent.png' )}}" alt="">
+                <img  class="mt-8 rounded-lg mx-auto /faded-x-mask rounded-lg max-w-[256px] sm:max-w-[400px]" src="{{ asset( 'img/aiautofill_transparent.png' )}}" alt="">
 
                 <p class="mt-8">
                     Supercharge your food meal intake by filling it with nutritional information more quickly.
