@@ -12,6 +12,35 @@
         }
     @endphp
 
+    @empty($foods)
+
+        <!-- If Search Results are Empty -->
+
+        <div class="p-16 bg-slate-800">
+            <div class="flex flex-col justify-center items-center min-w-[150px] min-h-[250px] w-full h-full bg-slate-900 rounded-lg">
+
+                <p class="text-white">
+                    <span id="search-result">{{$query}} is not found. Would you like to AI Auto Fill this instead?<span>
+                </p>
+
+                <div class="flex w-full gap-16 [&>*]:grow px-16">
+                    <button id="auto-fill-yes" type="button" class="bg-green-600 rounded-lg text-white hover:bg-green-400 cursor-pointer" >YES</button>
+                    <button id="auto-fill-no" type="button" class="bg-red-600 rounded-lg text-white hover:bg-red-400 cursor-pointer">NO</button>
+                </div>
+
+
+                <script>
+                    
+
+                </script>
+
+
+
+            </div>
+        </div>
+
+    @endempty
+
     @foreach($foods as $index=>$food)
         
         @php
@@ -297,6 +326,64 @@
 
 
                 // })
+
+                $('#auto-fill-yes').on("click", function(e) {
+
+                    let btn = $(this);
+                    let foodInput = $('#meal_name_1').val();
+
+                    btn.addClass('animate-pulse');
+                    btn.removeClass('animate-gradient');
+                
+                    btn.prop("disabled", true);
+
+                    btn.text('Loading...')
+
+
+                    e.preventDefault();
+                    
+                    $.ajax({
+                    url: `/nutrition/ai/empty_food_prompt/${foodInput}`,
+                    method: 'POST',
+                    headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                    },
+
+                    success: function(response) {
+
+                        // response = JSON.parse(response);
+                        
+                        // const fixedJsonString = rawJsonString.replace(/\\n/g, '\n');
+
+                        // const parsedData = JSON.parse(fixedJsonString);
+
+                        // console.log(response.result);
+                        // console.log(typeof response.result);
+
+                        alert('Food added successfully!');
+                        btn.text('Food added successfully! 🙂')
+                        
+                    },
+
+                    complete: function () {
+                        // Hide loading indicator and re-enable submit button
+                        btn.removeClass('animate-pulse');
+                        btn.addClass('animate-gradient');
+
+                    },
+
+                    error: function () {
+
+                        alert('Error with AI auto fill or food insertion');
+                        btn.text('Food failed to add! :(')
+                    }
+
+                    
+
+
+                    })
+
+                })
 
                 $('.add_food_icon').on("click", function(e) {
 

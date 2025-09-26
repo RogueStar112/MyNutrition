@@ -1,4 +1,4 @@
-<div id="food_number_{{$index}}" class="rounded-t-lg inline-block {{$active}} [&>div]:bg-white dark:[&>div]:bg-slate-800 dark:[&>*>*]:text-white [&>*>*>*]:text-black dark:[&>*>label>span]:text-white [&>*>*]:text-black [&>div>label>input]:bg-slate-300 dark:[&>div>label>select]:text-black [&>div>label>select]:bg-slate-300">
+<div id="food_number_{{$index}}" class="rounded-t-lg {{$active}} [&>div]:bg-white dark:[&>div]:bg-slate-800 dark:[&>*>*]:text-white [&>*>*>*]:text-black dark:[&>*>label>span]:text-white [&>*>*]:text-black [&>div>label>input]:bg-slate-300 dark:[&>div>label>input]:bg-slate-400 dark:[&>div>label>select]:text-black [&>div>label>select]:bg-slate-300 dark:[&>div>label>select]:bg-slate-400 w-full max-w-[90vw] h-max">
     <div class="p-6 rounded-t-lg">
     <h2 class="text-white text-2xl">1. Food Name and Source</h2>
     <p class="text-gray-500 italic mt-2">The basic information. <span class="font-black text-red-400!">Fields required.</span></p>
@@ -127,121 +127,121 @@
               </label> --}}
         </label>
 
-        <div class="flex gap-4 ml-4 flex-wrap [&>*>label>*]:scale-[1.5] justify-evenly [&>*>input]:hidden [&>*>label>*]:text-black dark:[&>*>label>*]:text-slate-500">
+        <div class="flex gap-4 /ml-4 flex-wrap [&>*>label>*]:text-[24px] justify-evenly [&>*>input]:hidden [&>*>label>*]:text-black dark:[&>*>label>*]:text-slate-500 p-6 [&>div>label>i]:p-2!">
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_1" type="radio" value="fa-solid fa-lemon" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_1" type="radio" value="fa-solid fa-lemon" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_1" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-lemon"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_2" type="radio" value="fa-solid fa-hamburger" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_2" type="radio" value="fa-solid fa-hamburger" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_2" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-hamburger"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_3" type="radio" value="fa-solid fa-egg" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_3" type="radio" value="fa-solid fa-egg" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_3" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-egg"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_4" type="radio" value="fa-solid fa-carrot" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_4" type="radio" value="fa-solid fa-carrot" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_4" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-carrot"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_5" type="radio" value="fa-solid fa-pizza-slice" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_5" type="radio" value="fa-solid fa-pizza-slice" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_5" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-pizza-slice"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_6" type="radio" value="fa-solid fa-pepper-hot" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_6" type="radio" value="fa-solid fa-pepper-hot" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_6" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-pepper-hot"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_7" type="radio" value="fa-solid fa-stroopwafel" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_7" type="radio" value="fa-solid fa-stroopwafel" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_7" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-stroopwafel"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_8" type="radio" value="fa-solid fa-cheese" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_8" type="radio" value="fa-solid fa-cheese" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_8" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-cheese"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_9" type="radio" value="fa-solid fa-fish" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_9" type="radio" value="fa-solid fa-fish" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_9" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-fish"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_10" type="radio" value="fa-solid fa-bread-slice" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_10" type="radio" value="fa-solid fa-bread-slice" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_10" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-bread-slice"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_11" type="radio" value="fa-solid fa-bowl-rice" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_11" type="radio" value="fa-solid fa-bowl-rice" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_11" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-bowl-rice"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_12" type="radio" value="fa-solid fa-drumstick-bite" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_12" type="radio" value="fa-solid fa-drumstick-bite" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_12" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-drumstick-bite"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_13" type="radio" value="fa-solid fa-bottle-water" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_13" type="radio" value="fa-solid fa-bottle-water" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_13" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-bottle-water"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_14" type="radio" value="fa-solid fa-beer-mug-empty" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_14" type="radio" value="fa-solid fa-beer-mug-empty" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_14" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-beer-mug-empty"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_15" type="radio" value="fa-solid fa-candy-cane" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_15" type="radio" value="fa-solid fa-candy-cane" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_15" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-candy-cane"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_16" type="radio" value="fa-solid fa-ban" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_16" type="radio" value="fa-solid fa-ban" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_16" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-ban"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_17" type="radio" value="fa-solid fa-fish-fins" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_17" type="radio" value="fa-solid fa-fish-fins" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_17" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-fish-fins"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_18" type="radio" value="fa-solid fa-seedling" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_18" type="radio" value="fa-solid fa-seedling" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_18" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-seedling"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_19" type="radio" value="fa-solid fa-mug-saucer" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_19" type="radio" value="fa-solid fa-mug-saucer" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_19" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-mug-saucer"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_20" type="radio" value="fa-solid fa-bacon" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_20" type="radio" value="fa-solid fa-bacon" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_20" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-bacon"></i> </label>
             </div>
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_21" type="radio" value="fa-solid fa-ice-cream" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_21" type="radio" value="fa-solid fa-ice-cream" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_21" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-ice-cream"></i> </label>
             </div>
 
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_22" type="radio" value="fa-solid fa-cake-candles" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_22" type="radio" value="fa-solid fa-cake-candles" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_22" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-cake-candles"></i> </label>
             </div>
 
 
             <div class="flex items-center">
-                <input id="food-icon-{{$index}}_23" type="radio" value="fa-solid fa-cookie" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="food-icon-{{$index}}_23" type="radio" value="fa-solid fa-cookie" name="food-icon-{{$index}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-4 dark:bg-gray-700 dark:border-gray-600">
                 <label for="food-icon-{{$index}}_23" class="ms-2 text-md font-medium rounded-full text-gray-900 dark:text-gray-300"><i class="fa-solid fa-cookie"></i> </label>
             </div>
 

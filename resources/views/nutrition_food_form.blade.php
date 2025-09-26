@@ -100,9 +100,9 @@
     <div class="flex py-4 justify-center">
         <div class="flex max-w-7xl">
             <div class="max-w-3xl mx-auto px-6 sm:px-6 lg:px-8">
-                <form id="FOOD_FORM" class="bg-gray-800 /h-32 rounded-lg" method="POST" enctype="multipart/form-data" action="{{ route('food.store')}}">
+                <form id="FOOD_FORM" class="relative rounded-lg flex flex-col h-max bg-gray-800 /h-32 rounded-lg" method="POST" enctype="multipart/form-data" action="{{ route('food.store')}}">
                     @csrf
-                    <div id="FOOD_FORM_INPUTS" class="relative /md:max-h-[682px] /md:max-h-[750px] /md:max-h-[935px] md:max-h-[1380px] overflow-hidden">
+                    <div id="FOOD_FORM_INPUTS" class="h-full relative w-[700px] max-w-[90vw]">
 
 
                        <x-food-input-item index="1" :servingUnitOptions="$food_form_options"/>
@@ -130,7 +130,7 @@
         
                     </div>
 
-                    <div id="food-media-controls" class="bg-white dark:bg-slate-800">
+                    <div id="food-media-controls" class="bg-white dark:bg-slate-800 rounded-b-lg">
                         <div class="flex justify-center">
                             <button id="PREV-PAGE-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-arrow-left"></i></button>
                             <button id="ADD-FOOD-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-plus"></i></button>
@@ -361,10 +361,10 @@
                 var transaction_list = $(`div[id^="food_number_"],[id*="food_number_"]`).not(`.food_number_${pageNumber}`);
                 
                 for (let item of transaction_list) {
-                    $(item).addClass('invisible hidden');
+                    $(item).addClass('hidden');
                 }
 
-                $(`#food_number_${pageNumber}`).removeClass('invisible hidden');
+                $(`#food_number_${pageNumber}`).removeClass('hidden');
 
             }
 

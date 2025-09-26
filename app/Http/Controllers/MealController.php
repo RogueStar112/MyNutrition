@@ -513,12 +513,12 @@ class MealController extends Controller
 
         if ($servingSize == "") {
 
-            $component = new MealSearchItem($food_array, $macronutrients_search->serving_size, $quantity);        
+            $component = new MealSearchItem($food_array, $macronutrients_search->serving_size, $foods, $quantity);        
 
         
         } else {
 
-            $component = new MealSearchItem($food_array, $servingSize, $quantity);
+            $component = new MealSearchItem($food_array, $servingSize, $quantity, $foods);
 
 
         }

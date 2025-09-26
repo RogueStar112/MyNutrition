@@ -25,8 +25,9 @@ class MealSearchItem extends Component
     public $foods;
     public $servingSize;
     public $quantity;
+    public $query;
 
-    public function __construct($foods = '', $servingSize = 1, $quantity = 1, $existsAsItem = false)
+    public function __construct($foods = '', $servingSize = 1, $quantity = 1, $query = '', $existsAsItem = false)
 
     {
         // $this->index = $index;
@@ -44,6 +45,7 @@ class MealSearchItem extends Component
         $this->foods = $foods;
         $this->servingSize = $servingSize;
         $this->quantity = $quantity;
+        $this->query = $query;
         $this->existsAsItem = $existsAsItem;
 
     }

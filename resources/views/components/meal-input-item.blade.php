@@ -2,7 +2,7 @@
 
 <div id="meal_number_{{$index}}" class="/inline-block bg-slate-200 dark:bg-slate-800 rounded-t-lg">
 
-    <div class="p-6 text-center">
+    <div class="p-6 text-center rounded-t-lg">
     <p class="dark:text-gray-500">You have two options to add meals.</p>
 
     <h2 class="dark:text-white text-2xl mt-2 text-center">1. Select Existing Foods To Add</h2>

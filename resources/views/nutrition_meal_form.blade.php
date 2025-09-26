@@ -39,7 +39,7 @@
         <div class="flex max-w-7xl flex-col-reverse md:flex-row relative mx-auto">
 
             <div class="max-w-7xl /w-[768px] mx-auto sm:px-6 lg:px-8">
-                <form id="FOOD_FORM" class="rounded-lg dark:bg-gray-800 max-w-[65rem] /h-32 rounded-lg mx-4" method="GET" action="{{ route('meal.create_p2')}}">
+                <form id="FOOD_FORM" class="rounded-lg dark:bg-gray-800 max-w-[65rem] /h-32 mx-4" method="GET" action="{{ route('meal.create_p2')}}">
                     @csrf
 
                     

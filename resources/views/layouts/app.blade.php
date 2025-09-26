@@ -115,7 +115,7 @@
  
     <body class="antialiased bg-slate-700">
         
-        <div class="min-h-screen bg-slate-100 dark:bg-slate-700 min-h-screen">
+        <div class="min-h-screen bg-slate-100 dark:bg-slate-700">
             
             @include('layouts.navigation')
  
@@ -158,7 +158,7 @@
  
             <!-- Page Content -->
  
-            <main class="dark:bg-slate-700 h-full relative overflow-hidden" id="MAIN">
+            <main class="dark:bg-slate-700 h-full relative" id="MAIN">
  
 
  

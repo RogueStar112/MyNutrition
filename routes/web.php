@@ -154,6 +154,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/nutrition/ai/food_prompt/{name}/{serving_size}/{source}/{serving_unit}', [OpenAIController::class, 'food_prompt'])->name('ai.food_prompt');
 
+    Route::post('/nutrition/ai/empty_food_prompt/{name}', [OpenAIController::class, 'empty_food_insertion']);
+
     Route::get('/nutrition/testing/profanity', [ProfanityController::class, 'profanity_test']);
     
     Route::get('/changelog', [ChangelogController::class, 'changelog_view'])->name('changelog');
