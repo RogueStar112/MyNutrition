@@ -24,7 +24,7 @@
                         <!-- x-meal-search-items -->
                     </div>
 
-                    <div id="food-media-controls">
+                    <div id="food-media-controls" class="sticky top-0 z-0 md:z-50 bg-slate-200 dark:bg-gray-800 hidden md:block">
                         {{-- <div class="flex justify-center">
                             <button id="PREV-PAGE-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-arrow-left"></i></button>
                             <button id="ADD-FOOD-BTN" type="button" class="bg-lime-800 text-white p-4 m-4 rounded-lg"><i class="fas fa-plus"></i></button>
@@ -43,6 +43,9 @@
                         </div>
                     </div>
                     
+                    <div id="FOOD-ITEMS-CONTAINER-MOBILE" class="hidden sm:hidden max-w-sm mx-auto max-h-screen pb-4 /sm:px-6 /lg:px-8 [&>*]:my-3 [&>*]:mx-auto">
+
+                    </div>
 
                     <input type="hidden" id="no_of_foods" value="0" autocomplete="off">
                     <input type="hidden" id="foods_pages" name="foods_pages" value="" autocomplete="off">
@@ -57,7 +60,9 @@
                 </form>
             </div>
 
-            <div id="FOOD-ITEMS-CONTAINER" class="max-w-sm mx-auto max-h-screen /sm:px-6 /lg:px-8 [&>div]:mb-3">
+ 
+
+            <div id="FOOD-ITEMS-CONTAINER" class="hidden sm:block max-w-sm mx-auto max-h-screen /sm:px-6 /lg:px-8 [&>div]:mb-3">
                 
                 
                 {{-- <x-food-item 
@@ -77,6 +82,8 @@
                 protein="8.4" /> --}}
 
             </div>
+
+   
         </div>
 
         {{-- Hidden form to keep no_of_foods, doesn't do anything outside of this.
@@ -98,6 +105,18 @@
         let food_index = 0;
         let food_id = 0;
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+          $(document).ready(function () {
+
+            $( "#FOOD-ITEMS-CONTAINER" ).on( "change", function() {
+
+                // console.log('This should work POTATOLAND')
+                $("#ITEMS-COUNT-MOBILE").text(`${meal_json.length}`)
+
+            })
+
+        });
+
 
         $( "#FOOD-ITEMS-CONTAINER" ).change(function() {
                 
@@ -410,6 +429,7 @@
                             // $('#FOOD-ITEMS-CONTAINER').append(response['html']['render_html']);
                             
                             $('#FOOD-ITEMS-CONTAINER').empty();
+                            $('#FOOD-ITEMS-CONTAINER-MOBILE').empty();
                             $('#form-meal-foods').empty();
 
                             foods_pages = [];
@@ -429,6 +449,8 @@
 
 
                                     $('#FOOD-ITEMS-CONTAINER').append(response['html'][food_array[i]['query']]['render_html']);
+
+                                    $('#FOOD-ITEMS-CONTAINER-MOBILE').append(response['html'][food_array[i]['query']]['render_html']);
 
                                     // console.log('FOODS PAGES PUSH', response['html'][food_array[i]['query']]);
 
@@ -478,13 +500,19 @@
                             // test
                             // $("#no_of_foods").val(0)
 
+                                       $("#ITEMS-COUNT-MOBILE").text(`${no_of_foods}`)
+
                             console.log('NO OF FOODS: SUCCESS', no_of_foods);
 
                             no_of_foods += 1;
 
+                 
+
+
                             console.log('food_array', food_array);
 
                             console.log('foods_pages', foods_pages);
+                            
                             
                         },
                         error: function(xhr) {
@@ -495,7 +523,8 @@
 
 
             console.log('MEALS ARRAY IN COMPLETION', meals_array);
- 
+            
+            
         });
 
         function confirmToDelete(id) {
@@ -519,7 +548,23 @@
             reorderItems();
 
         }
-                
+
+              $(document).ready(function () {
+                $("#SHOW-ITEMS-BTN-MOBILE").on( "click", function() {
+                    $('#FOOD_FORM_INPUTS').toggleClass('hidden');
+                    $('#food-media-controls').toggleClass('hidden');
+                    $('#FOOD-ITEMS-CONTAINER-MOBILE').toggleClass('hidden');
+                    $('#FOOD-ITEMS-CONTAINER-MOBILE').toggleClass('block');
+                    $('#FOOD-SEARCH-CONTAINER').toggleClass('hidden');
+
+                    $('#SHOW-ITEMS-ICON').toggleClass('fa-cart-shopping');
+                    $('#SHOW-ITEMS-ICON').toggleClass('fa-magnifying-glass');
+
+                    $('#FOOD-ITEMS-CONTAINER').addClass('hidden sm:block');
+                } );
+            });
+       
+        
                     
     </script>
 </x-app-layout>

@@ -10,10 +10,36 @@
   <div class="w-screen h-full max-w-7xl mx-auto text-black dark:text-white mt-8 pt-6 px-4 sm:px-6 lg:px-8 flex flex-col gap-4">
     
     <div class=" bg-slate-200 dark:bg-slate-800 p-4 rounded-lg">
+      <h2 class="text-2xl font-extrabold">Patch Notes 2025.09_01</h2>
+
+      
+      <p class="text-gray-800 dark:text-gray-400">27/09/2025 - Present</p>
+
+
+      
+      <p class="text-green-500 text-2xl font-extrabold mt-4">ADDED:  
+        
+      </p>
+      
+      <p>+ AI Auto Fill is now added as an option when there are no food results, allowing for faster meal logging.</p>
+      
+      
+      <p class="text-fuchsia-500 text-2xl font-extrabold mt-4">QUALITY OF LIFE:</p>
+
+      <p>+ Fixed meal editing on mobile.</p>
+
+      <p class="text-purple-500 text-2xl font-extrabold mt-4">WORKING ON: </p>
+
+      <p>+ Meal Editing.</p>
+      <p>+ Significant UI overhaul to viewing meals etc.</p>
+    </div>
+
+
+    <div class=" bg-slate-200 dark:bg-slate-800 p-4 rounded-lg">
       <h2 class="text-2xl font-extrabold">Patch Notes 2025.04_01</h2>
 
       
-      <p class="text-gray-800 dark:text-gray-400">21/04/2025 - Present</p>
+      <p class="text-gray-800 dark:text-gray-400">21/04/2025 - 26/09/2025</p>
       
       <p class="text-green-500 text-2xl font-extrabold mt-4">ADDED:  
         

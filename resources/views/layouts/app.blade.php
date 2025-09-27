@@ -187,7 +187,7 @@
                         </div>
                         
                         
-                        @if(Route::currentRouteName() === 'meal.create' || Route::currentRouteName() === 'food.create')
+                        @if(Route::currentRouteName() === 'meal.create' || Route::currentRouteName() === 'food.create' || Route::currentRouteName() === 'meal.edit_form')
  
 
                             <!-- Cart Button -->
