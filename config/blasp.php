@@ -117,6 +117,8 @@ return [
     'false_positives' => [
         'en' => [
             'coke',
+            'basil',
+            'butter',
             'assassin', // spaghetti all'assassina
             'paprika',
             'mustard',

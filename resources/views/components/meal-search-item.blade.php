@@ -16,16 +16,16 @@
 
         <!-- If Search Results are Empty -->
 
-        <div class="p-16 bg-slate-800">
+        <div class="p-8 sm:p-16 bg-slate-800">
             <div class="flex flex-col justify-center items-center min-w-[150px] min-h-[250px] w-full h-full bg-slate-900 rounded-lg">
 
-                <p class="text-white">
-                    <span id="search-result">{{$query}} is not found. Would you like to AI Auto Fill this instead?<span>
+                <p class="text-white text-center mx-2">
+                    {{$query}} is not found. Would you like to AI Auto Fill this instead?
                 </p>
 
-                <div class="flex w-full gap-16 [&>*]:grow px-16">
-                    <button id="auto-fill-yes" type="button" class="bg-green-600 rounded-lg text-white hover:bg-green-400 cursor-pointer" >YES</button>
-                    <button id="auto-fill-no" type="button" class="bg-red-600 rounded-lg text-white hover:bg-red-400 cursor-pointer">NO</button>
+                <div class="flex w-full gap-16 [&>*]:grow sm:px-16 py-8">
+                    <button id="auto-fill-yes" type="button" class="bg-green-600 rounded-lg text-white hover:bg-green-400 cursor-pointer py-4 ml-2" >YES</button>
+                    <button id="auto-fill-no" type="button" class="bg-red-600 rounded-lg text-white hover:bg-red-400 cursor-pointer py-2 mr-2">NO</button>
                 </div>
 
 
