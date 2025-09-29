@@ -299,7 +299,13 @@ class DashboardController extends Controller
         $meals_dates = [];
 
     
+        $last_five_meals_calories = [];
+        $last_five_meals_fat = [];
+        $last_five_meals_carbs = [];
+        $last_five_meals_protein = [];
 
+        $last_five_meals_names = [];
+        $last_five_meals_dates = [];
 
 
         // $meal_select = Meal::where('time_planned', '<=', $date)
@@ -312,6 +318,59 @@ class DashboardController extends Controller
                         ->where('is_eaten', '=', 1)
                         ->orderBy('time_planned', 'asc')
                         ->get();
+
+        $last_five_meals = Meal::where('time_planned', '<=', $end)
+                            ->where('time_planned', '>=', $start)
+                            ->where('user_id', '=', $user_id)
+                            ->where('is_eaten', '=', 1)
+                            ->orderBy('time_planned', 'desc')
+                            ->limit(5)
+                            ->get();
+
+        // dd($last_five_meals);
+        
+         foreach($last_five_meals as $meal) {    
+
+            $key = date('Y-m-d H:i:s', strtotime($meal->time_planned));
+            $last_five_meals_names[$key] = $this->get_nutrients_of_meal($meal->id)['meal_name'];
+            $last_five_meals_dates[$key] = $key ?? "";
+            $last_five_meals_calories[$key] = ($last_five_meals_calories[$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['calories'] ?? 0);
+            $last_five_meals_fat[$key] = ($last_five_meals_fat[$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['fat'] ?? 0);
+            $last_five_meals_carbs[$key] = ($last_five_meals_carbs[$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['carbohydrates'] ?? 0);
+            $last_five_meals_protein[$key] = ($last_five_meals_protein[$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['protein'] ?? 0);
+            
+
+        }
+
+        
+
+
+
+
+        $last_five_meals_calories = array_values($last_five_meals_calories);
+        $last_five_meals_dates = array_values($last_five_meals_dates);
+
+        $last_five_meals_fat = array_values($last_five_meals_fat);
+        $last_five_meals_carbs = array_values($last_five_meals_carbs);
+        $last_five_meals_protein = array_values($last_five_meals_protein);
+        
+        $last_five_meals_array = [
+            'dates' => $last_five_meals_dates,
+            'names' => $last_five_meals_names,
+            'calories' => $last_five_meals_calories,
+            'fat' => $last_five_meals_fat,
+            'carbs' => $last_five_meals_carbs,
+            'protein' => $last_five_meals_protein
+        ];
+
+
+        // dd($last_five_meals_array['calories']);
+
+        // dd($last_five_meals_array);
+
+        // dd($last_five_meals);
+        
+        // dd($meal_select);
 
         if(count($meal_select) == 0) {
 
@@ -354,7 +413,7 @@ class DashboardController extends Controller
 
         }
 
-     
+        
 
         // dd(array_values($meals_calories), array_values($meals_dates));
 
@@ -695,7 +754,7 @@ class DashboardController extends Controller
         ]);
             
 
-            return view("dashboard", compact("chart", "fat_chart", "carbs_chart", "protein_chart", "avg_calories", "highest_calories", "lowest_calories", "last_meal_nutrients", "last_fluids_selected"));
+            return view("dashboard", compact("chart", "fat_chart", "carbs_chart", "protein_chart", "avg_calories", "highest_calories", "lowest_calories", "last_meal_nutrients", "last_fluids_selected", "last_five_meals_array"));
     }
 
     public function renderBodyStatsChart() {

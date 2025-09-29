@@ -124,6 +124,8 @@ return [
             'butter',
             'assassin', // spaghetti all'assassina
             'paprika',
+            'meatballs',
+            'meatball',
             'mustard',
             'glass',
             'glasses',

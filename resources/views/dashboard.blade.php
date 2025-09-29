@@ -72,8 +72,37 @@
             </div>
 
             
-            <div class="col-start-4 col-end-6 row-start-3 row-end-6 border-4 border-green-300">
-                <p class="text-center w-full">Latest Day Summary</p>
+            <div class="col-start-4 col-end-6 row-start-3 row-end-6 border-4 border-green-300 flex flex-col sm:grid">
+                <p class="text-center w-full p-4 font-black">Last 5 Meals</p>
+                
+                <div class="flex flex-col h-full justify-center items-center [&>*]:grow gap-4 m-4">
+                @isset($last_five_meals_array)
+                    
+                    @for($i = 0; $i < count($last_five_meals_array['dates']); $i++) 
+                        
+                        @php
+                            $current_meal = $last_five_meals_array['names'][$last_five_meals_array['dates'][$i]];
+                        @endphp
+
+                        <div class="bg-slate-800 w-full p-4 rounded-lg shadow-lg">
+                            <p class="text-2xl text-center font-extrabold">{{$last_five_meals_array['names'][$last_five_meals_array['dates'][$i]]}}</p>
+
+                        </div>
+
+                        <div class="flex justify-between w-full [&>*]:bg-slate-800 [&>*]:p-2 [&>*]:rounded-lg [&>*]:text-center">
+
+                                <p class="text-blue-500">Calories<br>{{$last_five_meals_array['calories'][$i]}}kcal</p>
+                                <p class="text-orange-500">Fat<br>{{$last_five_meals_array['fat'][$i]}}g</p>
+                                <p class="text-red-500">Carbs<br>{{$last_five_meals_array['carbs'][$i]}}g</p>
+                                <p class="text-green-500">Protein<br>{{$last_five_meals_array['protein'][$i]}}g</p>
+
+                        </div>
+
+                    @endfor
+                
+                @endisset
+                </div>
+
             </div>
 
 
