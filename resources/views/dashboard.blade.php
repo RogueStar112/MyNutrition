@@ -7,7 +7,7 @@
     </x-slot>
 
     <div class="min-h-screen py-4 pt-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="flex flex-col sm:grid grid-cols-5 grid-rows-5 w-full h-full gap-2 /h-[calc(100vh-8rem)] max-h-[900px] [&>*]:flex  [&>*]:text-black dark:[&>*]:text-white">
+        <div class="flex flex-col sm:grid grid-cols-5 grid-rows-5 w-full h-full gap-2 /h-[calc(100vh-8rem)] /max-h-[900px] /[&>*]:flex  [&>*]:text-black dark:[&>*]:text-white">
             <div class="col-start-1 col-end-4 row-start-1 row-end-4 rounded-lg bg-slate-800 flex flex-col border-2 border-green-500">
                 
                 <p class="text-left mx-4 mt-2 text-center">Calorie Intake</p>
@@ -57,7 +57,7 @@
 
             </div>
             
-            <div class="col-start-4 col-end-6 row-start-1 row-end-3 border-4 border-blue-300 grid grid-cols-3 [&>*]:w-[33%] [&>*]:h-full p-4">
+            <div class="col-start-4 col-end-6 row-start-1 row-end-3 border-4 border-blue-300 flex flex-col /[&>*]:w-[33%] [&>*]:h-full p-4 ">
                 
                 <div class="">
                     <x-chartjs-component :chart="$fat_chart" />
@@ -72,30 +72,28 @@
             </div>
 
             
-            <div class="col-start-4 col-end-6 row-start-3 row-end-6 border-4 border-green-300 flex flex-col sm:grid">
-                <p class="text-center w-full p-4 font-black">Last 5 Meals</p>
+            <div class="col-start-4 col-end-6 row-start-3 row-end-6 border-4 border-green-300 flex flex-col">
+                <p class="text-center w-full p-4 font-black text-3xl">Last 5 Meals</p>
                 
                 <div class="flex flex-col h-full justify-center items-center [&>*]:grow gap-4 m-4">
                 @isset($last_five_meals_array)
                     
                     @for($i = 0; $i < count($last_five_meals_array['dates']); $i++) 
                         
-                        @php
-                            $current_meal = $last_five_meals_array['names'][$last_five_meals_array['dates'][$i]];
-                        @endphp
+                        <div class="bg-slate-900 p-4 rounded-lg w-full h-full flex flex-col gap-4">
+                            <div class="bg-slate-800 w-full p-4 rounded-lg shadow-lg">
+                                <p class="text-2xl text-center font-extrabold">{{$last_five_meals_array['names'][$last_five_meals_array['dates'][$i]]}}</p>
 
-                        <div class="bg-slate-800 w-full p-4 rounded-lg shadow-lg">
-                            <p class="text-2xl text-center font-extrabold">{{$last_five_meals_array['names'][$last_five_meals_array['dates'][$i]]}}</p>
+                            </div>
 
-                        </div>
+                            <div class="flex justify-between w-full [&>*]:bg-slate-800 gap-4 [&>*]:grow [&>*]:p-2 [&>*]:rounded-lg [&>*]:text-center">
 
-                        <div class="flex justify-between w-full [&>*]:bg-slate-800 [&>*]:p-2 [&>*]:rounded-lg [&>*]:text-center">
+                                    <p class="text-blue-500">Calories<br>{{$last_five_meals_array['calories'][$i]}}kcal</p>
+                                    <p class="text-orange-500">Fat<br>{{$last_five_meals_array['fat'][$i]}}g</p>
+                                    <p class="text-red-500">Carbs<br>{{$last_five_meals_array['carbs'][$i]}}g</p>
+                                    <p class="text-green-500">Protein<br>{{$last_five_meals_array['protein'][$i]}}g</p>
 
-                                <p class="text-blue-500">Calories<br>{{$last_five_meals_array['calories'][$i]}}kcal</p>
-                                <p class="text-orange-500">Fat<br>{{$last_five_meals_array['fat'][$i]}}g</p>
-                                <p class="text-red-500">Carbs<br>{{$last_five_meals_array['carbs'][$i]}}g</p>
-                                <p class="text-green-500">Protein<br>{{$last_five_meals_array['protein'][$i]}}g</p>
-
+                            </div>
                         </div>
 
                     @endfor

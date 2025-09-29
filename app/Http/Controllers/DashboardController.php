@@ -435,7 +435,7 @@ class DashboardController extends Controller
         
         $chart = Chartjs::build()
             ->name("MacroIntakeChart")
-            ->size(["width" => 600, "height" => 300])
+            ->size(["width" => "100%", "height" => "100%"])
             ->labels($meals_dates)
             ->datasets([
                 [
@@ -515,7 +515,7 @@ class DashboardController extends Controller
             
         $fat_chart = Chartjs::build()
         ->name("FatIntakeChart")
-        ->size(["width" => 150, "height" => 300])
+        ->size(["width" => "100%", "height" => "33.3%"])
         ->labels($meals_dates)
         ->datasets([
             [
@@ -532,6 +532,9 @@ class DashboardController extends Controller
                 'color' => 'white',
                 'style' => 'Montserrat'
             ],
+
+            'responsive' => 'true',
+            'maintainAspectRatio' => "false",
 
             'scales' => [
                 'x' => [
@@ -595,7 +598,7 @@ class DashboardController extends Controller
 
         $carbs_chart = Chartjs::build()
         ->name("CarbsIntakeChart")
-        ->size(["width" => 150, "height" => 300])
+        ->size(["width" => "100%", "height" => "33.3%"])
         ->labels($meals_dates)
         ->datasets([
             [
@@ -675,7 +678,7 @@ class DashboardController extends Controller
 
         $protein_chart = Chartjs::build()
         ->name("ProteinIntakeChart")
-        ->size(["width" => 150, "height" => 300])
+        ->size(["width" => "100%", "height" => "33.3%"])
         ->labels($meals_dates)
         ->datasets([
             [
@@ -868,6 +871,7 @@ class DashboardController extends Controller
         function meal_select($start_date, $end_date, $user_id) {
         $meal_select = Meal::where('user_id', $user_id)
                             ->whereBetween('time_planned', [$start_date . ' 00:00:00', $end_date . ' 23:59:59'])
+                            ->where('is_eaten', 1)
                             ->orderByRaw('time_planned ASC')
                             ->get();
 
@@ -917,6 +921,7 @@ class DashboardController extends Controller
             
 
         } 
+        
 
         // return $meal_items_array;
         
@@ -1002,12 +1007,16 @@ class DashboardController extends Controller
         $meal_times = array_keys($meal_items_array);
 
         // return $meal_items_array;
+        // dd($meal_items_array);
 
+        // dd($meal_macro_calculations);
         // return ([
         //     $meal_items_array,
         //     $meal_items_names,
         //     $meal_macro_calculations
         // ]);    
+
+        // dd($meal_items_array);
 
         return view('dashboard_2024', ['start_date' => $start_date, 'end_date' => $end_date, 'meal_times' => $meal_times, 'meal_items' => $meal_items_array, 'meal_macros_no_total' => $meal_macros_no_total, 'meal_macros' => $meal_macro_calculations, 'meal_names' => $meal_items_names, 'calendar' => $this->calendar(null, $start_date, $end_date), 'load_date_calories' => $this->viewModeCalories()]);
         // return $meal_items_array;
