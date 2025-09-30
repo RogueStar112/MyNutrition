@@ -8,9 +8,9 @@
 
     <div class="min-h-screen py-4 pt-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="flex flex-col sm:grid grid-cols-5 grid-rows-5 w-full h-full gap-2 /h-[calc(100vh-8rem)] /max-h-[900px] /[&>*]:flex  [&>*]:text-black dark:[&>*]:text-white">
-            <div class="col-start-1 col-end-4 row-start-1 row-end-4 rounded-lg bg-slate-800 flex flex-col border-2 border-green-500">
+            <div class="col-start-1 col-end-4 row-start-1 row-end-4 rounded-lg bg-slate-800 flex flex-col /border-2 /border-green-500">
                 
-                <p class="text-left mx-4 mt-2 text-center">Calorie Intake</p>
+                <p class="text-center mx-4 mt-2">Calorie Intake</p>
                     
 
                 <div class="flex justify-center sm:flex-row sm:justify-around">
@@ -57,7 +57,7 @@
 
             </div>
             
-            <div class="col-start-4 col-end-6 row-start-1 row-end-3 border-4 border-blue-300 flex flex-col /[&>*]:w-[33%] [&>*]:h-full p-4 ">
+            <div class="col-start-4 col-end-6 row-start-1 row-end-3 /border-4 /border-blue-300 flex flex-col justify-between /[&>*]:w-[33%] [&>*]:h-fit [&>*]:bg-slate-800 [&>*]:p-4 [&>*]:rounded-lg [&>*]:shadow-2xl gap-4">
                 
                 <div class="">
                     <x-chartjs-component :chart="$fat_chart" />
@@ -72,7 +72,7 @@
             </div>
 
             
-            <div class="col-start-4 col-end-6 row-start-3 row-end-6 border-4 border-green-300 flex flex-col">
+            <div class="col-start-4 col-end-6 row-start-3 row-end-6 /border-4 /border-green-300 flex flex-col bg-slate-800 p-4 rounded-lg">
                 <p class="text-center w-full p-4 font-black text-3xl">Last 5 Meals</p>
                 
                 <div class="flex flex-col h-full justify-center items-center [&>*]:grow gap-4 m-4">
@@ -80,7 +80,7 @@
                     
                     @for($i = 0; $i < count($last_five_meals_array['dates']); $i++) 
                         
-                        <div class="bg-slate-900 p-4 rounded-lg w-full h-full flex flex-col gap-4">
+                        <div class="bg-slate-900 p-4 rounded-lg w-full h-fit flex flex-col gap-4">
                             <div class="bg-slate-800 w-full p-4 rounded-lg shadow-lg">
                                 <p class="text-2xl text-center font-extrabold">{{$last_five_meals_array['names'][$last_five_meals_array['dates'][$i]]}}</p>
 
@@ -108,19 +108,19 @@
                 
 
                 @isset($last_meal_nutrients)
-                <div class="bg-slate-800 w-full [&>*]:m-2 border-2 border-yellow-500">
+                <div class="bg-slate-800 w-full [&>*]:m-2 /border-2 /border-yellow-500 flex flex-col justify-around">
                     <h2 class="text-2xl font-extrabold italic text-center">Last Tracked Meal</h2>
 
-                    <p class="text-xl text-center">{{$last_meal_nutrients['meal_name']}}</p>
+                    <p class="text-2xl text-center">{{$last_meal_nutrients['meal_name']}}</p>
 
-                    <div class="flex justify-around">
-                    <p class="text-blue-500">{{$last_meal_nutrients['calories']}}kcal<br><span class="text-black dark:text-white">Calories</span></p>
+                    <div class="flex justify-around [&>*]:text-center">
+                        <p class="text-blue-500">{{$last_meal_nutrients['calories']}}kcal<br><span class="text-black dark:text-white">Calories</span></p>
 
-                    <p class="text-red-500">{{$last_meal_nutrients['fat']}}g<br><span class="text-black dark:text-white">Fat</span></p>
+                        <p class="text-red-500">{{$last_meal_nutrients['fat']}}g<br><span class="text-black dark:text-white">Fat</span></p>
 
-                    <p class="text-orange-500">{{$last_meal_nutrients['carbohydrates']}}g<br><span class="text-black dark:text-white">Carbs</span></p>
+                        <p class="text-orange-500">{{$last_meal_nutrients['carbohydrates']}}g<br><span class="text-black dark:text-white">Carbs</span></p>
 
-                    <p class="text-green-500">{{$last_meal_nutrients['protein']}}g<br><span class="text-black dark:text-white">Protein</span></p>
+                        <p class="text-green-500">{{$last_meal_nutrients['protein']}}g<br><span class="text-black dark:text-white">Protein</span></p>
                     </div>
                 </div>
 
@@ -132,10 +132,10 @@
                 @endisset
 
 
-                <div class="bg-slate-800 w-full [&>*]:m-2 border-2 border-blue-500">
-                    <h2 class="text-2xl font-extrabold italic text-center">Last Logged Drink</h2>
+                <div class="bg-slate-800 w-full [&>*]:m-2 /border-2 /border-blue-500 flex flex-col justify-between">
+                    <h2 class="text-2xl font-extrabold italic text-center p-4">Last Logged Drink</h2>
 
-                    <p class="text-xl text-center">
+                    <p class="text-xl text-center h-full grid items-center">
 
                         @isset($last_fluids_selected)
                             
@@ -161,7 +161,7 @@
 
                         @else 
 
-                           No Fluids Tracked!<br>Go track <a class="text-blue-300" href="{{route('water.form')}}">them here!</a>
+                           No Fluids Tracked!<br><a class="text-blue-300" href="{{route('water.form')}}">Go track them here!</a>
 
                         @endisset
                     
@@ -169,9 +169,10 @@
                 </div>
 
             </div>
-            <div class="col-start-1 col-end-2 row-start-5 row-end-6 border-4 border-purple-300"> <p class="text-center w-full">Slot 1</p></div>
-            <div class="col-start-2 col-end-3 row-start-5 row-end-6 border-4 border-pink-300"> <p class="text-center w-full">Slot 2</p></div>
-            <div class="col-start-3 col-end-4 row-start-5 row-end-6 border-4 border-orange-300"> <p class="text-center w-full">Slot 3</p></div>
+            
+            <div class="col-start-1 col-end-2 row-start-5 row-end-6 /border-4 /border-purple-300 rounded-lg"> <p class="flex items-center justify-center text-center w-full h-full bg-slate-800 rounded-lg shadow-2xl p-4">Slot 1</p></div>
+            <div class="col-start-2 col-end-3 row-start-5 row-end-6 /border-4 /border-pink-300  rounded-lg"> <p class="flex items-center justify-center text-center w-full h-full bg-slate-800 rounded-lg shadow-2xl p-4">Slot 2</p></div>
+            <div class="col-start-3 col-end-4 row-start-5 row-end-6 /border-4 /border-orange-300  rounded-lg"> <p class="flex items-center justify-center text-center w-full h-full bg-slate-800 rounded-lg shadow-2xl p-4">Slot 3</p></div>
           </div>
           
     </div>

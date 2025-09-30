@@ -480,7 +480,8 @@ class DashboardController extends Controller
 
                         
                         'ticks' => [
-                            'color' => 'white'
+                            'color' => 'white',
+                            'mirror' => 'true'
                         ],
 
                         'grid' => [
