@@ -75,7 +75,7 @@
             <div class="col-start-4 col-end-6 row-start-3 row-end-6 /border-4 /border-green-300 flex flex-col bg-slate-800 p-4 rounded-lg">
                 <p class="text-center w-full p-4 font-black text-3xl">Last 10 Meals</p>
                 
-                <div class="flex flex-col h-full justify-start items-center /[&>*]:grow gap-4 m-4">
+                <div class="flex flex-col h-full justify-start items-center /[&>*]:grow gap-4">
                 @isset($last_five_meals_array)
                     
                     @for($i = 0; $i < count($last_five_meals_array['dates']); $i++) 
