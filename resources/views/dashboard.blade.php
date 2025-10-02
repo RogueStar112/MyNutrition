@@ -6,7 +6,7 @@
         <p class="text-black dark:text-white text-center sm:text-left">Last 2 Weeks of Activity</p>
     </x-slot>
 
-    <div class="min-h-screen py-4 pt-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="min-h-screen max-w-7xl py-4 pt-6 px-4 sm:px-6 lg:px-8 /max-w-7xl mx-auto">
         <div class="flex flex-col sm:grid grid-cols-5 grid-rows-5 w-full h-full gap-2 /h-[calc(100vh-8rem)] /max-h-[900px] /[&>*]:flex  [&>*]:text-black dark:[&>*]:text-white">
             <div class="col-start-1 col-end-4 row-start-1 row-end-4 rounded-lg bg-slate-800 flex flex-col /border-2 /border-green-500">
                 
@@ -73,14 +73,29 @@
 
             
             <div class="col-start-4 col-end-6 row-start-3 row-end-6 /border-4 /border-green-300 flex flex-col bg-slate-800 p-4 rounded-lg">
-                <p class="text-center w-full p-4 font-black text-3xl">Last 5 Meals</p>
+                <p class="text-center w-full p-4 font-black text-3xl">Last 10 Meals</p>
                 
-                <div class="flex flex-col h-full justify-center items-center [&>*]:grow gap-4 m-4">
+                <div class="flex flex-col h-full justify-start items-center /[&>*]:grow gap-4 m-4">
                 @isset($last_five_meals_array)
                     
                     @for($i = 0; $i < count($last_five_meals_array['dates']); $i++) 
+                       
+                        @php
+                            $meal_name = $last_five_meals_array['names'][$last_five_meals_array['dates'][$i]];
+                            $meal_calories = $last_five_meals_array['calories'][$i];
+                            $meal_fats = $last_five_meals_array['fat'][$i];
+                            $meal_carbs = $last_five_meals_array['carbs'][$i];
+                            $meal_protein = $last_five_meals_array['protein'][$i];
+                            $meal_macros = $last_five_meals_array['macros'][$last_five_meals_array['dates'][$i]];
+                            $meal_micros = $last_five_meals_array['micros'][$last_five_meals_array['dates'][$i]];
+                            // dd($meal_macros, $meal_micros);
+
+                        @endphp
                         
-                        <div class="bg-slate-900 p-4 rounded-lg w-full h-fit flex flex-col gap-4">
+                        <livewire:dashboard.food-item :meal_name="$meal_name" :meal_calories="$meal_calories" :meal_fats="$meal_fats" :meal_carbs="$meal_carbs" :meal_protein="$meal_protein" :meal_macros="$meal_macros" :meal_micros="$meal_micros" />
+
+
+                        {{-- <div class="bg-slate-900 p-4 rounded-lg w-full h-fit flex flex-col gap-4">
                             <div class="bg-slate-800 w-full p-4 rounded-lg shadow-lg">
                                 <p class="text-2xl text-center font-extrabold">{{$last_five_meals_array['names'][$last_five_meals_array['dates'][$i]]}}</p>
 
@@ -94,10 +109,11 @@
                                     <p class="text-green-500">Protein<br>{{$last_five_meals_array['protein'][$i]}}g</p>
 
                             </div>
-                        </div>
+                        </div> --}}
 
                     @endfor
-                
+                @else
+                    No Meals Found. Log a meal to view this!
                 @endisset
                 </div>
 
