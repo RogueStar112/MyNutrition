@@ -20,7 +20,7 @@
 
                 <p></p> --}}
                 
-                <div class="m-4 rounded-lg w-[900px] h-[300px] relative [&>*]:absolute overflow-x-scroll">
+                <div class="m-4 sm:m-0 rounded-lg min-w-[909px] min-h-[300px] sm:min-w-full sm:w-full h-full relative [&>*]:absolute overflow-x-scroll">
                     <x-chartjs-component :chart="$chart" />
                 </div>    
 
