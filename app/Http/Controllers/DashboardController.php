@@ -502,7 +502,7 @@ class DashboardController extends Controller
 
                     'y' => [
                         'min' => 0,
-                        'max' => max($meals_calories),
+                        'max' => (round(max($meals_calories) * 1.1, 0)),
 
                               'drawTicks' => 'true',
 

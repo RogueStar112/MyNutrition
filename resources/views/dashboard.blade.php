@@ -24,7 +24,7 @@
                     <x-chartjs-component :chart="$chart" />
                 </div>    
 
-                       <div id="calories-avg" class="flex justify-center sm:flex-row sm:justify-evenly">
+                       <div id="calories-avg" class="flex justify-center sm:flex-row sm:justify-evenly ">
 
                     <div class="w-full text-center">
                     <p class="text-orange-200 mx-4 text-center">Average</p>
