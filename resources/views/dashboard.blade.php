@@ -8,12 +8,23 @@
 
     <div class="min-h-screen max-w-7xl py-4 pt-6 px-4 sm:px-6 lg:px-8 /max-w-7xl mx-auto">
         <div class="flex flex-col sm:grid grid-cols-5 grid-rows-5 w-full h-full gap-2 /h-[calc(100vh-8rem)] /max-h-[900px] /[&>*]:flex  [&>*]:text-black dark:[&>*]:text-white">
-            <div class="col-start-1 col-end-4 row-start-1 row-end-4 rounded-lg bg-slate-800 flex flex-col /border-2 /border-green-500">
+            <div class="col-start-1 col-end-6 row-start-1 row-end-3 rounded-lg bg-slate-800 flex flex-col /border-2 /border-green-500">
                 
                 <p class="text-center mx-4 mt-2">Calorie Intake</p>
                     
 
-                <div class="flex justify-center sm:flex-row sm:justify-around">
+         
+
+                {{-- <p class="">You have averaged...</p>
+                <p class="mx-4 mt-2 text-2xl font-black text-orange-300">{{round($avg_calories, 0)}}</p>
+
+                <p></p> --}}
+                
+                <div class="m-4 rounded-lg">
+                    <x-chartjs-component :chart="$chart" />
+                </div>    
+
+                       <div id="calories-avg" class="flex justify-center sm:flex-row sm:justify-evenly">
 
                     <div class="w-full text-center">
                     <p class="text-orange-200 mx-4 text-center">Average</p>
@@ -43,21 +54,14 @@
                     </div>
                 </div>
 
-                {{-- <p class="">You have averaged...</p>
-                <p class="mx-4 mt-2 text-2xl font-black text-orange-300">{{round($avg_calories, 0)}}</p>
-
-                <p></p> --}}
-                
-                <div class="m-4">
-                    <x-chartjs-component :chart="$chart" />
-                </div>    
-
             
 
 
             </div>
+
+
             
-            <div class="col-start-4 col-end-6 row-start-1 row-end-3 /border-4 /border-blue-300 flex flex-col justify-between /[&>*]:w-[33%] [&>*]:h-fit [&>*]:bg-slate-800 [&>*]:p-4 [&>*]:rounded-lg [&>*]:shadow-2xl gap-4">
+            <div id="MacrosChart" class="col-start-1 col-end-4 row-start-3 row-end-4 /border-4 /border-blue-300 flex flex-col sm:flex-row justify-between [&>*]:w-full [&>*]:h-full [&>*]:bg-slate-800 [&>*]:p-4 [&>*]:rounded-lg [&>*]:shadow-2xl gap-4">
                 
                 <div class="">
                     <x-chartjs-component :chart="$fat_chart" />
@@ -192,4 +196,29 @@
           </div>
           
     </div>
+
+   <script>
+    var MacroIntakeChart = new Chart(document.getElementById("MacroIntakeChart"), {
+        type: "line",
+        data: { ... },
+        options: { ... }
+    });
+    // Make sure the chart is already initialized
+    const ctx = MacroIntakeChart.ctx;
+    const chartArea = MacroIntakeChart.chartArea;
+
+    if (chartArea) {
+        const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+        gradient.addColorStop(0, 'rgba(75,192,192,0.8)');
+        gradient.addColorStop(1, 'rgba(75,192,192,0)');
+
+        // Apply to dataset(s) — here only the first dataset
+        MacroIntakeChart.data.datasets[0].backgroundColor = gradient;
+
+        // Update chart
+        MacroIntakeChart.update();
+        
+        console.log('THIS ALSO WORKS MUPPET')
+    }
+    </script>
 </x-app-layout>

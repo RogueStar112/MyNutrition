@@ -448,16 +448,17 @@ class DashboardController extends Controller
         
         $chart = Chartjs::build()
             ->name("MacroIntakeChart")
-            ->size(["width" => "100%", "height" => "100%"])
+            ->size(["width" => "100%", "height" => "33.3%"])
             ->labels($meals_dates)
             ->datasets([
                 [
                     "label" => "Calories (kcal)",
-                    "type" => "bar",
-                    "backgroundColor" => "rgba(255, 200, 0, 1)",
+                    "type" => "line",
+                    "backgroundColor" => "rgba(255, 200, 0, 0.35)",
                     "borderColor" => "rgba(255, 200, 0, 1)",
                     "data" => $meals_calories,
-                    "lineTension" => 0.6
+                    "lineTension" => 0.6,
+                    "fill" => true,
                 ],
             ])
             ->options([
@@ -466,47 +467,66 @@ class DashboardController extends Controller
                     'style' => 'Montserrat'
                 ],
 
+                'layout' => [
+                    'padding' => '20',
+                ],
+
                 'scales' => [
                     'x' => [
                         'type' => 'time',
                         'time' => [
-                            'unit' => 'month'
+                            'unit' => 'day'
                         ],
                         
-                        'drawTicks' => 'false',
+                        'title' => [
+                            'display' => 'true',
+                            'text' => 'Months'
+                        ],
+                        
+                        'drawTicks' => 'true',
+
+                    
 
                         'ticks' => [
-                            'color' => 'orange'
+                            'color' => 'white',
+                            'display' => 'true'
                         ],
 
                         'grid' => [
-                            'color' => 'transparent',
-                            'display' => 'false',
-                            'drawborder' => 'false',
+                            'color' => '#2D2D2D',
+                            'display' => 'true',
+                            'drawborder' => 'true',
                         ],
                         'min' => min($meals_dates),
                     ],
 
                     'y' => [
                         'min' => 0,
-                        'max' => max($meals_calories) + 100,
+                        'max' => max($meals_calories),
 
-                        
+                              'drawTicks' => 'true',
+
+
                         'ticks' => [
                             'color' => 'white',
-                            'mirror' => 'true'
+                            // 'mirror' => 'true'
+                        ],
+
+                        'title' => [
+                            'display' => 'true',
+                            'text' => 'Calories (kcal)'
                         ],
 
                         'grid' => [
-                            'color' => 'transparent',
-                            'display' => 'false',
-                            'drawBorder' => 'false',
+                            'color' => '#545454',
+                            'display' => 'true',
+                            'drawBorder' => 'true',
                         ],
                     ]
                 ],
 
                 'tooltips' => [
-                    'enabled' => 'false',
+                    'enabled' => 'true',
                 ],
 
                 'plugins' => [
@@ -529,7 +549,7 @@ class DashboardController extends Controller
             
         $fat_chart = Chartjs::build()
         ->name("FatIntakeChart")
-        ->size(["width" => "100%", "height" => "33.3%"])
+        ->size(["width" => "100%", "height" => "125%"])
         ->labels($meals_dates)
         ->datasets([
             [
@@ -612,7 +632,7 @@ class DashboardController extends Controller
 
         $carbs_chart = Chartjs::build()
         ->name("CarbsIntakeChart")
-        ->size(["width" => "100%", "height" => "33.3%"])
+        ->size(["width" => "100%", "height" => "125%"])
         ->labels($meals_dates)
         ->datasets([
             [
@@ -692,7 +712,7 @@ class DashboardController extends Controller
 
         $protein_chart = Chartjs::build()
         ->name("ProteinIntakeChart")
-        ->size(["width" => "100%", "height" => "33.3%"])
+        ->size(["width" => "100%", "height" => "125%"])
         ->labels($meals_dates)
         ->datasets([
             [

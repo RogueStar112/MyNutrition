@@ -229,7 +229,7 @@
  
         <script>
  
-            const myChart = new Chart(ctx, {...});
+            // const myChart = new Chart(ctx, {...});
  
         </script>
  
