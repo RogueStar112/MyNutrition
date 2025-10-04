@@ -127,6 +127,7 @@ return [
             'meatballs',
             'meatball',
             'mustard',
+            'spicy',
             'glass',
             'glasses',
             'scunthorpe',
