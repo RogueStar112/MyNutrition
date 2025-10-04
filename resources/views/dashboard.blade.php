@@ -8,7 +8,7 @@
 
     <div class="min-h-screen max-w-7xl py-4 pt-6 px-4 sm:px-6 lg:px-8 /max-w-7xl mx-auto">
         <div class="flex flex-col sm:grid grid-cols-5 grid-rows-5 w-full h-full gap-2 /h-[calc(100vh-8rem)] /max-h-[900px] /[&>*]:flex  [&>*]:text-black dark:[&>*]:text-white">
-            <div class="col-start-1 col-end-6 row-start-1 row-end-3 rounded-lg bg-slate-800 flex flex-col /border-2 /border-green-500">
+            <div class="col-start-1 col-end-6 row-start-1 row-end-3 rounded-lg bg-slate-800 flex flex-col /border-2 /border-green-500 overflow-x-scroll">
                 
                 <p class="text-center mx-4 mt-2">Calorie Intake</p>
                     
@@ -20,11 +20,11 @@
 
                 <p></p> --}}
                 
-                <div class="m-4 rounded-lg">
+                <div class="m-4 rounded-lg w-[900px] h-[300px] relative [&>*]:absolute overflow-x-scroll">
                     <x-chartjs-component :chart="$chart" />
                 </div>    
 
-                       <div id="calories-avg" class="flex justify-center sm:flex-row sm:justify-evenly ">
+                       <div id="calories-avg" class="flex justify-center sm:flex-row sm:justify-evenly sticky left-0">
 
                     <div class="w-full text-center">
                     <p class="text-orange-200 mx-4 text-center">Average</p>
