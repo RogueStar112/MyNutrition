@@ -8,9 +8,11 @@
 
     <div class="min-h-screen max-w-7xl py-4 pt-6 px-4 sm:px-6 lg:px-8 /max-w-7xl mx-auto">
         <div class="flex flex-col sm:grid grid-cols-5 grid-rows-5 w-full h-full gap-2 /h-[calc(100vh-8rem)] /max-h-[900px] /[&>*]:flex  [&>*]:text-black dark:[&>*]:text-white">
-            <div class="col-start-1 col-end-6 row-start-1 row-end-3 rounded-lg bg-slate-800 flex flex-col /border-2 /border-green-500 overflow-x-scroll">
+            <div id="MacroIntakeChart_container" class="col-start-1 col-end-6 row-start-1 row-end-3 rounded-lg bg-slate-800 flex flex-col /border-2 /border-green-500 overflow-x-scroll min-w-full relative">
                 
-                <p class="text-center mx-4 mt-2">Calorie Intake</p>
+
+
+                <p class="sticky left-0 text-center m-4">Macro Intake</p>
                     
 
          
@@ -20,39 +22,42 @@
 
                 <p></p> --}}
                 
-                <div class="m-4 sm:m-0 rounded-lg min-w-[909px] min-h-[300px] sm:min-w-full sm:w-full h-full relative [&>*]:absolute overflow-x-scroll">
+                <div class="m-4 sm:m-0 rounded-lg min-w-[909px] min-h-[300px] sm:min-w-full sm:w-full h-full relative flex items-center /[&>*]:absolute overflow-x-scroll">
                     <x-chartjs-component :chart="$chart" />
                 </div>    
 
-                       <div id="calories-avg" class="flex justify-center sm:flex-row sm:justify-evenly sticky left-0">
 
-                    <div class="w-full text-center">
-                    <p class="text-orange-200 mx-4 text-center">Average</p>
+                {{-- <livewire:dashboard.macros-date /> --}}
 
+                    <div id="calories-avg" class="flex justify-center sm:flex-row sm:justify-evenly sticky left-0 p-4">
 
-                    <span class="text-orange-300 text-2xl sm:text-4xl font-black mx-4">{{round($avg_calories, 0)}}kcal</span>
-                    </div>
-
-
-                    <div class="w-full text-center">
-                    <p class="text-red-200 mx-4 text-center">Highest</p>
+                                <div class="w-full text-center">
+                                <p class="text-orange-200 mx-4 text-center">Average</p>
 
 
-                    <span class="text-red-300 text-2xl sm:text-4xl font-black mx-4">{{round($highest_calories, 0)}}kcal</span>
-
-                    </div>
-
-
-                    <div class="w-full text-center">
-                    
-                        <p class="text-green-200 mx-4 text-center">Lowest</p>
+                                <span class="text-orange-300 text-2xl sm:text-4xl font-black mx-4">{{round($avg_calories, 0)}}kcal</span>
+                                </div>
 
 
-                        <span class="text-green-300 text-2xl sm:text-4xl font-black mx-4">{{round($lowest_calories, 0)}}kcal</span>
+                                <div class="w-full text-center">
+                                <p class="text-red-200 mx-4 text-center">Highest</p>
 
 
-                    </div>
-                </div>
+                                <span class="text-red-300 text-2xl sm:text-4xl font-black mx-4">{{round($highest_calories, 0)}}kcal</span>
+
+                            </div>
+
+
+                            <div class="w-full text-center">
+                            
+                                <p class="text-green-200 mx-4 text-center">Lowest</p>
+
+
+                                <span class="text-green-300 text-2xl sm:text-4xl font-black mx-4">{{round($lowest_calories, 0)}}kcal</span>
+
+
+                            </div>
+                     </div>
 
             
 
@@ -198,27 +203,9 @@
     </div>
 
    <script>
-    var MacroIntakeChart = new Chart(document.getElementById("MacroIntakeChart"), {
-        type: "line",
-        data: { ... },
-        options: { ... }
-    });
-    // Make sure the chart is already initialized
-    const ctx = MacroIntakeChart.ctx;
-    const chartArea = MacroIntakeChart.chartArea;
+     let calorieCanvas = document.getElementById('MacroIntakeChart_container');
 
-    if (chartArea) {
-        const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
-        gradient.addColorStop(0, 'rgba(75,192,192,0.8)');
-        gradient.addColorStop(1, 'rgba(75,192,192,0)');
-
-        // Apply to dataset(s) — here only the first dataset
-        MacroIntakeChart.data.datasets[0].backgroundColor = gradient;
-
-        // Update chart
-        MacroIntakeChart.update();
-        
-        console.log('THIS ALSO WORKS MUPPET')
-    }
-    </script>
+     calorieCanvas.scrollLeft = calorieCanvas.scrollWidth;
+     
+   </script>
 </x-app-layout>

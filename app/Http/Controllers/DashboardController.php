@@ -224,7 +224,7 @@ class DashboardController extends Controller
         
         $chart = Chartjs::build()
             ->name("MacroIntakeChart")
-            ->size(["width" => 3000, "height" => 600])
+            ->size(["width" => 1280, "height" => 600])
             ->labels($meals_dates)
             ->datasets([
                 [
@@ -467,6 +467,10 @@ class DashboardController extends Controller
                     'style' => 'Montserrat'
                 ],
 
+                
+                'responsive' => 'true',
+                'maintainAspectRatio' => "false",
+
                 'layout' => [
                     'padding' => '20',
                 ],
@@ -568,7 +572,7 @@ class DashboardController extends Controller
             ],
 
             'responsive' => 'true',
-            'maintainAspectRatio' => "false",
+            'maintainAspectRatio' => "true",
 
             'scales' => [
                 'x' => [
@@ -790,6 +794,18 @@ class DashboardController extends Controller
             ]
         ]);
             
+
+        $last_two_weeks = Meal::where('time_planned', '<=', $end)
+                            ->where('time_planned', '>=', $start)
+                            ->where('user_id', '=', $user_id)
+                            ->where('is_eaten', '=', 1)
+                            ->orderBy('time_planned', 'desc')
+                            ->get();
+
+
+
+
+        // dd($last_five_meals_array);
 
             return view("dashboard", compact("chart", "fat_chart", "carbs_chart", "protein_chart", "avg_calories", "highest_calories", "lowest_calories", "last_meal_nutrients", "last_fluids_selected", "last_five_meals_array"));
     }
