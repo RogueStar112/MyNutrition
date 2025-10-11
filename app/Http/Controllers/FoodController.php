@@ -322,6 +322,7 @@ class FoodController extends Controller
         $food_search = Food::where('user_id', $user_id)
                             ->orderBy('id', 'desc')
                             // ->groupBy('name')
+                            ->limit(50)
                             ->get();
 
         // dd($food_search);
@@ -353,7 +354,7 @@ class FoodController extends Controller
 
         }                   
 
-        dd($food_array);
+        // dd($food_array);
         
         // return $food_array;
 
