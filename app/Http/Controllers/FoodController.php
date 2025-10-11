@@ -324,7 +324,7 @@ class FoodController extends Controller
                             // ->groupBy('name')
                             ->get();
 
-        dd($food_search);
+        // dd($food_search);
 
         $food_array = [];
 
@@ -352,6 +352,8 @@ class FoodController extends Controller
             
 
         }                   
+
+        dd($food_array);
         
         // return $food_array;
 
