@@ -337,7 +337,7 @@ class FoodController extends Controller
             $macronutrients_search = Macronutrients::where('food_id', $food->id)
                                                 ->first();
 
-            $food_unit_chosen = FoodUnit::find($macronutrients_search->food_unit_id)->short_name;
+            $food_unit_chosen = FoodUnit::find($macronutrients_search->food_unit_id)->short_name ?? 'g';
 
             $food_array[$index]['source_name'] = $food_source_search->name;
             $food_array[$index]['serving_size'] = $macronutrients_search->serving_size;

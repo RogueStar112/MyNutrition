@@ -72,7 +72,7 @@ class MealController extends Controller
             // finds the specific food in the loop
             $food_search = Food::find((int)$food_pages_x);
 
-            $food_imgurl = $food_search->img_url;
+            $food_imgurl = $food_search?->img_url;
 
             $food_source_search = FoodSource::where('id', $food_search->source_id)
                                         ->first();
