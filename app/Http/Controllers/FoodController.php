@@ -341,13 +341,13 @@ class FoodController extends Controller
 
             $food_unit_chosen = FoodUnit::find($macronutrients_search?->food_unit_id)->short_name ?? 'g';
 
-            $food_array[$index]['source_name'] = $food_source_search->name;
-            $food_array[$index]['serving_size'] = $macronutrients_search->serving_size;
+            $food_array[$index]['source_name'] = $food_source_search->name ?? "404 Not Found";
+            $food_array[$index]['serving_size'] = $macronutrients_search->serving_size ?? 404;
             $food_array[$index]['serving_unit'] = $food_unit_chosen;
-            $food_array[$index]['calories'] = $macronutrients_search->calories;
-            $food_array[$index]['fat'] = $macronutrients_search->fat;
-            $food_array[$index]['carbohydrates'] = $macronutrients_search->carbohydrates;
-            $food_array[$index]['protein'] = $macronutrients_search->protein;
+            $food_array[$index]['calories'] = $macronutrients_search->calories ?? 404;
+            $food_array[$index]['fat'] = $macronutrients_search->fat ?? 404;
+            $food_array[$index]['carbohydrates'] = $macronutrients_search->carbohydrates ?? 404;
+            $food_array[$index]['protein'] = $macronutrients_search->protein ?? 404;
 
             
 
