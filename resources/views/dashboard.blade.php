@@ -29,31 +29,31 @@
 
                 {{-- <livewire:dashboard.macros-date /> --}}
 
-                    <div id="calories-avg" class="flex justify-center sm:flex-row sm:justify-evenly sticky left-0 p-4">
+                    <div id="calories-avg" class="flex justify-around sm:flex-row sm:justify-evenly sticky left-0 py-4">
 
-                                <div class="w-full text-center">
-                                <p class="text-orange-200 mx-4 text-center">Average</p>
+                                <div class="text-center">
+                                <p class="text-orange-200 text-center">Average</p>
 
 
-                                <span class="text-orange-300 text-2xl sm:text-4xl font-black mx-4">{{round($avg_calories, 0)}}kcal</span>
+                                <span class="text-orange-300 text-2xl sm:text-4xl font-black">{{round($avg_calories, 0)}}kcal</span>
                                 </div>
 
 
-                                <div class="w-full text-center">
-                                <p class="text-red-200 mx-4 text-center">Highest</p>
+                                <div class="text-center">
+                                <p class="text-red-200 text-center">Highest</p>
 
 
-                                <span class="text-red-300 text-2xl sm:text-4xl font-black mx-4">{{round($highest_calories, 0)}}kcal</span>
+                                <span class="text-red-300 text-2xl sm:text-4xl font-black">{{round($highest_calories, 0)}}kcal</span>
 
                             </div>
 
 
-                            <div class="w-full text-center">
+                            <div class="text-center">
                             
-                                <p class="text-green-200 mx-4 text-center">Lowest</p>
+                                <p class="text-green-200 text-center">Lowest</p>
 
 
-                                <span class="text-green-300 text-2xl sm:text-4xl font-black mx-4">{{round($lowest_calories, 0)}}kcal</span>
+                                <span class="text-green-300 text-2xl sm:text-4xl font-black">{{round($lowest_calories, 0)}}kcal</span>
 
 
                             </div>
