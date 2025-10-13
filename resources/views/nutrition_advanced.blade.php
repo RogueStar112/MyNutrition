@@ -20,7 +20,7 @@
 
               <h2 class="text-6xl italic font-extrabold text-black dark:text-white col-span-6 m-4 pb-6 border-b-4 border-gray-500">Advanced Menu</h2>
 
-                  <a class="text-2xl italic bg-slate-200 dark:bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2 duration-300 dark:hover:bg-red-800 hover:bg-red-800 [&>*]:hover:text-black [&>*]:hover:border-b-black" href="{{route('advanced.suggester')}}">
+                  <a class="text-2xl italic bg-slate-200 dark:bg-slate-800 p-4 rounded-lg shadow-2xl col-span-2 duration-300 dark:hover:bg-red-800 hover:bg-red-800 [&>*]:hover:text-black [&>*]:hover:border-b-black" href="{{route('advanced.breakdown')}}">
 
                       <div class="flex justify-between text-red-500 border-b-4 border-b-red-500 p-4 items-center">
                           <h2 class="text-4xl uppercase font-black">Nutritional Breakdown</h2>

@@ -5,10 +5,12 @@
        {{$meal_name}}
 
        <div class="text-blue-500">{{$meal_calories}}kcal</div>
-       <button wire:click="toggle_meal_items" class="text-5xl cursor-pointer">
-        {{ $show_meal_items ? '-' : '+' }} 
-        
-
+       <button wire:click="toggle_meal_items" class="text-4xl cursor-pointer">
+        @if ($show_meal_items)
+            <i class="fa-solid fa-chevron-up"></i>
+        @else
+            <i class="fa-solid fa-chevron-down"></i>
+        @endif
        </button>
     </div>
 

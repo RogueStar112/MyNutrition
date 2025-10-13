@@ -17,6 +17,7 @@ use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\ProfanityController;
 use App\Http\Controllers\ChangelogController;
 use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\BreakdownController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -143,6 +144,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/components/meal_notifications/show/{id}', MealNotificationLivewire::class);
 
     Route::get('/nutrition/advanced', [DashboardController::class, 'advanced_menu'])->name('nutrition_advancedMenu');
+
+    Route::get('/nutrition/advanced/breakdown', [BreakdownController::class, 'breakdown_form'])->name('advanced.breakdown');
 
     Route::get('/nutrition/advanced/suggester', [SuggesterController::class, 'suggester_form'])->name('advanced.suggester');
 

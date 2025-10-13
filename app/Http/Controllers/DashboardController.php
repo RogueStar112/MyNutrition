@@ -454,8 +454,8 @@ class DashboardController extends Controller
                 [
                     "label" => "Calories (kcal)",
                     "type" => "line",
-                    "backgroundColor" => "rgba(255, 200, 0, 0.35)",
-                    "borderColor" => "rgba(255, 200, 0, 1)",
+                    "backgroundColor" => "rgba(59, 130, 246, 0.33)",
+                    "borderColor" => "rgba(59, 130, 246, 1)",
                     "data" => $meals_calories,
                     "lineTension" => 0.6,
                     "fill" => true,
@@ -469,7 +469,7 @@ class DashboardController extends Controller
 
                 
                 'responsive' => 'true',
-                'maintainAspectRatio' => "false",
+                'maintainAspectRatio' => "true",
 
                 'layout' => [
                     'padding' => '20',
@@ -559,8 +559,8 @@ class DashboardController extends Controller
             [
                 "label" => "Fat (g)",
                 "type" => "bar",
-                "backgroundColor" => "rgba(185, 0, 0, 1)",
-                "borderColor" => "rgba(185, 0, 0, 1)",
+                "backgroundColor" => "rgb(249, 115, 22, 1)",
+                "borderColor" => "rgb(249, 115, 22, 1)",
                 "data" => $meals_fat,
                 "lineTension" => 0.6
             ],
@@ -642,8 +642,8 @@ class DashboardController extends Controller
             [
                 "label" => "Carbs (g)",
                 "type" => "bar",
-                "backgroundColor" => "rgba(0, 185, 0, 1)",
-                "borderColor" => "rgba(0, 185, 0, 1)",
+                "backgroundColor" => "rgb(239 68 68)",
+                "borderColor" => "rgb(239 68 68)",
                 "data" => $meals_carbs,
                 "lineTension" => 0.6
             ],
@@ -653,6 +653,11 @@ class DashboardController extends Controller
                 'color' => 'white',
                 'style' => 'Montserrat'
             ],
+
+            
+            'responsive' => 'true',
+            'maintainAspectRatio' => "true",
+
 
             'scales' => [
                 'x' => [
@@ -722,8 +727,8 @@ class DashboardController extends Controller
             [
                 "label" => "Protein (g)",
                 "type" => "bar",
-                "backgroundColor" => "rgba(0, 0, 185, 1)",
-                "borderColor" => "rgba(0, 0, 185, 1)",
+                "backgroundColor" => "rgb(34 197 94)",
+                "borderColor" => "rgb(34 197 94)",
                 "data" => $meals_protein,
                 "lineTension" => 0.6
             ],
@@ -733,6 +738,11 @@ class DashboardController extends Controller
                 'color' => 'white',
                 'style' => 'Montserrat'
             ],
+
+            
+            'responsive' => 'true',
+            'maintainAspectRatio' => "true",
+
 
             'scales' => [
                 'x' => [
