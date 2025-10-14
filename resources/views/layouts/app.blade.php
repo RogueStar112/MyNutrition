@@ -55,9 +55,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         {{-- <link rel="stylesheet" href="dist/fontawesome-5.11.2/css/all.min.css" /> --}}
  
-
- 
+   
         <script>
+            
             // Get saved theme from localStorage
             const savedTheme = localStorage.getItem('theme') || '{{ session('theme', 'light') }}';
     
@@ -76,14 +76,16 @@
         {{-- <link href="{{asset('resources/css/app.css')}}" rel="stylesheet">
         <link href="resources/css/app.js" rel=""> --}}
 
-        <script
+        {{-- <script
  
 			  src="https://code.jquery.com/jquery-3.7.0.min.js"
  
 			  integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
  
-			  crossorigin="anonymous"></script>
- 
+			  crossorigin="anonymous"></script> --}}
+        
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        
         <script
  
 			  src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
@@ -91,16 +93,12 @@
 			  integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
  
 			  crossorigin="anonymous"></script>
+  
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        {{-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script> --}}
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1/dist/chartjs-plugin-annotation.min.js"></script>
+        
  
-
- 
-
- 
-
- 
-
- 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="//unpkg.com/alpinejs" defer></script>
 
  
@@ -224,8 +222,8 @@
         </div>
  
 
- 
-        <script src="node_modules\chart.js\dist\chart.umd.js"></script>
+{{--  
+        <script src="node_modules\chart.js\dist\chart.umd.js"></script> --}}
  
         <script>
  

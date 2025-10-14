@@ -353,20 +353,14 @@ class DashboardController extends Controller
             'micros' => []
         ];
 
-
+        
         
 
          foreach($last_fourteen_days_meals as $meal) {  
             $key = date('Y-m-d H:i:s', strtotime($meal->time_planned));
             $key_ymd = date('Y-m-d', strtotime($meal->time_planned));
 
-            // if(isset($last_fourteen_days_meals_array['dates'][$key_ymd], $last_fourteen_days_meals_array['names'][$key])) {
-                
-            // } else {
-            //     $last_fourteen_days_meals_array['dates'][$key_ymd] = [];
-            //     $last_fourteen_days_meals_array['names'][$key] = [];
-            // }
-                // Initialize only if not already set
+            // Initialize only if not already set
             if (!isset($last_fourteen_days_meals_array['dates'][$key_ymd])) {
                 $last_fourteen_days_meals_array['dates'][$key_ymd] = [];
             }
@@ -379,13 +373,7 @@ class DashboardController extends Controller
             $last_fourteen_days_meals_array['dates'][$key_ymd][] = $key;
             $last_fourteen_days_meals_array['names'][$key][] = $this->get_nutrients_of_meal($meal->id)['nutrients']['meal_name'];
 
-            // array_push($last_fourteen_days_meals_array['dates'][$key_ymd], $key ?? "");
-            // // dd($meal->id);
-            // array_push($last_fourteen_days_meals_array['names'][$key], $this->get_nutrients_of_meal($meal->id)['nutrients']['meal_name'] ?? "");
-        
 
-            // $last_fourteen_days_meals_array['dates'][$key] = $key ?? "";
-            // $last_fourteen_days_meals_array['names'][$key] = $this->get_nutrients_of_meal($meal->id)['nutrients']['meal_name'];
              $last_fourteen_days_meals_array['calories'][$key] = ($last_fourteen_days_meals_array['calories'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['calories'] ?? 0);
              $last_fourteen_days_meals_array['fat'][$key] = ($last_fourteen_days_meals_array['fat'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['fat'] ?? 0);
              $last_fourteen_days_meals_array['carbs'][$key] = ($last_fourteen_days_meals_array['carbs'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['carbohydrates'] ?? 0);
@@ -395,7 +383,7 @@ class DashboardController extends Controller
              $last_fourteen_days_meals_array['micros'][$key] = $this->get_nutrients_of_meal($meal->id)['micros'];
          }
 
-         dd($last_fourteen_days_meals_array);
+        //  dd(array_keys($last_fourteen_days_meals_array['dates'])[0]);
         // dd($last_five_meals);
         
          foreach($last_five_meals as $meal) {    
@@ -506,6 +494,113 @@ class DashboardController extends Controller
         $lowest_calories = min($meals_calories);
 
         // dd($meals_dates);
+
+        // dd($last_fourteen_days_meals_array);
+
+        $pie_date_selected = array_keys($last_fourteen_days_meals_array['dates'])[0];
+
+        $pie_sum_calories = array_sum(
+            array_filter($last_fourteen_days_meals_array['calories'], function ($value, $key) use ($pie_date_selected) {
+                return str_starts_with($key, $pie_date_selected);
+            }, ARRAY_FILTER_USE_BOTH)
+        );
+
+          $pie_sum_fat = array_sum(
+            array_filter($last_fourteen_days_meals_array['fat'], function ($value, $key) use ($pie_date_selected) {
+                return str_starts_with($key, $pie_date_selected);
+            }, ARRAY_FILTER_USE_BOTH)
+        );
+        
+          $pie_sum_carbs = array_sum(
+            array_filter($last_fourteen_days_meals_array['carbs'], function ($value, $key) use ($pie_date_selected) {
+                return str_starts_with($key, $pie_date_selected);
+            }, ARRAY_FILTER_USE_BOTH)
+        );
+
+          $pie_sum_protein = array_sum(
+            array_filter($last_fourteen_days_meals_array['protein'], function ($value, $key) use ($pie_date_selected) {
+                return str_starts_with($key, $pie_date_selected);
+            }, ARRAY_FILTER_USE_BOTH)
+        );
+
+        // dd($pie_sum_calories, $pie_sum_fat, $pie_sum_carbs, $pie_sum_protein);
+
+        $pie_chart = Chartjs::build()
+                ->name("MacroIntakePieChart")
+                ->type('doughnut')
+                ->size(["width" => "100%", "height" => "100%"])
+                ->labels(['Fat', 'Carbs', 'Protein'])
+                ->datasets([
+                    [
+                        'backgroundColor' => ['rgb(229, 95, 22, 1)', 'rgb(219 48 68)', 'rgb(14 177 94)'],
+                        'hoverBackgroundColor' => ['orange', 'red', 'green'],
+                        'borderColor' => 'oklch(27.9% 0.041 260.031)',
+                        'data' => [$pie_sum_fat, $pie_sum_carbs, $pie_sum_protein]
+                    ]
+                    ])
+                ->optionsRaw('{
+                    "plugins": {
+                        "datalabels": {
+                        "display": true,
+                        "backgroundColor": "#ccc",
+                        "borderRadius": 3,
+                        "font": {
+                            "color": "red",
+                            "weight": "bold"
+                        }
+                        },
+                        "doughnutlabel": {
+                        "labels": {
+                            "text": "$pie_sum_calories"
+                        }
+                        },
+                        "annotation": {
+                        "annotations": {
+                            "dLabel": {
+                            "type": "doughnutLabel",
+                            "content": ["$pie_sum_calories", "kcal"],
+                            "font": [{size: 30}, {size: 15}],
+                            "color": ["yellow", "red"]
+                            }
+                        }
+                        }
+                    }
+                    }');
+                // ->options([
+
+                    
+                //         'plugins' => [
+                //             'datalabels' => [
+                //                 'display' => true,
+                //                 'backgroundColor' => '#ccc',
+                //                 'borderRadius' => 3,
+                //                 'font' => [
+                //                     'color' => 'red',
+                //                     'weight' => 'bold'
+                //                 ]
+                //                 ],
+
+                //             'doughnutlabel' => [
+                //                 'labels' => [
+                //                     'text' => "$pie_sum_calories"
+                //                 ]
+                //                 ],
+
+                //                 'annotation' => [
+                //                     'annotations' => [
+                //                         'dLabel' => [
+                //                             'type' => 'doughnutLabel',
+                //                             'content' => [$pie_sum_calories, 'kcal']
+
+                //                         ]
+                //                     ]
+                //                 ]
+                //         ]
+                    
+                // ]);
+
+
+        
         
         $chart = Chartjs::build()
             ->name("MacroIntakeChart")
@@ -878,7 +973,7 @@ class DashboardController extends Controller
 
         // dd($last_five_meals_array);
 
-            return view("dashboard", compact("chart", "fat_chart", "carbs_chart", "protein_chart", "avg_calories", "highest_calories", "lowest_calories", "last_meal_nutrients", "last_fluids_selected", "last_five_meals_array"));
+            return view("dashboard", compact("last_fourteen_days_meals_array", "pie_date_selected", "pie_sum_calories", "pie_sum_fat", "pie_sum_carbs", "pie_sum_protein", "pie_chart", "chart", "fat_chart", "carbs_chart", "protein_chart", "avg_calories", "highest_calories", "lowest_calories", "last_meal_nutrients", "last_fluids_selected", "last_five_meals_array"));
     }
 
     public function renderBodyStatsChart() {
