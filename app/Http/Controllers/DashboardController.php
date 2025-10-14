@@ -368,7 +368,7 @@ class DashboardController extends Controller
             }
      
             array_push($last_fourteen_days_meals_array['dates'][$key_ymd], $key ?? "");
-            array_push($last_fourteen_days_meals_array['names'][$key], $this->get_nutrients_of_meal($meal->id)['nutrients']['meal_name']);
+            array_push($last_fourteen_days_meals_array['names'][$key], $this->get_nutrients_of_meal($meal->id)['nutrients']['meal_name'] ?? "");
         
 
             // $last_fourteen_days_meals_array['dates'][$key] = $key ?? "";
