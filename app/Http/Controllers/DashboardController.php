@@ -335,6 +335,27 @@ class DashboardController extends Controller
                             ->limit(10)
                             ->get();
 
+        $last_fourteen_days_meals = Meal::where('time_planned', '<=', $end)
+                                        ->where('time_planned', '>=', $start)
+                                        ->where('user_id', '=', $user_id)
+                                        ->where('is_eaten', '=', 1)
+                                        ->orderBy('time_planned', 'desc')
+                                        ->get();
+
+         foreach($last_fourteen_days_meals as $meal) {  
+            $key = date('Y-m-d', strtotime($meal->time_planned));
+            $last_five_meals_names[$key] = $this->get_nutrients_of_meal($meal->id)['nutrients']['meal_name'];
+            $last_five_meals_dates[$key] = $key ?? "";
+            $last_five_meals_calories[$key] = ($last_five_meals_calories[$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['calories'] ?? 0);
+            $last_five_meals_fat[$key] = ($last_five_meals_fat[$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['fat'] ?? 0);
+            $last_five_meals_carbs[$key] = ($last_five_meals_carbs[$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['carbohydrates'] ?? 0);
+            $last_five_meals_protein[$key] = ($last_five_meals_protein[$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['protein'] ?? 0);
+            
+            $last_five_meals_macros[$key] = $this->get_nutrients_of_meal($meal->id)['macros'];
+            $last_five_meals_micros[$key] = $this->get_nutrients_of_meal($meal->id)['micros'];
+         }
+
+         dd($last_fourteen_days_meals);
         // dd($last_five_meals);
         
          foreach($last_five_meals as $meal) {    
