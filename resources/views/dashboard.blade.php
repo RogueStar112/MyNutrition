@@ -11,7 +11,7 @@
 
             <div id="MacroIntakeChart_container_daily" class="col-start-1 col-end-3 row-start-1 row-end-3 bg-slate-800 w-full h-full rounded-lg relative pb-6 sm:pb-0">
 
-                <p class="p-4 text-center w-full">Latest Day Macro Breakdown<br>{{date('d/m/Y', strtotime($pie_date_selected))}}</p>
+                <p class="p-4 text-left w-full">Latest Day Macro Breakdown<br>{{date('d/m/Y', strtotime($pie_date_selected))}}</p>
 
                 {{-- <livewire:dashboard.daily-pie-chart :day_selected="$pie_date_selected" :pie_sum_calories="$pie_sum_calories" :pie_sum_fat="$pie_sum_fat" :pie_sum_carbs="$pie_sum_carbs" :pie_sum_protein="$pie_sum_protein" /> --}}
 
@@ -39,7 +39,7 @@
                             <div class=" text-green-500 text-sm sm:text-lg">{{$pie_sum_protein}}<span class="text-sm sm:text-sm items-end">g Protein</span></div>
                         </div>
 
-                    <div class="absolute top-0 right-0 flex flex-col items-end justify-end gap-2 [&>*]:text-center [&>*]:w-full [&>*]:mx-2 bg-slate-800 p-4 rounded-lg">
+                    <div class="absolute top-[-4.5rem] right-0 flex flex-col items-end justify-end gap-2 [&>*]:text-center [&>*]:w-full [&>*]:mx-2 bg-transparent p-4 rounded-lg">
                         <p class="bg-orange-500 text-slate-800 rounded-lg bottom-0 right-0">{{$pie_sum_fat_perc}}%</p>
                         <p class="bg-red-500 text-slate-800 rounded-lg bottom-0 right-0">{{$pie_sum_carbs_perc}}%</p>
                         <p class="bg-green-500 text-slate-800 rounded-lg bottom-0 right-0">{{$pie_sum_protein_perc}}%</p>
