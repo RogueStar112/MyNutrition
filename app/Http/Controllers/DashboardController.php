@@ -357,20 +357,15 @@ class DashboardController extends Controller
 
 
          foreach($last_fourteen_days_meals as $meal) {  
-            $key = date('Y-m-d', strtotime($meal->time_planned));
-            
+            $key = date('Y-m-d H:i:s', strtotime($meal->time_planned));
+
             $last_fourteen_days_meals_array['dates'][$key] = [];
             $last_fourteen_days_meals_array['names'][$key] = [];
             
-            // if($last_fourteen_days_meals_array['dates'][$key] && $last_fourteen_days_meals_array['names'][$key]) {
-            //     array_push($last_fourteen_days_meals_array['dates'][$key], $key ?? "");
-            //     array_push($last_fourteen_days_meals_array['names'][$key], $this->get_nutrients_of_meal($meal->id)['nutrients']['meal_name']);
-            // } else {
-            //     $last_fourteen_days_meals_array['dates'][$key] = [];
-            //     $last_fourteen_days_meals_array['names'][$key] = [];
-                array_push($last_fourteen_days_meals_array['dates'][$key], $key ?? "");
-                array_push($last_fourteen_days_meals_array['names'][$key], $this->get_nutrients_of_meal($meal->id)['nutrients']['meal_name']);
-            // }
+     
+            array_push($last_fourteen_days_meals_array['dates'][$key], $key ?? "");
+            array_push($last_fourteen_days_meals_array['names'][$key], $this->get_nutrients_of_meal($meal->id)['nutrients']['meal_name']);
+        
 
             // $last_fourteen_days_meals_array['dates'][$key] = $key ?? "";
             // $last_fourteen_days_meals_array['names'][$key] = $this->get_nutrients_of_meal($meal->id)['nutrients']['meal_name'];
