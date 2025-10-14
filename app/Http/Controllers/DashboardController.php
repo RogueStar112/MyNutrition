@@ -360,16 +360,28 @@ class DashboardController extends Controller
             $key = date('Y-m-d H:i:s', strtotime($meal->time_planned));
             $key_ymd = date('Y-m-d', strtotime($meal->time_planned));
 
-            if(isset($last_fourteen_days_meals_array['dates'][$key_ymd], $last_fourteen_days_meals_array['names'][$key])) {
+            // if(isset($last_fourteen_days_meals_array['dates'][$key_ymd], $last_fourteen_days_meals_array['names'][$key])) {
                 
-            } else {
+            // } else {
+            //     $last_fourteen_days_meals_array['dates'][$key_ymd] = [];
+            //     $last_fourteen_days_meals_array['names'][$key] = [];
+            // }
+                // Initialize only if not already set
+            if (!isset($last_fourteen_days_meals_array['dates'][$key_ymd])) {
                 $last_fourteen_days_meals_array['dates'][$key_ymd] = [];
+            }
+
+            if (!isset($last_fourteen_days_meals_array['names'][$key])) {
                 $last_fourteen_days_meals_array['names'][$key] = [];
             }
-     
-            array_push($last_fourteen_days_meals_array['dates'][$key_ymd], $key ?? "");
-            // dd($meal->id);
-            array_push($last_fourteen_days_meals_array['names'][$key], $this->get_nutrients_of_meal($meal->id)['nutrients']['meal_name'] ?? "");
+
+            
+            $last_fourteen_days_meals_array['dates'][$key_ymd][] = $key;
+            $last_fourteen_days_meals_array['names'][$key][] = $this->get_nutrients_of_meal($meal->id)['nutrients']['meal_name'];
+
+            // array_push($last_fourteen_days_meals_array['dates'][$key_ymd], $key ?? "");
+            // // dd($meal->id);
+            // array_push($last_fourteen_days_meals_array['names'][$key], $this->get_nutrients_of_meal($meal->id)['nutrients']['meal_name'] ?? "");
         
 
             // $last_fourteen_days_meals_array['dates'][$key] = $key ?? "";
