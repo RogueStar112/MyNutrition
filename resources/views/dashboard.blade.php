@@ -20,7 +20,7 @@
 
                         @php
                             $nutrients_g_total = $pie_sum_fat + $pie_sum_carbs + $pie_sum_protein;
-
+                            
 
                             $pie_sum_fat_perc = round((($pie_sum_fat) / $nutrients_g_total) * 100, 1);
                             

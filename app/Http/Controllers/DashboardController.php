@@ -604,7 +604,7 @@ class DashboardController extends Controller
         
         $chart = Chartjs::build()
             ->name("MacroIntakeChart")
-            ->size(["width" => "100%", "height" => "33.3%"])
+            ->size(["width" => "100%", "height" => "50%"])
             ->labels($meals_dates)
             ->datasets([
                 [
