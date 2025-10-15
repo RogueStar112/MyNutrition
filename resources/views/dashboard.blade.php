@@ -22,11 +22,11 @@
                             $nutrients_g_total = $pie_sum_fat + $pie_sum_carbs + $pie_sum_protein;
 
 
-                            $pie_sum_fat_perc = round((($pie_sum_fat) / $nutrients_g_total+0.1) * 100, 1);
+                            $pie_sum_fat_perc = round((($pie_sum_fat) / $nutrients_g_total) * 100, 1);
                             
-                            $pie_sum_carbs_perc = round((($pie_sum_carbs) / $nutrients_g_total+0.1) * 100, 1);
+                            $pie_sum_carbs_perc = round((($pie_sum_carbs) / $nutrients_g_total) * 100, 1);
                             
-                            $pie_sum_protein_perc = round((($pie_sum_protein) / $nutrients_g_total+0.1) * 100, 1);
+                            $pie_sum_protein_perc = round((($pie_sum_protein) / $nutrients_g_total) * 100, 1);
                         @endphp
 
                         <div class="absolute top-[1rem] z-50 w-full h-full flex justify-center items-center flex-col select-none">
