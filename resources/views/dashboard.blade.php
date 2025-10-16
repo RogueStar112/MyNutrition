@@ -64,7 +64,7 @@
 
                 <p></p> --}}
                 
-                <div class="m-4 sm:m-0 rounded-lg min-w-[909px] min-h-[300px] max-h-[401px] sm:min-w-full sm:w-full h-full relative flex items-center /[&>*]:absolute overflow-x-scroll">
+                <div class="m-4 sm:m-0 rounded-lg /min-w-[909px] min-h-[300px] max-h-[401px] sm:min-w-full sm:w-full h-full relative flex items-center /[&>*]:absolute overflow-x-scroll">
                     <x-chartjs-component :chart="$chart" />
                 </div>    
 
@@ -108,7 +108,7 @@
 
 
             
-            <div id="MacrosChart" class="col-start-1 col-end-4 row-start-3 row-end-4 /border-4 /border-blue-300 flex flex-row max-w-screen sm:flex-row justify-between [&>*]:w-full [&>*]:h-full [&>*]:bg-slate-800 sm:[&>*]:p-4 [&>*]:rounded-lg [&>*]:shadow-2xl gap-4 overflow-x-scroll max-h-[281px] h-fit">
+            <div id="MacrosChart" class="col-start-1 col-end-4 row-start-3 row-end-4 /border-4 /border-blue-300 flex flex-col max-w-screen sm:flex-row justify-between [&>*]:w-full [&>*]:h-full [&>*]:bg-slate-800 sm:[&>*]:p-4 [&>*]:rounded-lg [&>*]:shadow-2xl gap-4 overflow-x-scroll max-h-[281px] h-fit">
                 
                 <div class="">
                     <x-chartjs-component :chart="$fat_chart" />
@@ -252,19 +252,19 @@
 
      calorieCanvas.scrollLeft = calorieCanvas.scrollWidth;
      
-     function beforePrintHandler () {
-        for (let id in Chart.instances) {
-            Chart.instances[id].resize();
-        }
-     }
+    //  function beforePrintHandler () {
+    //     for (let id in Chart.instances) {
+    //         Chart.instances[id].resize();
+    //     }
+    //  }
 
-     window.addEventListener('beforeprint', () => {
-         beforePrintHandler();
-        });
+    //  window.addEventListener('beforeprint', () => {
+    //      beforePrintHandler();
+    //     });
    
-    window.addEventListener('afterprint', () => {
-         beforePrintHandler();
-        });
+    // window.addEventListener('afterprint', () => {
+    //      beforePrintHandler();
+    //     });
 
  
 

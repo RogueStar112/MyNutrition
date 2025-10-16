@@ -11,53 +11,53 @@
                         {{-- <x-chartjs-component :chart="$pie_chart_JSON" /> --}}
 
                         <script>
-                                document.addEventListener('DOMContentLoaded', () => {
-                                const ctx = document.getElementById('MacroIntakePieChart');
-                                 const MacroIntakePieChart = new Chart(ctx, {
-                                    type: 'doughnut',
-                                    data: {
-                                        labels: ['Fat', 'Carbs', 'Protein'],
-                                        datasets: [{
-                                            backgroundColor: [
-                                                'rgb(229, 95, 22, 1)',
-                                                'rgb(219, 48, 68)',
-                                                'rgb(14, 177, 94)'
-                                            ],
-                                            hoverBackgroundColor: ['orange', 'red', 'green'],
-                                            borderColor: 'oklch(27.9% 0.041 260.031)',
-                                            data: [pie_sum_fat, pie_sum_carbs, pie_sum_protein],
-                                        }]
-                                    },
-                                    options: {
-                                        plugins: {
-                                            datalabels: {
-                                                display: true,
-                                                backgroundColor: '#ccc',
-                                                borderRadius: 3,
-                                                font: {
-                                                    color: 'red',
-                                                    weight: 'bold'
-                                                }
-                                            },
-                                            doughnutlabel: {
-                                                labels: {
-                                                    text: pie_sum_calories
-                                                }
-                                            },
-                                            annotation: {
-                                                annotations: {
-                                                    dLabel: {
-                                                        type: 'doughnutLabel', // custom plugin if applicable
-                                                        content: [pie_sum_calories + '', 'kcal'],
-                                                        font: [{ size: 30 }, { size: 15 }],
-                                                        color: ['yellow', 'red']
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                });
-                            });
+                            //     document.addEventListener('DOMContentLoaded', () => {
+                            //     const ctx = document.getElementById('MacroIntakePieChart');
+                            //      const MacroIntakePieChart = new Chart(ctx, {
+                            //         type: 'doughnut',
+                            //         data: {
+                            //             labels: ['Fat', 'Carbs', 'Protein'],
+                            //             datasets: [{
+                            //                 backgroundColor: [
+                            //                     'rgb(229, 95, 22, 1)',
+                            //                     'rgb(219, 48, 68)',
+                            //                     'rgb(14, 177, 94)'
+                            //                 ],
+                            //                 hoverBackgroundColor: ['orange', 'red', 'green'],
+                            //                 borderColor: 'oklch(27.9% 0.041 260.031)',
+                            //                 data: [pie_sum_fat, pie_sum_carbs, pie_sum_protein],
+                            //             }]
+                            //         },
+                            //         options: {
+                            //             plugins: {
+                            //                 datalabels: {
+                            //                     display: true,
+                            //                     backgroundColor: '#ccc',
+                            //                     borderRadius: 3,
+                            //                     font: {
+                            //                         color: 'red',
+                            //                         weight: 'bold'
+                            //                     }
+                            //                 },
+                            //                 doughnutlabel: {
+                            //                     labels: {
+                            //                         text: pie_sum_calories
+                            //                     }
+                            //                 },
+                            //                 annotation: {
+                            //                     annotations: {
+                            //                         dLabel: {
+                            //                             type: 'doughnutLabel', // custom plugin if applicable
+                            //                             content: [pie_sum_calories + '', 'kcal'],
+                            //                             font: [{ size: 30 }, { size: 15 }],
+                            //                             color: ['yellow', 'red']
+                            //                         }
+                            //                     }
+                            //                 }
+                            //             }
+                            //         }
+                            //     });
+                            // });
                         </script>
 
                         @php
