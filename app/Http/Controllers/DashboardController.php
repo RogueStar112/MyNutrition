@@ -525,6 +525,10 @@ class DashboardController extends Controller
 
         // dd($pie_sum_calories, $pie_sum_fat, $pie_sum_carbs, $pie_sum_protein);
 
+        // dd($pie_sum_fat, $pie_sum_carbs, $pie_sum_protein);
+
+    
+
         $pie_chart = Chartjs::build()
                 ->name("MacroIntakePieChart")
                 ->type('doughnut')
@@ -537,35 +541,7 @@ class DashboardController extends Controller
                         'borderColor' => 'oklch(27.9% 0.041 260.031)',
                         'data' => [$pie_sum_fat, $pie_sum_carbs, $pie_sum_protein]
                     ]
-                    ])
-                ->optionsRaw('{
-                    "plugins": {
-                        "datalabels": {
-                        "display": true,
-                        "backgroundColor": "#ccc",
-                        "borderRadius": 3,
-                        "font": {
-                            "color": "red",
-                            "weight": "bold"
-                        }
-                        },
-                        "doughnutlabel": {
-                        "labels": {
-                            "text": "$pie_sum_calories"
-                        }
-                        },
-                        "annotation": {
-                        "annotations": {
-                            "dLabel": {
-                            "type": "doughnutLabel",
-                            "content": ["$pie_sum_calories", "kcal"],
-                            "font": [{size: 30}, {size: 15}],
-                            "color": ["yellow", "red"]
-                            }
-                        }
-                        }
-                    }
-                    }');
+                    ]);
                 // ->options([
 
                     
@@ -640,7 +616,7 @@ class DashboardController extends Controller
                         
                         'title' => [
                             'display' => 'true',
-                            'text' => 'Months'
+                            'text' => 'Days'
                         ],
                         
                         'drawTicks' => 'true',
