@@ -253,19 +253,19 @@
 
      calorieCanvas.scrollLeft = calorieCanvas.scrollWidth;
      
-     function beforePrintHandler () {
-        for (let id in Chart.instances) {
-            Chart.instances[id].resize();
-        }
-     }
+    //  function beforePrintHandler () {
+    //     for (let id in Chart.instances) {
+    //         Chart.instances[id].resize();
+    //     }
+    //  }
 
-     window.addEventListener('beforeprint', () => {
-         beforePrintHandler();
-        });
+    //  window.addEventListener('beforeprint', () => {
+    //      beforePrintHandler();
+    //     });
    
-    window.addEventListener('afterprint', () => {
-         beforePrintHandler();
-        });
+    // window.addEventListener('afterprint', () => {
+    //      beforePrintHandler();
+    //     });
 
  
 
