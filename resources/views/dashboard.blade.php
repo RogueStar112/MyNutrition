@@ -68,9 +68,6 @@
                     <x-chartjs-component :chart="$chart" />
                 </div>    
 
-
-                {{-- <livewire:dashboard.macros-date /> --}}
-
                     <div id="calories-avg" class="flex justify-around sm:flex-row sm:justify-evenly sticky left-0 py-4">
 
                                 <div class="text-center">
@@ -109,6 +106,7 @@
 
 
             
+
             <div id="MacrosChart" class="col-start-1 col-end-4 row-start-3 row-end-4 /border-4 /border-blue-300 flex flex-row max-w-screen sm:flex-row justify-between [&>*]:w-screen [&>*]:h-full [&>*]:bg-slate-800 sm:[&>*]:p-4 [&>*]:rounded-lg [&>*]:shadow-2xl gap-4 overflow-x-scroll max-h-[281px] min-h-[281px] sm:h-fit">
                 
 
