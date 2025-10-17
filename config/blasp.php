@@ -128,6 +128,8 @@ return [
             'meatball',
             'mustard',
             'spicy',
+            'wetherspoon',
+            'wetherspoons', // food pub
             'glass',
             'glasses',
             'scunthorpe',
