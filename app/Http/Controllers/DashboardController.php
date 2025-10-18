@@ -600,7 +600,7 @@ class DashboardController extends Controller
                 ],
 
                 
-                'responsive' => 'true',
+                'responsive' => 'false',
                 'maintainAspectRatio' => "true",
 
                 'layout' => [
@@ -703,7 +703,7 @@ class DashboardController extends Controller
                 'style' => 'Montserrat'
             ],
 
-            'responsive' => 'true',
+            'responsive' => 'false',
             'maintainAspectRatio' => "true",
 
             'scales' => [
@@ -787,7 +787,7 @@ class DashboardController extends Controller
             ],
 
             
-            'responsive' => 'true',
+            'responsive' => 'false',
             'maintainAspectRatio' => "true",
 
 
@@ -872,7 +872,7 @@ class DashboardController extends Controller
             ],
 
             
-            'responsive' => 'true',
+            'responsive' => 'false',
             'maintainAspectRatio' => "true",
 
 
