@@ -295,7 +295,7 @@ class DashboardController extends Controller
         $start = Carbon::now()->subWeeks(2);
         $end = Carbon::now();
 
-        $period = CarbonPeriod::create($start, "1 month", $end);
+        // $period = CarbonPeriod::create($start, "1 month", $end);
 
         $meals_calories = [];
         $meals_fat = [];
