@@ -249,23 +249,23 @@
 
     // Chart.register(ChartDataLabels);
 
-     let calorieCanvas = document.getElementById('MacroIntakeChart_container');
+    //  let calorieCanvas = document.getElementById('MacroIntakeChart_container');
 
-     calorieCanvas.scrollLeft = calorieCanvas.scrollWidth;
+    //  calorieCanvas.scrollLeft = calorieCanvas.scrollWidth;
      
-     function beforePrintHandler () {
-        for (let id in Chart.instances) {
-            Chart.instances[id].resize();
-        }
-     }
+    //  function beforePrintHandler () {
+    //     for (let id in Chart.instances) {
+    //         Chart.instances[id].resize();
+    //     }
+    //  }
 
-     window.addEventListener('beforeprint', () => {
-         beforePrintHandler();
-        });
+    //  window.addEventListener('beforeprint', () => {
+    //      beforePrintHandler();
+    //     });
    
-    window.addEventListener('afterprint', () => {
-         beforePrintHandler();
-        });
+    // window.addEventListener('afterprint', () => {
+    //      beforePrintHandler();
+    //     });
 
  
 
