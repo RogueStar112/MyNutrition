@@ -292,9 +292,22 @@ class DashboardController extends Controller
     public function dashboard_view() {
         $user_id = Auth::user()->id;
 
+        
         $start = Carbon::now()->subWeeks(2);
         $end = Carbon::now();
 
+          $meal_select = Meal::where('time_planned', '<=', $end)
+                        ->where('time_planned', '>=', $start)
+                        ->where('user_id', '=', $user_id)
+                        ->where('is_eaten', '=', 1)
+                        ->orderBy('time_planned', 'asc')
+                        ->get();
+
+        if(count($meal_select) == 0) {
+
+            return view("dashboard_placeholder");
+
+        }
         // $period = CarbonPeriod::create($start, "1 month", $end);
 
         $meals_calories = [];
@@ -320,12 +333,8 @@ class DashboardController extends Controller
         // ->where('user_id', '=', $user_id)
         // ->get();
 
-        $meal_select = Meal::where('time_planned', '<=', $end)
-                        ->where('time_planned', '>=', $start)
-                        ->where('user_id', '=', $user_id)
-                        ->where('is_eaten', '=', 1)
-                        ->orderBy('time_planned', 'asc')
-                        ->get();
+      
+
 
         $last_five_meals = Meal::where('time_planned', '<=', $end)
                             ->where('time_planned', '>=', $start)
@@ -434,11 +443,7 @@ class DashboardController extends Controller
         
         // dd($meal_select);
 
-        if(count($meal_select) == 0) {
-
-            return view("dashboard_placeholder");
-
-        }
+    
             
         $last_meal_selected = $meal_select->reverse()->first();
 
@@ -566,7 +571,7 @@ class DashboardController extends Controller
 
                 
                 'responsive' => 'false',
-                'maintainAspectRatio' => "true",
+                
 
                 'layout' => [
                     'padding' => '20',
@@ -669,7 +674,7 @@ class DashboardController extends Controller
             ],
 
             'responsive' => 'false',
-            'maintainAspectRatio' => "true",
+            
 
             'scales' => [
                 'x' => [
@@ -753,7 +758,7 @@ class DashboardController extends Controller
 
             
             'responsive' => 'false',
-            'maintainAspectRatio' => "true",
+            
 
 
             'scales' => [
@@ -838,7 +843,7 @@ class DashboardController extends Controller
 
             
             'responsive' => 'false',
-            'maintainAspectRatio' => "true",
+            
 
 
             'scales' => [
