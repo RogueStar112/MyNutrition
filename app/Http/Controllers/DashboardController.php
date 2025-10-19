@@ -542,41 +542,6 @@ class DashboardController extends Controller
                         'data' => [$pie_sum_fat, $pie_sum_carbs, $pie_sum_protein]
                     ]
                     ]);
-                // ->options([
-
-                    
-                //         'plugins' => [
-                //             'datalabels' => [
-                //                 'display' => true,
-                //                 'backgroundColor' => '#ccc',
-                //                 'borderRadius' => 3,
-                //                 'font' => [
-                //                     'color' => 'red',
-                //                     'weight' => 'bold'
-                //                 ]
-                //                 ],
-
-                //             'doughnutlabel' => [
-                //                 'labels' => [
-                //                     'text' => "$pie_sum_calories"
-                //                 ]
-                //                 ],
-
-                //                 'annotation' => [
-                //                     'annotations' => [
-                //                         'dLabel' => [
-                //                             'type' => 'doughnutLabel',
-                //                             'content' => [$pie_sum_calories, 'kcal']
-
-                //                         ]
-                //                     ]
-                //                 ]
-                //         ]
-                    
-                // ]);
-
-
-        
         
         $chart = Chartjs::build()
             ->name("MacroIntakeChart")
