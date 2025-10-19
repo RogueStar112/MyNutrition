@@ -245,7 +245,4 @@
           
     </div>
 
-    <script>
-     
-    </script>
 </x-app-layout>

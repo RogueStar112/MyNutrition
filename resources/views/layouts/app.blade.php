@@ -55,8 +55,6 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-        {{-- <script type="module" src="./chartjs.js"></script> --}}
-        {{-- <link rel="stylesheet" href="dist/fontawesome-5.11.2/css/all.min.css" /> --}}
  
    
         <script>
@@ -99,14 +97,6 @@
  
 			  crossorigin="anonymous"></script>
 
-
-        {{-- <script>import {Chart} from 'chart.js';</script> --}}
-        {{-- <script type="module" src="../resources/js/charts.js"></script> --}}
-
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js" integrity="sha512-n/G+dROKbKL3GVngGWmWfwK0yPctjZQM752diVYnXZtD/48agpUKLIn0xDQL9ydZ91x6BiOmTIFwWjjFi2kEFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
-        {{-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script> --}}
-        {{-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1/dist/chartjs-plugin-annotation.min.js"></script>
-         --}}
  
         <script src="//unpkg.com/alpinejs" defer></script>
 
@@ -326,12 +316,11 @@
                         
          )
 
+        </script>
+
+
  
- 
-            // @vite(['resources/js/app.js'])
-            
-            // window.chart = require('chart.js');
-            
-        </script>   
+            @vite(['resources/js/app.js'])
+   
     </body>
 </html>
