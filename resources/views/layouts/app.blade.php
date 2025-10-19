@@ -72,8 +72,8 @@
  
         <!-- Scripts -->
  
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/charts.js'])
+        
         {{-- <link href="resources/css/app.css" rel="stylesheet"> --}}
 
         {{-- <link href="{{asset('resources/css/app.css')}}" rel="stylesheet">
@@ -99,8 +99,9 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js" integrity="sha512-n/G+dROKbKL3GVngGWmWfwK0yPctjZQM752diVYnXZtD/48agpUKLIn0xDQL9ydZ91x6BiOmTIFwWjjFi2kEFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-        <script>import {Chart} from 'chart.js';</script>
-        
+        {{-- <script>import {Chart} from 'chart.js';</script> --}}
+        {{-- <script type="module" src="../resources/js/charts.js"></script> --}}
+
         {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js" integrity="sha512-n/G+dROKbKL3GVngGWmWfwK0yPctjZQM752diVYnXZtD/48agpUKLIn0xDQL9ydZ91x6BiOmTIFwWjjFi2kEFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
         {{-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script> --}}
         {{-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1/dist/chartjs-plugin-annotation.min.js"></script>
