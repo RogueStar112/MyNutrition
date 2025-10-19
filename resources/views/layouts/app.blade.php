@@ -328,9 +328,9 @@
 
  
  
-            @vite(['resources/js/app.js'])
+            // @vite(['resources/js/app.js'])
             
-            window.chart = require('chart.js');
+            // window.chart = require('chart.js');
             
         </script>   
     </body>
