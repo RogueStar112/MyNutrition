@@ -4,7 +4,8 @@
     class="{{ auth()->user()->theme }}">
  
     <head>
- 
+        
+        
         <meta charset="utf-8">
  
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,7 +39,7 @@
         <link rel="icon" href="{{ asset('img/mynutritionlogo_scales_upscaled.png') }}">
  
 
- 
+
         <!-- Fonts -->
  
         {{-- <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" /> --}}
@@ -71,7 +72,7 @@
  
         <!-- Scripts -->
  
-        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/charts.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         {{-- <link href="resources/css/app.css" rel="stylesheet"> --}}
 
@@ -97,6 +98,8 @@
 			  crossorigin="anonymous"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js" integrity="sha512-n/G+dROKbKL3GVngGWmWfwK0yPctjZQM752diVYnXZtD/48agpUKLIn0xDQL9ydZ91x6BiOmTIFwWjjFi2kEFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script>import {Chart} from 'chart.js';</script>
         
         {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js" integrity="sha512-n/G+dROKbKL3GVngGWmWfwK0yPctjZQM752diVYnXZtD/48agpUKLIn0xDQL9ydZ91x6BiOmTIFwWjjFi2kEFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
         {{-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script> --}}
