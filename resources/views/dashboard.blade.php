@@ -245,45 +245,7 @@
           
     </div>
 
-   <script>
-
-    // Chart.register(ChartDataLabels);
-
-    //  let calorieCanvas = document.getElementById('MacroIntakeChart_container');
-
-    //  calorieCanvas.scrollLeft = calorieCanvas.scrollWidth;
-     
-    //  function beforePrintHandler () {
-    //     for (let id in Chart.instances) {
-    //         Chart.instances[id].resize();
-    //     }
-    //  }
-
-    //  window.addEventListener('beforeprint', () => {
-    //      beforePrintHandler();
-    //     });
-   
-    // window.addEventListener('afterprint', () => {
-    //      beforePrintHandler();
-    //     });
-
- 
-
- 
-
-    //  var jmediaquery = window.matchMedia( "(min-width: 480px)" )
-    //     if (jmediaquery.matches) {
-    //         // window width is at least 480px
-    //         beforePrintHandler();
-    //     }
-    //     else {
-    //         // window width is less than 480px
-            
-    //         beforePrintHandler();
-         
-    //     }
-
- 
-
-   </script>
+    <script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </script>
 </x-app-layout>

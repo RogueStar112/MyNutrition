@@ -71,8 +71,10 @@
         </script>
  
         <!-- Scripts -->
+
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js" integrity="sha512-n/G+dROKbKL3GVngGWmWfwK0yPctjZQM752diVYnXZtD/48agpUKLIn0xDQL9ydZ91x6BiOmTIFwWjjFi2kEFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
  
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css'])
         
         {{-- <link href="resources/css/app.css" rel="stylesheet"> --}}
 
@@ -97,7 +99,6 @@
  
 			  crossorigin="anonymous"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js" integrity="sha512-n/G+dROKbKL3GVngGWmWfwK0yPctjZQM752diVYnXZtD/48agpUKLIn0xDQL9ydZ91x6BiOmTIFwWjjFi2kEFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         {{-- <script>import {Chart} from 'chart.js';</script> --}}
         {{-- <script type="module" src="../resources/js/charts.js"></script> --}}
@@ -107,7 +108,7 @@
         {{-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1/dist/chartjs-plugin-annotation.min.js"></script>
          --}}
  
-        <script src="//unpkg.com/alpinejs" defer></script>
+        <script src="//unpkg.com/alpinejs"></script>
 
  
 
@@ -232,12 +233,7 @@
 
 {{--  
         <script src="node_modules\chart.js\dist\chart.umd.js"></script> --}}
- 
-        <script>
- 
-            // const myChart = new Chart(ctx, {...});
- 
-        </script>
+
  
 
 {{--  
@@ -330,6 +326,12 @@
                         
          )
 
-        </script>
+ 
+ 
+            @vite(['resources/js/app.js'])
+            
+            window.chart = require('chart.js');
+            
+        </script>   
     </body>
 </html>
