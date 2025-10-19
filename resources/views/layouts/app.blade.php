@@ -54,7 +54,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-        <script type="module" src="./chartjs.js"></script>
+        {{-- <script type="module" src="./chartjs.js"></script> --}}
         {{-- <link rel="stylesheet" href="dist/fontawesome-5.11.2/css/all.min.css" /> --}}
  
    
@@ -71,7 +71,7 @@
  
         <!-- Scripts -->
  
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/charts.js'])
 
         {{-- <link href="resources/css/app.css" rel="stylesheet"> --}}
 
