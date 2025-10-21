@@ -11,12 +11,84 @@
 
             <div id="MacroIntakeChart_container_daily" class="col-start-1 col-end-3 row-start-1 row-end-3 bg-slate-800 w-full h-full rounded-lg relative pb-6 sm:pb-0">
 
-                <p class="p-4 text-left w-full">Latest Day Macro Breakdown<br>{{date('d/m/Y', strtotime($pie_date_selected))}}</p>
+                <p class="p-4 text-left w-full">Latest Day Macro Breakdown<br>
+                    
+                    <button class="p-1 rounded-lg bg-red-600 text-black cursor-pointer" onclick="prevDayPieRender(index_selector)"><- Previous</button>
+                
+                    <button class="p-1 rounded-lg bg-green-600 text-black cursor-pointer" onclick="nextDayPieRender(index_selector)">Next -></button>
+
+                </p>
 
                 {{-- <livewire:dashboard.daily-pie-chart :day_selected="$pie_date_selected" :pie_sum_calories="$pie_sum_calories" :pie_sum_fat="$pie_sum_fat" :pie_sum_carbs="$pie_sum_carbs" :pie_sum_protein="$pie_sum_protein" /> --}}
 
                 <div class="relative [&>canvas]:mx-auto [&>canvas]:w-full">
-                        <x-chartjs-component :chart="$pie_chart" />
+                        
+                        <div id="MacroIntakePieChart_container">
+
+                                   <canvas id="MacroIntakePieChart" class="absolute z-0 bg-transparent">
+
+
+                                    </canvas>
+
+                        </div>
+                 
+
+                        <script>
+
+                            var index_selector = 0;
+
+                                function renderPieChart(index) {
+
+                            
+                                $(document).ready(function () {
+                                    $.ajax({
+                                        url: `/render/daily_macro_pie_chart/${index}`, // Laravel API endpoint
+                                        method: 'GET',
+
+                                        success: function (response) {
+                                        
+                                                    $('#MacroIntakePieChart_container').empty().append(response);
+
+
+                                            },
+                                        error: function (xhr, status, error) {
+                                            console.error('AJAX Error:', error);
+                                        }
+                                        });
+                                    });
+                                    
+                            }
+
+                        
+                            function prevDayPieRender(index) {
+                                  
+                                  index_selector += 1;          
+                                  renderPieChart(index);
+
+
+                            }
+
+                            function nextDayPieRender(index) {
+                                  
+                                  if(index_selector <= 0) {
+                                    
+                                  } else {
+                                     index_selector -= 1;      
+                                  }
+                 
+                                  renderPieChart(index);
+
+
+                            }
+
+                            renderPieChart(index_selector);
+
+                        
+                            
+                 
+                        </script>
+                    
+                        {{-- <x-chartjs-component :chart="$pie_chart" /> 
 
                         @php
                             $nutrients_g_total = $pie_sum_fat + $pie_sum_carbs + $pie_sum_protein;
@@ -43,7 +115,7 @@
                         <p class="bg-orange-500 text-slate-800 rounded-lg bottom-0 right-0">{{$pie_sum_fat_perc}}%</p>
                         <p class="bg-red-500 text-slate-800 rounded-lg bottom-0 right-0">{{$pie_sum_carbs_perc}}%</p>
                         <p class="bg-green-500 text-slate-800 rounded-lg bottom-0 right-0">{{$pie_sum_protein_perc}}%</p>
-                    </div>
+                    </div> --}}
                 </div> 
 
                
@@ -244,5 +316,25 @@
           </div>
           
     </div>
+
+    <script>
+
+        
+        // let pie_chart = Chart.getChart('MacroIntakePieChart');
+
+        
+        
+        // function removeData(chart) {
+        //     chart.data.labels.pop();
+        //     chart.data.datasets.forEach((dataset) => {
+        //         dataset.data.pop();
+        //     });
+        //     chart.update();
+        // }
+
+        // removeData(pie_chart);
+    
+
+    </script>
 
 </x-app-layout>

@@ -165,6 +165,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/function_test/{meal_id}', [DashboardController::class, 'get_nutrients_of_meal']);
 
+    Route::get('/render/daily_macro_pie_chart/{index_selector}', [DashboardController::class, 'renderMacroPieChartForDay']);
+
     // Route::get('/function_test/{meal_id}/{meal_id_two}', [MealController::class, 'combine_two_meals']);
 
     // Route::get('/function_test_v2', [DashboardController::class, 'renderDailyMacroIntakeChart']);
