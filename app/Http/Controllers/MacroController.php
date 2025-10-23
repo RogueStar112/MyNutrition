@@ -112,7 +112,7 @@ class MacroController extends Controller
 
         $user_id = Auth::user()->id;
 
-        // last 10 meals within 10 weeks
+        // last 30 meals within 10 weeks
 
         $start = Carbon::now()->subWeeks(10);
         $end = Carbon::now();
@@ -122,7 +122,7 @@ class MacroController extends Controller
                             ->where('user_id', '=', $user_id)
                             ->where('is_eaten', '=', 1)
                             ->orderBy('time_planned', 'desc')
-                            ->limit(10)
+                            ->limit(30)
                             ->get();
 
         $last_ten_meals_array = [
