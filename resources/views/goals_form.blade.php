@@ -49,12 +49,12 @@
       {{-- background: radial-gradient(closest-side, #0465A5, #334155); --}}
       <div class="" style="background: radial-gradient(closest-side, #9a3412, #334155);">
 
-        <p class="text-center text-2xl text-white my-4">1. Select a goal type</p>
+        <p class="text-center text-2xl text-white py-4 bg-gradient-to-r from-orange-800 to-orange-700">1. Select a goal type</p>
 
 
 
 
-          <div class="grid md:grid-cols-2 gap-4">
+          <div class="grid md:grid-cols-2 gap-4 m-4">
             <!-- Tailored Option -->
             <label class="text-2xl italic bg-slate-800 p-4 rounded-lg shadow-2xl col-span-1 md:col-span-1 duration-300 hover:bg-red-800 [&>*]:hover:text-black [&>*]:hover:border-b-black grow focus-within:border-4 focus-within:border-red-700 cursor-pointer">
                 <input type="radio" name="goal_type" value="tailored" class="hidden" />
@@ -97,11 +97,16 @@
               <span class="question_number text-4xl font-extrabold mb-4">2) </span>
               Here are your average macros based on the data you've inserted.<br>
 
-              Calorie: <span id="calorie-amount" class="ml-2"></span><br>
-              Fat: <span id="fat-amount" class="ml-2"></span><br>
-              Carbs: <span id="carbs-amount" class="ml-2"></span><br>
-              Protein: <span id="protein-amount" class="ml-2"></span><br>
-              
+              @isset($average_macros)
+              Calorie: <span id="calorie-amount" class="ml-2 text-blue-500 text-3xl">{{$average_macros['calories']}}kcal</span><br>
+              Fat: <span id="fat-amount" class="ml-2 text-orange-500 text-xl">{{$average_macros['fat']}}g</span><br>
+              Carbs: <span id="carbs-amount" class="ml-2 text-red-500 text-xl">{{$average_macros['carbs']}}g</span><br>
+              Protein: <span id="protein-amount" class="ml-2 text-green-500 text-xl">{{$average_macros['protein']}}g</span><br>
+              @else
+
+              Please create some meals first.
+
+              @endisset
               
 
               Tick if you want More or Less of each Macro.<br>

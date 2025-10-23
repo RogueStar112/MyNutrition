@@ -359,7 +359,11 @@ class DashboardController extends Controller
             'carbs' => [],
             'protein' => [],
             'macros' => [],
-            'micros' => []
+            'micros' => [],
+            'sugars' => [],
+            'saturates' => [],
+            'fibre' => [],
+            'salt' => []
         ];
 
         
@@ -383,10 +387,18 @@ class DashboardController extends Controller
             $last_fourteen_days_meals_array['names'][$key][] = $this->get_nutrients_of_meal($meal->id)['nutrients']['meal_name'];
 
 
+
+
              $last_fourteen_days_meals_array['calories'][$key] = ($last_fourteen_days_meals_array['calories'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['calories'] ?? 0);
              $last_fourteen_days_meals_array['fat'][$key] = ($last_fourteen_days_meals_array['fat'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['fat'] ?? 0);
              $last_fourteen_days_meals_array['carbs'][$key] = ($last_fourteen_days_meals_array['carbs'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['carbohydrates'] ?? 0);
              $last_fourteen_days_meals_array['protein'][$key] = ($last_fourteen_days_meals_array['protein'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['protein'] ?? 0);
+
+            $last_fourteen_days_meals_array['saturates'][$key] = ($last_fourteen_days_meals_array['saturates'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['saturates'] ?? 0);
+            $last_fourteen_days_meals_array['sugars'][$key] = ($last_fourteen_days_meals_array['sugars'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['sugars'] ?? 0);
+            $last_fourteen_days_meals_array['fibre'][$key] = ($last_fourteen_days_meals_array['fibre'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['fibre'] ?? 0);
+            $last_fourteen_days_meals_array['salt'][$key] = ($last_fourteen_days_meals_array['salt'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['salt'] ?? 0);
+            
             
              $last_fourteen_days_meals_array['macros'][$key] = $this->get_nutrients_of_meal($meal->id)['macros'];
              $last_fourteen_days_meals_array['micros'][$key] = $this->get_nutrients_of_meal($meal->id)['micros'];
@@ -394,6 +406,8 @@ class DashboardController extends Controller
 
         //  dd(array_keys($last_fourteen_days_meals_array['dates'])[0]);
         // dd($last_five_meals);
+
+        // dd($last_fourteen_days_meals_array);
         
          foreach($last_five_meals as $meal) {    
 
@@ -527,6 +541,8 @@ class DashboardController extends Controller
                 return str_starts_with($key, $pie_date_selected);
             }, ARRAY_FILTER_USE_BOTH)
         );
+
+
 
         // dd($pie_sum_calories, $pie_sum_fat, $pie_sum_carbs, $pie_sum_protein);
 

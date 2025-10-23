@@ -15,277 +15,185 @@ use App\Models\MealNotifications;
 
 use Auth;
 
-use Carbon;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 
 use Illuminate\Support\Facades\DB;
 
 
 class MacroController extends Controller
 {
+    public function get_nutrients_of_meal($meal_id) {
+
+        $meal_items = MealItems::where('meal_id', $meal_id)
+                                ->get();
+
+        // dd($meal_items);
+
+        $meal = Meal::where('id', $meal_id)
+                            ->first();
+
+        $meal_name = $meal?->name;
+        $meal_time = $meal?->time_planned;
+
+
+        $meal_array = [];
+
+        $macros = [];
+        $micros = [];
+
+        foreach($meal_items as $meal_item) {
+
+            $macros[] = DB::table('macronutrients')
+            ->join('meal_items', 'macronutrients.food_id', '=', 'meal_items.food_id')
+            ->select(
+                'macronutrients.food_id',
+                'meal_items.name', // Keep non-numeric columns as-is
+                'meal_items.serving_size',
+                DB::raw('ROUND((macronutrients.calories * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 0) AS calories'),
+                DB::raw('ROUND((macronutrients.protein * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS protein'),
+                DB::raw('ROUND((macronutrients.carbohydrates * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS carbohydrates'),
+                DB::raw('ROUND((macronutrients.fat * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS fat')
+            )
+            ->where('macronutrients.food_id', '=', $meal_item->food_id)
+            ->where('meal_items.meal_id', '=', $meal_item->meal_id)
+            ->first();
+
+            $micros[] = DB::table('macronutrients')
+            ->join('meal_items', 'macronutrients.food_id', '=', 'meal_items.food_id')
+            ->join('micronutrients', 'micronutrients.food_id', '=', 'meal_items.food_id')
+            ->select(
+                'macronutrients.food_id',
+                'meal_items.name', // Keep non-numeric columns as-is
+                DB::raw('ROUND((micronutrients.sugars * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS sugars'),
+                DB::raw('ROUND((micronutrients.saturates * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS saturates'),
+                DB::raw('ROUND((micronutrients.fibre * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 1) AS fibre'),
+                DB::raw('ROUND((micronutrients.salt * ((meal_items.serving_size / macronutrients.serving_size) * meal_items.quantity)), 2) AS salt')
+            )
+            ->where('macronutrients.food_id', '=', $meal_item->food_id)
+            ->where('meal_items.meal_id', '=', $meal_item->meal_id)
+            ->first();
+            
+        }
+        
+        $macro_totals = [];
+        $micro_totals = [];
+
+        foreach($macros as $macro) {
+
+
+            if(isset($macro)) {
+                $macro_totals['calories'] = ($macro_totals['calories'] ?? 0) + $macro->calories;
+                $macro_totals['carbohydrates'] = ($macro_totals['carbohydrates'] ?? 0) + $macro->carbohydrates;
+                $macro_totals['fat'] = ($macro_totals['fat'] ?? 0) + $macro->fat;
+                $macro_totals['protein'] = ($macro_totals['protein'] ?? 0) + $macro->protein;
+            }
+        }
+
+        foreach($micros as $micro) {
+            if(isset($micro)) {
+                $micro_totals['sugars'] = ($micro_totals['sugars'] ?? 0) + $micro->sugars;
+                $micro_totals['saturates'] = ($micro_totals['saturates'] ?? 0) + $micro->saturates;
+                $micro_totals['fibre'] = ($micro_totals['fibre'] ?? 0) + $micro->fibre;
+                $micro_totals['salt'] = ($micro_totals['salt'] ?? 0) + $micro->salt;
+            }
+        }
+
+        $nutrients = array_merge($macro_totals, $micro_totals);
+
+        $nutrients['meal_name'] = $meal_name;
+        $nutrients['meal_time'] = $meal_time;
+
+        return ['nutrients' => $nutrients, 'macros' => $macros, 'micros' => $micros];
+ 
+    }
+
     public function goals_form(Request $request) {
 
         $user_id = Auth::user()->id;
 
-        $check_if_local = env('DB_CONNECTION') === 'sqlite';
-        
-        // Local SQLite Version
-            // if ($check_if_local) {
-                $meal_dates_select_filterstr = "strftime('%Y-%m-%d', time_planned) as date";
+        // last 10 meals within 10 weeks
 
-        // Deployment MySQL Version
-            // } else {
-            //     $meal_dates_select_filterstr = "DATE_FORMAT(time_planned, '%Y-%m-%d') as date";
-            
-            // }
+        $start = Carbon::now()->subWeeks(10);
+        $end = Carbon::now();
 
-        $meal_dates_select = DB::table('meal')
-                ->selectRaw($meal_dates_select_filterstr)
-                ->where('user_id', $user_id)
-                ->where('is_eaten', 1)
-                ->whereBetween('date', [now()->subDays(28), now()])
-                ->orderBy('time_planned', 'desc')
-                ->limit(28)
-                ->distinct()
-                ->get();
-
-        
-        $last14Days = now()->subDays(28)->format('d/m/Y');
-        $dateNow = now()->format('d/m/Y');
-
-        $strLast14Days = "From $last14Days to $dateNow";
-
-        $check_if_local = env('DB_CONNECTION') === 'sqlite';
-
-        // dd(env('DB_CONNECTION'));
-    
-
-        // if ($check_if_local) {
-            // Local Environment
-
-            $meal_dates_select_filterstr = "strftime('%Y-%m-%d', time_planned) as date, time_planned";
-            $exercise_dates_select_filterstr = "strftime('%Y-%m-%d', exercise_start) as date, exercise_start";
-
-            $meal_dates_select =        DB::table('meal')
-                                            ->selectRaw($meal_dates_select_filterstr)
-                                            ->where('user_id', 1)
-                                            ->where('is_eaten', 1)
-                                            ->groupBy('time_planned')
-                                            ->orderBy('time_planned', 'desc')
-                                            ->distinct()
-                                            ->limit(28)
-                                            ->get();
-
-
-        // } else {
-        //     // Deployment Environment
-        //     $meal_dates_select_filterstr = "DISTINCT DATE_FORMAT(time_planned, '%Y-%m-%d') as date, time_planned";
-        //     $exercise_dates_select_filterstr = "DISTINCT DATE_FORMAT(exercise_start, '%Y-%m-%d') as date, exercise_start";
-            
-        //     $meal_dates_select =        DB::table('meal')
-        //                                     ->selectRaw($meal_dates_select_filterstr)
-        //                                     ->where('user_id', 1)
-        //                                     ->where('is_eaten', 1)
-        //                                     ->orderBy('time_planned', 'desc')
-        //                                     ->limit(14)
-        //                                     ->get();
-
-        // }
-
-        
-        // dd($meal_dates_select);
-
-        foreach ($meal_dates_select as $meal_date) {
-
-            $meal_date = date('Y-m-d', strtotime($meal_date->date));
-
-            // $meal_dates_ymd[$meal_date] = '';
-            
-
-            /* Data Structure Breakdown.
-
-                
-
-            */
-            // $meal_dates_ymd[0][$meal_date]['meal_name'] = $meal_dates_select->
-
-
-  
-            if($meal_dates_ymd[0][$meal_date] ?? "") {
-                $meal_dates_ymd[0][$meal_date]['calories'] = 0;
-                $meal_dates_ymd[1]['calories_avg'] = [];
-            } else {
-                $meal_dates_ymd[0][$meal_date]['calories'] = 0;
-                $meal_dates_ymd[1]['calories_avg'] = [];
-            }
-
-            $meal_dates_ymd[0][$meal_date]['fat'] = 0;
-            $meal_dates_ymd[0][$meal_date]['carbs'] = 0;
-            $meal_dates_ymd[0][$meal_date]['protein'] = 0;
-            $meal_dates_ymd[0][$meal_date]['times_planned'] = [];
-            $meal_dates_ymd[0][$meal_date]['serving_size'] = 0;
-            $meal_dates_ymd[0][$meal_date]['serving_unit_short'] = "";
-
-
-            $meal_select = Meal::where('user_id', $user_id)
-                            ->whereBetween('time_planned', [$meal_date . ' 00:00:00', $meal_date . ' 23:59:59'])
-                            ->where('is_eaten', 1)
-                            ->orderByRaw('time_planned ASC')
-
+        $last_ten_meals = Meal::where('time_planned', '<=', $end)
+                            ->where('time_planned', '>=', $start)
+                            ->where('user_id', '=', $user_id)
+                            ->where('is_eaten', '=', 1)
+                            ->orderBy('time_planned', 'desc')
+                            ->limit(10)
                             ->get();
 
+        $last_ten_meals_array = [
+            'dates' => [],
+            'names' => [],
+            'calories' => [],
+            'fat' => [],
+            'carbs' => [],
+            'protein' => [],
+            'macros' => [],
+            'micros' => [],
+            'sugars' => [],
+            'saturates' => [],
+            'fibre' => [],
+            'salt' => []
+        ];
 
-            
-            foreach($meal_select as $meal_date=>$meal) {
-                
-                $meal_items_select = MealItems::where('meal_id', $meal->id)
-                                        ->get();
+        foreach($last_ten_meals as $meal) {  
+            $key = date('Y-m-d H:i:s', strtotime($meal->time_planned));
+            $key_ymd = date('Y-m-d', strtotime($meal->time_planned));
 
-                $meal_date = date('Y-m-d', strtotime($meal->time_planned));
-
-                $meal_time = date('H:i:s', strtotime($meal->time_planned));
-
-                
-
-                // Push times planned so we can go through the process
-                array_push($meal_dates_ymd[0][$meal_date]['times_planned'], $meal_time);
-                
-                
-                $meal_dates_ymd[0][$meal_date][$meal_time]['serving_size'] = round($meal->serving_size ?? 1 * $meal->quantity ?? 1, 2);
-            
-                
-
-
-                // $meal_dates_ymd[$meal_date]['meal_date'] = $meal_date;
-                // $meal_dates_ymd[$meal_date]['time_planned'] = date('H:i', strtotime($meal->time_planned));
-                $meal_dates_ymd[0][$meal_date][$meal_time]['meal_name'] = $meal->name;
-                $meal_dates_ymd[0][$meal_date][$meal_time]['meal_id'] = $meal->id;
-                
-                // $meal_dates_ymd[$meal_date]['calories'] = 0;
-                // $meal_dates_ymd[$meal_date]['fat'] = 0;
-                // $meal_dates_ymd[$meal_date]['carbs'] = 0;
-                // $meal_dates_ymd[$meal_date]['protein'] = 0;
-
-                $meal_dates_ymd[0][$meal_date][$meal_time]['calories'] = 0;
-                $meal_dates_ymd[0][$meal_date][$meal_time]['fat'] = 0;
-                $meal_dates_ymd[0][$meal_date][$meal_time]['carbs'] = 0;
-                $meal_dates_ymd[0][$meal_date][$meal_time]['protein'] = 0;
-
-                $meal_dates_ymd[0][$meal_date][$meal_time]['serving_unit_short'] = "";
-                                        
-                foreach($meal_items_select as $food_index=>$meal_item) {
-
-
-
-
-                    // get specific nutrients of food
-                    $foods = Macronutrients::where('food_id', $meal_item->food_id)
-                                                ->get();
-                    
-                    // $meal_dates_ymd['name'] = $food_index;                         
-                    
-                    $food_img = DB::table('food')
-                                    ->select('img_url')
-                                    ->where("id", "=", $meal_item->food_id)
-                                    ->get();
-
-                    // $meal_portion = (float)$meal_item->serving_size*$meal_item->quantity;
-
-                    // $meal_dates_ymd[0][$meal_date][$meal_time]['serving_size'] 
-
-                    
-                     
-
-                    foreach($foods as $food) {
-                        // $meal_dates_ymd[$food_index]['calories'] = $food->calories;
-
-                        // $meal_dates_ymd[$food_index]['serving_size_food'] = $food->serving_size;
-
-                        // $meal_dates_ymd[$food_index]['serving_size_meal'] = $meal_item->serving_size;
-
-                        // $meal_dates_ymd[$food_index]['time_planned'] = $meal->time_planned;
-
-                        
-                         $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['serving_unit_short'] = FoodUnit::find($meal_item->food_unit_id)->short_name;
-        
-
-                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['img_url'] = $food_img[0];
-
-                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['food_id'] = $meal_item->food_id; 
-
-                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['food_name'] = $meal_item->name; 
-
-                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['calories'] = (int)(($food->calories /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity;
-
-                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['serving_size'] = $meal_item->serving_size;
-
-                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['quantity'] = $meal_item->quantity;
-
-                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['serving_x_quantity'] = round($meal_item->serving_size*$meal_item->quantity, 0);
-
-                        
-
-                        $meal_dates_ymd[0][$meal_date]['calories'] += round((($food->calories /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 0);
-
-                   
-
-                        $meal_dates_ymd[0][$meal_date][$meal_time]['calories'] += round((($food->calories /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 0);
-
-                        
-                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['fat'] = round((($food->fat /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
-                        
-                        $meal_dates_ymd[0][$meal_date][$meal_time]['fat'] += round((($food->fat /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
-
-
-                        $meal_dates_ymd[0][$meal_date]['fat'] += round((($food->fat /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
-
-                        // $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['fat'] += round((($food->fat /(float) $food->serving_size) * ()$meal_item->serving_size)*$meal_item->quantity, 1);
-                        
-                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['carbs'] = round((($food->carbohydrates /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
-
-                        $meal_dates_ymd[0][$meal_date]['carbs'] += round((($food->carbohydrates /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
-
-
-                        $meal_dates_ymd[0][$meal_date][$meal_time]['carbs'] += round((($food->carbohydrates /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
-                        
-                        
-                        $meal_dates_ymd[0][$meal_date][$meal_time][$food_index]['protein'] = round((($food->protein /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
-
-                        $meal_dates_ymd[0][$meal_date]['protein'] += round((($food->protein /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
-                        
-                        $meal_dates_ymd[0][$meal_date][$meal_time]['protein'] += round((($food->protein /(float) $food->serving_size) * (float)$meal_item->serving_size)*$meal_item->quantity, 1);
-
-                   
-                    }  
-
-            
-                    // Rounding the numbers to prevent trailing decimals.
-
-                    // $meal_dates_ymd[$meal_date]['calories'] = round($meal_dates_ymd[$meal_date]['calories'], 0);
-                    // $meal_dates_ymd[$meal_date]['fat'] = round($meal_dates_ymd[$meal_date]['fat'], 1);
-                    // $meal_dates_ymd[$meal_date]['carbs'] = round($meal_dates_ymd[$meal_date]['carbs'], 1);
-                    // $meal_dates_ymd[$meal_date]['protein'] = round($meal_dates_ymd[$meal_date]['protein'], 1);
-
-                    $meal_dates_ymd[0][$meal_date]['calories'] = round($meal_dates_ymd[0][$meal_date]['calories'], 0);
-                    $meal_dates_ymd[0][$meal_date]['fat'] = round($meal_dates_ymd[0][$meal_date]['fat'], 1);
-                    $meal_dates_ymd[0][$meal_date]['carbs'] = round($meal_dates_ymd[0][$meal_date]['carbs'], 1);
-                    $meal_dates_ymd[0][$meal_date]['protein'] = round($meal_dates_ymd[0][$meal_date]['protein'], 1);
-                    
-                    $meal_dates_ymd[0][$meal_date][$meal_time]['calories'] = round($meal_dates_ymd[0][$meal_date][$meal_time]['calories'], 0);
-                    $meal_dates_ymd[0][$meal_date][$meal_time]['fat'] = round($meal_dates_ymd[0][$meal_date][$meal_time]['fat'], 1);
-                    $meal_dates_ymd[0][$meal_date][$meal_time]['carbs'] = round($meal_dates_ymd[0][$meal_date][$meal_time]['carbs'], 1);
-                    $meal_dates_ymd[0][$meal_date][$meal_time]['protein'] = round($meal_dates_ymd[0][$meal_date][$meal_time]['protein'], 1);
-                    
-                    array_push($meal_dates_ymd[1]['calories_avg'], $meal_dates_ymd[0][$meal_date]['calories']);
-                }       
-
-               
+            // Initialize only if not already set
+            if (!isset($last_ten_meals_array['dates'][$key_ymd])) {
+                $last_ten_meals_array['dates'][$key_ymd] = [];
             }
 
-        }
-    
-        dd($meal_dates_ymd);
+            if (!isset($last_ten_meals_array['names'][$key])) {
+                $last_ten_meals_array['names'][$key] = [];
+            }
 
-        return view('goals_form', ['meal_dates' => $meal_dates_select, 'last14Days' => $strLast14Days]);
+            
+            $last_ten_meals_array['dates'][$key_ymd][] = $key;
+            $last_ten_meals_array['names'][$key][] = $this->get_nutrients_of_meal($meal->id)['nutrients']['meal_name'];
+
+
+
+
+             $last_ten_meals_array['calories'][$key] = ($last_ten_meals_array['calories'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['calories'] ?? 0);
+             $last_ten_meals_array['fat'][$key] = ($last_ten_meals_array['fat'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['fat'] ?? 0);
+             $last_ten_meals_array['carbs'][$key] = ($last_ten_meals_array['carbs'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['carbohydrates'] ?? 0);
+             $last_ten_meals_array['protein'][$key] = ($last_ten_meals_array['protein'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['protein'] ?? 0);
+
+            $last_ten_meals_array['saturates'][$key] = ($last_ten_meals_array['saturates'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['saturates'] ?? 0);
+            $last_ten_meals_array['sugars'][$key] = ($last_ten_meals_array['sugars'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['sugars'] ?? 0);
+            $last_ten_meals_array['fibre'][$key] = ($last_ten_meals_array['fibre'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['fibre'] ?? 0);
+            $last_ten_meals_array['salt'][$key] = ($last_ten_meals_array['salt'][$key] ?? 0) + ($this->get_nutrients_of_meal($meal->id)['nutrients']['salt'] ?? 0);
+            
+            
+             $last_ten_meals_array['macros'][$key] = $this->get_nutrients_of_meal($meal->id)['macros'];
+             $last_ten_meals_array['micros'][$key] = $this->get_nutrients_of_meal($meal->id)['micros'];
+         }
+
+        //  dd($last_ten_meals_array);
+
+
+        $meals_calories = array_values($last_ten_meals_array['calories']);
+        $meals_dates = array_values($last_ten_meals_array['dates']);
+
+        $meals_fat = array_values($last_ten_meals_array['fat']);
+        $meals_carbs = array_values($last_ten_meals_array['carbs']);
+        $meals_protein = array_values($last_ten_meals_array['protein']);
+
+
+        $average_macros = [
+            'calories' => round(array_sum($meals_calories) / count($meals_dates), 0),
+            'fat' => round(array_sum($meals_fat) / count($meals_dates), 0),
+            'carbs' => round(array_sum($meals_carbs) / count($meals_dates), 0),
+            'protein' => round(array_sum($meals_protein) / count($meals_dates), 0),
+        ];
+
+        return view('goals_form', ['average_macros' => $average_macros]);
 
 
     }
