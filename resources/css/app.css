@@ -3,11 +3,16 @@
 @tailwind utilities;
 
 
+*{
+   box-sizing: border-box;
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @import "tailwindcss";
 
-@theme {  --breakpoint-xs: 30rem;
+@theme {  --breakpoint-xxs: 26rem;
+          --breakpoint-xs: 30rem;
           --breakpoint-3xl: 120rem;}
 
 html {

@@ -124,6 +124,7 @@ return [
             'butter',
             'assassin', // spaghetti all'assassina
             'paprika',
+            'passata', // tomato passata
             'meatballs',
             'meatball',
             'mustard',

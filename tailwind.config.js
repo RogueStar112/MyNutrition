@@ -13,6 +13,10 @@ export default {
         
     ],
 
+      screens: {
+           'xxs': '25rem',
+      },
+
 
     theme: {
         extend: {

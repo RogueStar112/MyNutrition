@@ -43,13 +43,13 @@
 
 
 
-  <form id="GOALS-FORM" method="POST" class="shadow-2xl max-w-[1216px] mx-auto relative" action="{{ route('water.store') }}">
+  <form id="GOALS-FORM" method="POST" class="shadow-2xl max-w-[1216px] mx-auto relative dark:text-white" action="{{ route('water.store') }}">
     @csrf
       
       {{-- background: radial-gradient(closest-side, #0465A5, #334155); --}}
       <div class="" style="background: radial-gradient(closest-side, #9a3412, #334155);">
 
-        <p class="text-center text-2xl text-white py-4 bg-gradient-to-r from-orange-800 to-orange-700">1. Select a goal type</p>
+        <p class="text-center text-2xl text-white py-4 bg-gradient-to-r from-transparent via-orange-800 to-transparent">1. Select goal style</p>
 
 
 
@@ -80,10 +80,10 @@
 
             <p class="text-white text-left text-4xl italic mb-4 font-extrabold">TAILORED QUESTIONS</p>
 
-            <div class="flex gap-4 place-items-center mb-4">
+            <div class="flex flex-col sm:flex-row gap-4 place-items-center mb-4">
               <label for="exercise-activity-level"><span class="question_number text-4xl font-extrabold mb-4">1) </span>What is your Exercise Activity Level?</label>
 
-              <select name="exercise-activity-level" id="exercise-activity-level" class="bg-slate-700 text-white">
+              <select name="exercise-activity-level" id="exercise-activity-level" class="bg-slate-700 text-white rounded-lg">
                 <option value="sedentary">None (0 Days)</option>
                 <option value="lightly_active">Lightly active (1 - 2 Days)</option>
                 <option value="moderately_active">Moderately active (3 - 4 Days)</option>
@@ -92,37 +92,52 @@
             </div>
 
             
+       
+              
+        
 
-            <p>
+            <p class="text-center sm:text-left">
               <span class="question_number text-4xl font-extrabold mb-4">2) </span>
               Here are your average macros based on the data you've inserted.<br>
+            </p>
+           
+            @isset($average_macros)
+             <div class="my-2 w-full flex justify-around [&>*]:bg-slate-800 [&>*]:p-4 [&>*]:rounded-lg items-center [&>*]:text-center">
+                <div>
+                Calorie: <span id="calorie-amount" class="ml-2 text-blue-500 text-3xl">{{$average_macros['calories']}}kcal</span><br>
+                </div>
 
-              @isset($average_macros)
-              Calorie: <span id="calorie-amount" class="ml-2 text-blue-500 text-3xl">{{$average_macros['calories']}}kcal</span><br>
-              Fat: <span id="fat-amount" class="ml-2 text-orange-500 text-xl">{{$average_macros['fat']}}g</span><br>
-              Carbs: <span id="carbs-amount" class="ml-2 text-red-500 text-xl">{{$average_macros['carbs']}}g</span><br>
-              Protein: <span id="protein-amount" class="ml-2 text-green-500 text-xl">{{$average_macros['protein']}}g</span><br>
+                <div>
+                        Fat: <span id="fat-amount" class="ml-2 text-orange-500 text-xl">{{$average_macros['fat']}}g</span><br>
+                </div>
+                <div>
+                    Carbs: <span id="carbs-amount" class="ml-2 text-red-500 text-xl">{{$average_macros['carbs']}}g</span><br>
+                </div>
+                <div>
+                        Protein: <span id="protein-amount" class="ml-2 text-green-500 text-xl">{{$average_macros['protein']}}g</span><br>
+
+            </div>
               @else
 
               Please create some meals first.
 
               @endisset
-              
+            
+            </div>
 
               Tick if you want More or Less of each Macro.<br>
               (the app will calculate an average based on your exercise and activity.)
-            </p>
 
 
             <div class="flex justify-start items-center">
-                <div class="w-full max-w-[960px] mx-auto grid grid-cols-6 gap-4 m-4">
+                <div class="w-full max-w-[960px] sm:max-w-full mx-auto grid grid-cols-6 gap-4 m-4 [&>div]:text-center">
                     <!-- Header Row for Labels -->
                     <div></div>
-                    <div class="flex justify-center items-center text-white">Even Less</div>
-                    <div class="flex justify-center items-center text-white">Less</div>
-                    <div class="flex justify-center items-center text-white">Maintain</div>
-                    <div class="flex justify-center items-center text-white">More</div>
-                    <div class="flex justify-center items-center text-white">Even More</div>
+                    <div class="flex justify-center items-center text-white">Even Less<br>-100%</div>
+                    <div class="flex justify-center items-center text-white">Less<br>-50%</div>
+                    <div class="flex justify-center items-center text-white">Maintain<br>0%</div>
+                    <div class="flex justify-center items-center text-white">More<br>50%</div>
+                    <div class="flex justify-center items-center text-white">Even More<br>+100%</div>
             
                     <!-- Row for Calorie -->
                     <div class="flex justify-center items-center">
@@ -234,6 +249,7 @@
 
 
           </div>
+              </div>
 
           <div id="GOALS-CUSTOM-FORM">
 

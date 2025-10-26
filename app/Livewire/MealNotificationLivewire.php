@@ -20,7 +20,7 @@ class MealNotificationLivewire extends Component
     public $mealId = '';
     public $message = '';
 
-
+    // public $isMobile = false;
     // notification types;
     // 1 - meal prompts post time planned
     // 2 - reminded of meal.
@@ -36,9 +36,10 @@ class MealNotificationLivewire extends Component
     public $isAccepted = 0;
 
     
-    public function mount($id)
+    public function mount($id, $isMobile = false)
     {
         $this->result = MealNotifications::findOrFail($id);
+
         $this->key = $this->result->id;
         $this->mealId = $this->result->meal_id;
         $this->message = $this->result->message;
@@ -122,7 +123,7 @@ class MealNotificationLivewire extends Component
         $changeMessage = $this->result;
 
         $changeMessage->message = $this->message;
-        $changeMessage->is_accepted = 1;
+        // $changeMessage->is_accepted = 1;
 
         $changeMessage->save();
 

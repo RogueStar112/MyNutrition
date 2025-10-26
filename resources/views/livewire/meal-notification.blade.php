@@ -19,6 +19,10 @@
                 <p class="text-left w-full bg-gradient-to-b font-black text-xl from-blue-600 via-orange-500 to-indigo-400 inline-block text-transparent bg-clip-text">MEAL REMINDER</p><br>
             @endif
 
+            @if($notificationType == 3)
+                <p class="text-left w-full bg-gradient-to-b font-black text-xl from-blue-600 via-orange-500 to-indigo-400 inline-block text-transparent bg-clip-text">MEAL ALTERED</p><br>     
+            @endif
+
 
             
 
@@ -86,6 +90,10 @@
         @endif
 
         @if($notificationType == 2)
+        <button type="button" class="bg-blue-600 hover:bg-blue-700 text-white" wire:click="dismissNotification">Dismiss</button>
+        @endif
+
+         @if($notificationType == 3)
         <button type="button" class="bg-blue-600 hover:bg-blue-700 text-white" wire:click="dismissNotification">Dismiss</button>
         @endif
         @endisset

@@ -103,23 +103,28 @@
 
                         <h2 class="text-2xl italic font-extrabold m-4 text-center text-white">NOTIFICATIONS</h2>
 
-                        @if(count($mealNotifications) == 0)
+                        @isset($mealNotifications)
+                            @if(count($mealNotifications) == 0)
 
-                            <p class="text-center text-white">No notifications.</p>
+                                <p class="text-center text-white">No notifications.</p>
 
-                        @else
+                            @else
 
-                            <p class="text-slate-500 text-center"><i class="fas fa-bell gap-4"></i> {{count($mealNotifications)}}</p>
+                                <p class="text-slate-500 text-center"><i class="fas fa-bell gap-4"></i> {{count($mealNotifications)}}</p>
 
-                        @endif
+                            @endif
 
-                        @foreach ($mealNotifications as $mealNotification)
-                            @foreach($mealNotification as $notification)
-                                @isset($notification->id)
-                                  <livewire:meal-notification-livewire :id="$notification->id" />
-                                @endisset
+                            @foreach ($mealNotifications as $mealNotification)
+                                @foreach ($mealNotification as $notification)
+                                    @isset($notification->id)
+                                        <livewire:meal-notification-livewire
+                                            :id="$notification->id"
+                                            wire:key="desktop-meal-{{ $notification->id }}"
+                                        />
+                                    @endisset
+                                @endforeach
                             @endforeach
-                         @endforeach
+                        @endisset
                         {{-- <div class="text-2xl italic text-left font-extrabold px-4 border-b-4 border-b-slate-500" >NOTIFICATIONS</div>
 
 
@@ -307,13 +312,13 @@
 
                                 // console.log(response)
                                 // console.log(response_Keys);
-                                
-                               let notificationsContainer = $('#notifications-base'); // Or any other suitable container
-                                notificationsContainer.empty(); // Clear previous notifications if needed
+                                    
+                                //    let notificationsContainer = $('#notifications-base'); // Or any other suitable container
+                                //     notificationsContainer.empty(); // Clear previous notifications if needed
 
-                                $.each(response.components, function(index, componentHtml) {
-                                    notificationsContainer.append(componentHtml);
-                                });
+                                //     $.each(response.components, function(index, componentHtml) {
+                                //         notificationsContainer.append(componentHtml);
+                                //     });
                             }
 
             });

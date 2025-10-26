@@ -295,21 +295,25 @@ class MealController extends Controller
 
         }
 
-        $newMeal_notification_prompt = new MealNotifications();
+        if (date('Y-m-d H:i:s', $date_time) > Carbon::now()->format('Y-m-d H:i:s')) {
 
-        $newMeal_notification_prompt->meal_id = $newMeal_search->id;
-        
-        $newMeal_name = $newMeal_search->name;
-        $newMeal_notification_prompt_time = date("d/m/Y H:i", $date_time);
+            // create meal notification ONLY is the planned time is in the future.
 
-        $newMeal_notification_prompt->message = "Have you eaten this meal?";
+            $newMeal_notification_prompt = new MealNotifications();
 
-        $newMeal_notification_prompt->is_accepted = 0;
-        $newMeal_notification_prompt->type = 2;
+            $newMeal_notification_prompt->meal_id = $newMeal_search->id;
+            
+            $newMeal_name = $newMeal_search->name;
+            $newMeal_notification_prompt_time = date("d/m/Y H:i", $date_time);
 
-        $newMeal_notification_prompt->save();
-        $newMeal_notification_prompt->touch();
+            $newMeal_notification_prompt->message = "Have you eaten this meal?";
 
+            $newMeal_notification_prompt->is_accepted = 0;
+            $newMeal_notification_prompt->type = 2;
+
+            $newMeal_notification_prompt->save();
+            $newMeal_notification_prompt->touch();
+        }
 
         // return view('nutrition_meal_form');
         return redirect()->route('meal.create')->with('success', 'Your meal items have been submitted successfully!');
@@ -394,20 +398,27 @@ class MealController extends Controller
         
         });
 
-        // $newMeal_notification_prompt = new MealNotifications();
+         if (date('Y-m-d H:i:s', $date_time) > Carbon::now()->format('Y-m-d H:i:s')) {
 
-        // $newMeal_notification_prompt->meal_id = $newMeal_search->id;
-        
-        // $newMeal_name = $newMeal_search->name;
-        // $newMeal_notification_prompt_time = date("d/m/Y H:i", $date_time);
 
-        // $newMeal_notification_prompt->message = "Have you eaten this meal?";
 
-        // $newMeal_notification_prompt->is_accepted = 0;
-        // $newMeal_notification_prompt->type = 2;
+                $newMeal_notification_prompt = new MealNotifications();
 
-        // $newMeal_notification_prompt->save();
-        // $newMeal_notification_prompt->touch();
+                $newMeal_notification_prompt->meal_id = $id;
+                
+                $newMeal_name = $newMeal->name;
+                $newMeal_notification_prompt_time = date("d/m/Y H:i", strtotime($date_time));
+
+                $newMeal_notification_prompt->message = "Your meal: $newMeal_name, has changed its time to $newMeal_notification_prompt_time.";
+
+                $newMeal_notification_prompt->is_accepted = 0;
+                $newMeal_notification_prompt->type = 3;
+
+                $newMeal_notification_prompt->save();
+                $newMeal_notification_prompt->touch();
+         } else {
+            
+         }
 
 
         // return view('nutrition_meal_form');
@@ -1269,7 +1280,6 @@ class MealController extends Controller
         return view('nutrition_meal_edit_form', ['meals' => $meal_select, 'id' => $id, 'meals_array' => $meals_array]);
     }
 
-
     public function load_meal_notifications() {
 
         $user_id = Auth::user()->id;
@@ -1292,6 +1302,8 @@ class MealController extends Controller
 
 
 
+
+
         }
         
         // dd($meal_notifications_array);
@@ -1308,16 +1320,16 @@ class MealController extends Controller
 
             $meal_notifications_html = "";
 
-            $meal_notifications_html .= '<div class="text-2xl mb-2 border-b-2 border-b-slate-500 italic text-left font-extrabold p-4" >NOTIFICATIONS</div>';
+            // $meal_notifications_html .= '<div class="text-2xl mb-2 border-b-2 border-b-slate-500 italic text-left font-extrabold p-4" >NOTIFICATIONS</div>';
 
             
             $renderedComponents = [];
 
-            $renderedComponents[] = '<div class="text-2xl mb-2 border-b-2 border-b-slate-500 italic text-left font-extrabold p-4" >NOTIFICATIONS</div>';
+            // dd($renderedComponents);
+
+            // $renderedComponents[] = '<div class="text-2xl mb-2 border-b-2 border-b-slate-500 italic text-left font-extrabold p-4" >NOTIFICATIONS</div>';
 
             // dd($meal_notifications_array);
-
-            dd($renderedComponents);
 
             foreach ($meal_notifications_array as $meal_idkey => $meal_notification) {
                 $meal_message = $meal_notification->message ?? "waiting";
@@ -1365,11 +1377,106 @@ class MealController extends Controller
         //                     </div>
         // `
 
+    }
+    // public function load_meal_notifications() {
+
+    //     $user_id = Auth::user()->id;
+
+    //     $get_all_mealids_from_user = DB::table('meal')
+    //                                     ->select('id')
+    //                                     ->where('user_id', $user_id)
+    //                                     ->where('is_eaten', 0)
+    //                                     ->orderBy('id', 'desc')
+    //                                     ->get();
+
+    //     $meal_notifications_array = [];
+
+
+
+    //     foreach ($get_all_mealids_from_user as $index => $meal_id) {
+
+    //         $meal_notifications_array[$index+1] = DB::table('meal_notifications')->select('id', 'meal_id', 'message', 'type')->where('meal_id', $meal_id->id)->first();
+
+
+
+
+    //     }
+        
+    //     // dd($meal_notifications_array);
+
+    //     // $meal_notifications_html = "";
+        
+        
+
+
+    //         $meal_message = $meal_notification->message ?? "waiting";
+
+     
+            
+
+    //         // $meal_notifications_html = "";
+
+    //         // $meal_notifications_html .= '<div class="text-2xl mb-2 border-b-2 border-b-slate-500 italic text-left font-extrabold p-4" >NOTIFICATIONS</div>';
+
+            
+    //         $renderedComponents = [];
+
+    //         // $renderedComponents[] = '<div class="text-2xl mb-2 border-b-2 border-b-slate-500 italic text-left font-extrabold p-4" >NOTIFICATIONS</div>';
+
+    //         // dd($meal_notifications_array);
+
+    //         // dd($renderedComponents);
+
+    //         foreach ($meal_notifications_array as $meal_idkey => $meal_notification) {
+    //             $meal_message = $meal_notification->message ?? "waiting";
+
+    //             $meal_id = $meal_notification->id ?? "NaN";
+
+                
+    //                 $renderedComponents[] = view('livewire.meal-notification', [
+    //                     'key' => $meal_notification->id ?? "NaN",
+    //                     'mealId' => $meal_notification->meal_id ?? "NaN",
+    //                     'message' => $meal_notification->message ?? "NaN", 
+    //                 ])->render();
+
+    //         // dd($renderedComponents);
+            
+    //         //     $meal_notifications_html .= '
+    //         //     <div id="notification-meal-' . $meal_idkey . '" class="py-4 w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-center px-4 relative z-50 flex flex-col justify-left gap-4 items-start">
+    //         //         <div class="grow">
+    //         //             <span class="text-slate-400 grow">' . $meal_idkey . ')</span> ' . $meal_message . '
+    //         //         </div>
+    //         //         <div class="flex w-full px-4 justify-around gap-4 items-end [&>*]:p-2 [&>*]:rounded-lg [&>*]:w-fit gap-6 [&>*]:text-center [&>*]:cursor-pointer mt-2 min-w-max">
+    //         //             <button type="button" class="bg-blue-600 hover:bg-blue-700 text-white" wire:click.prevent="markAsEaten(' . $meal_id . ')">Yes</button>
+    //         //             <button type="button"  class="bg-red-600 hover:bg-red-700 text-white" wire:click.prevent="markAsDeleted(' . $meal_id . ')">No</button>
+    //         //             <button type="button"  class="bg-yellow-600 hover:bg-yellow-700">Edit</button> 
+    //         //         </div>
+    //         //     </div>
+    //         // ';
+    //         }
+
+
+    //         return response()->json(['components' => $renderedComponents]);
+    //     // $meal_notifications_html = `
+    //     // <div id="notification-meal-$meal_idkey" class="w-full bg-slate-900 text-white text-[12px] whitespace-normal indent-0 leading-none text-justify px-4 relative">
+                                
+    //     //                         <span class="text-slate-400">1)</span>
+    //     //                         Your meal named Meal Deal has passed the time planned (08/08/2023 11:00). Have you eaten this meal?
+
+
+    //     //                         <div class="flex w-full px-4 justify-around items-end [&>*]:p-2 [&>*]:w-full [&>*]:text-center mt-2 gap-4">
+    //     //                             <div class="bg-green-600">YES</div>
+    //     //                             <div class="bg-red-600">NO</div>
+    //     //                         </div>
+
+    //     //                     </div>
+    //     // `
+
         
 
 
 
-    }
+    // }
 
     public function load_meal_notifications_mobile() {
 

@@ -51,7 +51,7 @@ class AppServiceProvider extends ServiceProvider
 
                 // $mealNotifications[$index+1] = DB::table('meal_notifications')->select('id', 'meal_id', 'message', 'type')->where('meal_id', $meal_id->id)->first() ?? null;
                 
-                $meal_notifications_search = DB::table('meal_notifications')->select('id', 'meal_id', 'message', 'type')->where('meal_id', $meal_id->id)->orderBy('created_at', 'asc')->get() ?? null;
+                $meal_notifications_search = DB::table('meal_notifications')->select('id', 'meal_id', 'message', 'type')->where('meal_id', $meal_id->id)->orderBy('created_at', 'desc')->get() ?? null;
                 
                 foreach ($meal_notifications_search as $notification) {
 
@@ -90,7 +90,7 @@ class AppServiceProvider extends ServiceProvider
 
                 // $mealNotifications[$index+1] = DB::table('meal_notifications')->select('id', 'meal_id', 'message', 'type')->where('meal_id', $meal_id->id)->first() ?? null;
                 
-                $meal_notifications_search = DB::table('meal_notifications')->select('id', 'meal_id', 'message', 'type')->where('meal_id', $meal_id->id)->orderBy('created_at', 'asc')->get() ?? null;
+                $meal_notifications_search = DB::table('meal_notifications')->select('id', 'meal_id', 'message', 'type')->where('meal_id', $meal_id->id)->orderBy('created_at', 'desc')->get() ?? null;
                 
                 foreach ($meal_notifications_search as $notification) {
 

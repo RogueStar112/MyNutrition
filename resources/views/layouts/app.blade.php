@@ -128,14 +128,17 @@
             <div id="MOBILE-NOTIFICATIONS-CONTAINER" class="hidden fixed top-[calc(0px+6rem)] /top-[calc(50%-8rem)] top-1/2 left-1/2 blur-none! text-white z-[9999] translate-y-0 -translate-x-1/2 bg-slate-800 w-[calc(100%-2rem)] h-[calc(100%-2rem)] rounded-lg text-left p-6 text-2xl font-black italic">
                 NOTIFICATIONS
 
-                <div class="flex flex-col gap-2" id="MOBILE-NOTIFICATIONS-INNER">
+                <div class="flex flex-col gap-2 [&>*]:rounded-lg [&>*]:shadow-2xl [&>*]:mt-4" id="MOBILE-NOTIFICATIONS-INNER">
                     @foreach ($mealNotifications as $mealNotification)
-                            @foreach($mealNotification as $notification)
-                                @isset($notification->id)
-                                  <livewire:meal-notification-livewire :id="$notification->id" />
-                                @endisset
-                            @endforeach
-                         @endforeach
+                        @foreach ($mealNotification as $notification)
+                            @isset($notification->id)
+                                <livewire:meal-notification-livewire
+                                    :id="$notification->id"
+                                    wire:key="mobile-meal-{{ $notification->id }}"
+                                />
+                            @endisset
+                        @endforeach
+                    @endforeach
                 </div>
             </div>
 

@@ -163,7 +163,8 @@
         </main>
 
         
-        <div id="features" data-aos="fade-up" class="relative grid grid-cols-1 px-12 md:px-0 md:grid-cols-6 mt-32 mx-auto text-orange-600 max-w-[1400px] [&>*]:text-center gap-12 /[&>*>img]:h-[421px] /[&>*>img]:h-[421px] [&>*>img]:object-cover">
+        
+        <div id="features" data-aos="fade-up" class="relative grid grid-cols-1 px-12 md:px-0 md:grid-cols-6 mt-32 mx-auto text-orange-600 max-w-[1400px] [&>*]:text-center /[&>*>img]:h-[421px] /[&>*>img]:h-[421px] [&>*>img]:object-cover">
 
             <div id="fork" class="absolute top-[-55px] sm:left-[-10rem] sm:block">
                 <img class="h-[120px] sm:h-[421px]" src="{{ asset('img/Fork.png')}}" alt="" data-aos="fade-right">
@@ -175,42 +176,77 @@
 
             <div class="md:col-span-6 inline-block bg-gradient-to-r from-orange-400 via-red-500 to-orange-400 bg-clip-text text-5xl md:text-7xl text-transparent font-black">FEATURES</div>
             
-            <div class="text-center text-4xl font-semibold mt-8 md:col-span-2" data-aos="fade-up" data-aos-duration="500">
-                <p>Nutrition Tracking</p>
-                
-                <img class="mt-8 rounded-lg" src="{{ asset('img/mynutrition_nutritiontracking.png')}}" alt="">
+            <div class="grid grid-cols-1 sm:grid-cols-6 sm:justify-between gap-12 col-span-full sm:[&>*]:grow">
+                <div class="text-center text-4xl font-semibold mt-8 md:col-span-2" data-aos="fade-up" data-aos-duration="500">
+                    <p class="font-black">Nutrition Tracking</p>
+                    
+                    <img class="mt-8 rounded-lg" src="{{ asset('img/mynutrition_nutritiontracking.png')}}" alt="">
 
-                <p class="mt-8">Calories, Fat, Carbs and Protein are all tracked.</p>
+                    <p class="mt-8">Calories, Fat, Carbs and Protein are all tracked.</p>
+                </div>
+                <div class="text-center text-4xl  font-semibold mt-8 md:col-span-2"  data-aos="fade-up" data-aos-duration="750">
+                    
+                    <p class="font-black">Water Reminders</p>
+
+                    <img class="mt-8 rounded-lg" src="{{ asset( 'img/mynutrition_water.png' ) }}">
+
+                    <p class="mt-8">
+                        Hydration is important, and you can track that down too!
+                    </p>
+                </div>
+                <div class="text-center text-4xl font-semibold mt-8 md:col-span-2"  data-aos="fade-up" data-aos-duration="1250">
+                    <p class="font-black">Meal Logging</p>
+
+                    <img class="mt-8 rounded-lg" src="{{ asset( 'img/mynutrition_meallog.png') }}">
+
+                    <p class="mt-8">
+                        Track your meals, at any custom meal times you wish.
+                    </p>
+                </div>
+
+                <div class="md:col-span-3 text-center text-4xl  font-semibold mt-4"  data-aos="fade-up" data-aos-duration="1250">
+                    <p class="font-black">Informative Dashboard</p>
+
+                    <img class="mt-8 rounded-lg" src="{{ asset('img/mynutrition_dashboard_oct2025_ii.png')}} " alt="Dashboard">
+
+                    <p class="mt-8">
+                        Keep a constant track of your macros, over the course of two continuous weeks.
+                    </p>
+
+                </div>
+
+                <div class="md:col-span-3 text-center text-4xl  font-semibold mt-4"  data-aos="fade-up" data-aos-duration="1250">
+                    <p class="font-black">Achievements</p>
+
+                    <img class="mt-8 rounded-lg" src="{{ asset('img/mynutrition_WIP.png')}} " alt="WIP">
+
+                    <p class="mt-8">
+                        Create goals that can be accomplished, from macro goals, portion control and so much more.
+                    </p>
+
+                </div>
             </div>
-            <div class="text-center text-4xl  font-semibold mt-8 md:col-span-2"  data-aos="fade-up" data-aos-duration="750">
+
+
+
+            
+
+
+
+            <div class="md:col-span-6 mt-24 sm:mt-0 inline-block text-white p-4 md:p-12 rounded-full /bg-clip-text text-3xl md:text-7xl text-transparent font-black relative z-50 ">
+
+                <img class="absolute w-[128px] right-0 top-[-50px] sm:top-[-15px] sm:right-5 z-[49]! rounded-lg mx-auto /faded-x-mask /w-[9rem] /h-[6.5rem] col-end-7" src="{{ asset( 'img/premium_crown_rescaled.png') }}" data-aos="fade-up" data-aos-duration="1500">
+
+                <div>
+                <p class="bg-gradient-to-r from-orange-400 via-red-500 to-orange-400 p-4 rounded-lg relative z-50" data-aos="fade-up" data-aos-duration="1000">Premium FEATURES</p>
                 
-                <p>Water Reminders</p>
-
-                <img class="mt-8 rounded-lg" src="{{ asset( 'img/mynutrition_water.png' ) }}">
-
-                <p class="mt-8">
-                    Hydration is important, and you can track that down too!
-                </p>
-            </div>
-            <div class="text-center text-4xl font-semibold mt-8 md:col-span-2"  data-aos="fade-up" data-aos-duration="1250">
-                <p>Meal Logging</p>
-
-                <img class="mt-8 rounded-lg" src="{{ asset( 'img/mynutrition_meallog.png') }}">
-
-                <p class="mt-8">
-                    Track your meals, at any custom meal times you wish.
-                </p>
-            </div>
-
-            <div class="md:col-span-6 mt-24 sm:mt-0 inline-block bg-gradient-to-r from-orange-400 via-red-500 to-orange-400 text-white p-4 md:p-12 rounded-full /bg-clip-text text-3xl md:text-7xl text-transparent font-black relative" data-aos="fade-up" data-aos-duration="1250">
-                Premium FEATURES
-                
-                <div class="absolute right-0 -top-[120%] md:-top-[47%]">    <img class="rounded-lg mx-auto /faded-x-mask w-[9rem] h-[9rem]" src="{{ asset( 'img/premium_crown.png') }}" data-aos="fade-up" data-aos-duration="1500">
-</div>
+                {{-- <div class="absolute right-0 bottom-0 sm:top-0">    <img class="rounded-lg mx-auto /faded-x-mask /w-[9rem] h-[6.5rem]" src="{{ asset( 'img/premium_crown_rescaled.png') }}" data-aos="fade-up" data-aos-duration="1500">
+                </div>           --}}
+                </div>
             </div>
 
             <div class="text-center text-4xl font-semibold mt-8 md:col-span-3 [&>*>img]:h-[421px]"  data-aos="fade-up" data-aos-duration="1250">
-                <p>Planning Meals</p>
+                <p class="font-black">Planning Meals</p>
 
                 <img class="mt-8 rounded-lg mx-auto /faded-x-mask max-w-[256px] sm:max-w-[400px]" src="{{ asset( 'img/clock_transparent.png') }}" data-aos="fade-up" data-aos-duration="1500">
 
@@ -220,7 +256,7 @@
             </div>
 
             <div class="text-center text-4xl font-semibold mt-8 md:col-span-3 [&>*>img]:h-[421px]"  data-aos="fade-up" data-aos-duration="1500">
-                <p>✨AI Auto Fill ✨</p>
+                <p class="font-black">AI Auto Fill</p>
 
                 <img  class="mt-8 rounded-lg mx-auto /faded-x-mask rounded-lg max-w-[256px] sm:max-w-[400px]" src="{{ asset( 'img/aiautofill_transparent.png' )}}" alt="">
 
@@ -342,6 +378,12 @@
                 </ul>
             </div>
 
+            {{-- <p class="text-[16px] text-center py-4">Boring but Serious Discretion Stuff</p> --}}
+
+            <p class="py-12 col-span-full text-white text-[12px] sm:text-[18px] px-4 text-justify sm:text-center">MyNutrition is an app that is made with the intent of helping others meet their macro goals. That being said, such goals should be as achievable and reasonable as possible.<br><br>
+
+                Nutrition tracking will not be 100% accurate. Use the nutrition tracking features of this app with discretion, especially AI generated content. Macros such as calories will most likely as a result be over or underestimated. This app is not meant to be made as a medical substitute nor will it suggest any dietary accomodations.
+            </p>
 
             <p class="col-span-full text-center py-12">&copy; 2025 Demie M.</p>  
 
