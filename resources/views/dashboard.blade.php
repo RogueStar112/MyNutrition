@@ -181,7 +181,7 @@
 
 
             
-            <div id="MacrosChart" class="col-start-1 col-end-4 row-start-3 row-end-4 /border-4 /border-blue-300 flex flex-row max-w-screen sm:flex-row justify-between [&>*]:w-screen [&>*]:h-full [&>*]:bg-slate-800 sm:[&>*]:p-4 [&>*]:rounded-lg [&>*]:shadow-2xl gap-4 overflow-x-scroll max-h-[281px] min-h-[281px] sm:[&>*]:max-w-[33%] sm:[&>*]:h-full sm:h-fit">
+            <div id="MacrosChart" class="col-start-1 col-end-4 row-start-3 row-end-4 /border-4 /border-blue-300 flex flex-row max-w-screen sm:flex-row justify-between [&>*]:w-screen [&>*]:h-full [&>*]:bg-slate-800 sm:[&>*]:p-4 [&>*]:rounded-lg [&>*]:shadow-2xl /gap-4 overflow-x-scroll max-h-[281px] [&>*]:max-h-[281px]  min-h-[281px] sm:[&>*]:max-w-[33%] sm:[&>*]:h-full sm:h-fit">
                 
 
 
@@ -195,8 +195,68 @@
        
             </div>
 
+            <div class="col-start-4 col-end-6 row-start-3 row-end-4 /bg-amber-800 rounded-lg w-full h-full grid grid-cols-3 grid-rows-3 bg-slate-800" >
+
+                <div id="CalendarChart" class="col-start-1 col-end-4 sm:col-end-3 row-start-1 row-end-4 min-h-[321px] sm:min-h-0">
+
+                    <div class="/p-4 w-full h-full">
+
+                        {!! $calendar !!}
+                        
+                    </div>
+
+                    
+                </div>
+
+                <div id="NutrientsProgress" class="col-start-3 col-end-4 row-start-1 row-end-4 m-2 rounded-lg flex flex-col justify-between [&>*]:bg-slate-900 [&>*]:h-full [&>*]:w-full gap-1 text-white [&>*]:rounded-lg [&>*]:relative [&>*>*]:absolute [&>*>div]:top-0 [&>*>p]:right-1 [&>*>div]:rounded-lg [&>*>p]:top-1/2 [&>*>*]:text-[11px] [&>*]:overflow-hidden">
+                    
+                    <div id="Nutrients_Calories">
+                        <div class="bg-blue-600 w-3/4 h-full z-[2]" ></div>
+                        <p class="relative z-[3]">1667/2500kcal</p>
+                    </div>
+                    <div id="Nutrients_Fat">
+                        <div class="bg-red-600 w-4/5 h-full z-[2]" ></div>
+                        fat
+                        <p class="relative z-[3]">80g/100g fat</p>
+                    </div>
+                    <div id="Nutrients_Carbs">
+                        <div class="bg-orange-600 w-full h-full z-[2]" ></div>
+                        carbs
+                        <p class="relative z-[3]">240g/240g carbs</p>
+                    </div>
+                    <div id="Nutrients_Protein">
+                        <div class="bg-green-600 w-2/3 h-full z-[2]" ></div>
+                        prot.
+                        <p class="relative z-[3]">67g/100g protein</p>
+                    </div>
+                    <div id="Nutrients_Saturates">
+                        <div class="bg-red-700 w-2/3 h-full z-[2]" ></div>
+
+                        <p class="relative z-[3]">10g/30g sat fat.</p>
+                    </div>
+                   <div id="Nutrients_Sugar">
+                        <div class="bg-yellow-500 w-2/3 h-full z-[2]" ></div>
+
+                        <p class="relative z-[3]">10g/30g sugar</p>
+                    </div>
+                      <div id="Nutrients_Fibre">
+                        <div class="bg-red-900 w-2/10 h-full z-[2]" ></div>
+
+                        <p class="relative z-[3]">6/30g fibre</p>
+                    </div>
+                 <div id="Nutrients_Salt">
+                        <div class="bg-slate-600 w-1/6 h-full z-[2]" ></div>
+
+                        <p class="relative z-[3]">1g/6g salt</p>
+                    </div>
+
+                </div>
+
+
+            </div>
+
             
-            <div class="col-start-4 col-end-6 row-start-3 row-end-6 /border-4 /border-green-300 flex flex-col bg-slate-800 p-4 rounded-lg">
+            <div class="col-start-4 col-end-6 row-start-4 row-end-6 /border-4 /border-green-300 flex flex-col bg-slate-800 p-4 rounded-lg overflow-y-scroll">
                 <p class="text-center w-full p-4 font-black text-3xl">Last 10 Meals</p>
                 
                 <div class="flex flex-col h-full justify-start items-center /[&>*]:grow gap-4">

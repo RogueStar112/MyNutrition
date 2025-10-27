@@ -786,7 +786,7 @@ class MealController extends Controller
             $html .= '<span class="day '.$extraClass.'"><span id="content-day-' . $day .'" class="content">' . $day . '</span></span>';
             $startOfCalendar->addDay();
         }
-        $html .= '</div></div>';
+        $html .= '</div></div></div>';
         return $html;
 
         
