@@ -55,12 +55,12 @@ class DashboardController extends Controller
 
         $html = '<div class="calendar">';
 
-        $html .= '<div class="month-year">';
+        $html .= '<div class="month-year hidden sm:block">';
         $html .= '<span class="month">' . $date->format('M') . '</span>';
         $html .= '<span class="year">' . $date->format('Y') . '</span>';
         $html .= '</div>';
 
-        $html .= '<div class="days">';
+        $html .= '<div class="days col-span-full sm:col-span-1">';
 
         $dayLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
         foreach ($dayLabels as $dayLabel)
