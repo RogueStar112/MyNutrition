@@ -235,7 +235,7 @@
 
             <div class="md:col-span-6 mt-24 sm:mt-0 inline-block text-white p-4 md:p-12 rounded-full /bg-clip-text text-3xl md:text-7xl text-transparent font-black relative z-50 ">
 
-                <img class="absolute w-[128px] right-0 top-[-50px] sm:top-[-15px] sm:right-5 z-[49]! rounded-lg mx-auto /faded-x-mask /w-[9rem] /h-[6.5rem] col-end-7" src="{{ asset( 'img/premium_crown_rescaled.png') }}" data-aos="fade-up" data-aos-duration="1500">
+                <img class="absolute w-[128px] right-0 top-[-50px] sm:top-[-15px] sm:right-5 z-[51] rounded-lg mx-auto /faded-x-mask /w-[9rem] /h-[6.5rem] col-end-7" src="{{ asset( 'img/premium_crown_rescaled.png') }}" data-aos="fade-up" data-aos-duration="1500">
 
                 <div>
                 <p class="bg-gradient-to-r from-orange-400 via-red-500 to-orange-400 p-4 rounded-lg relative z-50" data-aos="fade-up" data-aos-duration="1000">Premium FEATURES</p>
