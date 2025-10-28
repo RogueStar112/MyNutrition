@@ -108,7 +108,7 @@
 
                         <div id="carousel-wrapper" class="carousel-wrapper md:text-8xl absolute flex mx-auto max-w-[241.367px] overflow-hidden sm:max-w-[600px] scroll-smooth" style="left: -1rem;">
 
-                            <div class="carousel-slides font-light flex xl:w-[400%] xl:justify-evenly text-center [&>*]:w-[241.367px] md:[&>*]:w-max xl:[&>*]:w-[480.767px]">
+                            <div class="carousel-slides [&>*]:shadow-2xl font-light flex xl:w-[400%] xl:justify-evenly text-center [&>*]:w-[241.367px] md:[&>*]:w-max xl:[&>*]:w-[480.767px]">
                                 <div class="slide bg-orange-500 text-white p-4 rounded-lg" style="">fitness</div>
                                 <div class="slide bg-orange-500 text-white p-4 rounded-lg" style="">nutrition</div>          
                                 <div class="slide bg-orange-500 text-white p-4 rounded-lg" style="">hydration</div>
@@ -124,13 +124,13 @@
 
                 <div class="mx-auto text-center" data-aos="fade-right">goals</div>
                 
-                <div class="md:absolute md:right-[31.33%] xl:-right-[24.33%] bg-orange-800 md:text-white md:p-4 z-40 rounded-lg select-none mt-4 w-1/2 sm:w-initial mx-auto w-fit p-8 md:p-0"><span>to</span><span class="md:text-white">day</span></div>
+                <div class="md:absolute shadow-2xl md:right-[31.33%] xl:-right-[24.33%] bg-orange-800 md:text-white md:p-4 z-40 rounded-lg select-none mt-4 w-1/2 sm:w-initial mx-auto w-fit p-8 md:p-0"><span>to</span><span class="md:text-white">day</span></div>
 
             </div>
             
             <div id="hero-images" class="absolute top-0 md:relative z-0  brightness-50 sm:brightness-100 ">
 
-                <div class="relative ml-0 sm:ml-4 overflow-hidden h-full [&>img]:object-cover z-30 transition duration-300 ease-in-out animate-border h-[125%] w-[125%] sm:h-initial sm:w-initial" style="border-radius:
+                <div class="shadow-2xl relative ml-0 sm:ml-4 overflow-hidden h-full [&>img]:object-cover z-30 transition duration-300 ease-in-out animate-border h-[125%] w-[125%] sm:h-initial sm:w-initial" style="border-radius:
     83% 17% 90% 10% / 23% 84% 16% 77%;">
                     <img id="img-1" src="{{ asset('img/pexels-maksgelatin-4348629.jpg') }}" class="img-1 top-0 rounded-lg /opacity-70 z-50"  alt="">
 
@@ -177,7 +177,7 @@
 
             <div class="md:col-span-6 inline-block bg-gradient-to-r from-orange-400 via-red-500 to-orange-400 bg-clip-text text-5xl md:text-7xl text-transparent font-black">FEATURES</div>
             
-            <div class="grid grid-cols-1 sm:grid-cols-6 sm:justify-between gap-12 col-span-full sm:[&>*]:grow">
+            <div class="grid [&>div>img]:shadow-2xl [&>div>img]:shadow-orange-300 grid-cols-1 sm:grid-cols-6 sm:justify-between gap-12 col-span-full sm:[&>*]:grow">
                 <div class="text-center text-4xl font-semibold mt-8 md:col-span-2" data-aos="fade-up" data-aos-duration="500">
                     <p class="font-black">Nutrition Tracking</p>
                     
@@ -239,7 +239,7 @@
                 <img class="absolute w-[128px] right-0 top-[-50px] sm:top-[-15px] sm:right-5 z-[51] rounded-lg mx-auto /faded-x-mask /w-[9rem] /h-[6.5rem] col-end-7" src="{{ asset( 'img/premium_crown_rescaled.png') }}" data-aos="fade-up" data-aos-duration="1500">
 
                 <div>
-                <p class="bg-gradient-to-r from-orange-400 via-red-500 to-orange-400 p-4 rounded-lg relative z-50" data-aos="fade-up" data-aos-duration="1000">Premium FEATURES</p>
+                <p class="bg-gradient-to-r shadow-2xl shadow-orange-800 from-orange-400 via-red-500 to-orange-400 p-4 rounded-lg relative z-50" data-aos="fade-up" data-aos-duration="1000">Premium FEATURES</p>
                 
                 {{-- <div class="absolute right-0 bottom-0 sm:top-0">    <img class="rounded-lg mx-auto /faded-x-mask /w-[9rem] h-[6.5rem]" src="{{ asset( 'img/premium_crown_rescaled.png') }}" data-aos="fade-up" data-aos-duration="1500">
                 </div>           --}}
@@ -353,7 +353,7 @@
         
       </div>
 
-      <footer id="contacts-footer" class="/sticky bottom-0 bg-gradient-to-b from-orange-500 to-orange-800 text-white text-4xl flex flex-col items-center justify-center border-t-4 border-t-orange-500">
+      <footer id="contacts-footer" class="/sticky bottom-0 bg-gradient-to-b from-orange-500 to-orange-800 text-white text-4xl flex flex-col items-center justify-center /border-t-4 border-t-[#FC6400]">
 
         <div class="grid grid-cols-1 sm:grid-cols-[1fr_3fr] w-full max-w-[1600px]">
           
