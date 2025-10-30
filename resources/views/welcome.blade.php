@@ -61,6 +61,8 @@
                     <a href="{{ route('login') }}"> Login</a>
         
                     <a href="{{ route('register') }}"> Register</a>
+
+                    <a href="#pricing-title">Pricing</a>
         
                     <a href="#contacts-footer"> Contact</a>
                 </div>
@@ -76,6 +78,8 @@
                    <a href="{{ route('login') }}"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
         
                     <a href="{{ route('register') }}"><i class="fa-solid fa-user-plus"></i></i> Register</a>
+
+                    <a href="#pricing-title"><i class="fa-solid fa-money-bill"></i>Pricing</a>
         
                     <a href="#contacts-footer"><i class="fa-solid fa-address-book"></i>Contact</a>
                 </div>
@@ -262,8 +266,149 @@
                 <img  class="mt-8 rounded-lg mx-auto /faded-x-mask rounded-lg max-w-[256px] sm:max-w-[400px]" src="{{ asset( 'img/aiautofill_transparent.png' )}}" alt="">
 
                 <p class="mt-8">
-                    Supercharge your food meal intake by filling it with nutritional information more quickly.
+                    Supercharge your food meal intake by filling it with nutritional information quickly.
                 </p>
+            </div>
+
+        </div>
+
+        <div class="col-span-full text-center text-4xl my-24 sm:text-7xl text-orange-500 sm:m-24 font-black" id="pricing-title">Pricing</div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 [&>*]:text-white /[&>*]:min-h-[1000px] [&>*]:rounded-lg [&>*]:shadow-2xl [&>*]:w-full gap-6 my-6 max-w-[1400px] mx-auto" id="pricing">
+
+            
+            <div class="text-center pt-24 text-7xl bg-orange-700 relative" data-aos="fade-up" data-aos-duration="1000">
+                
+                Basic
+                
+                <p class="text-3xl">FREE</p>
+
+                <div class="absolute top-0 bg-orange-600 text-white rounded-t-lg h-[64px] w-full text-3xl! flex items-center justify-center text-black text-center">
+                    EVERYONE'S WELCOME
+                </div>  
+                
+                <div class="w-full h-full mt-8 flex-col justify-between px-12 text-2xl! [&>*]:mt-6 [&>*>div]:text-center mb-8 [&>div>div]:w-full [&>div>div]:text-right">
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i>
+                        <div>Meal Tracking</div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i>
+                        <div>Water Reminders</div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i>
+                        <div>Informative Dashboard</div>
+                    </div>
+                    
+
+
+                </div>
+
+                
+            </div>  
+
+            <div class="text-center pt-24 text-7xl bg-orange-600 relative" data-aos="fade-up" data-aos-duration="1250">
+                
+                <div class="absolute top-0 bg-yellow-400 rounded-t-lg h-[64px] w-full text-3xl! flex items-center justify-center text-black text-center">
+                    MOST RECOMMENDED    
+                </div>    
+                Premium
+                
+                <p class="text-3xl">£4.99/month</p>
+
+                <div class="w-full h-full mt-8 flex-col justify-between px-12 text-2xl! [&>*]:mt-6 [&>*>div]:text-center mb-8 [&>div>div]:w-full [&>div>div]:text-right">
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i>
+                        <div>Meal Tracking</div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i>
+                        <div>Water Reminders</div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i>
+                        <div>Informative Dashboard</div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i>
+                        <div>Meal Planning</div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i>
+                        <div>AI Auto Fill</div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i>
+                        <div>Higher Usage Limits</div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        {{-- <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i> --}}
+                        <div>Early Bird 1 Week Free Trial</div>
+                    </div>
+ 
+ 
+                </div>
+            </div>
+
+            <div class="text-center pt-24 text-7xl bg-orange-500 relative" data-aos="fade-up" data-aos-duration="1500">
+                
+                <div class="absolute top-0 bg-yellow-300 rounded-t-lg h-[64px] w-full text-3xl! flex items-center justify-center text-black text-center">
+                    BEST VALUE
+                </div>    
+                Lifetime
+
+                <p class="text-3xl">£29.99</p>
+                
+                <div class="w-full h-full mt-8 flex-col justify-between px-12 text-2xl! [&>*]:mt-6 [&>*>div]:text-center mb-8 [&>div>div]:w-full [&>div>div]:text-right">
+
+                    <div class="flex justify-between items-center">
+                            <i class="fa-solid fa-check bg-orange-400 rounded-full p-4"></i>
+                            <div>Meal Tracking</div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-400 rounded-full p-4"></i>
+                        <div>Water Reminders</div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-400 rounded-full p-4"></i>
+                        <div>Informative Dashboard</div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-400 rounded-full p-4"></i>
+                        <div>Meal Planning</div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-400 rounded-full p-4"></i>
+                        <div>AI Auto Fill</div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-400 rounded-full p-4"></i>
+                        <div>Higher Usage Limits</div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-400 rounded-full p-4"></i>
+                        <div>No Additional Fees afterwards</div>
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
@@ -277,8 +422,10 @@
                 <p class="hidden xl:flex">,</p>
             </div>
 
-            <div class="flex justify-center items-center [&>p]:text-orange-600 [&>p]:text-5xl [&>p]:mt-8 sm:[&>p]:text-7xl gap-6 text-center">
-                <p>MyNutrition's got you covered.</p>
+            <div class="flex flex-col sm:flex-row justify-center /items-center [&>p]:text-orange-600 [&>p]:text-5xl [&>p]:mt-8 sm:[&>p]:text-7xl text-center sm:mt-8 sm:gap-6">
+                {{-- <p>MyNutrition's got you covered.</p> --}}
+
+                <img src="{{ asset('img/mynutritionlogo_cropped.png')}}" class="w-[450px] hidden sm:block" /><p class="block sm:hidden">MyNutrition</p><p>has got you covered.</p>
             </div>
 
         </div>
