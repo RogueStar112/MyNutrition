@@ -62,7 +62,7 @@
         
                     <a href="{{ route('register') }}"> Register</a>
 
-                    <a href="#pricing-title">Pricing</a>
+                    <a href="#pricing">Pricing</a>
         
                     <a href="#contacts-footer"> Contact</a>
                 </div>
@@ -79,7 +79,7 @@
         
                     <a href="{{ route('register') }}"><i class="fa-solid fa-user-plus"></i></i> Register</a>
 
-                    <a href="#pricing-title"><i class="fa-solid fa-money-bill"></i>Pricing</a>
+                    <a href="#pricing"><i class="fa-solid fa-money-bill"></i>Pricing</a>
         
                     <a href="#contacts-footer"><i class="fa-solid fa-address-book"></i>Contact</a>
                 </div>
@@ -136,13 +136,13 @@
 
                 <div class="shadow-2xl relative ml-0 sm:ml-4 overflow-hidden h-full [&>img]:object-cover z-30 transition duration-300 ease-in-out animate-border h-[125%] w-[125%] sm:h-initial sm:w-initial" style="border-radius:
     83% 17% 90% 10% / 23% 84% 16% 77%;">
-                    <img id="img-1" src="{{ asset('img/pexels-maksgelatin-4348629.jpg') }}" class="img-1 top-0 rounded-lg /opacity-70 z-50"  alt="">
+                    <img id="img-1" alt="Two women running up the stairs" src="{{ asset('img/pexels-maksgelatin-4348629.jpg') }}" class="img-1 top-0 rounded-lg /opacity-70 z-50"  alt="">
 
-                    <img id="img-2" src="{{ asset('img/pexels-ella-olsson-572949-1640774.jpg') }}" class="absolute img-2 top-0 bg-gradient-to-r from-transparent to-orange-500 z-0 left-0 /opacity-60" alt="">
+                    <img id="img-2" alt="A variety of food items" src="{{ asset('img/pexels-ella-olsson-572949-1640774.jpg') }}" class="absolute img-2 top-0 bg-gradient-to-r from-transparent to-orange-500 z-0 left-0 /opacity-60" alt="">
 
-                    <img id="img-3" src="{{ asset('img/pexels-olly-3776811.jpg') }}" class="absolute img-3 top-0 bg-gradient-to-r from-transparent to-orange-500 z-0 left-0 /opacity-60" alt="">
+                    <img id="img-3" alt="A man drinking water" src="{{ asset('img/pexels-olly-3776811.jpg') }}" class="absolute img-3 top-0 bg-gradient-to-r from-transparent to-orange-500 z-0 left-0 /opacity-60" alt="">
 
-                    <img id="img-4" src="{{ asset('img/pexels-pixabay-53404.jpg') }}" class="absolute img-4 top-0 bg-gradient-to-r from-transparent to-orange-500 z-0 left-0  /opacity-60" alt="">
+                    <img id="img-4" alt="A weighing scale and measuring tape" src="{{ asset('img/pexels-pixabay-53404.jpg') }}" class="absolute img-4 top-0 bg-gradient-to-r from-transparent to-orange-500 z-0 left-0  /opacity-60" alt="">
 
 
                     <div class="absolute sm:-bottom-8 -bottom-0 -right-8 bg-orange-600 rounded-full sm:w-48 sm:h-48 w-16 h-16"></div>
@@ -172,11 +172,11 @@
         <div id="features" data-aos="fade-up" class="relative grid grid-cols-1 px-12 md:px-0 md:grid-cols-6 mt-32 mx-auto text-orange-600 max-w-[1400px] [&>*]:text-center /[&>*>img]:h-[421px] /[&>*>img]:h-[421px] [&>*>img]:object-cover">
 
             <div id="fork" class="absolute top-[-55px] sm:left-[-10rem] sm:block">
-                <img class="h-[120px] sm:h-[421px]" src="{{ asset('img/Fork.png')}}" alt="" data-aos="fade-right">
+                <img alt="A hand-drawn fork" class="h-[120px] sm:h-[421px]" src="{{ asset('img/Fork.png')}}" alt="" data-aos="fade-right">
             </div>
 
             <div id="knife" class="absolute top-[-55px] sm:top-[1350px] right-[-20px] sm:right-[-16rem] sm:bottom-0 sm:block">
-                <img class="h-[120px] sm:h-[421px]" src="{{ asset('img/Knife.png')}}" alt="" data-aos="fade-left">
+                <img alt="A hand-drawn knife" class="h-[120px] sm:h-[421px]" src="{{ asset('img/Knife.png')}}" alt="" data-aos="fade-left">
             </div>
 
             <div class="md:col-span-6 inline-block bg-gradient-to-r from-orange-400 via-red-500 to-orange-400 bg-clip-text text-5xl md:text-7xl text-transparent font-black">FEATURES</div>
@@ -185,7 +185,7 @@
                 <div class="text-center text-4xl font-semibold mt-8 md:col-span-2" data-aos="fade-up" data-aos-duration="500">
                     <p class="font-black">Nutrition Tracking</p>
                     
-                    <img class="mt-8 rounded-lg" src="{{ asset('img/mynutrition_nutritiontracking.png')}}" alt="">
+                    <img class="mt-8 rounded-lg" alt="Nutrition tracking" src="{{ asset('img/mynutrition_nutritiontracking.png')}}" alt="">
 
                     <p class="mt-8">Calories, Fat, Carbs and Protein are all tracked.</p>
                 </div>
@@ -240,7 +240,7 @@
 
             <div class="md:col-span-6 mt-24 sm:mt-0 inline-block text-white p-4 md:p-12 rounded-full /bg-clip-text text-3xl md:text-7xl text-transparent font-black relative z-50 ">
 
-                <img class="absolute w-[128px] right-0 top-[-50px] sm:top-[-15px] sm:right-5 z-[51] rounded-lg mx-auto /faded-x-mask /w-[9rem] /h-[6.5rem] col-end-7" src="{{ asset( 'img/premium_crown_rescaled.png') }}" data-aos="fade-up" data-aos-duration="1500">
+                <img class="absolute w-[128px] right-0 top-[-50px] sm:top-[-15px] sm:right-5 z-[51] rounded-lg mx-auto /faded-x-mask /w-[9rem] /h-[6.5rem] col-end-7" alt="A crown on top of Premium Features" src="{{ asset( 'img/premium_crown_rescaled.png') }}" data-aos="fade-up" data-aos-duration="1500">
 
                 <div>
                 <p class="bg-gradient-to-r shadow-2xl shadow-orange-800 from-orange-400 via-red-500 to-orange-400 p-4 rounded-lg relative z-50" data-aos="fade-up" data-aos-duration="1000">Premium FEATURES</p>
@@ -253,7 +253,7 @@
             <div class="text-center text-4xl font-semibold mt-8 md:col-span-3 [&>*>img]:h-[421px]"  data-aos="fade-up" data-aos-duration="1250">
                 <p class="font-black">Planning Meals</p>
 
-                <img class="mt-8 rounded-lg mx-auto /faded-x-mask max-w-[256px] sm:max-w-[400px]" src="{{ asset( 'img/clock_transparent.png') }}" data-aos="fade-up" data-aos-duration="1500">
+                <img alt="A hand-drawn clock" class="mt-8 rounded-lg mx-auto /faded-x-mask max-w-[256px] sm:max-w-[400px]" src="{{ asset( 'img/clock_transparent.png') }}" data-aos="fade-up" data-aos-duration="1500">
 
                 <p class="mt-8">
                     Plan meals in advance, with the ability to change and edit at any time.
@@ -263,7 +263,7 @@
             <div class="text-center text-4xl font-semibold mt-8 md:col-span-3 [&>*>img]:h-[421px]"  data-aos="fade-up" data-aos-duration="1500">
                 <p class="font-black">AI Auto Fill</p>
 
-                <img  class="mt-8 rounded-lg mx-auto /faded-x-mask rounded-lg max-w-[256px] sm:max-w-[400px]" src="{{ asset( 'img/aiautofill_transparent.png' )}}" alt="">
+                <img alt="Hand-drawn image saying AI Auto Fill" class="mt-8 rounded-lg mx-auto /faded-x-mask rounded-lg max-w-[256px] sm:max-w-[400px]" src="{{ asset( 'img/aiautofill_transparent.png' )}}" alt="">
 
                 <p class="mt-8">
                     Supercharge your food meal intake by filling it with nutritional information quickly.
@@ -272,9 +272,9 @@
 
         </div>
 
-        <div class="col-span-full text-center text-4xl my-24 sm:text-7xl text-orange-500 sm:m-24 font-black" id="pricing-title">Pricing</div>
+        <div class="col-span-full text-center text-4xl my-24 sm:text-7xl text-orange-500 sm:m-24 font-black" id="pricing">Pricing</div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 [&>*]:text-white /[&>*]:min-h-[1000px] [&>*]:rounded-lg [&>*]:shadow-2xl [&>*]:w-full gap-6 my-6 max-w-[1400px] mx-auto" id="pricing">
+        <div class="grid grid-cols-1 sm:grid-cols-3 [&>*]:text-white /[&>*]:min-h-[1000px] [&>*]:rounded-lg [&>*]:shadow-2xl [&>*]:w-full gap-6 my-6 max-w-[1400px] mx-6 sm:mx-auto" id="pricing-container">
 
             
             <div class="text-center pt-24 text-7xl bg-orange-700 relative" data-aos="fade-up" data-aos-duration="1000">
@@ -283,7 +283,7 @@
                 
                 <p class="text-3xl">FREE</p>
 
-                <div class="absolute top-0 bg-orange-600 text-white rounded-t-lg h-[64px] w-full text-3xl! flex items-center justify-center text-black text-center">
+                <div class="absolute top-0 bg-orange-600 text-white rounded-t-lg h-[64px] w-full text-2xl sm:text-3xl flex items-center justify-center text-black text-center shadow-2xl">
                     EVERYONE'S WELCOME
                 </div>  
                 
@@ -303,6 +303,11 @@
                         <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i>
                         <div>Informative Dashboard</div>
                     </div>
+
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i>
+                        <div>Meal Planning <sup class="opacity-40">1</sup></div>
+                    </div>
                     
 
 
@@ -313,7 +318,7 @@
 
             <div class="text-center pt-24 text-7xl bg-orange-600 relative" data-aos="fade-up" data-aos-duration="1250">
                 
-                <div class="absolute top-0 bg-yellow-400 rounded-t-lg h-[64px] w-full text-3xl! flex items-center justify-center text-black text-center">
+                <div class="absolute top-0 text-2xl sm:text-3xl bg-gradient-to-r from-yellow-400 to-orange-600 /bg-yellow-400 rounded-t-lg h-[64px] w-full flex items-center justify-center text-black text-center shadow-2xl">
                     MOST RECOMMENDED    
                 </div>    
                 Premium
@@ -344,17 +349,17 @@
 
                     <div class="flex justify-between items-center">
                         <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i>
-                        <div>AI Auto Fill</div>
+                        <div>AI Auto Fill <sup class="opacity-40">2</sup></div>
                     </div>
 
                     <div class="flex justify-between items-center">
                         <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i>
-                        <div>Higher Usage Limits</div>
+                        <div>Higher Usage Limits <sup class="opacity-40">3</sup></div>
                     </div>
 
                     <div class="flex justify-between items-center">
                         {{-- <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i> --}}
-                        <div>Early Bird 1 Week Free Trial</div>
+                        <div class="text-center! p-4 rounded-lg bg-orange-800 shadow-2xl">1 Week Free Trial Available!</div>
                     </div>
  
  
@@ -363,12 +368,12 @@
 
             <div class="text-center pt-24 text-7xl bg-orange-500 relative" data-aos="fade-up" data-aos-duration="1500">
                 
-                <div class="absolute top-0 bg-yellow-300 rounded-t-lg h-[64px] w-full text-3xl! flex items-center justify-center text-black text-center">
+                <div class="absolute top-0 bg-gradient-to-r from-yellow-500 to-yellow-300 rounded-t-lg h-[64px] w-full text-2xl sm:text-3xl flex items-center justify-center text-black text-center shadow-2xl">
                     BEST VALUE
                 </div>    
                 Lifetime
 
-                <p class="text-3xl">£29.99</p>
+                <p class="text-3xl">£29.99 once</p>
                 
                 <div class="w-full h-full mt-8 flex-col justify-between px-12 text-2xl! [&>*]:mt-6 [&>*>div]:text-center mb-8 [&>div>div]:w-full [&>div>div]:text-right">
 
@@ -394,12 +399,12 @@
 
                     <div class="flex justify-between items-center">
                         <i class="fa-solid fa-check bg-orange-400 rounded-full p-4"></i>
-                        <div>AI Auto Fill</div>
+                        <div>AI Auto Fill <sup class="opacity-40">2</sup></div>
                     </div>
 
                     <div class="flex justify-between items-center">
                         <i class="fa-solid fa-check bg-orange-400 rounded-full p-4"></i>
-                        <div>Higher Usage Limits</div>
+                        <div>Higher Usage Limits <sup class="opacity-40">3</sup></div>
                     </div>
 
                     <div class="flex justify-between items-center">
@@ -494,7 +499,7 @@
 
         <div style="position:relative;flex:none" class="">
             <div id="wave-container" class="">
-                <svg class="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#FC6400" class="bg-gradient-to-t from-orange-500 to-orange-800" fill-opacity="1" d="M0,192L120,176C240,160,480,128,720,138.7C960,149,1200,203,1320,229.3L1440,256L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
+                <svg class="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#FF6700" class="bg-gradient-to-t from-orange-500 to-orange-800" fill-opacity="1" d="M0,192L120,176C240,160,480,128,720,138.7C960,149,1200,203,1320,229.3L1440,256L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
             </div>
         </div>
         
@@ -530,7 +535,7 @@
 
             <p class="py-12 col-span-full text-white text-[12px] sm:text-[18px] px-4 text-justify sm:text-center">MyNutrition is an app that is made with the intent of helping others meet their macro goals. That being said, such goals should be as achievable and reasonable as possible.<br><br>
 
-                Nutrition tracking will not be 100% accurate. Use the nutrition tracking features of this app with discretion, especially AI generated content. Macros such as calories will most likely as a result be over or underestimated. This app is not meant to be made as a medical substitute nor will it suggest any dietary accomodations.
+                Nutrition tracking will not be fully accurate. Use the nutrition tracking features of this app with discretion, especially AI generated content. Macros such as calories will most likely as a result be over or underestimated. This app is not meant to be made as a medical substitute nor will it suggest any dietary accomodations.
             </p>
 
             <p class="col-span-full text-center py-12">&copy; 2025 Demie M.</p>  
