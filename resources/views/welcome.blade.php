@@ -508,7 +508,7 @@
       <footer id="contacts-footer" class="/sticky bottom-0 bg-gradient-to-b from-orange-500 to-orange-800 text-white text-4xl flex flex-col items-center justify-center /border-t-4 border-t-[#FC6400]">
 
         <div class="grid grid-cols-1 sm:grid-cols-[1fr_3fr] w-full max-w-[1600px]">
-          
+            
             <div>
                 <img src="{{ asset('img/MyNutrition_white.png')}}" alt="" class="p-16 xl:pr-8 border-r-4 border-r-white/50">
             </div>
@@ -533,9 +533,21 @@
 
             {{-- <p class="text-[16px] text-center py-4">Boring but Serious Discretion Stuff</p> --}}
 
-            <p class="py-12 col-span-full text-white text-[12px] sm:text-[18px] px-4 text-justify sm:text-center">MyNutrition is an app that is made with the intent of helping others meet their macro goals. That being said, such goals should be as achievable and reasonable as possible.<br><br>
+            <p class="py-12 col-span-full text-white text-[12px] sm:text-[18px] px-4 text-justify sm:text-center [&>sup]:opacity-40">
+                
+                MyNutrition is an app that is made with the intent of helping others meet their macro goals. That being said, such goals should be as achievable and reasonable as possible.<br><br>
 
                 Nutrition tracking will not be fully accurate. Use the nutrition tracking features of this app with discretion, especially AI generated content. Macros such as calories will most likely as a result be over or underestimated. This app is not meant to be made as a medical substitute nor will it suggest any dietary accomodations.
+
+                <br><br>
+                
+                Footnotes<br><br>
+
+                <sup>1</sup> Meal Planning for the free tier is limited to within 48 hours.<br><br>
+
+                <sup>2</sup> AI features of the app cannot guarantee 100% nutritional accuracy when filling in information.<br><br>
+
+                <sup>3</sup> Free tier users can put in up to 5 meals a day, with up to 6 food items. Premium users will be able to put up to 12 meals a day, with up to 20 food items.<br><br>
             </p>
 
             <p class="col-span-full text-center py-12">&copy; 2025 Demie M.</p>  
