@@ -12,6 +12,7 @@ use App\Models\ExerciseType;
 
 use App\Models\UserHealthDetails;
 
+use Carbon\Carbon;
 
 class ExerciseController extends Controller
 {
@@ -98,6 +99,10 @@ class ExerciseController extends Controller
 
     public function exercise_store(Request $request) {
 
+       
+
+        // dd($exercise_time_diff);
+
         $user_id = Auth::user()->id;
 
         $active_calories = (float)($request->input('active-calories') ?? 0);
@@ -106,10 +111,23 @@ class ExerciseController extends Controller
 
         $distance_val = (float)$request->input('exercise-distance');
 
+        
 
         // Default duration unit is Minutes (mins).
 
-        $duration_val = (float)$request->input('exercise-duration');
+
+
+        // $duration_val = (float)$request->input('exercise-duration');
+
+        $exercise_time = $request->input('exercise-time');
+        $exercise_time_ymdhis = Carbon::parse($exercise_time);
+
+        $exercise_time_end = $request->input('exercise-time-end');
+        $exercise_time_end_ymdhis = Carbon::parse($exercise_time_end);
+
+        $exercise_time_diff = $exercise_time_end_ymdhis->diffInMinutes($exercise_time_ymdhis);
+
+        $duration_val = $exercise_time_diff;
 
         $exercise_distance_unit = $request->input('exercise-distance-unit');
 
@@ -140,8 +158,7 @@ class ExerciseController extends Controller
         // $avg_heart_rate = (float)($request->input('avg-heart-rate') ?? 0);
         
 
-        $exercise_time = $request->input('exercise-time');
-        $exercise_time_ymdhis = date('Y-m-d H:i:s', strtotime($exercise_time));
+      
 
         
 
@@ -169,7 +186,7 @@ class ExerciseController extends Controller
             $validated = $request->validate([
                 'exercise-time' => 'required',
                 'exercise-distance' => 'required|decimal:0,2',
-                'exercise-duration' => 'required|decimal:0,2',
+                'exercise-time-end' => 'required',
                 'exercise-type' => 'required|in:walk,run,cycle',
                 'active-calories' => 'nullable|decimal:0,1',
                 'total-calories' => 'nullable|decimal:0,1',
