@@ -40,6 +40,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/defaultsite', function () {
+    return view('welcome');
+});
+
 // Route::get('/dashboard', function () {
 
 
