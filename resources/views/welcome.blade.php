@@ -359,7 +359,7 @@
 
                     <div class="flex justify-between items-center">
                         {{-- <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i> --}}
-                        <div class="text-center! p-4 rounded-lg bg-orange-800 shadow-2xl">1 Week Free Trial Available!</div>
+                        <div class="text-center! p-4 rounded-lg bg-orange-800 shadow-2xl">1 Month Free Trial Available!</div>
                     </div>
  
  
@@ -371,9 +371,10 @@
                 <div class="absolute top-0 bg-gradient-to-r from-yellow-500 to-yellow-300 rounded-t-lg h-[64px] w-full text-2xl sm:text-3xl flex items-center justify-center text-black text-center shadow-2xl">
                     BEST VALUE
                 </div>    
-                Lifetime
+                Premium+
 
-                <p class="text-3xl">£29.99 once</p>
+                <p class="text-3xl">£29.99/year</p>
+                {{-- <p class="text-[1.5rem] pt-4 italic">50% off! (vs Monthly)</p> --}}
                 
                 <div class="w-full h-full mt-8 flex-col justify-between px-12 text-2xl! [&>*]:mt-6 [&>*>div]:text-center mb-8 [&>div>div]:w-full [&>div>div]:text-right">
 
@@ -408,8 +409,8 @@
                     </div>
 
                     <div class="flex justify-between items-center">
-                        <i class="fa-solid fa-check bg-orange-400 rounded-full p-4"></i>
-                        <div>No Additional Fees afterwards</div>
+                        {{-- <i class="fa-solid fa-check bg-orange-500 rounded-full p-4"></i> --}}
+                        <div class="text-center! p-4 rounded-lg bg-orange-800 shadow-2xl">1 Month Free Trial Available!</div>
                     </div>
 
                 </div>
