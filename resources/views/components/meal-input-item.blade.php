@@ -2,36 +2,35 @@
 
 <div id="meal_number_{{$index}}" class="/inline-block bg-slate-200 dark:bg-slate-800 rounded-t-lg">
 
-    <div class="p-6 text-center rounded-t-lg">
-    <p class="dark:text-gray-500">You have two options to add meals.</p>
 
-    <h2 class="dark:text-white text-2xl mt-2 text-center">1. Select Existing Foods To Add</h2>
-    <p class="dark:text-gray-500 italic mt-2 text-center">Type in all three inputs, then press enter. ↩️</p>
-    </div>
 
-    <div class="mb-3 md:grid md:grid-cols-3 gap-1 /w-[50rem]">
+    <div class="mb-3 grid grid-cols-6 md:grid md:grid-cols-6 gap-1 /w-[50rem]">
         
-        <label class="block p-6">
+        <label class="block p-6 col-span-full">
             <span class="dark:text-white w-full text-center block">Search Existing Foods</span>
-            <div class="flex place-items-center w-full">
-                <i class="fas fa-magnifying-glass mx-3 dark:text-white"></i>
-                <input type="text" id="meal_name_{{$index}}" name="meal_name_{{$index}}" class="block bg-white dark:bg-slate-700 dark:text-gray-200 w-full mt-1 rounded-md" placeholder="Fries" value="" required/>
+            <div class="flex place-items-center w-full relative">
+                {{-- <i class="fas fa-magnifying-glass mx-3 dark:text-white"></i> --}}
+                <input type="text" minlength="3" id="meal_name_{{$index}}" name="meal_name_{{$index}}" class="block /text-center bg-white dark:bg-slate-700 dark:text-gray-200 w-full mt-1 rounded-full" placeholder="🔍 Fries" value="" required/>
+            
+                <button type="button" class="absolute right-0 bg-green-500 rounded-full p-4 mt-1 text-white cursor-pointer" onclick="searchMeal()" >SEARCH</button>
             </div>
         </label>
+        
+        {{-- <p class="col-span-full text-center text-slate-600  sm:hidden">OPTIONAL</p> --}}
 
-        <label class="block p-6">
+        <label class="block p-6 col-span-3">
             <span class="dark:text-white w-full text-center block">Enter Serving Size</span>
             <div class="flex place-items-center">
-                <i class="fas fa-balance-scale mx-3 dark:text-white"></i>
-                <input type="text" id="meal_servingsize_{{$index}}" name="meal_name_servingsize_{{$index}}" class="block bg-white dark:bg-slate-700 dark:text-gray-200 w-full mt-1 rounded-md" placeholder="100" value="" required/>
+                {{-- <i class="fas fa-balance-scale mx-3 dark:text-white"></i> --}}
+                <input type="text" id="meal_servingsize_{{$index}}" name="meal_name_servingsize_{{$index}}" class="text-center block bg-white dark:bg-slate-700 dark:text-gray-200 w-full mt-1 rounded-full" placeholder="100" value="" required/>
             </div>
         </label>
 
-        <label class="block p-6">
+        <label class="block p-6 col-span-3">
             <span class="dark:text-white w-full text-center block">Enter Quantity</span>
             <div class="flex place-items-center">
-                <i class="fas fa-times mx-3 dark:text-white"></i>
-                <input type="text" id="meal_quantity_{{$index}}" name="meal_name_quantity_{{$index}}" class="block bg-white dark:bg-slate-700 dark:text-gray-200 w-full mt-1 rounded-md" placeholder="1" value="" required/>
+                {{-- <i class="fas fa-times mx-3 dark:text-white"></i> --}}
+                <input type="text" id="meal_quantity_{{$index}}" name="meal_name_quantity_{{$index}}" class="text-center block bg-white dark:bg-slate-700 dark:text-gray-200 w-full mt-1 rounded-full" placeholder="1" value="" required/>
             </div>
         </label>
 
@@ -235,70 +234,113 @@
             this.value = this.value.replace(allowedChars, '');
         });
 
-        $(document).ready(function() {
-                $('#meal_name_1, #meal_servingsize_1, #meal_quantity_1').on("keypress", function(e) {
-                    
-                    // if key press = enter key.
-                    if(e.which == 13) {
-                        e.preventDefault();
 
-                        /* new block of code - refactor later.
-                            const pattern = `/^\d+(\.\d+)?$/`;
+        function searchMeal() {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var query = $('#meal_name_1').val();
+            var servingSize = $('#meal_servingsize_1').val() || 1;
+            var quantity = $('#meal_quantity_1').val() || 1;
+            var foods_pages = $('#foods_pages').val().split(",");
+            var existsAsItem = $.inArray(query, foods_pages) !== -1;
 
-                            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-                            var query = $('#meal_name_1').val();
-                            var servingSize = pattern.test($('#meal_quantity_1').val()), $('#meal_servingsize_1').val()) ?  $('#meal_servingsize_1').val() : "1";
-                            var quantity = pattern.test($('#meal_quantity_1').val()) ? $('#meal_quantity_1').val() : "1";
-                            var foods_pages = $('#foods_pages').val().split(",");
-                        */
-
-                        var csrfToken = $('meta[name="csrf-token"]').attr('content');
-                        var query = $('#meal_name_1').val();
-                        var servingSize = $('#meal_servingsize_1').val();
-                        var quantity = $('#meal_quantity_1').val();
-                        var foods_pages = $('#foods_pages').val().split(",");
-
-                        // console.log("FOODS PAGES SWPF", foods_pages)
-
-                        var existsAsItem = jQuery.inArray(query, foods_pages) !== -1 ? true : false;
-
-                        // console.log("EXISTS AS ITEM", existsAsItem);
-
-                        if (servingSize == "") {
-                            servingSize = 1;
-                        }
-
-                        if (quantity == "") {
-                            quantity = 1;
-                        }
-
-                        var ignoreServingSize = $("#disable_servingsize_1").is(':checked');
-
-                        $.ajax({
-                            url: `/nutrition/meal/search_food/${query}`,
-                            method: 'GET',
-                            headers: {
-                                'X-CSRF-TOKEN': csrfToken
-                            },
-                            data: {
-                                query: query,
-                                servingSize: servingSize,
-                                quantity: quantity,
-                                existsAsItem: existsAsItem
-                                //ignoreServingSize: ignoreServingSize
-                            },
-                            success: function(response) {
-                                $('#FOOD-SEARCH-CONTAINER').empty().append(response);
-                                // console.log('success');
-                                console.log(response);
-                            },
-                            error: function(xhr) {
-                                console.log(xhr.responseText);
-                            }
-                        });
-                    }
-
+            $.ajax({
+                url: `/nutrition/meal/search_food/${query}`,
+                method: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                data: {
+                    query: query,
+                    servingSize: servingSize,
+                    quantity: quantity,
+                    existsAsItem: existsAsItem
+                },
+                success: function(response) {
+                    $('#FOOD-SEARCH-CONTAINER').empty().append(response);
+                    console.log(response);
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                }
             });
+        }
+
+        $('#meal_name_1, #meal_servingsize_1, #meal_quantity_1').on('keypress', function(e) {
+            if (e.which === 13) {
+                e.preventDefault();
+                searchMeal();
+            }
         });
+
+        // Trigger when a button is clicked
+        $('#search_meal_btn').on('click', function() {
+            searchMeal();
+        });
+
+        // $(document).ready(function() {
+        //         $('#meal_name_1, #meal_servingsize_1, #meal_quantity_1').on("keypress", function(e) {
+                    
+        //             // if key press = enter key.
+        //             if(e.which == 13) {
+        //                 e.preventDefault();
+
+        //                 /* new block of code - refactor later.
+        //                     const pattern = `/^\d+(\.\d+)?$/`;
+
+        //                     var csrfToken = $('meta[name="csrf-token"]').attr('content');
+        //                     var query = $('#meal_name_1').val();
+        //                     var servingSize = pattern.test($('#meal_quantity_1').val()), $('#meal_servingsize_1').val()) ?  $('#meal_servingsize_1').val() : "1";
+        //                     var quantity = pattern.test($('#meal_quantity_1').val()) ? $('#meal_quantity_1').val() : "1";
+        //                     var foods_pages = $('#foods_pages').val().split(",");
+        //                 */
+
+        //                 var csrfToken = $('meta[name="csrf-token"]').attr('content');
+        //                 var query = $('#meal_name_1').val();
+        //                 var servingSize = $('#meal_servingsize_1').val();
+        //                 var quantity = $('#meal_quantity_1').val();
+        //                 var foods_pages = $('#foods_pages').val().split(",");
+
+        //                 // console.log("FOODS PAGES SWPF", foods_pages)
+
+        //                 var existsAsItem = jQuery.inArray(query, foods_pages) !== -1 ? true : false;
+
+        //                 // console.log("EXISTS AS ITEM", existsAsItem);
+
+        //                 if (servingSize == "") {
+        //                     servingSize = 1;
+        //                 }
+
+        //                 if (quantity == "") {
+        //                     quantity = 1;
+        //                 }
+
+        //                 var ignoreServingSize = $("#disable_servingsize_1").is(':checked');
+
+        //                 $.ajax({
+        //                     url: `/nutrition/meal/search_food/${query}`,
+        //                     method: 'GET',
+        //                     headers: {
+        //                         'X-CSRF-TOKEN': csrfToken
+        //                     },
+        //                     data: {
+        //                         query: query,
+        //                         servingSize: servingSize,
+        //                         quantity: quantity,
+        //                         existsAsItem: existsAsItem
+        //                         //ignoreServingSize: ignoreServingSize
+        //                     },
+        //                     success: function(response) {
+        //                         $('#FOOD-SEARCH-CONTAINER').empty().append(response);
+        //                         // console.log('success');
+        //                         console.log(response);
+        //                     },
+        //                     error: function(xhr) {
+        //                         console.log(xhr.responseText);
+        //                     }
+        //                 });
+        //             }
+
+        //     });
+        // });
     </script>
 </div>

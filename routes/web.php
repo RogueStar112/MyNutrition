@@ -175,6 +175,8 @@ Route::middleware('auth')->group(function () {
 
     // Route::get('/function_test_v2', [DashboardController::class, 'renderDailyMacroIntakeChart']);
 
+    Route::get('/api/return_food_name/{id}', [FoodController::class, 'return_food_name']);
+
     Route::post('/theme', [ThemeController::class, 'update'])->middleware('auth');
 });
 

@@ -194,11 +194,17 @@
  
 
                             <!-- Cart Button -->
-                            <div class="relative">
-                                <div id="ITEMS-COUNT-MOBILE" class="absolute -top-2 -right-2 w-6 h-6 bg-orange-700 text-white rounded-full flex items-center justify-center text-center" value="0">0</div>
-                                <button id="SHOW-ITEMS-BTN-MOBILE" class="bg-orange-600 text-white flex justify-center items-center rounded-full cursor-pointer w-[3rem] h-[3rem]"> 
+                            <div class="relative ">
+                                <div id="ITEMS-COUNT-MOBILE" class="absolute -top-2 z-[2] -right-2 w-6 h-6 bg-orange-700 text-white rounded-full flex items-center justify-center text-center" value="0">0</div>
+                                <button id="SHOW-ITEMS-BTN-MOBILE" class="relative z-[1] bg-orange-600 text-white flex justify-center items-center rounded-full cursor-pointer w-[3rem] h-[3rem]"> 
                                     <i id="SHOW-ITEMS-ICON" class="fa-solid fa-cart-shopping text-2xl select-none"></i>
                                 </button>
+
+                                <div id="ITEMS-NOTIFICATION-MOBILE" class="absolute truncate right-0 flex items-center justify-center text-white rounded-full top-0 hidden w-[calc(100vw-2rem)] text-center z-0 h-full bg-red-800 select-none">
+                                    Food item added!
+                                </div>
+
+                                
                             </div>
 
                         

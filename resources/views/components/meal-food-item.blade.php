@@ -1,5 +1,8 @@
 
+
+
 @foreach($foods as $food)
+
 
 @php
 $food['calories'] = round(($food['calories']/($food['serving_size']))*$servingSize*$quantity, 0);
@@ -10,7 +13,8 @@ $food['protein'] = round(($food['protein']/($food['serving_size']))*$servingSize
 $food_id = $food['food_id'] ?? "";
 
 @endphp
-<div id="meal_item_{{ $foodIndex }}" class="meal_{{$food_id}} meal_item relative min-h-[100px] mb-3 active:bg-slate-300 dark:active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-slate-200 text-black dark:bg-gray-800 w-64 rounded-lg @if($showNutrients == true) py-6 @else @endif  pt-6 dark:text-white shadow-md shadow-black overflow-hidden" index="{{$foodIndex}}">
+
+<div id="meal_item_{{ $foodIndex }}" class="meal_{{$food_id}} meal_item relative min-h-[100px] mb-3 active:bg-slate-300 dark:active:bg-slate-950 border-none focus-within:outline-none focus-within:ring focus-within:ring-violet-300 bg-slate-200 text-black dark:bg-gray-800 w-full px-8 rounded-lg @if($showNutrients == true) py-6 @else @endif  pt-6 dark:text-white shadow-md shadow-black overflow-hidden" index="{{$foodIndex}}">
     <ul class="relative @isset($food['img_url']) @else relative @endisset">
         <button type="button" id="item_revealbtn_{{ $foodIndex }}" index="{{ $foodIndex }}" class="item_revealbtn food_revealbtn absolute right-0 bg-lime-800 text-white p-3 mr-6 rounded-lg cursor-pointer @if($showNutrients == true)hidden @endif">
             <i id="item_icon_{{ $foodIndex }}" class="fas fa-chevron-down item_icon_{{ $foodIndex }}"> </i>
@@ -105,78 +109,5 @@ $food_id = $food['food_id'] ?? "";
     </ul>
 </div>
 
-
-<script>
-
-        // food_index = <?php echo json_encode($foodIndex, JSON_HEX_TAG); ?>;
-        // food_id = <?php echo json_encode($food_id, JSON_HEX_TAG); ?>;
-    
-        // console.log('FOOD INDEX NEBRASKA', food_index)
-    
-        // $(document).ready(function () {
-        //     $(document).trigger('on_update', [food_index, food_id]);
-
-        //     // Use event delegation for dynamically loaded elements
-        //     $(document).on("click", `[id^=mealitem-delete-btn-]`, function () {
-        //         let food_index = $(this).data("index"); 
-        //         $(`#mealitem-delete-btn-${food_index}`).addClass("hidden");
-        //         $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).removeClass("hidden");
-        //     });
-
-        //     $(document).on("click", `[id^=mealitem-delete-btn-yes-]`, function () {
-        //         let food_id = $(this).data("id"); 
-        //         $(`.meal_${food_id}`).remove();
-                
-        //         // foreach(meals_array as meal) {
-
-        //         //     if (meal['food_id'] == food_id) {
-
-        //         //         meals_array.splice(meals_array.indexOf(meal));
-
-        //         //     }
-        //         // }
-
-        //         // console.log('MEALS ARRAY COMPLETION?', meals_array);
-
-        //     });
-
-        //     $(document).on("click", `[id^=mealitem-delete-btn-no-]`, function () {
-        //         let food_index = $(this).data("index");
-        //         $(`#mealitem-delete-btn-${food_index}`).removeClass("hidden");
-        //         $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).addClass("hidden");
-        //     });
-        // });
-        // console.log(`FOOD ID: ${food_id} LOADED IN`);
-        
-
-    // $(`#mealitem-delete-btn-${food_index}`).on('click', function() {
-        
-    //     $(`#mealitem-delete-btn-${food_index}`).addClass('hidden');
-    //     $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).removeClass('hidden');
-
-    // });
-
-    // $(`#mealitem-delete-btn-yes-${food_index}`).on('click', function() {
-        
-    //     $(`.meal_${food_id}`).remove();
-    //     reorderItems();
-
-    // });
-
-    // $(`#mealitem-delete-btn-no-${food_index}`).on('click', function() {
-        
-    //     $(`#mealitem-delete-btn-${food_index}`).removeClass('hidden');
-    //     $(`#mealitem-delete-btn-confirmcontainer-${food_index}`).addClass('hidden');
-
-    // });
-
-
-  
-</script>
-
-
-{{-- <script>
-    document.getElementById(`mealitem-delete-btn-${food_index}`).onclick = () => console.log('potato');
-</script> --}}
 
 @endforeach

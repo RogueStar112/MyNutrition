@@ -440,23 +440,23 @@ class MealController extends Controller
 
         // }
 
-        $servingSize = $request->input('servingSize');
+        // $servingSize = $request->input('servingSize');
 
-        if ($servingSize == 0) {
-            $servingSize = 0;
-        }
+        // if ($servingSize == 0) {
+        //     $servingSize = 1;
+        // }
 
         $quantity = $request->input('quantity');
+        
 
         $meal_dategnoreServingSize = $request->input('ignoreServingSize');
 
         
 
         $food_search = Food::where('name', 'LIKE', "%{$foods}%")
-                        //    ->where('user_id', $user_id)
-                           ->orderBy('id', 'desc')
-                        //    ->groupBy('name', 'source_id')
-                           ->paginate(6);
+                        ->orderBy('id', 'desc')
+                        ->take(18)  // or limit(18)
+                        ->paginate(6);
 
 
         // $food_search = Food::selectRaw('MAX(id) as id, name, source_id, MAX(created_at) as created_at, MAX(updated_at) as updated_at')
@@ -489,6 +489,8 @@ class MealController extends Controller
             $food_unit = FoodUnit::where('id', $macronutrients_search->food_unit_id)
                                         ->first();
 
+            
+
             $food_array[$meal_datendex]['source_name'] = $food_source_search->name;
             
             if ($meal_dategnoreServingSize == true) {
@@ -502,6 +504,16 @@ class MealController extends Controller
             if($macronutrients_search->serving_size <= 0) {
                 $food_array[$meal_datendex]['serving_size'] = 1;
             }
+
+            // if($food_unit->short_name === "g") {
+            //     $food_array[$meal_datendex]['serving_size'] = 100;
+            //     $servingSize = 100;
+            // }
+
+            // if($food_unit->short_name === "pc") {
+            //     $food_array[$meal_datendex]['serving_size'] = 1;
+            //     $servingSize = 1;
+            // }
 
             $food_array[$meal_datendex]['food_id'] = $food->id;
 
@@ -522,7 +534,7 @@ class MealController extends Controller
 
         }                   
 
-        if ($servingSize == "") {
+        if ($servingSize == "" || $servingSize == NULL) {
 
             $component = new MealSearchItem($food_array, $macronutrients_search->serving_size, $foods, $quantity);        
 

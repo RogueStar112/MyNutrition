@@ -1,4 +1,4 @@
-<div class="max-w-7xl overflow-x-auto px-6">
+<div class="max-w-7xl overflow-x-auto overflow-y-scroll px-6">
     @php
         function getInitials($str) {
             $words = explode(" ", $str); // Split the string into an array of words
@@ -52,6 +52,8 @@
         if($servingSize == 0 or $servingSize == "") {
             
             $servingSize = $food['serving_size'];
+            
+            // dd($food['serving_size']);
 
             $food['calories'] = round(($food['calories']/($food['serving_size']/$servingSize))*$quantity, 0);
             $food['fat'] = round($food['fat']*$quantity, 1);
@@ -152,7 +154,7 @@
 
         @endphp
 
-        <div class="md:grid md:grid-cols-[auto_minmax(150px,_1fr)_2fr] mb-6 bg-slate-200 dark:bg-[#111827] rounded-lg relative p-6" id="food-item-{{$food['food_id']}}" x-data="{ serving_size: {{$servingSize}}, quantity: {{$quantity}} }">
+        <div class="md:grid md:grid-cols-[auto_minmax(150px,_100vw)] mb-6 bg-slate-200 dark:bg-[#111827] rounded-lg relative px-6 pt-6 pb-8" id="food-item-{{$food['food_id']}}" x-data="{ serving_size: {{$servingSize}}, quantity: {{$quantity}} }" data-servingsize="{{$servingSize}}" data-quantity="{{$quantity}}">
 
             <div class="bg-transparent self-center flex justify-center items-center h-[128px] w-[128px] max-w-[128px] max-h-[128px] {{ $food_class ? "[&>img]:hidden [&>i]:scale-150" : "[&>img]:flex" }} [&>img]:justify-evenly [&>img]:items-center rounded-full border-4 border-slate-500">
 
@@ -161,7 +163,7 @@
                 <img class="/p-6 object-cover {{ empty($food['img_url']) ? "hidden" : "" }} rounded-full {{  $food_class ? "hidden" : "" }} text-center leading-[128px] bg-gray dark:text-white text-2xl font-extrabold m-auto /min-h-full h-[128px] w-[128px] max-w-[128px] max-h-[128px]"    src="{{ asset($food['img_url']) }}"  alt="{{empty($food_class) ? $food_name_initials : ""}}  " />
             </div>
 
-            <div class="desc-box m-4 md:m-0 md:pl-6 self-center">
+            {{-- <div class="desc-box m-4 md:m-0 md:pl-6 self-center">
 
                 <div class="h-full">
                     <div class="h-1/2">
@@ -169,28 +171,16 @@
                         <p class="text-gray-500 text-lg">{{$food['source_name']}}</p>
 
                         <div class="flex items-center">
-                            {{-- <img src="{{url('/img/blankpfp.png')}}" width="24" height="24"> --}}
+        
                             <i class="fa-solid fa-user text-center text-md bg-gray dark:text-white"></i>
                             <p class="mx-3 text-gray-500">{{$food['user_name']}}</p>
                         </div>
                     </div>
 
-                    {{-- <div class="h-1/2 block md:hidden">
-                        <p class="bg-gray dark:text-white font-extrabold text-xl">{{$food['name']}}</p>
-                        
-                        <div class="flex justify-between mb-3 border-b-2 border-b-orange-400 border-opacity-40" >
-                            <p class="text-gray-500 text-lg grow">{{$food['source_name']}}</p>
-
-                            <div class="flex grow flex-row-reverse text-lg">
-                            <i class="fa-solid fa-user text-center bg-gray dark:text-white"></i>
-                            <p class="mx-3 text-gray-500">by {{$food['user_name']}}</p>
-                            </div>
-                        </div>
-                        
-                    </div> --}}
+             
                 </div>
 
-            </div>
+            </div> --}}
 
                 
             <div class="bg-gray dark:text-white h-full text-center mr-2 self-center" aria-label="food-macros">
@@ -207,7 +197,7 @@
 
                     {{-- <p class="w-fit">Per {{($servingSize != $food['serving_size']) ? $servingSize : $food['serving_size']}}{{$food['food_unit_short']}}. (normally {{$food['serving_size'] . $food['food_unit_short']}}) </p> --}}
 
-                    <p class="w-fit">Per <span x-text="serving_size"> </span>{{$food['food_unit_short']}} {{($quantity != 1) ? "x $quantity" : ""}}</p>
+                    {{-- <p class="w-fit">Per <span x-text="serving_size"> </span>{{$food['food_unit_short']}} {{($quantity != 1) ? "x $quantity" : ""}}</p> --}}
 
                     {{-- <div class="flex gap-3 justify-center">
                         <button class="text-green-200" x-on:click.prevent="serving_size = parseFloat((serving_size + 0.1).toFixed(1))"><i class="fa fa-plus"></i></button>
@@ -221,53 +211,86 @@
 
                 {{-- Food Nutrients. --}}
                 
-                <div class="h-fit flex px-6 pt-4 pb-2 gap-3 [&>*]:text-clip [&>*]:flex-1 [&>*]:text-lg [&>*]:text-center [&>*]:flex [&>*]:flex-col [&>*>p]:text-clip">
+                <div class="h-full [&>section>p]:text-[1rem] flex items-center mt-4 sm:mt-0 sm:px-6 /px-6 /pt-4 /pb-2 /gap-y-2 [&>*]:text-clip [&>*]:flex-1 [&>*]:text-lg [&>*]:text-center flex flex-col [&>*]:w-full /[&>*]:flex /[&>*]:flex-col [&>*>p]:text-clip">
                 
+                    <div class="flex justify-between">
 
-                    <section>
-                        <p>{{ ($food['calories'] > 1000) ? round($food['calories']/1000) . 'k ' : $food['calories'] . 'kcal' }}</p>
-                        <div class="w-full mt-1 bg-gray-100 /dark:bg-gray-200 rounded-full h-2.5 bg-blue-100 dark:bg-blue-900">
-                            <div id="food_progressbar_calories_{{$index}}" class="bg-blue-600 h-2.5 rounded-full {{$calorieExceedGlow ? "drop-shadow-glow animate-pulse" : ""}}" style="width: {{ $caloriePerc }}%"></div>
+                        <div class="flex flex-col w-full">
+                                <div class="grid grid-cols-[1fr_1fr] justify-between w-full">
+                            <p class="dark:text-white font-extrabold text-xl text-left w-max sm:w-fit">{{$food['name']}}</p>
+
+                                <p class="text-gray-500 text-lg text-right">{{$food['source_name']}}</p>    
+                                <p class="text-gray-500 text-left">👤{{$food['user_name']}}</p>
+                       
+                        
+
+                                <p class="w-full text-right">Per <span x-text="serving_size"> </span>{{$food['food_unit_short']}} {{($quantity != 1) ? "x $quantity" : ""}}</p>
+                            </div>
                         </div>
-                        <p class="mt-1 text-blue-600">Calories</p>
+
+                    </div>
+                    
+                    <section class="grid grid-cols-[1fr_5fr_1fr] gap-x-2 items-center">
+                  
+                        <p class="text-left text-blue-500 w-min">Calories</p>
+
+                        <div class="/col-span-full grow w-full /mt-1 bg-gray-100 /dark:bg-gray-200 rounded-full h-2.5 bg-blue-100 dark:bg-blue-900">
+                            <div id="food_progressbar_calories_{{$index}}" class="w-full bg-blue-600 h-2.5 rounded-full {{$calorieExceedGlow ? "drop-shadow-glow animate-pulse" : ""}}" style="width: {{ $caloriePerc }}%"></div>
+                        </div>
+
+                        <p class="text-right">{{ ($food['calories'] > 1000) ? round($food['calories']/1000) . 'k ' : $food['calories'] . 'kcal' }}</p>
+
+                 
+                        {{-- <p class="mt-1 text-blue-600">Calories</p> --}}
                     {{-- <br>
                         {{$food['calories']}}cal --}}
                     </section>
 
-                    <section>
-                        <p>{{($food['fat'] > 1000) ? round($food['fat']/1000) . 'kg ' : $food['fat'] . 'g'}}</p>
-                        <div class="w-full mt-1 bg-gray-100 dark:bg-gray-200 rounded-full h-2.5 bg-orange-100 dark:bg-orange-900">
+                    <section class="grid  grid-cols-[1fr_5fr_1fr] gap-x-2 items-center">
+
+                        <p class="text-left text-red-500 w-min">Fat</p>
+
+                        <div class="w-full bg-gray-100 dark:bg-gray-200 rounded-full h-2.5 bg-orange-100 dark:bg-orange-900">
                             <div id="food_progressbar_fat_{{$index}}" class="bg-orange-600 h-2.5 rounded-full {{$fatExceedGlow ? "drop-shadow-glow animate-pulse" : ""}}" style="width: {{ $fatPerc }}%"></div>
                         </div>
-                        <p class="mt-1 text-orange-600">Fat</p>
+
+                        <p class="text-right">{{($food['fat'] > 1000) ? round($food['fat']/1000) . 'kg ' : $food['fat'] . 'g'}}</p>
+                        
+                      
+                        {{-- <p class="mt-1 text-orange-600">Fat</p> --}}
                     {{-- <br>
                         {{$food['fat'] ? $food['fat'] : "0" }}g --}}
                     </section>
 
 
-                    <section>
-                        <p>{{($food['carbohydrates'] > 1000) ? round($food['carbohydrates']/1000) . 'kg ' : $food['carbohydrates'] . 'g'}}
-                        </p>
+                    <section class="grid grid-cols-[1fr_5fr_1fr] gap-x-2 items-center">
 
-                        <div class="w-full mt-1 bg-gray-100 dark:bg-gray-200 rounded-full h-2.5 bg-yellow-100 dark:bg-yellow-900">
+                        
+                        <p class="mt-1 text-yellow-500 text-left">Carbs</p>
+
+                        <div class="w-full  bg-gray-100 dark:bg-gray-200 rounded-full h-2.5 bg-yellow-100 dark:bg-yellow-900">
                             <div id="food_progressbar_carbs_{{$index}}" class="bg-yellow-500 h-2.5 rounded-full {{$carbsExceedGlow ? "drop-shadow-glow animate-pulse" : ""}}" style="width: {{ $carbsPerc }}%"></div>
                         </div>
+                        
+                        <p class="text-right">{{($food['carbohydrates'] > 1000) ? round($food['carbohydrates']/1000) . 'kg ' : $food['carbohydrates'] . 'g'}}</p>
 
-                        <p class="mt-1 text-yellow-500">Carbs</p>
+            
+
                     </section>
 {{-- 
                     <br>
                         {{$food['carbohydrates'] ? $food['carbohydrates'] : "0" }}g --}}
 
-                    <section>
-                        <p>{{($food['protein'] > 1000) ? round($food['protein']/1000) . 'kg ' : $food['protein'] . 'g'}}
-                        </p>
+                    <section class="grid grid-cols-[1fr_5fr_1fr] gap-x-2 items-center">
 
-                        <div class="w-full mt-1 bg-gray-100 dark:bg-gray-200 rounded-full h-2.5 dark:bg-green-900">
+                        <p class="mt-1 text-green-500 text-left">Protein</p>    
+
+                        <div class="w-full bg-gray-100 dark:bg-gray-200 rounded-full h-2.5 dark:bg-green-900">
                             <div id="food_progressbar_protein_{{$index}}" class="bg-green-600 h-2.5 rounded-full {{$proteinExceedGlow ? "drop-shadow-glow animate-pulse w-[110%] max-w-full overflow-hidden" : ""}}" style="width: {{ $proteinPerc }}%"></div>
                         </div>
 
-                        <p class="mt-1 text-green-600">Protein</p>
+                        <p class="text-right">{{($food['protein'] > 1000) ? round($food['protein']/1000) . 'kg ' : $food['protein'] . 'g'}}</p>
+                        {{-- <p class="mt-1 text-green-600">Protein</p> --}}
                     </section>
 
                     {{-- <br>{{$food['protein'] ? $food['protein'] : "0" }}g --}}
@@ -299,7 +322,7 @@
     {{-- {{ $foods->links() }} --}}
     
 
-
+        
  
     
 
@@ -391,6 +414,10 @@
 
                     // $("#no_of_foods").val(no_of_foods)
 
+                    // window.appData = @json($servingSize);
+
+                    // console.log('VOD', window.appData);
+
                     e.preventDefault();
 
                     if (meal_json[query]) {
@@ -401,12 +428,19 @@
                         var no_of_foods = parseInt($("#no_of_foods").val()) + 1;
                     }
 
+                    
+
                     var csrfToken = $('meta[name="csrf-token"]').attr('content');
                     var query = $(this).attr('value');
-                    var servingSize = $('#meal_servingsize_1').val();
-                    var quantity = $('#meal_quantity_1').val();
+
+                    console.log('X-DATAS', $(this).data());
+
+                    var servingSize = $('#meal_servingsize_1').val() ?? $(this).attr('x-data').servingSize;
+                    var quantity = $('#meal_quantity_1').val() ?? $(this).attr('x-data').quantity;
 
                     var ignoreServingSize = $("#disable_servingsize_1").is(':checked');
+
+
 
                     // let x=1;
 
@@ -503,7 +537,8 @@
                         },
                         data: {
                             meals: meal_json,
-                            food_id: query
+                            food_id: query,
+                            
                             // no_of_foods: no_of_foods,
                             // balancer: replacement_balancer,
                             // query: query,
@@ -552,49 +587,53 @@
 
                                     $("#foods_pages").val(foods_pages);
 
-                                    // console.log('HTML INPUT DATA LAZARUS', response['html_input_data'][query])
-
-                                    // console.log('HTML INPUT DATA LAZARUS', response['html_input_data'][query])
-
-                                    // $("#form-meal-foods").append(response['html_input_data'][query]);
+                  
 
                                     $("#form-meal-foods").append(response['html'][food_array[i]['query']]['form_data']);
-                                    
+
                                     $("#no_of_foods").val(no_of_foods); 
-                                    
-                                    // console.log('FOOD_ARRAY JACKSON', food_array);
-
-                                    // $(`#food-add-${query}`).addClass(`bg-yellow-500 [&>*]:text-black`);
-                                    
-                                    // $(`#food-add-icon-${query}`).addClass(`fa-pencil`);
-
-                                    // $(`#food-add-icon-${query}`).removeClass(`fa-plus`);
-
+                       
                                 }
                             }
 
-                            // for (const [key, value] of Object.entries(response['html'])) {
-                                
-                            //     $('#FOOD-ITEMS-CONTAINER').append(response['html'][key]['render_html']);
-                            //     $("#no_of_foods").val(no_of_foods);
-
-                            // }
-                            // for (let i = 1; i <= Object.keys(response['html']).length; i++) {
-                            //     console.log('successful response to render: ', response['html'][i]['render_html'])
-
-                                
-
-                            //     $('#FOOD-ITEMS-CONTAINER').append(response['html'][i]['render_html']);
-                            // } 
-
-                            // console.log('FULL RESPONSE HTML ', response['html'])
-                            
-                            // test
-                            // $("#no_of_foods").val(0)
+                            $('#meal-submit-btn').attr('disabled', false);
+                            $('#meal-submit-btn').removeClass('opacity-20');
 
                             console.log('NO OF FOODS: SUCCESS', no_of_foods);
                             
                             $("#ITEMS-COUNT-MOBILE").text(`${Object.keys(meal_json).length}`)
+
+                            $("#ITEMS-NOTIFICATION-MOBILE").removeClass('slide-animate hidden')
+
+                            $("#ITEMS-NOTIFICATION-MOBILE").addClass('slide-animate')
+
+                            $("#ITEMS-NOTIFICATION-MOBILE").one('animationend', function() {
+                                $("#ITEMS-NOTIFICATION-MOBILE").removeClass('slide-animate');
+                                $("#ITEMS-NOTIFICATION-MOBILE").addClass('hidden');
+                            });
+
+
+                            // Restart animation cleanly if it's already running
+
+                                             $.ajax({
+                                                url: `/api/return_food_name/${query}`,
+                                                method: 'GET',
+
+                                                success: function(response) {
+
+                                            
+                                                      
+                                                        // console.log('API RESPONSE', response);
+                                                        
+                                                        $("#ITEMS-NOTIFICATION-TEXT").text(`${response} added!`);
+
+                                                        // $("#ITEMS-NOTIFICATION-MOBILE")
+
+
+
+                                                    }
+                                             })
+
                         },
                         error: function(xhr) {
                             console.log(xhr.responseText);

@@ -756,4 +756,16 @@ class FoodController extends Controller
         return view('nutrition_compare');
 
     }
+
+    public function return_food_name(Request $request, $id) {
+
+        $user = Auth::user();
+
+        $food_name = Food::find($id)?->name;
+
+        // dd($food_name);
+
+        return $food_name;
+
+    }
 }
