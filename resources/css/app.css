@@ -15,6 +15,12 @@
           --breakpoint-xs: 30rem;
           --breakpoint-3xl: 120rem;}
 
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
 html {
 
   font-family:Figtree,ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
@@ -469,3 +475,33 @@ select {
 .light .datepicker-cell:hover {
     color: white !important;
 }
+
+#slideBox {
+  position: relative;
+  width: 0;
+  height: 100px;
+  background-color: #3498db;
+}
+
+@keyframes slideFade {
+  0% {
+    width: 0;
+    opacity: 1;
+    display: block;
+  }
+  50% {
+    width: calc(100vw-2rem);
+    opacity: 1;
+  }
+  100% {
+    width: calc(100vw-2rem);
+    opacity: 0;
+    display: hidden;
+  }
+}
+
+/* Animation class added dynamically */
+.slide-animate {
+  animation: slideFade 5s forwards;
+}
+
