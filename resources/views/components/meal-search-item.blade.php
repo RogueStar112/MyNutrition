@@ -238,7 +238,7 @@
                             <div id="food_progressbar_calories_{{$index}}" class="w-full bg-blue-600 h-2.5 rounded-full {{$calorieExceedGlow ? "drop-shadow-glow animate-pulse" : ""}}" style="width: {{ $caloriePerc }}%"></div>
                         </div>
 
-                        <p class="text-right">{{ ($food['calories'] > 1000) ? round($food['calories']/1000) . 'k ' : $food['calories'] . 'kcal' }}</p>
+                        <p class="text-right">{{ ($food['calories'] > 3000) ? round($food['calories']/1000) . 'k ' : $food['calories'] . 'kcal' }}</p>
 
                  
                         {{-- <p class="mt-1 text-blue-600">Calories</p> --}}
